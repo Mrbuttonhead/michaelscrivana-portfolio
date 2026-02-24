@@ -2535,12 +2535,17 @@ figcaption {
 }
 
 .pinterest {
-  column-count: 2;
-  column-rule-width: 0px;
-  column-gap: 32px;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
   margin-top: 0;
   padding-top: 5px;
   padding-bottom: 0;
+}
+
+.pinterest:before,
+.pinterest:after {
+  display: none !important;
 }
 
 .heading-5 {
@@ -3114,7 +3119,7 @@ figcaption {
   flex-direction: column;
   width: auto;
   height: auto;
-  margin-bottom: 28px;
+  margin-bottom: 0;
   display: block;
   overflow: hidden;
   box-shadow: 0 1px 3px #0000001a;
@@ -3148,6 +3153,7 @@ figcaption {
 .image-21 {
   object-fit: cover;
   width: 100%;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
 }
 
@@ -4374,7 +4380,7 @@ figcaption {
   }
 
   .pinterest {
-    column-count: 3;
+    grid-template-columns: 1fr 1fr;
   }
 
   .pinterest.container-padding {
@@ -5107,7 +5113,7 @@ figcaption {
   }
 
   .pinterest {
-    column-count: 2;
+    grid-template-columns: 1fr 1fr;
   }
 
   .pinterest.container-padding {
@@ -6018,7 +6024,7 @@ figcaption {
   }
 
   .pinterest {
-    column-count: 1;
+    grid-template-columns: 1fr;
   }
 
   .pinterest.container-padding {

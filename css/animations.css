@@ -1,0 +1,46 @@
+/* ===== Scroll Animations ===== */
+
+/* Fade-in on scroll */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children in a container */
+.stagger > .fade-in:nth-child(1) { transition-delay: 0ms; }
+.stagger > .fade-in:nth-child(2) { transition-delay: 80ms; }
+.stagger > .fade-in:nth-child(3) { transition-delay: 160ms; }
+.stagger > .fade-in:nth-child(4) { transition-delay: 240ms; }
+.stagger > .fade-in:nth-child(5) { transition-delay: 320ms; }
+.stagger > .fade-in:nth-child(6) { transition-delay: 400ms; }
+
+/* Hero entrance animation */
+@keyframes heroEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-anim {
+  opacity: 0;
+  animation: heroEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-anim:nth-child(1) { animation-delay: 0.1s; }
+.hero-anim:nth-child(2) { animation-delay: 0.35s; }
+
+/* Count-up number styling */
+[data-count] {
+  font-variant-numeric: tabular-nums;
+}
