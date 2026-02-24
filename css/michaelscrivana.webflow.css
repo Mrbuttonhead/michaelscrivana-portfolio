@@ -25,14 +25,14 @@
 :root {
   --button: #141413;
   --white-81: #faf9f5;
-  --yellow: #d97757;
+  --yellow: #faf9f5;
   --white-50: #faf9f580;
   --white-12: #faf9f51f;
   --white-64: #faf9f5a3;
   --white-18: #faf9f52e;
-  --white-6: #d97757;
+  --white-6: #faf9f51f;
   --white-80: #faf9f5;
-  --cornflower-blue: #6a9bcc;
+  --cornflower-blue: #faf9f5;
   --medium-slate-blue: #1e1e1c;
   --dark-slate-blue: #141413;
 }
@@ -2079,7 +2079,7 @@ figcaption {
 }
 
 .heading-caps-medium {
-  color: var(--white-6);
+  color: var(--white-81);
   margin-top: 0;
   margin-bottom: -8px;
   padding-top: 0;
@@ -2088,7 +2088,7 @@ figcaption {
 }
 
 .heading-caps-medium.page-title {
-  color: var(--white-6);
+  color: var(--white-81);
   margin-top: 24px;
   font-size: 70px;
 }
