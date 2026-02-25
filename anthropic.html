@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Space to Think — Speculative Event Concept for Anthropic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf9f5;
+    --fg: #141413;
+    --terracotta: #c4704a;
+    --terracotta-light: #d9875f;
+    --muted-blue: #6a9bcc;
+    --soft-green: #788c5d;
+    --warm-gray: #a09a90;
+    --light-warm: #f0ede6;
+    --caption: #7a756b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    font-size: 17px;
+    line-height: 1.7;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ============ NAV ============ */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(250, 249, 245, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(20, 20, 19, 0.06);
+  }
+  nav .name {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+  nav .back {
+    font-size: 13px;
+    color: var(--caption);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  nav .back:hover { color: var(--fg); }
+
+  /* ============ HERO ============ */
+  .hero {
+    padding: 160px 40px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hero-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(42px, 5.5vw, 72px);
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    max-width: 900px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+  .hero-subtitle {
+    font-size: 19px;
+    line-height: 1.65;
+    color: var(--caption);
+    max-width: 640px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 48px;
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(20, 20, 19, 0.08);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+  .hero-meta dt {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--caption);
+    margin-bottom: 6px;
+  }
+  .hero-meta dd {
+    font-size: 15px;
+    font-weight: 400;
+  }
+
+  /* ============ IMAGES ============ */
+  .hero-image {
+    margin: 64px 0;
+    opacity: 0;
+    animation: fadeUp 1s ease 1s forwards;
+  }
+  .hero-image.no-anim {
+    opacity: 1;
+    animation: none;
+  }
+  .hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 2px;
+  }
+  .hero-image figcaption {
+    font-size: 13px;
+    color: var(--caption);
+    margin-top: 12px;
+    max-width: 1200px;
+  }
+  .full-bleed {
+    padding: 0;
+    max-width: 100%;
+  }
+  .full-bleed figcaption {
+    padding: 0 40px;
+  }
+  .contained {
+    padding: 0 40px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .dual-image {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding: 0 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .dual-image figure { margin: 0; }
+  .dual-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 2px;
+  }
+  .dual-image figcaption {
+    font-size: 13px;
+    color: var(--caption);
+    margin-top: 10px;
+  }
+
+  /* ============ SECTIONS ============ */
+  section {
+    padding: 0 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-spacer { height: 120px; }
+  .section-spacer-sm { height: 80px; }
+
+  .divider {
+    height: 1px;
+    background: rgba(20, 20, 19, 0.08);
+    max-width: 1200px;
+    margin: 0 40px;
+  }
+
+  /* ============ BRIEF ============ */
+  .brief {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .brief-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    padding-top: 4px;
+  }
+  .brief-content p {
+    font-size: 17px;
+    margin-bottom: 20px;
+    max-width: 640px;
+  }
+  .brief-content p:last-child { margin-bottom: 0; }
+
+  /* ============ PRINCIPLES ============ */
+  .principles {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 80px;
+  }
+  .principles-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .principle {
+    padding: 32px 0;
+    border-top: 1px solid rgba(20, 20, 19, 0.08);
+  }
+  .principle-number {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--terracotta);
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+  .principle h3 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  .principle p {
+    font-size: 15px;
+    color: var(--caption);
+    line-height: 1.65;
+  }
+
+  /* ============ ZONE SECTIONS ============ */
+  .zone {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .zone-label {
+    position: sticky;
+    top: 100px;
+  }
+  .zone-number {
+    font-size: 64px;
+    font-family: 'DM Serif Display', Georgia, serif;
+    color: var(--light-warm);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .zone-name {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 8px;
+  }
+  .zone-title {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .zone-content p {
+    font-size: 17px;
+    margin-bottom: 20px;
+    max-width: 640px;
+  }
+  .zone-content .design-intent {
+    font-size: 15px;
+    color: var(--caption);
+    padding-left: 20px;
+    border-left: 2px solid var(--terracotta);
+    margin: 32px 0;
+    font-style: italic;
+    max-width: 580px;
+  }
+  .zone-image {
+    margin: 40px 0;
+  }
+  .zone-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 2px;
+  }
+  .zone-image figcaption {
+    font-size: 13px;
+    color: var(--caption);
+    margin-top: 10px;
+  }
+
+  /* ============ MATERIALS (DARK) ============ */
+  .materials {
+    background: var(--fg);
+    color: var(--bg);
+    padding: 100px 40px;
+    max-width: 100%;
+  }
+  .materials-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 80px;
+  }
+  .materials .brief-label {
+    color: var(--terracotta-light);
+  }
+  .materials-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+  }
+  .material-card {
+    padding: 28px 0;
+    border-top: 1px solid rgba(250, 249, 245, 0.12);
+  }
+  .material-card h4 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+  .material-card p {
+    font-size: 14px;
+    color: var(--warm-gray);
+    line-height: 1.6;
+  }
+
+  /* ============ JOURNEY STRIP ============ */
+  .journey-strip {
+    padding: 80px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .journey-strip .brief-label { margin-bottom: 40px; }
+  .journey-flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    padding-bottom: 12px;
+  }
+  .journey-step {
+    text-align: center;
+    min-width: 140px;
+    flex-shrink: 0;
+  }
+  .journey-step .step-num {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--terracotta);
+    color: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 auto 12px;
+  }
+  .journey-step .step-name {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  .journey-step .step-verb {
+    font-size: 12px;
+    color: var(--caption);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .journey-arrow {
+    flex-shrink: 0;
+    width: 60px;
+    height: 1px;
+    background: rgba(20,20,19,0.15);
+    position: relative;
+  }
+  .journey-arrow::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -3px;
+    width: 7px;
+    height: 7px;
+    border-right: 1px solid rgba(20,20,19,0.3);
+    border-top: 1px solid rgba(20,20,19,0.3);
+    transform: rotate(45deg);
+  }
+
+  /* ============ CLOSING ============ */
+  .closing {
+    text-align: center;
+    padding: 120px 40px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .closing-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 24px;
+  }
+  .closing h2 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+  }
+  .closing p {
+    font-size: 17px;
+    color: var(--caption);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    padding: 40px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--caption);
+    border-top: 1px solid rgba(20, 20, 19, 0.06);
+  }
+  footer a {
+    color: var(--fg);
+    text-decoration: none;
+  }
+
+  /* ============ ANIMATIONS ============ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 900px) {
+    .brief, .principles, .zone, .materials-inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .principles-grid, .materials-grid { grid-template-columns: 1fr; }
+    .dual-image { grid-template-columns: 1fr; }
+    .hero-meta { flex-wrap: wrap; gap: 24px; }
+    .zone-label { position: static; }
+    .zone-number { font-size: 48px; }
+    nav { padding: 16px 24px; }
+    .hero, section { padding-left: 24px; padding-right: 24px; }
+    .contained, .dual-image { padding-left: 24px; padding-right: 24px; }
+    .full-bleed figcaption { padding: 0 24px; }
+    .materials { padding: 80px 24px; }
+    .divider { margin: 0 24px; }
+    .section-spacer { height: 80px; }
+    .journey-strip { padding: 60px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="name">Michael Scrivana</span>
+  <a href="#" class="back">&larr; Back to Work</a>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<div class="hero">
+  <div class="hero-label">Speculative Concept</div>
+  <h1>A Space to Think</h1>
+  <p class="hero-subtitle">How might Anthropic show up at a conference — not to sell, but to invite a different kind of conversation about AI? A speculative event concept exploring spatial design, brand experience, and the attendee journey.</p>
+
+  <dl class="hero-meta">
+    <div>
+      <dt>Role</dt>
+      <dd>Event Designer &amp; Art Director</dd>
+    </div>
+    <div>
+      <dt>Type</dt>
+      <dd>Speculative / Self-Initiated</dd>
+    </div>
+    <div>
+      <dt>Scope</dt>
+      <dd>Spatial Design, Environmental Graphics, Brand Experience</dd>
+    </div>
+    <div>
+      <dt>Tools</dt>
+      <dd>MidJourney, Figma, Illustrator</dd>
+    </div>
+  </dl>
+</div>
+
+<!-- HERO IMAGE -->
+<figure class="hero-image full-bleed">
+  <img src="images/anthropic-xp/hero-exterior.png" alt="Exterior view of the Anthropic conference booth concept — dark walls with warm terracotta accents and natural wood, glowing warmly from within against a dark conference hall">
+  <figcaption>The booth exterior reads as a calm, warm volume on the conference floor — dark walls and natural materials creating an intentional contrast with the surrounding visual noise.</figcaption>
+</figure>
+
+<div class="section-spacer"></div>
+
+<!-- ===================== BRIEF ===================== -->
+<section>
+  <div class="brief reveal">
+    <div class="brief-label">The Brief</div>
+    <div class="brief-content">
+      <p>Most conference booths compete on volume — bigger screens, louder graphics, more aggressive lead capture. The result is a floor of undifferentiated noise where every company looks the same.</p>
+      <p>Anthropic is different. Their brand is built on restraint, intellectual honesty, and a belief that AI should be safe and beneficial. Their visual identity reflects this: warm, muted, typographic, unhurried. The brief I set for myself was simple — design a conference presence that feels like Anthropic, not like a trade show.</p>
+      <p>The concept: a space that rewards curiosity over conversion. An environment where attendees slow down, engage with ideas, and leave with a lasting impression of a company that thinks differently about AI.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-spacer"></div>
+<div class="divider"></div>
+<div class="section-spacer"></div>
+
+<!-- ===================== PRINCIPLES ===================== -->
+<section>
+  <div class="principles reveal">
+    <div class="brief-label">Design Principles</div>
+    <div class="principles-grid">
+      <div class="principle">
+        <div class="principle-number">01</div>
+        <h3>Calm Amid Noise</h3>
+        <p>Use restraint as a competitive advantage. While competitors fill every surface with messaging, create negative space that draws people in. The quietest booth on the floor becomes the most magnetic.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-number">02</div>
+        <h3>Gallery, Not Showroom</h3>
+        <p>Frame the experience more like visiting an exhibition than attending a sales pitch. Encourage exploration and discovery rather than a linear sales funnel. Let people find their own path.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-number">03</div>
+        <h3>Material Honesty</h3>
+        <p>Use real materials — oak, linen, concrete, felt — that you can touch. In a sea of printed vinyl and aluminum extrusion, natural materials communicate craft and intentionality without saying a word.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-number">04</div>
+        <h3>Thinking Made Visible</h3>
+        <p>Instead of hiding infrastructure, let the construction be part of the design language. Exposed steel frames, visible joinery, and honest structure echo Anthropic's commitment to transparency.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-spacer"></div>
+
+<!-- OVERVIEW IMAGE -->
+<figure class="hero-image no-anim contained reveal">
+  <img src="images/anthropic-xp/steel-frame.png" alt="Overhead view of booth concept showing exposed steel frame structure with distinct spatial zones">
+  <figcaption>Overhead view — the open steel frame creates distinct zones while maintaining visual permeability across the entire space.</figcaption>
+</figure>
+
+<div class="section-spacer"></div>
+
+<!-- ===================== ATTENDEE JOURNEY ===================== -->
+<div class="journey-strip reveal">
+  <div class="brief-label">The Attendee Journey</div>
+  <div class="journey-flow">
+    <div class="journey-step">
+      <div class="step-num">1</div>
+      <div class="step-name">Threshold</div>
+      <div class="step-verb">Approach</div>
+    </div>
+    <div class="journey-arrow"></div>
+    <div class="journey-step">
+      <div class="step-num">2</div>
+      <div class="step-name">Discovery Wall</div>
+      <div class="step-verb">Explore</div>
+    </div>
+    <div class="journey-arrow"></div>
+    <div class="journey-step">
+      <div class="step-num">3</div>
+      <div class="step-name">Demo Lab</div>
+      <div class="step-verb">Interact</div>
+    </div>
+    <div class="journey-arrow"></div>
+    <div class="journey-step">
+      <div class="step-num">4</div>
+      <div class="step-name">Talk Stage</div>
+      <div class="step-verb">Learn</div>
+    </div>
+    <div class="journey-arrow"></div>
+    <div class="journey-step">
+      <div class="step-num">5</div>
+      <div class="step-name">Decompression</div>
+      <div class="step-verb">Reflect</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="section-spacer"></div>
+
+<!-- ===================== ZONE 1: THRESHOLD ===================== -->
+<section>
+  <div class="zone reveal">
+    <div class="zone-label">
+      <div class="zone-number">01</div>
+      <div class="zone-name">Zone One</div>
+      <div class="zone-title">The Threshold</div>
+    </div>
+    <div class="zone-content">
+      <p>The first moment matters most. From the conference floor, the booth reads as a calm, warm volume — a deliberate contrast to the visual noise surrounding it. Dark exterior walls with natural wood panels create a clear boundary between "out there" and "in here."</p>
+      <p>There's no aggressive signage pulling you in. Instead, multiple open entry points invite curiosity. A large typographic statement on the exterior wall offers a thought rather than a tagline — something worth pausing for before stepping inside.</p>
+      <div class="design-intent">"The goal is transition. You should feel the shift — from busy to calm, from loud to quiet, from selling to thinking — in the three steps it takes to cross the threshold."</div>
+      <figure class="zone-image">
+        <img src="images/anthropic-xp/first-encounter.png" alt="View from the conference floor showing the calm Anthropic booth standing out among busier environments">
+        <figcaption>From the conference floor — the booth's restraint becomes its most visible feature. Multiple entry points replace a single branded entrance.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<div class="section-spacer"></div>
+<div class="divider"></div>
+<div class="section-spacer"></div>
+
+<!-- ===================== ZONE 2: DISCOVERY WALL ===================== -->
+<section>
+  <div class="zone reveal">
+    <div class="zone-label">
+      <div class="zone-number">02</div>
+      <div class="zone-name">Zone Two</div>
+      <div class="zone-title">The Discovery Wall</div>
+    </div>
+    <div class="zone-content">
+      <p>Once inside, the first thing you encounter isn't a product demo or a sales rep — it's a curated wall of ideas. Large-format typographic panels present Anthropic's thinking on AI safety, alignment, and responsible development. Not marketing copy. Actual ideas, presented with the care of a gallery exhibition.</p>
+      <p>The wall uses a modular panel system that can be reconfigured for different events and updated as Anthropic's research evolves. Each panel pairs a provocative question with a concise point of view — designed to be read in under 30 seconds but thought about long after.</p>
+      <div class="design-intent">"Conference attendees are overwhelmed with information. The Discovery Wall respects their time — short enough to scan, deep enough to stick."</div>
+      <figure class="zone-image">
+        <img src="images/anthropic-xp/gallery-corner.png" alt="Gallery-like interior of the booth with curated panels, minimal furniture, and warm lighting">
+        <figcaption>The interior reads as a curated exhibition — framed panels on warm terracotta and off-white walls, with natural wood and minimal furniture creating space to pause and read.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<div class="section-spacer"></div>
+<div class="divider"></div>
+<div class="section-spacer"></div>
+
+<!-- ===================== ZONE 3: DEMO LAB ===================== -->
+<section>
+  <div class="zone reveal">
+    <div class="zone-label">
+      <div class="zone-number">03</div>
+      <div class="zone-name">Zone Three</div>
+      <div class="zone-title">The Demo Lab</div>
+    </div>
+    <div class="zone-content">
+      <p>The hands-on zone, but designed to feel like a workshop rather than a kiosk. Small oak tables seat two or three people at a time — intimate enough for a real conversation, not a scripted demo. A central divider wall anchors the space with a screen showing Claude in action.</p>
+      <p>The key design decision: no standing demo stations with screens on poles. Instead, the interaction happens at seated height, at conversation speed. Attendees sit alongside an Anthropic team member rather than across from them. The spatial arrangement says "let's explore this together" rather than "let me show you what this does."</p>
+      <div class="design-intent">"Every demo station at a conference puts the product between the company and the visitor. We put them side by side instead."</div>
+      <figure class="zone-image">
+        <img src="images/anthropic-xp/demo-lab.png" alt="Intimate demo area with seated visitors at small wooden tables, warm lighting, and a central screen display">
+        <figcaption>The Demo Lab — seated interaction at conversation height. The central screen provides context while individual tables allow for personalized exploration.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<div class="section-spacer"></div>
+<div class="divider"></div>
+<div class="section-spacer"></div>
+
+<!-- ===================== ZONE 4: TALK STAGE ===================== -->
+<section>
+  <div class="zone reveal">
+    <div class="zone-label">
+      <div class="zone-number">04</div>
+      <div class="zone-name">Zone Four</div>
+      <div class="zone-title">The Talk Stage</div>
+    </div>
+    <div class="zone-content">
+      <p>A semi-enclosed space for 20–30 seated attendees, designed for short talks and fireside conversations. Wooden bench seating reinforces the informal, intellectual tone. The stage itself is barely elevated — a low platform that puts the speaker at eye level with the front row.</p>
+      <p>The backdrop is a single large projection surface with generous margins. Presentation slides follow the same typographic restraint as the rest of the space — no bullet points, no stock photography, just well-set type and the occasional diagram. The architecture of the stage area uses taller wall panels to create acoustic separation from the main floor without fully enclosing the space.</p>
+      <div class="design-intent">"The best conference talks feel like overhearing a brilliant conversation. The stage design should support that intimacy, not undermine it with corporate theater."</div>
+      <figure class="zone-image">
+        <img src="images/anthropic-xp/talk-stage.png" alt="Intimate presentation stage with wooden bench seating, large projection screen, and warm minimal aesthetic">
+        <figcaption>The Talk Stage — a low platform, wooden bench seating, and a single projection surface. The architecture creates acoustic separation without full enclosure.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<div class="section-spacer"></div>
+<div class="divider"></div>
+<div class="section-spacer"></div>
+
+<!-- ===================== ZONE 5: DECOMPRESSION ===================== -->
+<section>
+  <div class="zone reveal">
+    <div class="zone-label">
+      <div class="zone-number">05</div>
+      <div class="zone-name">Zone Five</div>
+      <div class="zone-title">The Decompression Lounge</div>
+    </div>
+    <div class="zone-content">
+      <p>The final zone is intentionally quiet — a place to sit, process, and have an unstructured conversation. Low seating with natural linen upholstery. Small side tables with printed booklets and research summaries. A few plants. No screens.</p>
+      <p>This is the zone most conference booths forget: the moment after the demo, after the talk, when someone decides whether this company is worth following up with. By giving attendees a comfortable place to decompress within the Anthropic space, the brand gets the most valuable thing at a conference — extended dwell time and authentic conversation.</p>
+      <div class="design-intent">"Most booths are designed for throughput. This one is designed for dwell time. The longer someone stays, the more likely they are to remember why."</div>
+      <figure class="zone-image">
+        <img src="images/anthropic-xp/social-lounge.png" alt="Warm evening atmosphere in the lounge zone with standing tables, pendant lighting, and people in conversation">
+        <figcaption>The Decompression Lounge — warm pendant lighting, standing and seated options, and an atmosphere that encourages lingering conversation.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<div class="section-spacer"></div>
+
+<!-- ===================== OVERHEAD LAYOUT ===================== -->
+<figure class="hero-image no-anim contained reveal">
+  <img src="images/anthropic-xp/overhead-layout.png" alt="Full overhead view of the booth showing all five zones and circulation paths">
+  <figcaption>Complete spatial layout — the five zones create a natural circulation pattern. Attendees can follow the full journey or enter any zone directly, supporting both guided and self-directed exploration.</figcaption>
+</figure>
+
+<div class="section-spacer"></div>
+
+<!-- ===================== MATERIALS (DARK SECTION) ===================== -->
+<div class="materials">
+  <div class="materials-inner reveal">
+    <div class="brief-label">Materials &amp; Palette</div>
+    <div>
+      <div class="materials-grid">
+        <div class="material-card">
+          <h4>White Oak</h4>
+          <p>Tables, benches, signage panels, and trim. Quarter-sawn for tight grain. Finished with a matte clear coat to preserve natural warmth without sheen.</p>
+        </div>
+        <div class="material-card">
+          <h4>Natural Linen</h4>
+          <p>Seating upholstery and scrim panels. Unbleached, medium-weight. Creates soft acoustic dampening and tactile warmth throughout the space.</p>
+        </div>
+        <div class="material-card">
+          <h4>Honed Concrete</h4>
+          <p>Flooring base. Sealed and polished to a matte finish. Provides a grounding material that contrasts with the warmth of wood and textile above.</p>
+        </div>
+        <div class="material-card">
+          <h4>Matte Black Steel</h4>
+          <p>Structural frame, shelf brackets, and lighting track. Powder-coated to a flat finish. Provides graphic contrast and industrial honesty.</p>
+        </div>
+        <div class="material-card">
+          <h4>Terracotta Paint</h4>
+          <p>Accent walls and wayfinding surfaces. A warm, earthy tone that anchors the palette and provides contrast against off-white walls without competing for attention.</p>
+        </div>
+        <div class="material-card">
+          <h4>Wool Felt</h4>
+          <p>Acoustic panels and pinboard surfaces. Charcoal and warm gray tones. Functional sound dampening that doubles as a refined graphic texture.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-spacer"></div>
+
+<!-- ===================== CLOSING ===================== -->
+<div class="closing reveal">
+  <div class="closing-label">Reflection</div>
+  <h2>The quietest space on the floor might be the one people remember most.</h2>
+  <p>This concept started with a question: what does it look like when a brand's physical presence actually reflects its values? For Anthropic — a company built on safety, thoughtfulness, and doing things carefully — the answer isn't louder. It's more intentional.</p>
+  <p>Every material, every spatial decision, every moment in the attendee journey was designed to communicate one thing: this is a company that thinks before it acts. And that kind of restraint, in a conference hall full of noise, is impossible to ignore.</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <p>Michael Scrivana &middot; Event &amp; Brand Designer &middot; <a href="mailto:mkscrivana@gmail.com">mkscrivana@gmail.com</a></p>
+</footer>
+
+<!-- ============ SCROLL REVEAL ============ -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
