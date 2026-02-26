@@ -466,6 +466,29 @@
     transform: translateY(0);
   }
 
+  /* ============ SPATIAL PLAN ============ */
+  .spatial-plan { padding: 6rem 0; border-top: 1px solid rgba(20, 20, 19, 0.08); }
+  .spatial-specs { display: grid; gap: 0; margin: 2.5rem 0 3rem; border-top: 1px solid rgba(20, 20, 19, 0.1); }
+  .spec-row { display: grid; grid-template-columns: 160px 1fr; gap: 2rem; padding: 1.25rem 0; border-bottom: 1px solid rgba(20, 20, 19, 0.08); align-items: baseline; }
+  .spec-zone { font-weight: 600; font-size: 0.85rem; letter-spacing: 0.02em; color: #141413; }
+  .spec-detail { font-size: 0.95rem; line-height: 1.65; color: rgba(20, 20, 19, 0.72); }
+
+  /* ============ PRODUCTION REALITY ============ */
+  .production-reality { padding: 6rem 0; border-top: 1px solid rgba(20, 20, 19, 0.08); }
+  .production-reality h2 { margin-bottom: 1.5rem; }
+  .production-reality h3 { font-size: 1.05rem; font-weight: 600; letter-spacing: 0.01em; margin-top: 3rem; margin-bottom: 1rem; color: #141413; }
+  .production-reality h3:first-of-type { margin-top: 2rem; }
+  .production-reality p { margin-bottom: 1.25rem; line-height: 1.7; }
+  .production-reality strong { color: #141413; font-weight: 600; }
+
+  /* ============ FEASIBILITY NOTE ============ */
+  .feasibility-note { margin-top: 2rem; padding: 1.5rem 2rem; background: rgba(20, 20, 19, 0.03); border-left: 3px solid #d97757; border-radius: 0 4px 4px 0; font-size: 0.92rem; line-height: 1.7; color: rgba(20, 20, 19, 0.78); }
+  .feasibility-note strong { color: #141413; font-weight: 600; }
+
+  /* ============ EXPERIENCE BRIDGE ============ */
+  .experience-bridge { padding: 3rem 0; margin: 2rem 0; border-top: 1px solid rgba(20, 20, 19, 0.08); border-bottom: 1px solid rgba(20, 20, 19, 0.08); }
+  .experience-bridge p { font-size: 0.95rem; line-height: 1.75; color: rgba(20, 20, 19, 0.68); max-width: 680px; font-style: italic; }
+
   /* ============ RESPONSIVE ============ */
   @media (max-width: 900px) {
     .brief, .principles, .zone, .materials-inner {
@@ -484,6 +507,7 @@
     .materials { padding: 80px 24px; }
     .divider { margin: 0 24px; }
     .section-spacer { height: 80px; }
+    .spec-row { grid-template-columns: 1fr; gap: 0.35rem; }
     .journey-strip { padding: 60px 24px; }
   }
 </style>
@@ -690,6 +714,7 @@
       <p>Anchoring the Discovery Wall is a perceptual illusion — a large-format illustrated head in profile, its mind opening into a network of nodes and connections. The visual language is deliberate: the branching points mirror vector embeddings — the way AI models map relationships between concepts in high-dimensional space. What looks organic is actually structured, and what looks like art is actually a diagram of how Claude thinks.</p>
       <p>From a distance, the illustration appears printed directly on the wall. But as attendees approach, the illusion reveals itself: the nodes are actually suspended in space, drifting slowly in front of the surface. The effect is built with projection mapping and transparent acrylic elements mounted at varying depths. From the front, everything reads as a single flat composition. Move to the side, and the layers separate — the mind stays fixed while the network floats free, occupying real three-dimensional space just like the vector points it represents.</p>
       <div class="design-intent">"The network isn't decorative — it's a spatial metaphor for how language models actually work. Each node is a point in meaning-space. The connections between them are the relationships Claude learns. We just made it something you can walk around."</div>
+      <p class="feasibility-note"><strong>A note on feasibility:</strong> The full execution — rear-projection mapping with synchronized acrylic suspension elements — requires partnership with a specialized experiential AV studio (teams like Moment Factory, Leviathan, or Float4 who work at the intersection of projection and physical installation). I'd spec this during a two-week technical discovery phase, including a proof-of-concept test at the fabricator's shop before committing to the full build. The concept is designed to scale gracefully: a pre-rendered LED version or a static dimensional mural both preserve the core idea at lower technical and budget thresholds. The creative intent — flat from the front, dimensional up close — holds regardless of the execution tier.</p>
       <figure class="zone-image">
         <div style="padding:55.87% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1168259227?autoplay=1&loop=1&muted=1&background=1&app_id=122963" style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:2px;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
         <figcaption>The Interactive Wall — a mind network visualizing vector relationships in physical space. Flat from the front, dimensional up close. Perception as interaction.</figcaption>
@@ -778,6 +803,49 @@
   <figcaption>Complete spatial layout — the five zones create a natural circulation pattern. Attendees can follow the full journey or enter any zone directly, supporting both guided and self-directed exploration.</figcaption>
 </figure>
 
+<!-- ===================== SPATIAL PLAN ===================== -->
+<section>
+  <div class="spatial-plan reveal">
+    <div class="brief-label">Spatial Plan</div>
+    <div>
+      <h2 style="font-family:'DM Serif Display',Georgia,serif;font-size:28px;font-weight:400;letter-spacing:-0.01em;margin-bottom:20px;">40 × 40 Island Booth — 1,600 sq ft</h2>
+
+      <p>The concept is designed as a 40' × 40' island configuration — open on all four sides with primary entry from the main aisle. This footprint accommodates the full six-zone journey while maintaining generous circulation paths (minimum 5' clear width) that prevent bottlenecks during peak floor hours.</p>
+
+      <p style="margin-top:16px;">The layout is organized around a central spine running east-west, with the Talk Stage anchoring the back-left quadrant and the Decompression Lounge occupying the back-right. The Threshold and Discovery Wall face the primary aisle to maximize first-impression visibility, while the Interactive Wall sits at the interior hinge point — visible from outside but requiring entry to fully experience.</p>
+
+      <div class="spatial-specs">
+        <div class="spec-row">
+          <span class="spec-zone">Threshold</span>
+          <span class="spec-detail">40' exterior face × 8' deep entry zone. 10' ceiling height at fascia.</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-zone">Discovery Wall</span>
+          <span class="spec-detail">16' linear wall, modular panel system on 4' increments. Panels are 4' × 7' on aluminum Z-clips for tool-free reconfiguration.</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-zone">Interactive Wall</span>
+          <span class="spec-detail">12' × 9' feature wall. Rear-projection surface with 4' clearance behind for AV equipment and acrylic suspension rigging.</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-zone">Demo Lab</span>
+          <span class="spec-detail">12' × 14' zone. Four oak tables at 30" seated height, spaced 4' apart. Central divider wall (8' × 4') houses a 55" display and cable management.</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-zone">Talk Stage</span>
+          <span class="spec-detail">14' × 16' footprint. 6" riser platform. Bench seating for 24 with 8' rear projection wall. Side panels at 9' height for acoustic separation — open top for fire code compliance and air circulation.</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-zone">Decompression Lounge</span>
+          <span class="spec-detail">10' × 14' zone. Low seating cluster, two standing-height tables, pendant lighting on a separate dimming circuit.</span>
+        </div>
+      </div>
+
+      <p>All structural elements — the steel frame, wall panels, and flooring system — are designed around standard crate dimensions for efficient freight. The oak flooring uses a raised modular platform system (SnapLock or similar) that installs without adhesive over the convention center's existing floor, keeping load-in clean and damage-deposit-free.</p>
+    </div>
+  </div>
+</section>
+
 <div class="section-spacer"></div>
 
 <!-- ===================== MATERIALS (DARK SECTION) ===================== -->
@@ -814,6 +882,63 @@
     </div>
   </div>
 </div>
+
+<!-- ===================== PRODUCTION REALITY ===================== -->
+<section>
+  <div class="production-reality reveal">
+    <div class="brief-label">Production Reality</div>
+    <div>
+      <h2 style="font-family:'DM Serif Display',Georgia,serif;font-size:28px;font-weight:400;letter-spacing:-0.01em;">From Concept to Convention Floor</h2>
+
+      <p>A concept only matters if it can be built, shipped, and installed on a deadline. This section outlines how the design translates to production — the budget framework, logistics, vendor strategy, and the decisions I'd make when constraints get tight.</p>
+
+      <h3>Budget Framework</h3>
+
+      <p>At this footprint and finish level, the build falls in the <strong>$250K–$350K range</strong> for a first deployment, including design development, fabrication, AV integration, graphics production, freight, I&D labor, and on-site supervision. Key cost drivers are the custom oak millwork, the Interactive Wall's AV system, and the raised flooring platform. Subsequent deployments of the same structure drop significantly — roughly <strong>$80K–$120K per show</strong> — covering freight, I&D, updated graphics, and any AV rental refreshes.</p>
+
+      <p>The material palette was chosen with amortization in mind. Oak millwork, steel frame, and concrete-finish flooring are durable across 8–12 deployments before showing wear. Linen upholstery and felt panels are replaceable components on a per-show basis at low cost. Graphics and typographic panels use the modular Z-clip system, so content updates don't require structural changes.</p>
+
+      <h3>Load-In & Logistics</h3>
+
+      <p>The 40 × 40 island is designed for a <strong>two-day install</strong> with a standard union crew of 8–12. Day one covers structural steel, flooring platform, and electrical rough-in. Day two handles millwork, graphics, AV calibration, furniture placement, and a lighting focus. The steel frame uses bolted connections (no welding on-site) and all wall panels are pre-finished and crated to final dimensions — minimizing on-floor fabrication time.</p>
+
+      <p>Freight estimate: 6–8 standard crates plus AV road cases. For West Coast shows (NeurIPS, for example), I'd recommend warehousing with a fabrication partner in LA or the Bay Area to reduce cross-country freight costs. East Coast shows route through a shop in the tri-state area.</p>
+
+      <h3>Vendor Strategy</h3>
+
+      <p>I'd approach this as a three-vendor build. A custom exhibit fabrication house (Czarnowski, Sparks, or similar tier-one shop) handles structure, millwork, and graphics. A dedicated AV integration studio specs and installs the Interactive Wall's projection mapping and acrylic suspension system — this is specialized work that benefits from a partner experienced in experiential AV, not general exhibit electricians. A furniture rental partner (CORT Event or similar) supplies the lounge seating and standing tables — these items aren't worth custom-building for a traveling exhibit.</p>
+
+      <h3>If the Budget Gets Cut by 30%</h3>
+
+      <p>Constraints are part of the design process. Here's what I'd protect and what I'd flex:</p>
+
+      <p><strong>Protect:</strong> The oak flooring and material palette. The tactile shift from convention carpet to real wood is the single most impactful moment in the attendee journey — it's what makes the space feel fundamentally different. Also protect the Discovery Wall's modular panel system, as it's the most reusable component across events.</p>
+
+      <p><strong>Flex:</strong> The Interactive Wall scales gracefully. The full projection-mapped version with suspended acrylic is the premium execution. A mid-tier version replaces projection with a high-resolution LED wall and pre-rendered parallax animation — same visual concept, lower AV complexity, roughly 40% cost reduction on that zone. An entry-level version uses a large-format printed mural with a few physical acrylic elements mounted at depth — still dimensional, still surprising, but fully static. The concept holds at every tier.</p>
+
+      <p><strong>Flex:</strong> The Talk Stage can downsize from a semi-enclosed room to an open-back configuration with acoustic felt panels and a smaller projection surface. Capacity drops from 24 to 16, but the intimate tone is preserved.</p>
+
+      <h3>Modular Scalability</h3>
+
+      <p>The design system isn't locked to a 40 × 40 footprint. The zone-based architecture means it can flex across event scales:</p>
+
+      <p><strong>20 × 20 (400 sq ft) — Mid-tier conferences:</strong> Threshold + Discovery Wall + Demo Lab. Three zones, one clear narrative. The Interactive Wall becomes a single feature panel at the back of the space. No Talk Stage — use the Demo Lab tables for informal presentations instead.</p>
+
+      <p><strong>10 × 10 (100 sq ft) — Satellite events or partner summits:</strong> A single-room expression. One oak table, two chairs, the Discovery Wall distilled to three key panels, and the terracotta accent wall as the anchor. The material palette carries the brand identity even at minimum footprint.</p>
+
+      <p><strong>Custom venue takeover — Flagship events like developer conferences:</strong> The zone system expands into a full venue. The Talk Stage becomes a proper theater. The Decompression Lounge scales into a café or reception space. The Interactive Wall could occupy an entire room as an immersive installation. Same design language, entirely different scale.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-spacer"></div>
+
+<!-- ===================== EXPERIENCE BRIDGE ===================== -->
+<section>
+  <aside class="experience-bridge reveal" style="max-width:1200px;margin:0 auto;">
+    <p>This concept is speculative, but the skills behind it aren't. Over the past six years at Bayer Consumer Health, I've art directed annual NACDS trade show booth builds — managing vendor relationships, reviewing fabrication specs, and coordinating on-site installation in competitive exhibition environments. I designed and produced three years of the Bold Breakthrough Tour, including venue scoping, environmental graphics, animated content, print collateral, and live event coordination. And I've run end-to-end production for company-wide award ceremonies — from motion graphics and stage design to run-of-show coordination on event night. This concept builds on that foundation.</p>
+  </aside>
+</section>
 
 <div class="section-spacer"></div>
 
