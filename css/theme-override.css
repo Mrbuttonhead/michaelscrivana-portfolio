@@ -1,0 +1,395 @@
+/* ==========================================================================
+   Theme Override — Anthropic Design Language
+   Loaded AFTER michaelscrivana.webflow.css to invert the dark theme to
+   a warm, light editorial aesthetic matching anthropic.html.
+   ========================================================================== */
+
+/* ---------- 1. Variable Redefinition ---------- */
+:root {
+  --button: #faf9f5;
+  --white-81: #141413;
+  --yellow: #141413;
+  --white-50: #141413a0;
+  --white-12: #1414131f;
+  --white-64: #141413a3;
+  --white-18: #1414132e;
+  --white-6: #1414130f;
+  --white-80: #141413;
+  --cornflower-blue: #141413;
+  --medium-slate-blue: #faf9f5;
+  --dark-slate-blue: #faf9f5;
+
+  /* New tokens */
+  --terracotta: #c4704a;
+  --terracotta-light: #d9875f;
+  --caption: #7a756b;
+  --light-warm: #f0ede6;
+  --bg: #faf9f5;
+  --fg: #141413;
+}
+
+/* ---------- 2. Font Override ---------- */
+body,
+.body-3,
+.paragraph,
+.paragraph-3,
+.paragraph.small,
+.paragraph.large,
+.paragraph-3.subhead,
+.paragraph-3.bold {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Body / page background */
+body,
+.body-3 {
+  background-color: var(--bg) !important;
+  color: var(--fg);
+}
+
+/* Headings → DM Serif Display */
+h1, h2, h3, h4, h5, h6,
+.heading,
+.heading.medium,
+.heading.extra-large,
+.heading.small,
+.heading.extra-small,
+.heading.regular,
+.heading-caps-medium,
+.heading-caps-medium.page-title,
+.heading-caps-medium.h4,
+.heading-medium,
+.heading-8 {
+  font-family: 'DM Serif Display', Georgia, serif !important;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Hero name */
+.heading.extra-large {
+  font-family: 'DM Serif Display', Georgia, serif !important;
+  font-weight: 400;
+  font-size: clamp(42px, 5.5vw, 72px);
+  color: var(--fg);
+  letter-spacing: -0.02em;
+}
+
+/* Subtitle text */
+.text-block {
+  font-family: 'DM Sans', sans-serif !important;
+  font-weight: 300;
+  font-size: 19px;
+  color: var(--caption);
+}
+
+/* Paragraph body text */
+.paragraph,
+.paragraph-3 {
+  color: var(--fg);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.paragraph-3.subhead {
+  color: var(--caption);
+}
+
+/* Case study section headings */
+.heading.medium {
+  font-family: 'DM Serif Display', Georgia, serif !important;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+}
+
+/* ---------- 3. Navigation Override ---------- */
+.navbar {
+  background-color: rgba(250, 249, 245, 0.85) !important;
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(20, 20, 19, 0.06);
+  box-shadow: none !important;
+}
+
+.nav-link-3,
+.nav-link-4,
+.nav-link-5 {
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg) !important;
+  -webkit-text-stroke-color: var(--fg) !important;
+  transition: color 0.25s ease;
+}
+
+.nav-link-3:hover,
+.nav-link-4:hover,
+.nav-link-5:hover {
+  color: var(--terracotta) !important;
+}
+
+/* Current page indicator */
+.nav-link-3.w--current,
+.nav-link-4.w--current,
+.nav-link-5.w--current {
+  color: var(--terracotta) !important;
+}
+
+/* Logo: invert for light bg */
+.image-32 {
+  filter: brightness(0);
+}
+
+/* ---------- 4. Mobile Hamburger ---------- */
+.menu-icon-line-top-2,
+.menu-icon-line-middle-2,
+.menu-icon-line-middle-inner-4,
+.menu-icon-line-bottom-4 {
+  background-color: var(--fg) !important;
+}
+
+/* Mobile nav menu background */
+.w-nav-overlay {
+  background-color: rgba(250, 249, 245, 0.98) !important;
+}
+
+.w-nav-overlay .nav-link-3,
+.w-nav-overlay .nav-link-4,
+.w-nav-overlay .nav-link-5 {
+  color: var(--fg) !important;
+}
+
+/* ---------- 5. Footer Override ---------- */
+.section-2 {
+  background-color: var(--light-warm) !important;
+  color: var(--fg);
+}
+
+.footer-link {
+  color: var(--fg) !important;
+  transition: color 0.25s ease;
+}
+
+.footer-link:hover {
+  color: var(--terracotta) !important;
+}
+
+.copyright-text,
+.copyright-link {
+  color: var(--caption) !important;
+}
+
+/* ---------- 6. Homepage Card Grid ---------- */
+.div-block-27 {
+  border-radius: 2px;
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.div-block-27:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(20, 20, 19, 0.08);
+}
+
+.image-21 {
+  border-radius: 2px 2px 0 0;
+}
+
+/* Content tab under cards */
+.content-tab {
+  background-color: var(--light-warm) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.heading-8 {
+  color: var(--fg);
+  font-size: 16px;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- 7. Hero Section ---------- */
+.section-7 {
+  padding-top: 120px;
+  padding-bottom: 40px;
+}
+
+/* Email CTA / Resume section */
+.movie.emailcta {
+  background-color: var(--bg);
+}
+
+.movie.emailcta .paragraph {
+  color: var(--fg);
+}
+
+.movie.emailcta .link {
+  color: var(--fg);
+  border-color: rgba(20, 20, 19, 0.25) !important;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+
+.movie.emailcta .link:hover {
+  color: var(--terracotta);
+  border-color: var(--terracotta) !important;
+}
+
+/* ---------- 8. Case Study Shared Styles ---------- */
+
+/* Page title */
+.heading-caps-medium {
+  font-family: 'DM Serif Display', Georgia, serif !important;
+  font-weight: 400;
+  color: var(--fg) !important;
+  letter-spacing: -0.02em;
+}
+
+/* "View All Work" link */
+.movie .link,
+a.link {
+  color: var(--fg);
+  transition: color 0.25s ease;
+}
+
+.movie .link:hover,
+a.link:hover {
+  color: var(--terracotta);
+}
+
+/* Image border-radius consistency */
+.img-full {
+  border-radius: 2px;
+}
+
+/* ---------- 9. Shared Element Fixes ---------- */
+
+/* .link class has hardcoded dark bg in Webflow CSS */
+.link {
+  background-color: transparent !important;
+  color: var(--fg) !important;
+  border: 1px solid rgba(20, 20, 19, 0.2);
+  border-radius: 6px;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.link:hover {
+  color: var(--terracotta) !important;
+  border-color: var(--terracotta);
+}
+
+/* Design role box (Iberogast, etc.) — hardcoded #1e1e1c bg */
+.design-role {
+  background-color: var(--light-warm) !important;
+  color: var(--fg);
+}
+
+.text-block-4 {
+  font-family: 'DM Sans', sans-serif !important;
+  color: var(--fg) !important;
+}
+
+.text-block-4 .bold-text-3 {
+  color: var(--fg);
+}
+
+/* ---------- 10. NACDS Page Specifics ---------- */
+.nacds-stat .num {
+  font-family: 'DM Serif Display', Georgia, serif !important;
+  color: var(--terracotta) !important;
+  font-weight: 400;
+}
+
+.testimonial {
+  border-left-color: var(--terracotta) !important;
+  color: var(--fg);
+}
+
+.testimonial .attribution {
+  color: var(--caption);
+}
+
+/* ---------- 10. MiraLAX Page Specifics ---------- */
+.mf-label,
+.mf-desc,
+.mf-meta-item,
+.mf-meta-label,
+.mf-tab-label,
+.mf-tab-number,
+.mf-tab-detail,
+.mf-stat-number,
+.mf-stat-label,
+.mf-title {
+  font-family: 'DM Sans', sans-serif !important;
+}
+
+.mf-title {
+  font-family: 'DM Serif Display', Georgia, serif !important;
+  font-weight: 400;
+  color: var(--fg) !important;
+}
+
+.mf-tab-number,
+.mf-stat-number {
+  font-family: 'DM Serif Display', Georgia, serif !important;
+  font-weight: 400;
+}
+
+.mf-hero {
+  border-color: rgba(20, 20, 19, 0.08);
+  background: var(--light-warm);
+}
+
+.mf-stat {
+  background: var(--bg);
+}
+
+.mf-tab {
+  background: var(--bg);
+  border-color: rgba(20, 20, 19, 0.08);
+}
+
+.mf-stats {
+  background: rgba(20, 20, 19, 0.06);
+  border-color: rgba(20, 20, 19, 0.08);
+}
+
+.mf-header img {
+  border-color: rgba(20, 20, 19, 0.08);
+  background: rgba(20, 20, 19, 0.03);
+}
+
+/* ---------- 11. Responsive ---------- */
+@media (max-width: 991px) {
+  .heading.extra-large {
+    font-size: clamp(36px, 5vw, 50px);
+  }
+
+  .heading.medium {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  .section-7 {
+    padding-top: 80px;
+    padding-bottom: 24px;
+  }
+
+  .heading.extra-large {
+    font-size: 36px;
+  }
+
+  .heading.medium {
+    font-size: 22px;
+  }
+
+  .heading-caps-medium {
+    font-size: 32px !important;
+  }
+}
