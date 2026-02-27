@@ -298,7 +298,43 @@ a.link:hover {
   color: var(--fg);
 }
 
-/* ---------- 10. NACDS Page Specifics ---------- */
+/* ---------- 10. About & Contact Page Fixes ---------- */
+
+/* .paragraph-copy has hardcoded #faf9f5 text */
+.paragraph-copy,
+.paragraph-copy.about {
+  color: var(--fg) !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-weight: 300;
+}
+
+/* Divider line — var(--white-12) is near-invisible on light bg */
+.divider-line {
+  background-color: rgba(20, 20, 19, 0.12) !important;
+}
+
+/* List items — border color needs contrast on light bg */
+.list-item {
+  border-bottom-color: rgba(20, 20, 19, 0.1) !important;
+}
+
+/* Button variants with hardcoded dark bg or light text */
+.button-2 {
+  background-color: var(--fg) !important;
+  color: var(--bg) !important;
+}
+
+.button-secondary {
+  background-color: rgba(20, 20, 19, 0.06) !important;
+  color: var(--fg) !important;
+}
+
+.tag {
+  background-color: rgba(20, 20, 19, 0.06) !important;
+  color: var(--fg) !important;
+}
+
+/* ---------- 11. NACDS Page Specifics ---------- */
 .nacds-stat .num {
   font-family: 'DM Serif Display', Georgia, serif !important;
   color: var(--terracotta) !important;
