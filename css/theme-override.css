@@ -300,6 +300,28 @@ a.link:hover {
 
 /* ---------- 10. About & Contact Page Fixes ---------- */
 
+/* Inset card — CTA block on about & contact pages */
+.inset-card {
+  background-color: var(--light-warm) !important;
+  padding: 64px !important;
+  margin-bottom: 30px !important;
+}
+
+/* Email link inside inset-card — should look like a text link, not a button */
+.inset-card .link {
+  background-color: transparent !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  color: var(--terracotta) !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.inset-card .link:hover {
+  color: var(--fg) !important;
+}
+
 /* .paragraph-copy has hardcoded #faf9f5 text */
 .paragraph-copy,
 .paragraph-copy.about {
