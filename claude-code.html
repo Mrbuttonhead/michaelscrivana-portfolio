@@ -13,30 +13,37 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ══════════════════════════════════════════════════════════════
-   PX Design System v0.2 — DARK / CHROME, scoped & inlined.
+   PX Design System v0.2 — LIGHT / PAPER tokens, scoped & inlined.
+   Sibling to designing-claude-code.html — same paper page,
+   richer scaffold (overview grid + anchored case sections).
    ══════════════════════════════════════════════════════════════ */
 :root {
-  --px-bg:          #000000;
-  --px-surface:     #0a0a0a;
-  --px-surface-2:   #141414;
-  --px-surface-3:   #1e1e1e;
-  --px-surface-4:   #262626;
+  /* surface — cool neutral, NOT pure white, NOT warm cream */
+  --px-bg:          #f4f5f7;
+  --px-surface:     #ffffff;
+  --px-surface-2:   #ebedf0;
+  --px-surface-3:   #dde0e6;
+  --px-surface-4:   #c9cdd5;
 
-  --px-accent:       #FF3D1F;
-  --px-accent-deep:  #D62E10;
-  --px-accent-hover: #FF5638;
-  --px-accent-2:     #00A896;
-  --px-accent-dim:   rgba(255, 61, 31, 0.12);
-  --px-accent-glow:  rgba(255, 61, 31, 0.28);
+  /* accent — PX blue */
+  --px-accent:       #2850D8;
+  --px-accent-deep:  #1B3AB0;
+  --px-accent-hover: #4368E8;
+  --px-accent-2:     #00867A;
+  --px-accent-dim:   rgba(40, 80, 216, 0.10);
+  --px-accent-glow:  rgba(40, 80, 216, 0.22);
+  --px-accent-2-dim: rgba(0, 134, 122, 0.10);
 
-  --px-text:    #f0f0f2;
-  --px-text-2:  #a8a8ad;
-  --px-text-3:  #6a6a70;
-  --px-text-4:  #4a4a4f;
+  /* text — cool near-black, never pure */
+  --px-text:    #0a0d12;
+  --px-text-2:  #4a5058;
+  --px-text-3:  #8b9099;
+  --px-text-4:  #b8bcc4;
 
-  --px-border:    rgba(255, 255, 255, 0.08);
-  --px-border-2:  rgba(255, 255, 255, 0.14);
-  --px-border-3:  rgba(255, 255, 255, 0.22);
+  /* border — rgba on ink */
+  --px-border:    rgba(10, 13, 18, 0.08);
+  --px-border-2:  rgba(10, 13, 18, 0.14);
+  --px-border-3:  rgba(10, 13, 18, 0.24);
 
   --px-font:  'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --px-mono:  'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
@@ -50,10 +57,10 @@
   --px-radius-sm:  10px;
   --px-radius-xs:  6px;
 
-  --px-shadow-sm:     0 2px 8px -4px rgba(0, 0, 0, 0.35);
-  --px-shadow:        0 8px 30px -16px rgba(0, 0, 0, 0.50);
-  --px-shadow-lg:     0 12px 40px -16px rgba(0, 0, 0, 0.60);
-  --px-shadow-accent: 0 8px 30px -12px rgba(255, 61, 31, 0.35);
+  --px-shadow-sm:     0 1px 2px -1px rgba(10, 13, 18, 0.08);
+  --px-shadow:        0 4px 16px -8px rgba(10, 13, 18, 0.12);
+  --px-shadow-lg:     0 8px 32px -12px rgba(10, 13, 18, 0.18);
+  --px-shadow-accent: 0 8px 30px -12px rgba(40, 80, 216, 0.25);
 
   --px-ease:  cubic-bezier(0.2, 0, 0, 1);
   --px-dur:   160ms;
@@ -63,10 +70,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background:
-    radial-gradient(ellipse 80% 60% at 50% -20%, rgba(255, 61, 31, 0.08), transparent 60%),
-    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(0, 168, 150, 0.06), transparent 60%),
-    var(--px-bg);
+  background: var(--px-bg);
   color: var(--px-text);
   font-family: var(--px-font);
   font-size: 16px;
@@ -74,10 +78,11 @@ body {
   font-weight: 400;
   letter-spacing: var(--px-track-body);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
 }
 
-::selection { background: var(--px-accent); color: #000; }
+::selection { background: var(--px-accent); color: #fff; }
 
 /* ============ MONO + EYEBROW UTILITIES ============ */
 .px-mono {
@@ -101,9 +106,9 @@ code, .inline-code {
   font-family: var(--px-mono);
   font-size: 0.88em;
   color: var(--px-text);
-  background: var(--px-surface-3);
+  background: var(--px-surface-2);
   padding: 1px 6px;
-  border-radius: 4px;
+  border-radius: var(--px-radius-xs);
   border: 1px solid var(--px-border);
   letter-spacing: 0;
 }
@@ -117,7 +122,7 @@ nav.site-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0, 0, 0, 0.72);
+  background: rgba(244, 245, 247, 0.82);
   backdrop-filter: blur(20px) saturate(140%);
   -webkit-backdrop-filter: blur(20px) saturate(140%);
   border-bottom: 1px solid var(--px-border);
@@ -138,7 +143,6 @@ nav.site-nav .name .dot {
   background: var(--px-accent);
   margin-right: 10px;
   vertical-align: middle;
-  box-shadow: 0 0 12px var(--px-accent-glow);
 }
 nav.site-nav .nav-links {
   display: flex;
@@ -193,7 +197,7 @@ nav.site-nav .back:hover { color: var(--px-text); }
 .hero h1 em {
   font-style: italic;
   font-weight: 400;
-  color: var(--px-accent-2);
+  color: var(--px-accent);
 }
 .hero-subtitle {
   font-family: var(--px-font);
@@ -946,9 +950,6 @@ footer.site-footer {
     </div>
 
     <aside class="case-study-aside">
-      <div class="case-study-illu">
-        <img src="working/anthropic-padlock-security.svg" alt="Padlock illustration suggesting compliance and trust">
-      </div>
       <blockquote class="case-study-pullquote">A single missed character in regulated artwork means a recall. The design surface had to make the agent legible enough to actually be trusted as a first pass.</blockquote>
       <div class="case-study-stack">
         <span class="stack-tag">Claude Opus</span>
@@ -1009,9 +1010,6 @@ footer.site-footer {
     </div>
 
     <aside class="case-study-aside">
-      <div class="case-study-illu">
-        <img src="working/anthropic-hand-adjusting-sliders.svg" alt="Hand adjusting sliders, suggesting designer control over AI pipeline">
-      </div>
       <blockquote class="case-study-pullquote">Designers don't think in prompts. They think in steps. The tool is the graph.</blockquote>
       <div class="case-study-stack">
         <span class="stack-tag">React Flow</span>
@@ -1072,9 +1070,6 @@ footer.site-footer {
     </div>
 
     <aside class="case-study-aside">
-      <div class="case-study-illu">
-        <img src="working/anthropic-geometric-framework.svg" alt="Geometric framework illustration suggesting platform architecture">
-      </div>
       <blockquote class="case-study-pullquote">A tool is a route, not a deployment. One front door, one identity, one shell &mdash; or you build the graveyard you were trying to replace.</blockquote>
       <div class="case-study-stack">
         <span class="stack-tag">Monorepo</span>
@@ -1136,9 +1131,6 @@ footer.site-footer {
     </div>
 
     <aside class="case-study-aside">
-      <div class="case-study-illu">
-        <img src="working/anthropic-desk-lamp-document.svg" alt="Desk lamp over a document, suggesting a morning briefing">
-      </div>
       <blockquote class="case-study-pullquote">The product isn't the dashboard. The product is the loop. The dashboard is just where it lives.</blockquote>
       <div class="case-study-stack">
         <span class="stack-tag">Claude on Azure</span>
@@ -1201,9 +1193,6 @@ footer.site-footer {
     </div>
 
     <aside class="case-study-aside">
-      <div class="case-study-illu">
-        <img src="working/anthropic-partnership-connection.svg" alt="Partnership / connection illustration, suggesting one server, three surfaces">
-      </div>
       <blockquote class="case-study-pullquote">One MCP server collapses three integration projects into one. The build is small; the consequence is large.</blockquote>
       <div class="case-study-stack">
         <span class="stack-tag">MCP 2025-06-18</span>
