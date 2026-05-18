@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Designing Claude Code — Michael Scrivana</title>
+<meta name="description" content="Twelve months of customizing Claude Code reshaped my design practice. A short essay on AI-native product surfaces.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   PX Design System v0.2 — LIGHT / PAPER tokens, scoped & inlined.
+   Page is self-contained: no external CSS dependency.
+   ══════════════════════════════════════════════════════════════ */
+:root {
+  /* surface — cool neutral, NOT pure white, NOT warm cream */
+  --px-bg:          #f4f5f7;
+  --px-surface:     #ffffff;
+  --px-surface-2:   #ebedf0;
+  --px-surface-3:   #dde0e6;
+  --px-surface-4:   #c9cdd5;
+
+  /* accent — PX blue */
+  --px-accent:       #2850D8;
+  --px-accent-deep:  #1B3AB0;
+  --px-accent-hover: #4368E8;
+  --px-accent-2:     #00867A;
+  --px-accent-dim:   rgba(40, 80, 216, 0.10);
+  --px-accent-glow:  rgba(40, 80, 216, 0.22);
+
+  /* text — cool near-black, never pure */
+  --px-text:    #0a0d12;
+  --px-text-2:  #4a5058;
+  --px-text-3:  #8b9099;
+  --px-text-4:  #b8bcc4;
+
+  /* border */
+  --px-border:    rgba(10, 13, 18, 0.08);
+  --px-border-2:  rgba(10, 13, 18, 0.14);
+  --px-border-3:  rgba(10, 13, 18, 0.24);
+
+  /* type */
+  --px-font:  'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --px-mono:  'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+
+  /* tracking */
+  --px-track-tight:    -0.025em;
+  --px-track-body:     -0.005em;
+  --px-track-mono:     0.14em;
+  --px-track-mono-lg:  0.18em;
+
+  /* shape */
+  --px-radius:     14px;
+  --px-radius-sm:  10px;
+  --px-radius-xs:  6px;
+
+  /* shadow */
+  --px-shadow-sm:    0 1px 2px -1px rgba(10, 13, 18, 0.08);
+  --px-shadow:       0 4px 16px -8px rgba(10, 13, 18, 0.12);
+  --px-shadow-lg:    0 8px 32px -12px rgba(10, 13, 18, 0.18);
+  --px-shadow-accent:0 8px 30px -12px rgba(40, 80, 216, 0.25);
+
+  /* motion */
+  --px-ease:  cubic-bezier(0.2, 0, 0, 1);
+  --px-dur:   160ms;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--px-bg);
+  color: var(--px-text);
+  font-family: var(--px-font);
+  font-size: 17px;
+  line-height: 1.65;
+  font-weight: 400;
+  letter-spacing: var(--px-track-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+::selection { background: var(--px-accent); color: #fff; }
+
+/* ============ NAV ============ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(244, 245, 247, 0.82);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border-bottom: 1px solid var(--px-border);
+}
+nav .name {
+  font-family: var(--px-font);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: var(--px-track-body);
+  color: var(--px-text);
+}
+nav .name .dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--px-accent);
+  margin-right: 10px;
+  vertical-align: middle;
+}
+nav .back {
+  font-family: var(--px-mono);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--px-track-mono);
+  color: var(--px-text-3);
+  text-decoration: none;
+  transition: color var(--px-dur) var(--px-ease);
+}
+nav .back:hover { color: var(--px-text); }
+
+/* ============ EYEBROW + MONO UTILITIES ============ */
+.px-eyebrow {
+  font-family: var(--px-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--px-track-mono-lg);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--px-accent);
+}
+.px-mono {
+  font-family: var(--px-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--px-track-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--px-text-3);
+}
+
+/* ============ HERO ============ */
+.hero {
+  padding: 160px 40px 64px;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.hero-eyebrow {
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s var(--px-ease) 0.15s forwards;
+}
+.hero h1 {
+  font-family: var(--px-font);
+  font-size: clamp(44px, 6vw, 72px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: var(--px-track-tight);
+  color: var(--px-text);
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 0.9s var(--px-ease) 0.3s forwards;
+}
+.hero h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--px-accent);
+}
+.hero-subtitle {
+  font-family: var(--px-font);
+  font-size: 19px;
+  line-height: 1.6;
+  font-weight: 400;
+  color: var(--px-text-2);
+  max-width: 640px;
+  opacity: 0;
+  animation: fadeUp 0.9s var(--px-ease) 0.45s forwards;
+}
+.hero-divider {
+  height: 1px;
+  background: var(--px-border);
+  margin: 56px 0 28px;
+  opacity: 0;
+  animation: fadeIn 0.9s var(--px-ease) 0.6s forwards;
+}
+.hero-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  opacity: 0;
+  animation: fadeUp 0.9s var(--px-ease) 0.7s forwards;
+}
+.hero-meta dt {
+  font-family: var(--px-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--px-track-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--px-text-3);
+  margin-bottom: 6px;
+}
+.hero-meta dd {
+  font-family: var(--px-font);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--px-text);
+}
+
+/* ============ ESSAY SECTIONS ============ */
+section.essay {
+  padding: 0 40px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.section-spacer { height: 96px; }
+.section-spacer-sm { height: 56px; }
+
+.essay-head {
+  margin-bottom: 24px;
+}
+.essay-head .px-eyebrow { display: block; margin-bottom: 16px; }
+.essay-head h2 {
+  font-family: var(--px-font);
+  font-size: clamp(28px, 3.4vw, 38px);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: var(--px-text);
+}
+.essay-head h2 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--px-text);
+}
+
+.essay-body p {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--px-text);
+  margin-bottom: 20px;
+}
+.essay-body p:last-child { margin-bottom: 0; }
+.essay-body p.lead {
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--px-text-2);
+  margin-bottom: 32px;
+}
+.essay-body em { font-style: italic; }
+.essay-body strong { font-weight: 600; color: var(--px-text); }
+.essay-body code {
+  font-family: var(--px-mono);
+  font-size: 0.92em;
+  color: var(--px-text);
+  background: var(--px-surface-2);
+  padding: 2px 6px;
+  border-radius: var(--px-radius-xs);
+  border: 1px solid var(--px-border);
+}
+
+/* ============ SURFACES LIST (definition list, mono key + body) ============ */
+.surfaces {
+  margin-top: 40px;
+  border-top: 1px solid var(--px-border);
+}
+.surface-row {
+  display: grid;
+  grid-template-columns: 24% 1fr;
+  gap: 32px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--px-border);
+  align-items: baseline;
+}
+.surface-row dt {
+  font-family: var(--px-mono);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--px-text);
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.4;
+  word-break: break-word;
+}
+.surface-row dd {
+  font-family: var(--px-font);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--px-text-2);
+  letter-spacing: var(--px-track-body);
+}
+.surface-row dd strong { color: var(--px-text); font-weight: 500; }
+
+/* ============ PRINCIPLES ============ */
+.principles {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin-top: 40px;
+}
+.principle {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 32px;
+  padding: 36px 0;
+  border-top: 1px solid var(--px-border);
+  align-items: start;
+}
+.principle:last-child { border-bottom: 1px solid var(--px-border); }
+.principle-num {
+  font-family: var(--px-font);
+  font-size: 56px;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--px-accent);
+  font-variant-numeric: tabular-nums;
+}
+.principle-body h3 {
+  font-family: var(--px-font);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--px-text);
+  margin-bottom: 14px;
+}
+.principle-body p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--px-text-2);
+  margin-bottom: 14px;
+}
+.principle-body p:last-child { margin-bottom: 0; }
+.principle-body p strong { color: var(--px-text); font-weight: 600; }
+
+/* ============ SPECULATIVE BLOCKS ============ */
+.speculative {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+.spec-block {
+  padding: 32px 0;
+  border-top: 1px solid var(--px-border);
+}
+.spec-block:last-child { border-bottom: 1px solid var(--px-border); }
+.spec-block h3 {
+  font-family: var(--px-font);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--px-text);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+.spec-block h3 .num {
+  font-family: var(--px-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: var(--px-track-mono);
+  color: var(--px-accent);
+  text-transform: uppercase;
+}
+.spec-block p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--px-text-2);
+}
+
+/* ============ CLOSING ============ */
+.closing {
+  padding: 0 40px;
+  max-width: 640px;
+  margin: 96px auto 0;
+  text-align: center;
+}
+.closing-mark {
+  width: 36px;
+  height: 1px;
+  background: var(--px-accent);
+  margin: 0 auto 32px;
+}
+.closing p {
+  font-family: var(--px-font);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(20px, 2.4vw, 24px);
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+  color: var(--px-text);
+}
+.closing p::before { content: '\201C'; color: var(--px-accent); margin-right: 2px; }
+.closing p::after  { content: '\201D'; color: var(--px-accent); margin-left: 2px; }
+
+/* ============ FOOTER ============ */
+footer {
+  margin-top: 120px;
+  padding: 48px 40px 56px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  border-top: 1px solid var(--px-border);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.foot-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.foot-col .label {
+  font-family: var(--px-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--px-track-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--px-text-3);
+  margin-bottom: 4px;
+}
+.foot-col a {
+  font-family: var(--px-font);
+  font-size: 14px;
+  color: var(--px-text);
+  text-decoration: none;
+  transition: color var(--px-dur) var(--px-ease);
+}
+.foot-col a:hover { color: var(--px-accent); }
+.foot-col .mono {
+  font-family: var(--px-mono);
+  font-size: 12.5px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.foot-col.right { text-align: right; }
+.foot-col.right .copy {
+  font-family: var(--px-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--px-track-mono);
+  font-size: 10.5px;
+  color: var(--px-text-3);
+}
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s var(--px-ease), transform 0.7s var(--px-ease);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px) {
+  .hero-meta { grid-template-columns: 1fr; gap: 20px; }
+  footer { grid-template-columns: 1fr; }
+  .foot-col.right { text-align: left; }
+  .surface-row { grid-template-columns: 1fr; gap: 8px; }
+  .principle { grid-template-columns: 1fr; gap: 16px; }
+  .principle-num { font-size: 42px; }
+}
+@media (max-width: 640px) {
+  nav { padding: 14px 20px; }
+  .hero { padding: 130px 20px 56px; }
+  section.essay { padding: 0 20px; }
+  .closing { padding: 0 20px; }
+  footer { padding: 40px 20px 48px; }
+  .hero h1 { font-size: clamp(34px, 8vw, 48px); }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="name"><span class="dot"></span>Michael Scrivana</span>
+  <a href="claude-code.html" class="back">&larr; Back to cases</a>
+</nav>
+
+<!-- ================ HERO ================ -->
+<div class="hero">
+  <div class="hero-eyebrow px-eyebrow">Meta &middot; Designing Claude Code</div>
+  <h1>I don't just <em>use</em> Claude Code. I live inside it.</h1>
+  <p class="hero-subtitle">Twelve months of customizing the environment &mdash; hooks, subagents, slash commands, MCPs, a vault, and a daily-briefing pipeline &mdash; reshaped my design practice. A short essay on what that taught me about AI-native product surfaces.</p>
+
+  <div class="hero-divider"></div>
+
+  <dl class="hero-meta">
+    <div>
+      <dt>Written</dt>
+      <dd>May 2026</dd>
+    </div>
+    <div>
+      <dt>Read time</dt>
+      <dd>6 minutes</dd>
+    </div>
+    <div>
+      <dt>Audience</dt>
+      <dd>Anthropic Claude Code team</dd>
+    </div>
+  </dl>
+</div>
+
+<div class="section-spacer"></div>
+
+<!-- ================ SECTION 1 — THE PROBLEM ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">01 &middot; The problem</span>
+    <h2>Most "AI features" are surfaces grafted onto pre-AI products.</h2>
+  </div>
+  <div class="essay-body">
+    <p>Last month I gave a 30-minute talk to my colleagues in Nashville called <em>"AI for Designers."</em> The spine was five principles &mdash; context, knowledge, conversation, memory, workflow &mdash; that turn Claude from a chatbot into a working environment. I built the talk to teach the practice I'd been quietly developing for a year. By the time I gave it, I'd noticed something quieter underneath the principles: I wasn't using Claude Code anymore. I was designing inside it.</p>
+    <p>The pattern I was reacting to is everywhere now. A SaaS product ships an "AI assistant." It's a chat window in the corner. It reads your data, it answers questions, it sometimes drafts something. The model is good. The surface is the same surface the product had before there was a model behind it.</p>
+    <p>That works as a feature. It fails as a design philosophy. Because the interesting design problem isn't "what goes in the chat window." It's the layer underneath &mdash; the working environment the user actually lives in. Files, configs, hooks, shortcuts, the way one tool composes with the next. The substrate. When the substrate is designed for AI, the chat window becomes the least interesting thing in the room.</p>
+    <p>Claude Code is the clearest example I've used of a product that took the substrate question seriously. A CLI with hooks, slash commands, MCPs, and subagents is not "a chatbot in a terminal." It's a new interaction grammar &mdash; one where the user authors the environment as readily as they invoke it. That's the bet I think Anthropic is making, and it's the bet I've been making in my own building.</p>
+  </div>
+</section>
+
+<div class="section-spacer"></div>
+
+<!-- ================ SECTION 2 — WHAT I BUILT ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">02 &middot; The custom surfaces</span>
+    <h2>A year inside Claude Code, building outward.</h2>
+  </div>
+  <div class="essay-body">
+    <p class="lead">I didn't set out to build a personal operating system. I just kept noticing small frictions, and Claude Code kept making them cheap to fix. A year on, the customizations have composed into something I rely on every day. Here's the surface area I authored, in roughly the order I built it.</p>
+
+    <dl class="surfaces">
+      <div class="surface-row">
+        <dt>/bod</dt>
+        <dd><strong>Morning kickoff skill.</strong> Reads today's daily note, surfaces yesterday's open items, asks which to start. Replaces a fifteen-minute manual triage.</dd>
+      </div>
+      <div class="surface-row">
+        <dt>/eod</dt>
+        <dd><strong>End-of-day close-out.</strong> Audits today's note, captures unfinished items, rolls them into tomorrow. The pair that makes <code>/bod</code> work the next morning.</dd>
+      </div>
+      <div class="surface-row">
+        <dt>/recap</dt>
+        <dd><strong>Session recap.</strong> Appends the session's Claude work to the Obsidian daily note. Used so often it became muscle memory; the daily note is now a continuous transcript of how I think with the model.</dd>
+      </div>
+      <div class="surface-row">
+        <dt>vault-synthesizer</dt>
+        <dd><strong>Subagent.</strong> Reads across my two-hundred-plus initiative notes and synthesizes state on demand. The first time it ranked my "top three things to ship this week" with full vault context, the calculus of what I could ask the model to do shifted.</dd>
+      </div>
+      <div class="surface-row">
+        <dt>brief-reviewer</dt>
+        <dd><strong>Subagent.</strong> Critiques drafts against stakeholder feedback and missing cross-references before they go to leadership. A standing second pair of eyes that never gets tired and remembers the last six months.</dd>
+      </div>
+      <div class="surface-row">
+        <dt>px-mcp-knowledge</dt>
+        <dd><strong>Custom MCP server.</strong> Exposes our organizational standards &mdash; brand rules, taxonomy, sub-home conventions &mdash; to Claude Code, MGA, and Microsoft 365 Copilot from a single deploy. Three tools, three surfaces, one source of truth.</dd>
+      </div>
+      <div class="surface-row">
+        <dt>SessionStart hook</dt>
+        <dd><strong>Hook.</strong> Prints today's daily note and the initiatives modified in the last forty-eight hours every time I open a session. Context-as-greeting; I never start cold.</dd>
+      </div>
+      <div class="surface-row">
+        <dt>Stop hook</dt>
+        <dd><strong>Hook.</strong> Text-to-speech via macOS <code>say</code>, toggled by a file flag. I can hear Claude's responses while making coffee. Small, but it changes how the tool fits the day.</dd>
+      </div>
+      <div class="surface-row">
+        <dt>launchd 7am briefing</dt>
+        <dd><strong>Pipeline.</strong> Node and Claude-on-Azure synthesize vault state into a one-screen briefing every morning. Designed for skim, not depth. The model met me where I already start the day instead of asking me to come find it.</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<div class="section-spacer"></div>
+
+<!-- ================ SECTION 3 — WHAT IT TAUGHT ME ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">03 &middot; What it taught me</span>
+    <h2>Four principles for designing AI-native product surfaces.</h2>
+  </div>
+  <div class="essay-body">
+    <p class="lead">These aren't laws. They're the patterns I keep returning to when I'm designing the AI-native tools I ship to colleagues at Bayer &mdash; and the ones I'd want to design at Anthropic.</p>
+
+    <div class="principles">
+
+      <div class="principle">
+        <div class="principle-num">01</div>
+        <div class="principle-body">
+          <h3>Custom surfaces should be cheap to author.</h3>
+          <p>The reason I built <code>/bod</code> and <code>/eod</code> is that Claude Code made them a twenty-minute job, not a two-week feature request. The threshold to extend the tool sat below the threshold to ignore the friction. That's a design decision, not a side effect.</p>
+          <p>Every AI tool should make its own extension surface this cheap. The product that lowers the cost of authoring its own primitives wins disproportionately, because the user starts shipping the features the team would never have prioritized.</p>
+        </div>
+      </div>
+
+      <div class="principle">
+        <div class="principle-num">02</div>
+        <div class="principle-body">
+          <h3>The CLI is a design canvas, not just a panel.</h3>
+          <p>Most "AI features" assume the chat window is the surface. Claude Code refuses that assumption. Hooks, skills, subagents, MCPs, slash commands &mdash; each is a designed primitive with its own shape, its own grammar, its own authoring story.</p>
+          <p>The design problem isn't "what goes in the chat." It's "what primitives compose into a working environment." That reframing is what makes Claude Code feel different from every other AI tool I use, and it's the reframing I'd want to keep extending.</p>
+        </div>
+      </div>
+
+      <div class="principle">
+        <div class="principle-num">03</div>
+        <div class="principle-body">
+          <h3>Memory + skills + hooks compose into a personal OS.</h3>
+          <p>I don't have a separate productivity app, calendar assistant, vault search, or briefing tool. Claude Code holds all of it because the primitives composed. Memory remembers me. Skills package the verbs I use most. Hooks decide when the environment speaks first. Together they're an operating system, not a feature set.</p>
+          <p>That composability is the design opportunity. The product that turns "an AI you use" into "an AI that holds your day" is doing the harder, more durable work.</p>
+        </div>
+      </div>
+
+      <div class="principle">
+        <div class="principle-num">04</div>
+        <div class="principle-body">
+          <h3>The best AI products make their users more capable, not more dependent.</h3>
+          <p>A year ago I couldn't ship working software. Now I ship AI-native tools to a hundred and fifteen colleagues. Not because I became a better engineer &mdash; because Claude is a capability-building partner. It teaches as it works. It defers when I should be the one deciding. It leaves me sharper than it found me.</p>
+          <p>That's the bar I'd want to design against. A surface that flatters the user's dependency on it is easy to build. A surface that grows the user's range is the one that earns trust at the scale Anthropic is operating at.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-spacer"></div>
+
+<!-- ================ SECTION 4 — WHAT I'D WANT TO DESIGN ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">04 &middot; What I'd want to design</span>
+    <h2>Three things I think about often.</h2>
+  </div>
+  <div class="essay-body">
+
+    <div class="speculative">
+
+      <div class="spec-block">
+        <h3><span class="num">A</span>The grammar of subagents.</h3>
+        <p>Right now I author subagents in YAML frontmatter plus markdown. It works, and the constraint is honest &mdash; the authoring surface is a config file because subagents are still a new primitive and the team is keeping the door open. But it leaves a real design question on the table: what does subagent authoring look like when it's a first-class surface for non-engineers? A teammate of mine could describe the agent they want in a paragraph. The grammar of subagents is one of the most interesting open spaces in the product.</p>
+      </div>
+
+      <div class="spec-block">
+        <h3><span class="num">B</span>Hooks as a user-facing concept.</h3>
+        <p>Hooks are powerful and almost invisible to most users. There's a design problem here: how do you surface hook composition so that customizing your Claude Code environment feels like writing a recipe, not editing JSON? Hooks are where Claude Code stops being a tool you use and starts being a tool you shape. Making them legible to a wider audience without making them less powerful is the kind of problem I'd want to spend a year on.</p>
+      </div>
+
+      <div class="spec-block">
+        <h3><span class="num">C</span>The "personal OS" pattern at scale.</h3>
+        <p>What I've built for myself in Claude Code is a personal operating system. Does that scale to a team &mdash; a shared vault, shared skills, shared subagents &mdash; without losing the intimacy that makes the personal version work? My instinct is that the answer involves designing for permeable membranes between personal and shared, not flat-sharing everything. But I'd rather work that out with a team that's already thinking about it than write about it from the outside.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================ CLOSING ================ -->
+<div class="closing reveal">
+  <div class="closing-mark"></div>
+  <p>Anthropic's bet that AI should be reliable, interpretable, and steerable is the bet I've made in my own building. I'd rather make it at the source.</p>
+</div>
+
+<!-- ================ FOOTER ================ -->
+<footer>
+  <div class="foot-col">
+    <span class="label">Contact</span>
+    <a href="mailto:mkscrivana@gmail.com" class="mono">mkscrivana@gmail.com</a>
+    <a href="https://www.linkedin.com/in/michaelscrivana89" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://michaelscrivana.com" target="_blank" rel="noopener">michaelscrivana.com</a>
+  </div>
+  <div class="foot-col">
+    <span class="label">Application materials</span>
+    <a href="claude-code.html">&larr; Six working answers</a>
+    <a href="documents/WhyAnthropic.pdf">Why Anthropic essay</a>
+  </div>
+  <div class="foot-col right">
+    <span class="label">Colophon</span>
+    <span class="copy">PX Design System v0.2</span>
+    <span class="copy">DM Sans &middot; JetBrains Mono</span>
+    <span class="copy">&copy; 2026 Michael Scrivana</span>
+  </div>
+</footer>
+
+<!-- ============ SCROLL REVEAL ============ -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.08,
+    rootMargin: '0px 0px -60px 0px'
+  });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
