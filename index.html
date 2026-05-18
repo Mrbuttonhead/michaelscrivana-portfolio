@@ -2,13 +2,13 @@
 <html data-wf-page="67084a3dbb84f332205bf75d" data-wf-site="633023a7fd7ec6455091290f" lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Michael Scrivana — Brand Experience Designer</title>
-  <meta content="Brand Experience Designer. Spatial &amp; Event Design. AI-Fluent Creative." name="description">
-  <meta content="Michael Scrivana — Brand Experience Designer" property="og:title">
-  <meta content="Brand Experience Designer. Spatial &amp; Event Design. AI-Fluent Creative." property="og:description">
+  <title>Michael Scrivana — Product Designer / Brand Designer</title>
+  <meta content="Product Designer / Brand Designer. AI product work, brand launches, and spatial design." name="description">
+  <meta content="Michael Scrivana — Product Designer / Brand Designer" property="og:title">
+  <meta content="Product Designer / Brand Designer. AI product work, brand launches, and spatial design." property="og:description">
   <meta content="https://uploads-ssl.webflow.com/633023a7fd7ec6455091290f/633819757b04fd0cc9c63ee9_softbody.webp" property="og:image">
-  <meta content="Michael Scrivana — Brand Experience Designer" property="twitter:title">
-  <meta content="Brand Experience Designer. Spatial &amp; Event Design. AI-Fluent Creative." property="twitter:description">
+  <meta content="Michael Scrivana — Product Designer / Brand Designer" property="twitter:title">
+  <meta content="Product Designer / Brand Designer. AI product work, brand launches, and spatial design." property="twitter:description">
   <meta content="https://uploads-ssl.webflow.com/633023a7fd7ec6455091290f/633819757b04fd0cc9c63ee9_softbody.webp" property="twitter:image">
   <meta property="og:type" content="website">
   <meta content="summary_large_image" name="twitter:card">
@@ -36,6 +36,7 @@
       </div>
       <nav role="navigation" class="nav-menu-3 w-nav-menu">
         <a href="index.html" aria-current="page" class="nav-link-3 w-nav-link w--current">Work</a>
+        <a href="claude-code.html" class="nav-link-3 w-nav-link" style="color:#FF3D1F;">AI / Product</a>
         <a href="about.html" class="nav-link-4 w-nav-link">About</a>
         <a href="contact.html" class="nav-link-5 w-nav-link">Contact</a>
       </nav>
@@ -56,46 +57,220 @@
       <div class="centre-align">
         <div class="text-box _900px">
           <h2 data-w-id="45f8ade1-566e-455d-577b-67a15abcbf10" class="heading extra-large hero-anim">Michael Scrivana</h2>
-          <div data-w-id="2041fd22-a6a7-c685-3b50-c3ec1e4ce7bc" class="text-block hero-anim">Brand Experience Designer. Spatial &amp; Event Design. AI-Fluent Creative.</div>
+          <div data-w-id="2041fd22-a6a7-c685-3b50-c3ec1e4ce7bc" class="text-block hero-anim">Product Designer / Brand Designer</div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- ============ HERO FEATURE TILE — CLAUDE CODE APPLICATION ============ -->
+  <style>
+    .hero-feature {
+      max-width: 1200px;
+      margin: 0 auto 56px;
+      padding: 0 24px;
+    }
+    .hero-feature a {
+      display: block;
+      position: relative;
+      background:
+        radial-gradient(ellipse 60% 80% at 100% 0%, rgba(255, 61, 31, 0.18), transparent 60%),
+        linear-gradient(180deg, #141414, #0a0a0a);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 18px;
+      padding: 56px 56px 48px;
+      color: #f0f0f2;
+      text-decoration: none;
+      overflow: hidden;
+      transition: transform 200ms cubic-bezier(0.2, 0, 0, 1), border-color 200ms cubic-bezier(0.2, 0, 0, 1), box-shadow 200ms cubic-bezier(0.2, 0, 0, 1);
+    }
+    .hero-feature a:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 61, 31, 0.7);
+      box-shadow: 0 18px 60px -20px rgba(255, 61, 31, 0.45);
+    }
+    .hero-feature .eyebrow {
+      font-family: 'JetBrains Mono', 'SF Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #FF3D1F;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-feature .eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #FF3D1F;
+      box-shadow: 0 0 12px rgba(255, 61, 31, 0.7);
+    }
+    .hero-feature h3 {
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      font-size: clamp(28px, 4.2vw, 48px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: #f0f0f2;
+      margin: 0 0 18px;
+      max-width: 22ch;
+    }
+    .hero-feature h3 em {
+      font-style: italic;
+      font-weight: 400;
+      color: #00A896;
+    }
+    .hero-feature p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 17px;
+      line-height: 1.55;
+      color: #a8a8ad;
+      max-width: 64ch;
+      margin: 0 0 28px;
+    }
+    .hero-feature .cta-row {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .hero-feature .read-cta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #FF3D1F;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-feature .meta-row {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #6a6a70;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .hero-feature .meta-row .sep { color: #4a4a4f; }
+    @media (max-width: 640px) {
+      .hero-feature a { padding: 36px 28px 32px; border-radius: 14px; }
+      .hero-feature .cta-row { gap: 18px; }
+    }
+
+    /* secondary rail — brand & spatial */
+    .secondary-rail-head {
+      max-width: 1200px;
+      margin: 80px auto 24px;
+      padding: 0 24px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      padding-bottom: 16px;
+    }
+    .secondary-rail-head h4 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #6a6a70;
+      margin: 0;
+    }
+    .secondary-rail-head .count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #8b9099;
+    }
+    .other-link-row {
+      max-width: 1200px;
+      margin: 40px auto 0;
+      padding: 24px;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+    .other-link-row a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      color: #6a6a70;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0,0,0,0.14);
+      padding-bottom: 2px;
+      transition: color 160ms;
+    }
+    .other-link-row a:hover { color: #FF3D1F; }
+  </style>
+
+  <div class="hero-feature fade-in">
+    <a href="claude-code.html">
+      <div class="eyebrow">Application &middot; Anthropic &middot; Product Designer, Claude Code</div>
+      <h3>Designing the surfaces where people <em>work with</em> AI.</h3>
+      <p>Five AI-native internal tools I designed and built for a 115-person product organization at Bayer Consumer Health &mdash; agentic review systems, MCP servers, React workflow editors, daily-briefing pipelines. Plus a short meta essay on what twelve months inside Claude Code taught me.</p>
+      <div class="cta-row">
+        <span class="read-cta">Read the application &rarr; ~12 min</span>
+        <div class="meta-row">
+          <span>5 case studies</span><span class="sep">/</span>
+          <span>1 meta essay</span>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <!-- ============ PRIMARY GRID — PRODUCT, ECOMM, AI ============ -->
   <div class="movie paddinghome">
     <div class="w-layout-blockcontainer pinterest container-padding w-container stagger">
-      <!-- 1. NACDS Booth Design -->
-      <div class="div-block-27 fade-in">
-        <a href="nacds.html" class="link-block-5 w-inline-block"><img src="images/nacds/TSE_booth-exterior-with-competitor.jpg" loading="lazy" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" alt="Bayer NACDS trade show booth with competitor visible — spatial exhibition design" class="image-21">
-          <div class="content-tab">
-            <h4 class="heading-8">NACDS Booth Design</h4>
-          </div>
-        </a>
-      </div>
-      <!-- 2. BOLD EVENT -->
-      <div class="div-block-27 fade-in">
-        <a href="marketingexcellence.html" class="link-block-5 w-inline-block"><img src="images/BOLD-HERO2.png" loading="lazy" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" alt="BOLD Activation Tour — event identity design" class="image-21">
-          <div class="content-tab">
-            <h4 class="heading-8">BOLD Event</h4>
-          </div>
-        </a>
-      </div>
-      <!-- 3. AI & Design Innovation -->
-      <div class="div-block-27 fade-in">
-        <a href="ai.html" class="link-block-5 w-inline-block"><img src="images/AIArt26.webp" loading="lazy" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" srcset="images/AIArt26-p-500.png 500w, images/AIArt26-p-800.png 800w, images/AIArt26-p-1080.png 1080w, images/AIArt26.webp 1536w" alt="AI-generated design exploration" class="image-21">
-          <div class="content-tab">
-            <h4 class="heading-8">AI &amp; Design</h4>
-          </div>
-        </a>
-      </div>
-      <!-- 4. MiraLAX -->
+
+      <!-- 1. MIRAFAST / MIRALAX — multi-surface brand launch -->
       <div class="div-block-27 fade-in">
         <a href="miralax.html" class="link-block-5 w-inline-block"><img src="images/MIRAFAST.png" loading="lazy" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" alt="MiraFAST brand launch packaging design" class="image-21">
           <div class="content-tab">
-            <h4 class="heading-8">MiraFAST</h4>
+            <h4 class="heading-8">MiraFAST &middot; Multi-Surface Brand Launch</h4>
           </div>
         </a>
       </div>
-      <!-- 5. Iberogast -->
+
+      <!-- 2. AGE FACTOR LAUNCH (product launch) -->
+      <div class="div-block-27 fade-in">
+        <a href="age-factor.html" class="link-block-5 w-inline-block"><img src="images/AF-KV-083123.webp" loading="lazy" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" alt="One A Day Age Factor — product launch creative" class="image-21">
+          <div class="content-tab">
+            <h4 class="heading-8">Age Factor &middot; Product Launch</h4>
+          </div>
+        </a>
+      </div>
+
+      <!-- 3. ONE A DAY — ECOMM LAUNCH (Hatch productshot) -->
+      <div class="div-block-27 fade-in">
+        <a href="ecommerce1.html" class="link-block-5 w-inline-block"><img src="images/HatchProductshot-1.webp" loading="lazy" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" alt="One A Day ecommerce launch — Hatch productshot" class="image-21">
+          <div class="content-tab">
+            <h4 class="heading-8">One A Day &middot; Ecomm Launch</h4>
+          </div>
+        </a>
+      </div>
+
+      <!-- 4. AI & Design Innovation -->
+      <div class="div-block-27 fade-in">
+        <a href="ai.html" class="link-block-5 w-inline-block"><img src="images/AIArt26.webp" loading="lazy" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" srcset="images/AIArt26-p-500.png 500w, images/AIArt26-p-800.png 800w, images/AIArt26-p-1080.png 1080w, images/AIArt26.webp 1536w" alt="AI-generated design exploration" class="image-21">
+          <div class="content-tab">
+            <h4 class="heading-8">AI &amp; Design Innovation</h4>
+          </div>
+        </a>
+      </div>
+
+      <!-- 5. IBEROGAST -->
       <div class="div-block-27 fade-in">
         <a href="iberogast-launch.html" class="link-block-5 w-inline-block"><img src="images/Mobile-mock1.webp" loading="lazy" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" srcset="images/Mobile-mock1-p-500.png 500w, images/Mobile-mock1-p-800.png 800w, images/Mobile-mock1-p-1080.png 1080w, images/Mobile-mock1.webp 1280w" alt="Iberogast brand launch mobile mockup" class="image-21">
           <div class="content-tab">
@@ -103,30 +278,51 @@
           </div>
         </a>
       </div>
-      <!-- 6. Fine Art -->
-      <div class="div-block-27 fade-in">
-        <a href="fine-art.html" class="link-block-5 w-inline-block"><img src="images/deerskull.webp" loading="lazy" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" srcset="images/deerskull-p-500.png 500w, images/deerskull-p-800.png 800w, images/deerskull-p-1080.png 1080w, images/deerskull.webp 1090w" alt="Still life drawing of a deer skull — Art Students League of New York" class="image-21">
-          <div class="content-tab">
-            <h4 class="heading-8">Fine Art</h4>
-          </div>
-        </a>
-      </div>
-      <!-- 7. Illustration -->
-      <div class="div-block-27 fade-in">
-        <a href="illustration.html" class="link-block-5 w-inline-block"><img src="images/softbody.webp" loading="lazy" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" srcset="images/softbody-p-500.jpg 500w, images/softbody-p-800.jpg 800w, images/softbody-p-1080.jpg 1080w, images/softbody.webp 1713w" alt="3D soft body digital illustration" class="image-21">
-          <div class="content-tab">
-            <h4 class="heading-8">Illustration</h4>
-          </div>
-        </a>
-      </div>
+
     </div>
   </div>
+
+  <!-- ============ SECONDARY RAIL — BRAND & SPATIAL ============ -->
+  <div class="secondary-rail-head fade-in">
+    <h4>Brand &amp; spatial work</h4>
+    <span class="count">02 / 02</span>
+  </div>
+  <div class="movie paddinghome">
+    <div class="w-layout-blockcontainer pinterest container-padding w-container stagger">
+
+      <!-- BOLD EVENT -->
+      <div class="div-block-27 fade-in">
+        <a href="marketingexcellence.html" class="link-block-5 w-inline-block"><img src="images/BOLD-HERO2.png" loading="lazy" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" alt="BOLD Activation Tour — event identity design" class="image-21">
+          <div class="content-tab">
+            <h4 class="heading-8">BOLD Breakthrough Tour</h4>
+          </div>
+        </a>
+      </div>
+
+      <!-- NACDS BOOTH -->
+      <div class="div-block-27 fade-in">
+        <a href="nacds.html" class="link-block-5 w-inline-block"><img src="images/nacds/TSE_booth-exterior-with-competitor.jpg" loading="lazy" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" alt="Bayer NACDS trade show booth — spatial exhibition design" class="image-21">
+          <div class="content-tab">
+            <h4 class="heading-8">NACDS Booth Design</h4>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ OTHER (FINE ART / ILLUSTRATION) — QUIET ROW ============ -->
+  <div class="other-link-row fade-in">
+    <a href="fine-art.html">Fine Art &mdash; Art Students League of New York</a>
+    <a href="illustration.html">Illustration</a>
+    <a href="anthropic.html">A Space to Think &mdash; Speculative Event Concept</a>
+  </div>
+
   <div class="movie emailcta">
     <div class="container w-container" style="text-align:center; padding:64px 0;">
       <div class="fade-in">
         <p class="paragraph" style="margin-bottom:24px;">Interested in working together?</p>
-        <a href="documents/MichaelScrivana_Resume.pdf" target="_blank" class="link" style="display:inline-block; border:1px solid var(--white-50); padding:14px 32px; border-radius:8px; text-decoration:none; letter-spacing:0.02em;">Download Resume</a>
-        <p style="margin-top:32px; font-size:14px; opacity:0.5;"><a href="anthropic.html" class="link" style="text-decoration:underline; text-underline-offset:3px;">A Space to Think — Speculative Event Concept</a></p>
+        <a href="mailto:mkscrivana@gmail.com" class="link" style="display:inline-block; border:1px solid var(--white-50); padding:14px 32px; border-radius:8px; text-decoration:none; letter-spacing:0.02em;">Get in touch</a>
       </div>
     </div>
   </div>

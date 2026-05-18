@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI product work — Michael Scrivana · Application for Product Designer, Claude Code</title>
+<meta name="description" content="Five AI-native internal tools, designed and built. Application for Product Designer, Claude Code at Anthropic.">
+<link rel="icon" href="images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   PX Design System v0.2 — DARK / CHROME, scoped & inlined.
+   ══════════════════════════════════════════════════════════════ */
+:root {
+  --px-bg:          #000000;
+  --px-surface:     #0a0a0a;
+  --px-surface-2:   #141414;
+  --px-surface-3:   #1e1e1e;
+  --px-surface-4:   #262626;
+
+  --px-accent:       #FF3D1F;
+  --px-accent-deep:  #D62E10;
+  --px-accent-hover: #FF5638;
+  --px-accent-2:     #00A896;
+  --px-accent-dim:   rgba(255, 61, 31, 0.12);
+  --px-accent-glow:  rgba(255, 61, 31, 0.28);
+
+  --px-text:    #f0f0f2;
+  --px-text-2:  #a8a8ad;
+  --px-text-3:  #6a6a70;
+  --px-text-4:  #4a4a4f;
+
+  --px-border:    rgba(255, 255, 255, 0.08);
+  --px-border-2:  rgba(255, 255, 255, 0.14);
+  --px-border-3:  rgba(255, 255, 255, 0.22);
+
+  --px-font:  'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --px-mono:  'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+
+  --px-track-tight:    -0.025em;
+  --px-track-body:     -0.005em;
+  --px-track-mono:     0.14em;
+  --px-track-mono-lg:  0.18em;
+
+  --px-radius:     14px;
+  --px-radius-sm:  10px;
+  --px-radius-xs:  6px;
+
+  --px-shadow-sm:     0 2px 8px -4px rgba(0, 0, 0, 0.35);
+  --px-shadow:        0 8px 30px -16px rgba(0, 0, 0, 0.50);
+  --px-shadow-lg:     0 12px 40px -16px rgba(0, 0, 0, 0.60);
+  --px-shadow-accent: 0 8px 30px -12px rgba(255, 61, 31, 0.35);
+
+  --px-ease:  cubic-bezier(0.2, 0, 0, 1);
+  --px-dur:   160ms;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -20%, rgba(255, 61, 31, 0.08), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(0, 168, 150, 0.06), transparent 60%),
+    var(--px-bg);
+  color: var(--px-text);
+  font-family: var(--px-font);
+  font-size: 16px;
+  line-height: 1.55;
+  font-weight: 400;
+  letter-spacing: var(--px-track-body);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+::selection { background: var(--px-accent); color: #000; }
+
+/* ============ MONO + EYEBROW UTILITIES ============ */
+.px-mono {
+  font-family: var(--px-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--px-track-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--px-text-3);
+}
+.px-eyebrow {
+  font-family: var(--px-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--px-track-mono-lg);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--px-accent);
+}
+code, .inline-code {
+  font-family: var(--px-mono);
+  font-size: 0.88em;
+  color: var(--px-text);
+  background: var(--px-surface-3);
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--px-border);
+  letter-spacing: 0;
+}
+
+/* ============ NAV ============ */
+nav.site-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border-bottom: 1px solid var(--px-border);
+}
+nav.site-nav .name {
+  font-family: var(--px-font);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: var(--px-track-body);
+  color: var(--px-text);
+  text-decoration: none;
+}
+nav.site-nav .name .dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--px-accent);
+  margin-right: 10px;
+  vertical-align: middle;
+  box-shadow: 0 0 12px var(--px-accent-glow);
+}
+nav.site-nav .nav-links {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+nav.site-nav .nav-links a {
+  font-family: var(--px-font);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--px-text-2);
+  text-decoration: none;
+  transition: color var(--px-dur) var(--px-ease);
+}
+nav.site-nav .nav-links a:hover { color: var(--px-text); }
+nav.site-nav .nav-links a.current { color: var(--px-accent); }
+nav.site-nav .back {
+  font-family: var(--px-mono);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--px-track-mono);
+  color: var(--px-text-3);
+  text-decoration: none;
+  transition: color var(--px-dur) var(--px-ease);
+}
+nav.site-nav .back:hover { color: var(--px-text); }
+
+/* ============ HERO ============ */
+.hero {
+  padding: 160px 40px 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.hero-eyebrow {
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s var(--px-ease) 0.15s forwards;
+}
+.hero h1 {
+  font-family: var(--px-font);
+  font-size: clamp(48px, 7vw, 84px);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: var(--px-track-tight);
+  color: var(--px-text);
+  max-width: 1080px;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 0.9s var(--px-ease) 0.3s forwards;
+}
+.hero h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--px-accent-2);
+}
+.hero-subtitle {
+  font-family: var(--px-font);
+  font-size: 19px;
+  line-height: 1.55;
+  font-weight: 400;
+  color: var(--px-text-2);
+  max-width: 760px;
+  opacity: 0;
+  animation: fadeUp 0.9s var(--px-ease) 0.45s forwards;
+}
+.hero-divider {
+  height: 1px;
+  background: var(--px-border);
+  margin: 64px 0 32px;
+  opacity: 0;
+  animation: fadeIn 0.9s var(--px-ease) 0.6s forwards;
+}
+.hero-meta {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 48px;
+  opacity: 0;
+  animation: fadeUp 0.9s var(--px-ease) 0.7s forwards;
+}
+.hero-meta dt {
+  font-family: var(--px-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--px-track-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--px-text-3);
+  margin-bottom: 8px;
+}
+.hero-meta dd {
+  font-family: var(--px-font);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--px-text);
+}
+
+/* ============ SECTION SCAFFOLD ============ */
+section.container {
+  padding: 0 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.section-spacer { height: 96px; }
+.section-spacer-sm { height: 56px; }
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 40px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--px-border);
+}
+.section-head h2 {
+  font-family: var(--px-font);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: var(--px-track-body);
+  color: var(--px-text);
+}
+.section-head .count {
+  font-family: var(--px-mono);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--px-track-mono);
+  color: var(--px-text-3);
+}
+
+/* ============ CASE GRID (overview) ============ */
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+.case {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  background: var(--px-surface-2);
+  border: 1px solid var(--px-border);
+  border-radius: var(--px-radius);
+  padding: 40px;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    transform var(--px-dur) var(--px-ease),
+    border-color var(--px-dur) var(--px-ease),
+    background var(--px-dur) var(--px-ease),
+    box-shadow var(--px-dur) var(--px-ease);
+  min-height: 280px;
+  overflow: hidden;
+}
+.case::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 100% 0%, var(--px-accent-dim), transparent 60%);
+  opacity: 0;
+  transition: opacity var(--px-dur) var(--px-ease);
+  pointer-events: none;
+}
+.case:hover {
+  border-color: var(--px-border-2);
+  background: var(--px-surface-3);
+  transform: translateY(-2px);
+  box-shadow: var(--px-shadow-lg);
+}
+.case:hover::before { opacity: 1; }
+
+.case-top { display: flex; flex-direction: column; gap: 16px; }
+.case-eyebrow {
+  font-family: var(--px-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--px-track-mono-lg);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--px-accent);
+}
+.case h3 {
+  font-family: var(--px-font);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--px-text);
+}
+.case h3 .product { display: block; color: var(--px-text); }
+.case h3 .desc {
+  display: block;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: var(--px-track-body);
+  color: var(--px-text-2);
+  margin-top: 14px;
+  max-width: 46ch;
+}
+.case-meta {
+  font-family: var(--px-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--px-track-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--px-text-3);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+.case-meta span:not(.sep) { white-space: nowrap; }
+.case-meta .sep { color: var(--px-text-4); user-select: none; }
+.case-arrow {
+  position: absolute;
+  top: 36px;
+  right: 36px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--px-border-2);
+  color: var(--px-text-2);
+  transition:
+    background var(--px-dur) var(--px-ease),
+    color var(--px-dur) var(--px-ease),
+    transform var(--px-dur) var(--px-ease),
+    border-color var(--px-dur) var(--px-ease);
+}
+.case:hover .case-arrow {
+  background: var(--px-accent);
+  border-color: var(--px-accent);
+  color: #000;
+  transform: translate(2px, -2px);
+}
+.case.case-meta-card {
+  background: linear-gradient(180deg, var(--px-surface-3), var(--px-surface-2));
+  border-color: var(--px-border-2);
+}
+.case.case-meta-card .case-eyebrow { color: var(--px-accent-2); }
+.case.case-meta-card h3 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--px-accent-2);
+}
+
+/* ============ CASE STUDY SECTIONS ============ */
+.case-study {
+  padding: 0 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  scroll-margin-top: 80px;
+}
+.case-study-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 32px;
+  padding: 56px 0 32px;
+  border-top: 1px solid var(--px-border);
+}
+.case-study-head .num {
+  font-family: var(--px-mono);
+  font-size: 10.5px;
+  letter-spacing: var(--px-track-mono);
+  text-transform: uppercase;
+  color: var(--px-accent);
+  margin-bottom: 14px;
+  display: block;
+}
+.case-study-head h2 {
+  font-family: var(--px-font);
+  font-size: clamp(36px, 4.6vw, 56px);
+  font-weight: 700;
+  letter-spacing: var(--px-track-tight);
+  line-height: 1.04;
+  color: var(--px-text);
+  margin-bottom: 18px;
+}
+.case-study-head h2 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--px-accent-2);
+}
+.case-study-head .deck {
+  font-family: var(--px-font);
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--px-text-2);
+  max-width: 720px;
+}
+.case-study-head .anchor-link {
+  font-family: var(--px-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: var(--px-track-mono);
+  color: var(--px-text-4);
+  text-decoration: none;
+  transition: color var(--px-dur) var(--px-ease);
+  white-space: nowrap;
+  align-self: start;
+  padding-top: 8px;
+}
+.case-study-head .anchor-link:hover { color: var(--px-accent); }
+
+.case-study-meta {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px;
+  padding: 24px 0 40px;
+  border-bottom: 1px solid var(--px-border);
+}
+.case-study-meta dt {
+  font-family: var(--px-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: var(--px-track-mono);
+  color: var(--px-text-3);
+  margin-bottom: 6px;
+}
+.case-study-meta dd {
+  font-family: var(--px-font);
+  font-size: 14px;
+  color: var(--px-text);
+  line-height: 1.45;
+}
+
+.case-study-body {
+  display: grid;
+  grid-template-columns: minmax(0, 760px) minmax(0, 1fr);
+  gap: 64px;
+  padding: 56px 0 32px;
+  align-items: start;
+}
+.case-study-body .body-col h3 {
+  font-family: var(--px-font);
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--px-track-mono);
+  color: var(--px-accent);
+  margin-top: 36px;
+  margin-bottom: 14px;
+}
+.case-study-body .body-col h3:first-child { margin-top: 0; }
+.case-study-body .body-col p {
+  font-family: var(--px-font);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--px-text);
+  margin-bottom: 18px;
+  font-weight: 400;
+  letter-spacing: var(--px-track-body);
+}
+.case-study-body .body-col p em {
+  color: var(--px-text-2);
+  font-style: italic;
+}
+.case-study-body .body-col ul {
+  list-style: none;
+  margin: 0 0 24px 0;
+  padding: 0;
+}
+.case-study-body .body-col ul li {
+  font-family: var(--px-font);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--px-text);
+  padding-left: 22px;
+  position: relative;
+  margin-bottom: 8px;
+}
+.case-study-body .body-col ul li::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 11px;
+  width: 8px;
+  height: 1px;
+  background: var(--px-accent);
+}
+
+.case-study-aside {
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.case-study-illu {
+  background: var(--px-surface-2);
+  border: 1px solid var(--px-border);
+  border-radius: var(--px-radius);
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  overflow: hidden;
+}
+.case-study-illu svg,
+.case-study-illu img {
+  max-width: 100%;
+  max-height: 240px;
+  width: auto;
+  height: auto;
+  filter: invert(0.92) hue-rotate(0deg);
+  opacity: 0.85;
+}
+.case-study-illu.no-filter svg,
+.case-study-illu.no-filter img { filter: none; opacity: 1; }
+.case-study-pullquote {
+  font-family: var(--px-font);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.5;
+  letter-spacing: var(--px-track-body);
+  color: var(--px-accent-2);
+  padding: 24px;
+  border-left: 2px solid var(--px-accent-2);
+  background: rgba(0, 168, 150, 0.04);
+  border-radius: 0 var(--px-radius-sm) var(--px-radius-sm) 0;
+}
+
+.case-study-stack {
+  border-top: 1px solid var(--px-border);
+  padding: 28px 0 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.stack-tag {
+  font-family: var(--px-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: var(--px-track-mono);
+  color: var(--px-text-2);
+  padding: 6px 12px;
+  border: 1px solid var(--px-border-2);
+  border-radius: 999px;
+  background: var(--px-surface);
+}
+
+/* ============ CLOSING / META LINK ============ */
+.meta-link-block {
+  margin: 96px auto 0;
+  max-width: 1200px;
+  padding: 0 40px;
+}
+.meta-link {
+  display: block;
+  background: linear-gradient(180deg, var(--px-surface-3), var(--px-surface-2));
+  border: 1px solid var(--px-border-2);
+  border-radius: var(--px-radius);
+  padding: 56px 56px 48px;
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+  transition:
+    transform var(--px-dur) var(--px-ease),
+    border-color var(--px-dur) var(--px-ease),
+    box-shadow var(--px-dur) var(--px-ease);
+}
+.meta-link:hover {
+  transform: translateY(-2px);
+  border-color: var(--px-accent-2);
+  box-shadow: 0 12px 40px -16px rgba(0, 168, 150, 0.35);
+}
+.meta-link .eyebrow {
+  font-family: var(--px-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: var(--px-track-mono-lg);
+  color: var(--px-accent-2);
+  margin-bottom: 18px;
+  display: block;
+}
+.meta-link h3 {
+  font-family: var(--px-font);
+  font-size: clamp(28px, 3.6vw, 42px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: var(--px-track-tight);
+  color: var(--px-text);
+  margin-bottom: 18px;
+  max-width: 22ch;
+}
+.meta-link h3 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--px-accent-2);
+}
+.meta-link p {
+  font-family: var(--px-font);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--px-text-2);
+  max-width: 60ch;
+  margin-bottom: 28px;
+}
+.meta-link .read-cta {
+  font-family: var(--px-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: var(--px-track-mono);
+  color: var(--px-accent-2);
+}
+
+/* ============ FOOTER ============ */
+footer.site-footer {
+  margin-top: 120px;
+  padding: 48px 40px 56px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  border-top: 1px solid var(--px-border);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.foot-col { display: flex; flex-direction: column; gap: 10px; }
+.foot-col .label {
+  font-family: var(--px-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--px-track-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--px-text-3);
+  margin-bottom: 4px;
+}
+.foot-col a {
+  font-family: var(--px-font);
+  font-size: 14px;
+  color: var(--px-text);
+  text-decoration: none;
+  transition: color var(--px-dur) var(--px-ease);
+}
+.foot-col a:hover { color: var(--px-accent); }
+.foot-col .mono {
+  font-family: var(--px-mono);
+  font-size: 12.5px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.foot-col.right { text-align: right; }
+.foot-col.right .label { color: var(--px-text-3); }
+.foot-col.right .copy {
+  font-family: var(--px-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--px-track-mono);
+  font-size: 10.5px;
+  color: var(--px-text-3);
+}
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s var(--px-ease), transform 0.7s var(--px-ease);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1024px) {
+  .case-study-body { grid-template-columns: 1fr; gap: 32px; }
+  .case-study-aside { position: relative; top: auto; }
+  .case-study-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .hero-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+}
+@media (max-width: 900px) {
+  .case-grid { grid-template-columns: 1fr; }
+  nav.site-nav .nav-links { gap: 18px; }
+  footer.site-footer { grid-template-columns: 1fr; }
+  .foot-col.right { text-align: left; }
+  .case-study-head { grid-template-columns: 1fr; gap: 16px; }
+  .case-study-head .anchor-link { padding-top: 0; }
+}
+@media (max-width: 640px) {
+  nav.site-nav { padding: 14px 20px; }
+  nav.site-nav .nav-links { display: none; }
+  nav.site-nav .back { display: inline; }
+  .hero { padding: 130px 20px 60px; }
+  section.container, .case-study, .meta-link-block { padding: 0 20px; }
+  footer.site-footer { padding: 40px 20px 48px; }
+  .case { padding: 32px 28px; min-height: 240px; }
+  .case h3 { font-size: 24px; }
+  .case-arrow { top: 24px; right: 24px; }
+  .hero h1 { font-size: clamp(38px, 9vw, 56px); }
+  .case-study-meta { grid-template-columns: 1fr; gap: 18px; }
+  .meta-link { padding: 36px 28px 32px; }
+  .case-study-illu { padding: 24px; min-height: 200px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ================ NAV ================ -->
+<nav class="site-nav">
+  <a href="index.html" class="name"><span class="dot"></span>Michael Scrivana</a>
+  <div class="nav-links">
+    <a href="index.html">Work</a>
+    <a href="claude-code.html" class="current">AI / Product</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <a href="index.html" class="back">&larr; Portfolio</a>
+</nav>
+
+<!-- ================ HERO ================ -->
+<div class="hero">
+  <div class="hero-eyebrow px-eyebrow">Application &middot; Product Designer, Claude Code</div>
+  <h1>Designing the surfaces where people <em>work with</em> AI.</h1>
+  <p class="hero-subtitle">Five AI-native internal tools I designed and built for a 115-person product organization at Bayer Consumer Health &mdash; agentic review systems, MCP servers, React workflow editors, daily-briefing pipelines. Shipped through dogfooding, not roadmap.</p>
+
+  <div class="hero-divider"></div>
+
+  <dl class="hero-meta">
+    <div>
+      <dt>Role</dt>
+      <dd>Product Designer, Claude Code</dd>
+    </div>
+    <div>
+      <dt>Location</dt>
+      <dd>New Jersey &middot; NYC-accessible</dd>
+    </div>
+    <div>
+      <dt>Read time</dt>
+      <dd>~12 min (skim &middot; 2 min)</dd>
+    </div>
+  </dl>
+</div>
+
+<!-- ================ OVERVIEW GRID ================ -->
+<section class="container">
+  <div class="section-head reveal">
+    <h2>Five working answers, one meta essay</h2>
+    <span class="count">06 / 06</span>
+  </div>
+
+  <div class="case-grid">
+
+    <!-- 01 DARTREVIEWERPX -->
+    <a href="#dartreviewerpx" class="case reveal">
+      <div class="case-top">
+        <span class="case-eyebrow">01 &middot; Vision + Compliance</span>
+        <h3>
+          <span class="product">DartReviewerPX</span>
+          <span class="desc">Agentic pre-review for regulated pharma packaging. Claude Opus on Azure ingests PDF text and vision together, scores against brand and compliance rules, and surfaces the diffs that matter before legal does.</span>
+        </h3>
+      </div>
+      <div class="case-meta">
+        <span>Internal tool</span><span class="sep">&middot;</span>
+        <span>React + Azure</span><span class="sep">&middot;</span>
+        <span>In production</span>
+      </div>
+      <span class="case-arrow" aria-hidden="true">&darr;</span>
+    </a>
+
+    <!-- 02 CREATIVELAB -->
+    <a href="#creativelab" class="case reveal">
+      <div class="case-top">
+        <span class="case-eyebrow">02 &middot; Agentic Workflows</span>
+        <h3>
+          <span class="product">CreativeLab</span>
+          <span class="desc">Node-based creative iteration platform. React Flow graph editor wired to image-generation backends, built to push one Claritin SKU through five retail channels and three regulated tweaks in sixty seconds.</span>
+        </h3>
+      </div>
+      <div class="case-meta">
+        <span>Internal tool</span><span class="sep">&middot;</span>
+        <span>React Flow + Node</span><span class="sep">&middot;</span>
+        <span>In production</span>
+      </div>
+      <span class="case-arrow" aria-hidden="true">&darr;</span>
+    </a>
+
+    <!-- 03 AI HUB -->
+    <a href="#ai-hub" class="case reveal">
+      <div class="case-top">
+        <span class="case-eyebrow">03 &middot; Internal Platform</span>
+        <h3>
+          <span class="product">AI Hub</span>
+          <span class="desc">A five-tool monorepo for a 115-person product organization. One front door, one identity, one consistent UX. Tools graduate here from pilot so work compounds across the org instead of evaporating between projects.</span>
+        </h3>
+      </div>
+      <div class="case-meta">
+        <span>Platform</span><span class="sep">&middot;</span>
+        <span>Vite + Azure SWA</span><span class="sep">&middot;</span>
+        <span>In production</span>
+      </div>
+      <span class="case-arrow" aria-hidden="true">&darr;</span>
+    </a>
+
+    <!-- 04 DAILY BRIEFING -->
+    <a href="#daily-briefing" class="case reveal">
+      <div class="case-top">
+        <span class="case-eyebrow">04 &middot; Personal OS</span>
+        <h3>
+          <span class="product">Daily Briefing Pipeline</span>
+          <span class="desc">A personal operating system on a public dashboard. Node + Claude-on-Azure synthesizes my vault, recent recaps, and initiative state into a one-screen briefing at 7am every morning, scheduled by <code>launchd</code>.</span>
+        </h3>
+      </div>
+      <div class="case-meta">
+        <span>Internal tool</span><span class="sep">&middot;</span>
+        <span>Node + launchd</span><span class="sep">&middot;</span>
+        <span>Daily</span>
+      </div>
+      <span class="case-arrow" aria-hidden="true">&darr;</span>
+    </a>
+
+    <!-- 05 KNOWLEDGE MCP -->
+    <a href="#knowledge-mcp" class="case reveal">
+      <div class="case-top">
+        <span class="case-eyebrow">05 &middot; MCP / Developer Tools</span>
+        <h3>
+          <span class="product">Knowledge MCP</span>
+          <span class="desc">Shared organizational-knowledge MCP server exposing canonical standards &mdash; brand rules, taxonomy, sub-home standards &mdash; to three AI surfaces from a single deploy. Three tools: <code>find_canonical</code>, <code>search</code>, <code>list_cells</code>.</span>
+        </h3>
+      </div>
+      <div class="case-meta">
+        <span>MCP server</span><span class="sep">&middot;</span>
+        <span>Node</span><span class="sep">&middot;</span>
+        <span>v0.1</span>
+      </div>
+      <span class="case-arrow" aria-hidden="true">&darr;</span>
+    </a>
+
+    <!-- 06 META ESSAY -->
+    <a href="designing-claude-code.html" class="case case-meta-card reveal">
+      <div class="case-top">
+        <span class="case-eyebrow">06 &middot; Meta &middot; Designing Claude Code</span>
+        <h3>
+          <span class="product">The environment <em>is</em> the design problem.</span>
+          <span class="desc">How twelve months of customizing Claude Code itself &mdash; hooks, subagents, slash commands, MCPs &mdash; reshaped my design practice. A short essay on what that taught me about AI-native product surfaces.</span>
+        </h3>
+      </div>
+      <div class="case-meta">
+        <span>Essay</span><span class="sep">&middot;</span>
+        <span>6 min read</span>
+      </div>
+      <span class="case-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     CASE STUDY 01 — DARTREVIEWERPX
+     ════════════════════════════════════════════════════════════════ -->
+<div class="section-spacer"></div>
+<section class="case-study reveal" id="dartreviewerpx">
+  <div class="case-study-head">
+    <div>
+      <span class="num">Case 01 / 05</span>
+      <h2>DartReviewerPX &mdash; <em>catching the diff before legal does.</em></h2>
+      <p class="deck">An agentic pre-review for regulated packaging artwork. One missed character in this category can mean a recall, so the design problem was trust at a level higher than convenience.</p>
+    </div>
+    <a href="#dartreviewerpx" class="anchor-link"># dartreviewerpx</a>
+  </div>
+
+  <dl class="case-study-meta">
+    <div><dt>Role</dt><dd>Designer &middot; builder &middot; prompt architect</dd></div>
+    <div><dt>Stack</dt><dd>Claude Opus on Azure &middot; React &middot; PDF.js &middot; Node</dd></div>
+    <div><dt>Year</dt><dd>April&ndash;ongoing 2026</dd></div>
+    <div><dt>Surface</dt><dd>Graphics Operations &middot; ~30 reviewers</dd></div>
+  </dl>
+
+  <div class="case-study-body">
+    <div class="body-col">
+      <h3>The problem</h3>
+      <p>Pharmaceutical packaging artwork passes through a Legal, Medical, Regulatory (LMR) review before it ships. The reviewers are good. The reviewers are slow. And the cost of a single uncaught diff &mdash; an inverted asterisk, a missing trademark, a one-character claim drift &mdash; is a recall, with a cost shape that nobody on the design side wants to live with.</p>
+      <p>I sat with the graphics operations team and watched what they did between rounds. The pattern was hand-eyeballing a fifteen-page PDF against a slightly different fifteen-page PDF, line by line, often at the end of a long day. That was the wedge: an agent could be the first reviewer, surface the diffs, and let the human do the judgement work on a much smaller set.</p>
+
+      <h3>The design approach</h3>
+      <p>The temptation with a vision model is to throw both PDFs at it and ask "what's different." That fails fast for a reason most demos hide: image resizing on the server side erases single-character drift before the model ever sees the page. I learned this the hard way. So the architecture became dual-path: extract text via <code>pdfjs</code> on the client, render each page as an image, and pass both to Claude Opus together. Text catches the asterisks and trademarks. Vision catches the layout drift and the color shifts. The model reconciles.</p>
+      <p>The interface design was the other half. Reviewers don't want a wall of "differences." They want a triage queue, sorted by what could ship and what couldn't. So the output is a structured report with three layers &mdash; a one-line headline diff, a categorized table (brand, claim, regulatory, layout, typography), and a per-page deep view with the model's reasoning beside the visual.</p>
+
+      <h3>What I built</h3>
+      <ul>
+        <li>A React + Node web app on Azure Static Web Apps with Entra-tenant SSO &mdash; Bayer-only, no public access.</li>
+        <li>A dual-pass review pipeline (text + vision) calling Claude Opus on the Anthropic passthrough endpoint, with structured JSON output and the raw reasoning preserved for audit.</li>
+        <li>A reviewer-facing diff view with severity sorting, per-page evidence, and an "accept / dismiss" loop that I use as the training signal for the next iteration.</li>
+        <li>A workshop demo at Bayer's Graphics Operations AI Workshop &mdash; live, with the team's real artwork &mdash; that produced the four converged friction patterns now feeding our PX roadmap.</li>
+      </ul>
+
+      <h3>What it changed</h3>
+      <p>The point isn't speed. It's that the design surface made the agent legible enough that reviewers actually trusted it as a first pass. The "training signal" question &mdash; how do we know the agent is getting better? &mdash; is the next design question, and one I'd want to be working on at Anthropic. This is a representative case for the kind of <em>quality-and-trust loop</em> that AI-native tools need to solve before they can move from demo to default.</p>
+
+      <h3>What I'd do next</h3>
+      <p>Co-deploy with the LMR reviewers. Build the disagreement view &mdash; show me the diffs where the human and the agent disagreed last week, sorted by category. That's where the model gets sharper and where the reviewers get faster, in the same loop.</p>
+    </div>
+
+    <aside class="case-study-aside">
+      <div class="case-study-illu">
+        <img src="working/anthropic-padlock-security.svg" alt="Padlock illustration suggesting compliance and trust">
+      </div>
+      <blockquote class="case-study-pullquote">A single missed character in regulated artwork means a recall. The design surface had to make the agent legible enough to actually be trusted as a first pass.</blockquote>
+      <div class="case-study-stack">
+        <span class="stack-tag">Claude Opus</span>
+        <span class="stack-tag">PDF.js</span>
+        <span class="stack-tag">Azure SWA</span>
+        <span class="stack-tag">Entra SSO</span>
+        <span class="stack-tag">Vision + Text</span>
+        <span class="stack-tag">React</span>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     CASE STUDY 02 — CREATIVELAB
+     ════════════════════════════════════════════════════════════════ -->
+<div class="section-spacer"></div>
+<section class="case-study reveal" id="creativelab">
+  <div class="case-study-head">
+    <div>
+      <span class="num">Case 02 / 05</span>
+      <h2>CreativeLab &mdash; <em>one SKU, five channels, sixty seconds.</em></h2>
+      <p class="deck">A node-based creative iteration platform for retailer-facing packaging variants. Designers compose pipelines on a React Flow graph instead of writing prompts.</p>
+    </div>
+    <a href="#creativelab" class="anchor-link"># creativelab</a>
+  </div>
+
+  <dl class="case-study-meta">
+    <div><dt>Role</dt><dd>Designer &middot; builder &middot; orchestrator</dd></div>
+    <div><dt>Stack</dt><dd>React Flow &middot; Node &middot; Gemini NB2 (pivoting to Flux / gpt-image-2)</dd></div>
+    <div><dt>Year</dt><dd>May 2026, ongoing</dd></div>
+    <div><dt>Surface</dt><dd>Brand Design + Ecommerce &middot; OAD Prime Day pilot</dd></div>
+  </dl>
+
+  <div class="case-study-body">
+    <div class="body-col">
+      <h3>The problem</h3>
+      <p>Retailer-facing packaging is a multiplication problem. One SKU shows up as a carton render on the brand site, a hero on Amazon, a tile on a retailer.com page, a vertical for social, a 6-second cut for digital out-of-home. Each surface has different ratios, different compliance constraints, different regulatory copy. Most teams handle this by sending the agency a brief and waiting a week. That cost shape kills experimentation.</p>
+      <p>The Ecommerce team came to me with a concrete need: prove out an OAD SKU across five channels with three regulated tweaks &mdash; a pending claim addition, a regulatory wording shift, an imagery refresh &mdash; in time for Amazon Prime Day. I had a week.</p>
+
+      <h3>The design approach</h3>
+      <p>The wrong move would have been to build a prompt UI. Designers don't think in prompts; they think in steps. A reference image goes in, a transformation happens, a check happens, an output comes out. So I borrowed the visual grammar of node editors &mdash; React Flow &mdash; and built the tool around composition, not prompting. Each node is a designed primitive: a reference input, a brand-rules check, an image generator, a channel-fit transform, a compliance reviewer, a final output. The user wires them. The graph runs.</p>
+      <p>The aesthetic choice was deliberate. I leaned into the cool, technical feel of node-graph tools (think Houdini, Blender's compositor, Figma's auto-layout) rather than the soft pastel feel of consumer AI tools. The audience &mdash; brand designers and ecommerce ops &mdash; respects that grammar. It signals "you are in control of the steps," which is the actual product promise.</p>
+
+      <h3>What I built</h3>
+      <ul>
+        <li>A React Flow graph editor wired to swappable image-generation backends (Gemini Nano Banana 2 today, with the MGA <code>img_generator</code> workflow and Foundry gpt-image-2 / Flux planned as second-stage fidelity backends).</li>
+        <li>A brand-rules layer co-owned with the Brand Design sub-home, exposed to the graph as a check node and to other AI surfaces via the Knowledge MCP server (see case 05).</li>
+        <li>An OAD pilot dataset &mdash; one SKU, five channels, three regulated tweaks &mdash; that became the anchor demo for Bayer's Science Leadership Team.</li>
+        <li>A capture pipeline (Creative Library) that ingests public retailer imagery as reference assets, so the tool works on day one without waiting for the brand team to upload their catalog.</li>
+      </ul>
+
+      <h3>What it changed</h3>
+      <p>The early result wasn't the time savings. It was the conversation. Showing brand designers a graph editor instead of a chat box reframed AI in their workflow from "the thing that writes prompts for me" to "the thing I orchestrate." That reframing is what I'd want to design more of: AI surfaces that respect the user's existing skill, not surfaces that flatten everything into chat.</p>
+
+      <h3>What I'd do next</h3>
+      <p>Make the graph saveable as a reusable template. The Ecommerce team's "OAD Prime Day" graph is the first one; it shouldn't be the last instance of itself. Templates plus parameterization is the path from "useful one time" to "operating in the background of every launch."</p>
+    </div>
+
+    <aside class="case-study-aside">
+      <div class="case-study-illu">
+        <img src="working/anthropic-hand-adjusting-sliders.svg" alt="Hand adjusting sliders, suggesting designer control over AI pipeline">
+      </div>
+      <blockquote class="case-study-pullquote">Designers don't think in prompts. They think in steps. The tool is the graph.</blockquote>
+      <div class="case-study-stack">
+        <span class="stack-tag">React Flow</span>
+        <span class="stack-tag">Node</span>
+        <span class="stack-tag">Gemini NB2</span>
+        <span class="stack-tag">MGA Workflow</span>
+        <span class="stack-tag">Brand-rules MCP</span>
+        <span class="stack-tag">Vite</span>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     CASE STUDY 03 — AI HUB
+     ════════════════════════════════════════════════════════════════ -->
+<div class="section-spacer"></div>
+<section class="case-study reveal" id="ai-hub">
+  <div class="case-study-head">
+    <div>
+      <span class="num">Case 03 / 05</span>
+      <h2>AI Hub &mdash; <em>one front door, one identity, five tools.</em></h2>
+      <p class="deck">A monorepo platform that hosts every AI tool I ship to the organization. Tools graduate here from pilot so work compounds across teams instead of evaporating between projects.</p>
+    </div>
+    <a href="#ai-hub" class="anchor-link"># ai-hub</a>
+  </div>
+
+  <dl class="case-study-meta">
+    <div><dt>Role</dt><dd>Designer &middot; builder &middot; platform owner</dd></div>
+    <div><dt>Stack</dt><dd>Vite &middot; React &middot; Azure Static Web Apps &middot; Entra SSO</dd></div>
+    <div><dt>Year</dt><dd>2026</dd></div>
+    <div><dt>Surface</dt><dd>~115 designers, researchers, packaging engineers</dd></div>
+  </dl>
+
+  <div class="case-study-body">
+    <div class="body-col">
+      <h3>The problem</h3>
+      <p>Internal AI tools have a graveyard problem. Someone ships a clever pilot. It lives on a hostname nobody remembers. The colleague who built it leaves. The tool dies. Six months later somebody builds the same thing again because they didn't know the first one existed. Multiply by a 115-person org and you get a folder of dead URLs and a culture that doesn't trust internal tooling.</p>
+      <p>I'd watched this play out across the previous year. So when I started shipping AI tools at scale, I gave myself a constraint: nothing ships as a one-off. Every new tool lives under one front door, behind one identity provider, with one consistent shell. The tool is a route, not a deployment.</p>
+
+      <h3>The design approach</h3>
+      <p>The landing page is the platform's main design surface. It doesn't sell &mdash; it indexes. A grid of cards, each card a tool with a one-line description, an owner, a "stage" (pilot, beta, in-production), and a use-count. The grid is the source of truth: if a tool isn't on the grid, it doesn't exist for the org.</p>
+      <p>The shell each tool inherits is opinionated and tiny. Same nav, same auth, same footer, same opinionated empty states. Tool designers don't decide whether to add a logout button. They decide what their tool actually does. That's the whole point of a shell &mdash; it removes the boring decisions so the interesting ones get more attention.</p>
+
+      <h3>What I built</h3>
+      <ul>
+        <li>A Vite + React monorepo on Azure Static Web Apps with Entra-tenant SSO &mdash; one auth boundary, five routes.</li>
+        <li>An opinionated shell &mdash; nav, auth, error states, telemetry &mdash; that every new tool inherits as a workspace template.</li>
+        <li>Five tools currently mounted: <strong>AI Hub</strong> landing &middot; <strong>Brief Translator</strong> (turns prose briefs into structured creative briefs) &middot; <strong>Persona Generator</strong> (synthetic personas, co-built with Product Research) &middot; <strong>Case Study Sharpener</strong> (rewrites internal case studies against brand benchmarks) &middot; <strong>Knowledge MCP</strong> console.</li>
+        <li>A "graduation" rubric &mdash; before a pilot mounts to the hub, it has to clear governance, identity, and a one-page case study. That rubric is the soft contract that keeps the platform from becoming the graveyard it was designed to replace.</li>
+      </ul>
+
+      <h3>What it changed</h3>
+      <p>Inside three months, the hub stopped being something I evangelized and started being something colleagues asked to be put on. That's the only adoption signal that matters for an internal platform. The pattern I'd want to bring to Anthropic: <em>treat internal-tool design as product design, not as a side effect of someone's pilot.</em></p>
+
+      <h3>What I'd do next</h3>
+      <p>Surface usage and trust signals on the grid itself. Which tools are people actually opening? Which tools made it past first use? The grid currently shows what exists. The next version should show what's earning its place.</p>
+    </div>
+
+    <aside class="case-study-aside">
+      <div class="case-study-illu">
+        <img src="working/anthropic-geometric-framework.svg" alt="Geometric framework illustration suggesting platform architecture">
+      </div>
+      <blockquote class="case-study-pullquote">A tool is a route, not a deployment. One front door, one identity, one shell &mdash; or you build the graveyard you were trying to replace.</blockquote>
+      <div class="case-study-stack">
+        <span class="stack-tag">Monorepo</span>
+        <span class="stack-tag">Vite</span>
+        <span class="stack-tag">React</span>
+        <span class="stack-tag">Azure SWA</span>
+        <span class="stack-tag">Entra SSO</span>
+        <span class="stack-tag">5 tools</span>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     CASE STUDY 04 — DAILY BRIEFING PIPELINE
+     ════════════════════════════════════════════════════════════════ -->
+<div class="section-spacer"></div>
+<section class="case-study reveal" id="daily-briefing">
+  <div class="case-study-head">
+    <div>
+      <span class="num">Case 04 / 05</span>
+      <h2>Daily Briefing Pipeline &mdash; <em>the design loop I run my own work through.</em></h2>
+      <p class="deck">A personal operating system on a public dashboard. Node and Claude-on-Azure synthesize my vault, recent recaps, and initiative state into a one-screen briefing at 7am every morning, scheduled by <code>launchd</code>.</p>
+    </div>
+    <a href="#daily-briefing" class="anchor-link"># daily-briefing</a>
+  </div>
+
+  <dl class="case-study-meta">
+    <div><dt>Role</dt><dd>Designer &middot; builder &middot; sole user (for now)</dd></div>
+    <div><dt>Stack</dt><dd>Node &middot; Claude on Azure &middot; <code>launchd</code> &middot; Obsidian vault</dd></div>
+    <div><dt>Year</dt><dd>2026, running daily</dd></div>
+    <div><dt>Surface</dt><dd>PX Dashboard &middot; my morning</dd></div>
+  </dl>
+
+  <div class="case-study-body">
+    <div class="body-col">
+      <h3>The problem</h3>
+      <p>I run multiple workstreams across PX and the cross-functional AI working team. Each one has its own initiative note, its own running backlog, its own stakeholder context. Most mornings I used to spend twenty minutes paging through the vault trying to remember what mattered before the first meeting hit. That's not work. That's startup tax.</p>
+      <p>So I built the surface I wished existed. Not a generic productivity dashboard &mdash; a briefing engine that reads the same vault I write into and produces the one-screen version of "what should be on your mind this morning."</p>
+
+      <h3>The design approach</h3>
+      <p>The briefing has to be skim-grade. If I read more than the headlines, the design failed. So the format is fixed and minimal: a section called <strong>Themes today</strong> (three to five terse headers with one-line orientations), a section called <strong>Open threads</strong> (stakeholder threads I owe a reply to), a section called <strong>Initiative state</strong> (which projects moved, which slipped, which I haven't touched in seven days), and a single closing line called <strong>What's the first move.</strong> That last line is the design point. Most personal briefings end with a list. Mine ends with a decision.</p>
+      <p>The pipeline is deliberately boring: a <code>launchd</code> plist fires a Node script at 7am, the script walks the last 72 hours of the vault and the last 14 days of recaps, hands the materials to Claude on Azure with a tightly-scoped system prompt, writes the output to a markdown file in the dashboard's public folder, and a static dashboard renders it. There's no app. There's a file. The file is the product.</p>
+
+      <h3>What I built</h3>
+      <ul>
+        <li>A <code>launchd</code>-scheduled Node pipeline that reads my Obsidian vault and synthesizes a daily briefing via Claude on Azure's Anthropic passthrough.</li>
+        <li>A "skim style" system prompt &mdash; theme heading plus ten-word bullets, never dense em-dash prose &mdash; that I iterated on by giving myself the briefing every morning for a month and noting where I bounced.</li>
+        <li>A "Generate now" fallback button on the dashboard for the inevitable mornings when <code>launchd</code> misses (laptop closed, on a plane, time-change weirdness).</li>
+        <li>A second pipeline that the <code>/recap</code>, <code>/bod</code>, and <code>/eod</code> slash commands feed into &mdash; so my own behavior produces the inputs for tomorrow's briefing without me writing summary prose by hand.</li>
+      </ul>
+
+      <h3>What it changed</h3>
+      <p>The dashboard isn't really the product. The product is the <em>practice</em> &mdash; the design loop where I write into the vault all day, slash-command my own recap at end of day, and wake up to a synthesis the next morning. The loop is the artifact. The dashboard is just where it lives.</p>
+      <p>This is the case that maps most directly to the Claude Code role: I'm already living inside the "personal OS" pattern the team is moving toward. I have opinions about what works in it, what doesn't, and where the design surface is still under-built. (More in the <a href="designing-claude-code.html" style="color:var(--px-accent-2); border-bottom:1px solid var(--px-accent-2); text-decoration:none;">meta essay</a>.)</p>
+
+      <h3>What I'd do next</h3>
+      <p>Make it a team-shaped artifact, not just a personal one. Same shell, same skim grammar, but with the permeable-membrane question: how much of the personal briefing should be shareable as a sub-team digest without losing the intimacy that makes the personal version actually useful?</p>
+    </div>
+
+    <aside class="case-study-aside">
+      <div class="case-study-illu">
+        <img src="working/anthropic-desk-lamp-document.svg" alt="Desk lamp over a document, suggesting a morning briefing">
+      </div>
+      <blockquote class="case-study-pullquote">The product isn't the dashboard. The product is the loop. The dashboard is just where it lives.</blockquote>
+      <div class="case-study-stack">
+        <span class="stack-tag">Claude on Azure</span>
+        <span class="stack-tag">Node</span>
+        <span class="stack-tag">launchd</span>
+        <span class="stack-tag">Obsidian</span>
+        <span class="stack-tag">Slash commands</span>
+        <span class="stack-tag">7am daily</span>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     CASE STUDY 05 — KNOWLEDGE MCP
+     ════════════════════════════════════════════════════════════════ -->
+<div class="section-spacer"></div>
+<section class="case-study reveal" id="knowledge-mcp">
+  <div class="case-study-head">
+    <div>
+      <span class="num">Case 05 / 05</span>
+      <h2>Knowledge MCP &mdash; <em>single build, three AI surfaces.</em></h2>
+      <p class="deck">An MCP server exposing canonical organizational standards &mdash; brand rules, taxonomy, sub-home standards &mdash; to three AI surfaces from a single deploy. Three tools, one source of truth.</p>
+    </div>
+    <a href="#knowledge-mcp" class="anchor-link"># knowledge-mcp</a>
+  </div>
+
+  <dl class="case-study-meta">
+    <div><dt>Role</dt><dd>Designer &middot; builder &middot; protocol-thinker</dd></div>
+    <div><dt>Stack</dt><dd>MCP (Streamable HTTP, 2025-06-18) &middot; FastMCP &middot; Node</dd></div>
+    <div><dt>Year</dt><dd>v0.1 May 2026</dd></div>
+    <div><dt>Surface</dt><dd>MGA &middot; M365 Copilot &middot; local Claude Code</dd></div>
+  </dl>
+
+  <div class="case-study-body">
+    <div class="body-col">
+      <h3>The problem</h3>
+      <p>Bayer has three approved AI surfaces &mdash; an internal GenAI platform (MGA), Microsoft 365 Copilot, and local Claude Code. Every team that builds a knowledge integration ends up building it three times, once per surface, and the three implementations drift. The brand-rules JSON the agency reads is different from the brand-rules the Copilot agent quotes is different from the brand-rules my own Claude Code session loads. Three sources of "truth," none of them true.</p>
+      <p>MCP solves this at the protocol layer, not the integration layer. If the canonical standards live inside an MCP server and every surface consumes them through the protocol, the three drift problem becomes one server problem. That was the design bet.</p>
+
+      <h3>The design approach</h3>
+      <p>The interesting design question with an MCP server isn't the wire format. It's <strong>the tool grammar</strong>. What tools do you expose? What do you not? How do you make the tool names self-documenting so an agent reasons correctly about when to call them?</p>
+      <p>I started with three. <code>find_canonical(topic)</code> returns the canonical artifact for a topic, with a citation. <code>search(query)</code> returns a ranked list across the knowledge corpus. <code>list_cells()</code> enumerates the six sub-home knowledge cells and their domains. Three tools, three verbs, three different shapes of intent. An agent calling these doesn't need a tutorial &mdash; the names tell it what each does.</p>
+      <p>The other design choice was where the data lives. The MCP server reads from a monorepo of markdown files versioned in Git, not from a database. That choice does two things at once: it makes contribution feel like writing a doc, not maintaining a system, and it gives every answer the MCP returns a stable Git URL as its citation. The agent says "per the OAD logo line semantics doc, paragraph 3," and you can click the citation to the line in the markdown.</p>
+
+      <h3>What I built</h3>
+      <ul>
+        <li>A FastMCP server (Streamable HTTP, MCP spec 2025-06-18) exposing the three tools above, packaged as a Bayer Terraform-deployable Lambda module.</li>
+        <li>A monorepo of canonical knowledge cells &mdash; Brand Design seeded as the v0.1 pilot, with eight cells covering OAD brand standards, the Claritin brand system, and PX-wide rules.</li>
+        <li>Registration into Bayer's MGA platform (as a custom tool), Microsoft 365 Copilot (as a declarative-agent action), and local Claude Code (via <code>.mcp.json</code>). Same server, three surfaces.</li>
+        <li>A grammar doc &mdash; the README of the server &mdash; that defines the contribution pattern for the next five sub-home cells.</li>
+      </ul>
+
+      <h3>What it changed</h3>
+      <p>This is the case I'm proudest of from a design-leverage standpoint. The build is small; the consequence is large. One MCP server collapses three integration projects into one. Other PX teams now have a contribution pattern, not a custom build. And canonical standards become a primitive AI surfaces can <em>call</em>, not a PDF nobody reads.</p>
+      <p>It's also the case that most directly speaks to the Claude Code team's posture &mdash; "stay close to the models," "rethink the basics." MCP is one of the basics being rethought right now. I want to be in the room when the next ones are.</p>
+
+      <h3>What I'd do next</h3>
+      <p>Author the missing five sub-home cells with their respective leads as co-contributors. The technical work is done; the social work is the bottleneck. (That's a familiar shape for anyone shipping infrastructure inside an organization.)</p>
+    </div>
+
+    <aside class="case-study-aside">
+      <div class="case-study-illu">
+        <img src="working/anthropic-partnership-connection.svg" alt="Partnership / connection illustration, suggesting one server, three surfaces">
+      </div>
+      <blockquote class="case-study-pullquote">One MCP server collapses three integration projects into one. The build is small; the consequence is large.</blockquote>
+      <div class="case-study-stack">
+        <span class="stack-tag">MCP 2025-06-18</span>
+        <span class="stack-tag">FastMCP</span>
+        <span class="stack-tag">Streamable HTTP</span>
+        <span class="stack-tag">3 tools</span>
+        <span class="stack-tag">3 surfaces</span>
+        <span class="stack-tag">Git as DB</span>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ================ META ESSAY LINK ================ -->
+<div class="meta-link-block reveal">
+  <a href="designing-claude-code.html" class="meta-link">
+    <span class="eyebrow">06 &middot; Meta &middot; Designing Claude Code</span>
+    <h3>The environment <em>is</em> the design problem.</h3>
+    <p>How twelve months of customizing Claude Code itself &mdash; hooks, subagents, slash commands, MCPs &mdash; reshaped my design practice. A short essay on what that taught me about AI-native product surfaces, the principles I keep returning to, and three open design problems I'd want to spend a year on.</p>
+    <span class="read-cta">Read the essay &rarr; 6 min</span>
+  </a>
+</div>
+
+<!-- ================ FOOTER ================ -->
+<footer class="site-footer">
+  <div class="foot-col">
+    <span class="label">Contact</span>
+    <a href="mailto:mkscrivana@gmail.com" class="mono">mkscrivana@gmail.com</a>
+    <a href="https://www.linkedin.com/in/michaelscrivana89" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://michaelscrivana.com" target="_blank" rel="noopener">michaelscrivana.com</a>
+  </div>
+  <div class="foot-col">
+    <span class="label">Application materials</span>
+    <a href="designing-claude-code.html">Designing Claude Code &mdash; meta essay</a>
+    <a href="index.html">&larr; Back to portfolio</a>
+  </div>
+  <div class="foot-col right">
+    <span class="label">Colophon</span>
+    <span class="copy">PX Design System v0.2</span>
+    <span class="copy">DM Sans &middot; JetBrains Mono</span>
+    <span class="copy">&copy; 2026 Michael Scrivana</span>
+  </div>
+</footer>
+
+<!-- ============ SCROLL REVEAL ============ -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const idx = Array.from(document.querySelectorAll('.reveal')).indexOf(entry.target);
+        const delay = Math.min(idx * 30, 240);
+        entry.target.style.transitionDelay = delay + 'ms';
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.05,
+    rootMargin: '0px 0px -40px 0px'
+  });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
