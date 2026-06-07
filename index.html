@@ -143,9 +143,48 @@ footer .links { font-size: 15px; color: var(--ink-2); }
 footer .links a { color: var(--accent); text-decoration: none; font-weight: 500; }
 footer .links a:hover { text-decoration: underline; }
 footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-family: var(--mono); letter-spacing: 0.06em; line-height: 1.6; }
+
+/* ── TOP NAV ── */
+nav.topnav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(244, 245, 247, 0.82);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--border-soft);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.nav-brand { font-weight: 700; font-size: 16px; letter-spacing: var(--tight); color: var(--ink); text-decoration: none; }
+.nav-brand .dot { color: var(--accent); }
+.nav-links { display: flex; align-items: center; gap: 26px; }
+.nav-links a { font-size: 14px; font-weight: 500; color: var(--ink-2); text-decoration: none; transition: color .15s ease; }
+.nav-links a:hover { color: var(--accent); }
+.nav-links a.cta {
+  font-family: var(--mono); text-transform: uppercase; font-size: 10.5px; letter-spacing: 0.1em;
+  color: var(--accent-deep); background: var(--accent-dim); border: 1px solid var(--accent-line);
+  padding: 7px 12px; border-radius: 100px;
+}
+.nav-links a.cta:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+@media (max-width: 680px) {
+  .nav-inner { height: 54px; }
+  .nav-brand { font-size: 14px; }
+  .nav-links { gap: 15px; }
+  .nav-links a { font-size: 13px; }
+  .nav-links a.work-link { display: none; }
+}
 </style>
 </head>
 <body>
+
+<nav class="topnav">
+  <div class="wrap nav-inner">
+    <a href="https://www.michaelscrivana.com" class="nav-brand">Michael Scrivana<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="https://www.michaelscrivana.com" class="work-link">Work</a>
+      <a href="https://www.michaelscrivana.com/about.html">About</a>
+      <a href="mailto:mkscrivana@gmail.com" class="cta">Contact</a>
+    </div>
+  </div>
+</nav>
 
 <header class="hero">
   <div class="wrap">
