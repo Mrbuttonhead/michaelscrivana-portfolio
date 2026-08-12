@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1200" width="2000" height="1200" role="img" aria-label="MECHANISM DIAGRAM placeholder">
+  <rect width="2000" height="1200" fill="#ebedf0"/>
+  <rect x="54" y="54" width="1892" height="1092" fill="none" stroke="#2850D8" stroke-opacity="0.45"
+        stroke-width="4" stroke-dasharray="26 26" rx="21"/>
+  <text x="50%" y="552" text-anchor="middle" font-family="'JetBrains Mono',monospace"
+        font-size="66" letter-spacing="4" fill="#2850D8" fill-opacity="0.85">MECHANISM DIAGRAM</text>
+  <text x="50%" y="654" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="38" fill="#4a5058">How the model learns without clinical labels — 2000 × 1200</text>
+  <text x="50%" y="744" text-anchor="middle" font-family="'JetBrains Mono',monospace"
+        font-size="27" fill="#8b9099">PLACEHOLDER &#183; replace this file, keep the filename</text>
+</svg>

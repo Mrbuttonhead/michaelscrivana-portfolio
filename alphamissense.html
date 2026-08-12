@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlphaMissense, translated &mdash; a paper made legible &middot; Michael Scrivana</title>
+<meta name="description" content="A self-directed concept: turning AlphaMissense — DeepMind's proteome-wide missense variant effect predictor — into a key visual, a mechanism diagram, and a research announcement. Not affiliated with Google DeepMind.">
+<meta content="AlphaMissense, translated — a paper made legible" property="og:title">
+<meta content="Seventy-one million mutations, one picture. A self-directed concept for making a research paper legible. Not affiliated with Google DeepMind." property="og:description">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://creative.michaelscrivana.com/alphamissense.html">
+<meta property="og:image" content="https://creative.michaelscrivana.com/images/alphamissense/og-card.svg">
+<meta content="summary_large_image" name="twitter:card">
+<meta name="twitter:title" content="AlphaMissense, translated — a paper made legible">
+<meta name="twitter:description" content="Seventy-one million mutations, one picture. A self-directed concept. Not affiliated with Google DeepMind.">
+<meta name="twitter:image" content="https://creative.michaelscrivana.com/images/alphamissense/og-card.svg">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/webclip.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   PX Design System v0.2 — LIGHT / PAPER tokens, scoped & inlined.
+   Case-study variant: essay + process artifacts + lightbox.
+   Self-contained: no external CSS dependency.
+   ══════════════════════════════════════════════════════════════ */
+:root {
+  --px-bg:          #f4f5f7;
+  --px-surface:     #ffffff;
+  --px-surface-2:   #ebedf0;
+  --px-surface-3:   #dde0e6;
+  --px-surface-4:   #c9cdd5;
+
+  --px-accent:       #2850D8;
+  --px-accent-deep:  #1B3AB0;
+  --px-accent-hover: #4368E8;
+  --px-accent-2:     #00867A;
+  --px-accent-dim:   rgba(40, 80, 216, 0.10);
+  --px-accent-glow:  rgba(40, 80, 216, 0.22);
+
+  --px-text:    #0a0d12;
+  --px-text-2:  #4a5058;
+  --px-text-3:  #8b9099;
+  --px-text-4:  #b8bcc4;
+
+  --px-border:    rgba(10, 13, 18, 0.08);
+  --px-border-2:  rgba(10, 13, 18, 0.14);
+  --px-border-3:  rgba(10, 13, 18, 0.24);
+
+  --px-font:  'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --px-mono:  'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+
+  --px-track-tight:    -0.025em;
+  --px-track-body:     -0.005em;
+  --px-track-mono:     0.14em;
+  --px-track-mono-lg:  0.18em;
+
+  --px-radius:     14px;
+  --px-radius-sm:  10px;
+  --px-radius-xs:  6px;
+
+  --px-shadow-sm:    0 1px 2px -1px rgba(10, 13, 18, 0.08);
+  --px-shadow:       0 4px 16px -8px rgba(10, 13, 18, 0.12);
+  --px-shadow-lg:    0 8px 32px -12px rgba(10, 13, 18, 0.18);
+  --px-shadow-accent:0 8px 30px -12px rgba(40, 80, 216, 0.25);
+
+  --px-ease:  cubic-bezier(0.2, 0, 0, 1);
+  --px-dur:   160ms;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background:
+    radial-gradient(ellipse 70% 40% at 50% -8%, var(--px-accent-dim), transparent 60%),
+    var(--px-bg);
+  color: var(--px-text);
+  font-family: var(--px-font);
+  font-size: 17px;
+  line-height: 1.65;
+  font-weight: 400;
+  letter-spacing: var(--px-track-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+::selection { background: var(--px-accent); color: #fff; }
+
+/* ============ NAV ============ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(244, 245, 247, 0.82);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border-bottom: 1px solid var(--px-border);
+}
+nav .name {
+  font-family: var(--px-font);
+  font-size: 14px; font-weight: 500;
+  letter-spacing: var(--px-track-body);
+  color: var(--px-text); text-decoration: none;
+}
+nav .name .dot {
+  display: inline-block; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--px-accent);
+  margin-right: 10px; vertical-align: middle;
+}
+nav .back {
+  font-family: var(--px-mono);
+  font-size: 11px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: var(--px-track-mono);
+  color: var(--px-text-3); text-decoration: none;
+  transition: color var(--px-dur) var(--px-ease);
+}
+nav .back:hover { color: var(--px-text); }
+
+/* ============ EYEBROW + MONO UTILITIES ============ */
+.px-eyebrow {
+  font-family: var(--px-mono);
+  text-transform: uppercase; letter-spacing: var(--px-track-mono-lg);
+  font-size: 11px; font-weight: 500; color: var(--px-accent);
+}
+
+/* ============ HERO ============ */
+.hero {
+  padding: 150px 40px 40px;
+  max-width: 880px; margin: 0 auto;
+}
+.hero-eyebrow { margin-bottom: 28px; opacity: 0; animation: fadeUp 0.8s var(--px-ease) 0.15s forwards; }
+.hero h1 {
+  font-family: var(--px-font);
+  font-size: clamp(40px, 5.6vw, 66px);
+  font-weight: 700; line-height: 1.06;
+  letter-spacing: var(--px-track-tight);
+  color: var(--px-text); margin-bottom: 30px;
+  opacity: 0; animation: fadeUp 0.9s var(--px-ease) 0.3s forwards;
+}
+.hero h1 em { font-style: italic; font-weight: 400; color: var(--px-accent); }
+.hero-subtitle {
+  font-family: var(--px-font);
+  font-size: 19px; line-height: 1.6; font-weight: 400;
+  color: var(--px-text-2); max-width: 660px;
+  opacity: 0; animation: fadeUp 0.9s var(--px-ease) 0.45s forwards;
+}
+.hero-divider { height: 1px; background: var(--px-border); margin: 48px 0 28px; opacity: 0; animation: fadeIn 0.9s var(--px-ease) 0.6s forwards; }
+.hero-meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; opacity: 0; animation: fadeUp 0.9s var(--px-ease) 0.7s forwards; }
+.hero-meta dt { font-family: var(--px-mono); text-transform: uppercase; letter-spacing: var(--px-track-mono); font-size: 10.5px; font-weight: 500; color: var(--px-text-3); margin-bottom: 6px; }
+.hero-meta dd { font-family: var(--px-font); font-size: 15px; font-weight: 400; color: var(--px-text); }
+
+/* hero feature image */
+.hero-feature { max-width: 1120px; margin: 44px auto 0; padding: 0 40px; opacity: 0; animation: fadeUp 0.9s var(--px-ease) 0.8s forwards; }
+.hero-feature figure { margin: 0; }
+.hero-feature img { width: 100%; height: auto; display: block; border-radius: var(--px-radius); border: 1px solid var(--px-border-2); box-shadow: var(--px-shadow-lg); background: var(--px-surface); }
+.hero-feature figcaption { font-family: var(--px-font); font-size: 13.5px; color: var(--px-text-3); margin-top: 14px; line-height: 1.55; text-align: center; }
+.hero-feature figcaption strong { color: var(--px-text-2); font-weight: 600; }
+
+/* ============ ESSAY SECTIONS ============ */
+section.essay { padding: 0 40px; max-width: 720px; margin: 0 auto; }
+.section-spacer { height: 88px; }
+.section-spacer-sm { height: 48px; }
+
+.essay-head { margin-bottom: 24px; }
+.essay-head .px-eyebrow { display: block; margin-bottom: 16px; }
+.essay-head h2 {
+  font-family: var(--px-font);
+  font-size: clamp(28px, 3.4vw, 38px);
+  font-weight: 600; line-height: 1.18;
+  letter-spacing: -0.02em; color: var(--px-text);
+}
+.essay-head h2 em { font-style: italic; font-weight: 400; }
+
+.essay-body p { font-size: 17px; line-height: 1.7; color: var(--px-text); margin-bottom: 20px; }
+.essay-body p:last-child { margin-bottom: 0; }
+.essay-body p.lead { font-size: 19px; line-height: 1.6; color: var(--px-text-2); margin-bottom: 32px; }
+.essay-body em { font-style: italic; }
+.essay-body strong { font-weight: 600; color: var(--px-text); }
+.essay-body code {
+  font-family: var(--px-mono); font-size: 0.9em; color: var(--px-text);
+  background: var(--px-surface-2); padding: 2px 6px;
+  border-radius: var(--px-radius-xs); border: 1px solid var(--px-border);
+}
+
+/* ============ PULL QUOTE ============ */
+.pullquote {
+  border-left: 3px solid var(--px-accent);
+  padding: 4px 0 4px 28px;
+  margin: 36px 0;
+  font-size: clamp(20px, 2.4vw, 24px);
+  line-height: 1.4; font-weight: 500;
+  letter-spacing: -0.015em; color: var(--px-text);
+}
+.pullquote em { font-style: italic; font-weight: 400; color: var(--px-accent); }
+
+/* ============ FIGURES / GALLERY (wide, break out of the 720 column) ============ */
+.figblock { max-width: 1000px; margin: 40px auto; padding: 0 40px; }
+.figblock--narrow { max-width: 820px; }
+.figlabel {
+  font-family: var(--px-mono); text-transform: uppercase;
+  letter-spacing: var(--px-track-mono); font-size: 10.5px; font-weight: 600;
+  color: var(--px-text-3); margin-bottom: 14px; display: block;
+}
+figure { margin: 0; }
+figure img { width: 100%; height: auto; display: block; border-radius: var(--px-radius); border: 1px solid var(--px-border-2); background: var(--px-surface); box-shadow: var(--px-shadow); cursor: zoom-in; }
+figcaption { font-family: var(--px-font); font-size: 13.5px; color: var(--px-text-3); margin-top: 13px; line-height: 1.55; }
+figcaption strong { color: var(--px-text-2); font-weight: 600; }
+.fig-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.fig-trio { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.fig-quad { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.fig-pair figcaption, .fig-trio figcaption, .fig-quad figcaption { margin-top: 10px; font-size: 12.5px; }
+@media (max-width: 720px) {
+  .fig-pair, .fig-trio, .fig-quad { grid-template-columns: 1fr; }
+}
+
+/* ============ VIDEO ============ */
+.px-video { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: var(--px-radius); overflow: hidden; border: 1px solid var(--px-border-2); box-shadow: var(--px-shadow); background: #0a0d12; }
+.px-video video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; object-fit: cover; }
+
+/* ============ PIPELINE DIAGRAM ============ */
+.pipeline { max-width: 1000px; margin: 40px auto; padding: 0 40px; }
+.pipeline-context {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--px-mono); font-size: 11px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: var(--px-track-mono);
+  color: var(--px-accent-deep); background: var(--px-accent-dim);
+  border: 1px solid rgba(40,80,216,0.22); border-radius: 100px;
+  padding: 7px 14px; margin-bottom: 22px;
+}
+.pipeline-context .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--px-accent); }
+.pipeline-flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; }
+.pipe-node {
+  flex: 1 1 150px; min-width: 150px;
+  background: var(--px-surface); border: 1px solid var(--px-border-2);
+  border-radius: var(--px-radius-sm); padding: 18px 18px 20px;
+  box-shadow: var(--px-shadow-sm);
+}
+.pipe-node .kind { font-family: var(--px-mono); font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: var(--px-track-mono); color: var(--px-accent); margin-bottom: 8px; }
+.pipe-node .title { font-family: var(--px-font); font-size: 15px; font-weight: 600; color: var(--px-text); margin-bottom: 6px; }
+.pipe-node .why { font-family: var(--px-font); font-size: 13px; line-height: 1.5; color: var(--px-text-2); }
+.pipe-arrow { flex: 0 0 34px; display: flex; align-items: center; justify-content: center; color: var(--px-text-4); font-size: 20px; }
+@media (max-width: 720px) {
+  .pipeline-flow { flex-direction: column; }
+  .pipe-node { flex-basis: auto; }
+  .pipe-arrow { flex-basis: auto; height: 26px; transform: rotate(90deg); }
+}
+
+/* ============ STATS ============ */
+.stats { max-width: 1000px; margin: 44px auto; padding: 0 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.stat { background: var(--px-surface); border: 1px solid var(--px-border-2); padding: 28px 24px; }
+.stat:first-child { border-radius: var(--px-radius-sm) 0 0 var(--px-radius-sm); }
+.stat:last-child { border-radius: 0 var(--px-radius-sm) var(--px-radius-sm) 0; }
+.stat + .stat { border-left: none; }
+.stat .num { font-family: var(--px-font); font-size: clamp(28px, 3.4vw, 42px); font-weight: 700; line-height: 1; letter-spacing: -0.02em; color: var(--px-text); font-variant-numeric: tabular-nums; margin-bottom: 10px; }
+.stat .num em { font-style: normal; color: var(--px-accent); }
+.stat .lbl { font-family: var(--px-font); font-size: 14px; line-height: 1.5; color: var(--px-text-2); }
+@media (max-width: 720px) {
+  .stats { grid-template-columns: 1fr; gap: 0; }
+  .stat, .stat:first-child, .stat:last-child { border-radius: 0; }
+  .stat + .stat { border-top: none; border-left: 1px solid var(--px-border-2); }
+  .stat:first-child { border-radius: var(--px-radius-sm) var(--px-radius-sm) 0 0; }
+  .stat:last-child { border-radius: 0 0 var(--px-radius-sm) var(--px-radius-sm); }
+}
+
+/* ============ SPECULATIVE / NEXT BLOCKS ============ */
+.speculative { margin-top: 28px; }
+.spec-block { padding: 30px 0; border-top: 1px solid var(--px-border); }
+.spec-block:last-child { border-bottom: 1px solid var(--px-border); }
+.spec-block h3 { font-family: var(--px-font); font-size: 20px; font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; color: var(--px-text); margin-bottom: 12px; display: flex; align-items: baseline; gap: 14px; }
+.spec-block h3 .num { font-family: var(--px-mono); font-size: 11px; font-weight: 500; letter-spacing: var(--px-track-mono); color: var(--px-accent); text-transform: uppercase; }
+.spec-block p { font-size: 16px; line-height: 1.7; color: var(--px-text-2); }
+
+/* ============ CLOSING ============ */
+.closing { padding: 0 40px; max-width: 640px; margin: 96px auto 0; text-align: center; }
+.closing-mark { width: 36px; height: 1px; background: var(--px-accent); margin: 0 auto 32px; }
+.closing p { font-family: var(--px-font); font-style: italic; font-weight: 400; font-size: clamp(20px, 2.4vw, 24px); line-height: 1.5; letter-spacing: -0.015em; color: var(--px-text); }
+.closing p::before { content: '\201C'; color: var(--px-accent); margin-right: 2px; }
+.closing p::after  { content: '\201D'; color: var(--px-accent); margin-left: 2px; }
+
+/* ============ FOOTER ============ */
+footer { margin-top: 110px; padding: 48px 40px 64px; max-width: 1120px; margin-left: auto; margin-right: auto; border-top: 1px solid var(--px-border); display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; align-items: start; }
+.foot-col { display: flex; flex-direction: column; gap: 10px; }
+.foot-col .label { font-family: var(--px-mono); text-transform: uppercase; letter-spacing: var(--px-track-mono); font-size: 10.5px; font-weight: 500; color: var(--px-text-3); margin-bottom: 4px; }
+.foot-col a { font-family: var(--px-font); font-size: 14px; color: var(--px-text); text-decoration: none; transition: color var(--px-dur) var(--px-ease); }
+.foot-col a:hover { color: var(--px-accent); }
+.foot-col .mono { font-family: var(--px-mono); font-size: 12.5px; letter-spacing: 0; text-transform: none; }
+.foot-col.right { text-align: right; }
+.foot-col.right .copy { font-family: var(--px-mono); text-transform: uppercase; letter-spacing: var(--px-track-mono); font-size: 10.5px; color: var(--px-text-3); }
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s var(--px-ease), transform 0.7s var(--px-ease); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ============ LIGHTBOX ============ */
+.lightbox { position: fixed; inset: 0; z-index: 200; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 4vh 4vw; background: rgba(10, 13, 18, 0.92); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); opacity: 0; visibility: hidden; transition: opacity .22s ease, visibility .22s ease; cursor: zoom-out; }
+.lightbox.open { opacity: 1; visibility: visible; }
+.lightbox img { max-width: 92vw; max-height: 84vh; width: auto; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 30px 80px -30px rgba(0,0,0,0.8); background: var(--px-surface); cursor: default; transform: scale(.98); transition: transform .22s ease; }
+.lightbox.open img { transform: scale(1); }
+.lightbox .lb-cap { max-width: 70ch; text-align: center; color: rgba(255,255,255,0.78); font-size: 13.5px; line-height: 1.55; cursor: default; }
+.lightbox .lb-cap strong { color: #fff; font-weight: 600; }
+.lightbox .lb-close { position: fixed; top: 18px; right: 22px; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.22); background: rgba(255,255,255,0.06); color: #fff; font-size: 20px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .15s; }
+.lightbox .lb-close:hover { background: rgba(255,255,255,0.16); }
+.lightbox .lb-nav { position: fixed; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.22); background: rgba(255,255,255,0.06); color: #fff; font-size: 24px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .15s; }
+.lightbox .lb-nav:hover { background: rgba(255,255,255,0.16); }
+.lightbox .lb-prev { left: 18px; }
+.lightbox .lb-next { right: 18px; }
+@media (max-width: 600px) { .lightbox .lb-prev { left: 8px; } .lightbox .lb-next { right: 8px; } .lightbox .lb-nav { width: 42px; height: 42px; } }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px) {
+  .hero-meta { grid-template-columns: 1fr; gap: 20px; }
+  footer { grid-template-columns: 1fr; }
+  .foot-col.right { text-align: left; }
+  .hero-feature, .figblock, .pipeline, .stats { padding-left: 24px; padding-right: 24px; }
+}
+@media (max-width: 640px) {
+  nav { padding: 14px 20px; }
+  .hero { padding: 124px 20px 40px; }
+  section.essay { padding: 0 20px; }
+  .closing { padding: 0 20px; }
+  footer { padding: 40px 20px 48px; }
+  .hero h1 { font-size: clamp(32px, 8vw, 46px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .hero-eyebrow, .hero h1, .hero-subtitle, .hero-divider, .hero-meta, .hero-feature { opacity: 1 !important; animation: none !important; }
+}
+/* ---- page-local: pathogenicity scale + spec-work notice ---- */
+.specnote {
+  max-width: 720px; margin: 0 auto; padding: 14px 18px;
+  border: 1px dashed var(--px-border-3); border-radius: var(--px-radius-sm);
+  background: var(--px-surface); color: var(--px-text-2);
+  font-size: 13.5px; line-height: 1.6;
+}
+.specnote strong { color: var(--px-text); font-weight: 600; }
+.specnote a { color: var(--px-accent); }
+.scalewrap { max-width: 820px; margin: 0 auto; }
+.scalebar {
+  height: 46px; border-radius: var(--px-radius-sm); border: 1px solid var(--px-border);
+  background: linear-gradient(90deg, #00867A 0%, #6FBFA8 26%, #E6E2D8 50%, #E0A06B 74%, #C0392B 100%);
+  box-shadow: var(--px-shadow-sm);
+}
+.scalekeys {
+  display: flex; justify-content: space-between; margin-top: 10px;
+  font-family: var(--px-mono); font-size: 10.5px; text-transform: uppercase;
+  letter-spacing: var(--px-track-mono); color: var(--px-text-3);
+}
+.scalekeys b { display: block; color: var(--px-text-2); font-weight: 600; margin-bottom: 2px; }
+.scalekeys span:nth-child(2) { text-align: center; }
+.scalekeys span:last-child { text-align: right; }
+@media (max-width: 680px) { .scalekeys { font-size: 9px; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class='name' href='/'><span class="dot"></span>Michael Scrivana</a>
+  <a class='back' href='/#research'>&larr; Back to work</a>
+</nav>
+
+<!-- ================ HERO ================ -->
+<div class="hero">
+  <div class="hero-eyebrow px-eyebrow">Concept &middot; AlphaMissense</div>
+  <h1>Seventy-one million mutations. One picture had to <em>hold</em> it.</h1>
+  <p class="hero-subtitle">AlphaMissense predicts which single-letter changes to a human protein cause disease &mdash; across every such change the genome can make. It is a genuinely important result with almost no visual language around it. So I gave it one: a key visual, a mechanism diagram, and the announcement page they'd live in. This is the thinking behind all three.</p>
+
+  <div class="hero-divider"></div>
+
+  <dl class="hero-meta">
+    <div>
+      <dt>Role</dt>
+      <dd>Concept, art direction, design</dd>
+    </div>
+    <div>
+      <dt>Subject</dt>
+      <dd>Cheng et&nbsp;al., <em>Science</em>, 2023</dd>
+    </div>
+    <div>
+      <dt>Status</dt>
+      <dd>Self-directed &mdash; unaffiliated</dd>
+    </div>
+  </dl>
+</div>
+
+<!-- HERO FEATURE -->
+<div class="hero-feature">
+  <figure>
+    <img src="images/alphamissense/key-visual.svg" alt="Key visual: the variant matrix — every position in a protein against every possible amino-acid substitution, each cell scored from benign to pathogenic">
+    <figcaption><strong>The variant matrix.</strong> Every position along a protein, crossed with every amino acid it could become. One cell is one possible mutation; its colour is the model's confidence that the mutation causes disease.</figcaption>
+  </figure>
+</div>
+
+<div class="section-spacer-sm"></div>
+
+<div class="specnote reveal">
+  <strong>What this is.</strong> An independent, self-directed concept made to think through a design problem I find interesting. It is <strong>not affiliated with, commissioned by, or endorsed by Google DeepMind</strong>, and none of it is official communication for the research or its authors. The science is theirs; the pictures are mine.
+</div>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 01 — THE PROBLEM ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">01 &middot; The problem</span>
+    <h2>The result is enormous. The picture of it was a table.</h2>
+  </div>
+  <div class="essay-body">
+    <p class="lead">A missense variant is a typo with consequences: one letter changes in DNA, one amino acid changes in the protein it builds. Most of those typos are harmless. A few of them cause disease. For decades the trouble has been telling which is which.</p>
+    <p>The human genome permits roughly <strong>71 million</strong> such single-letter substitutions.<!-- VERIFY: 71M figure, Cheng et al. --> Of the several million actually observed in people, only a tiny fraction &mdash; on the order of <strong>two percent</strong> &mdash; have been clinically classified as pathogenic or benign.<!-- VERIFY: ~2% clinically classified --> The rest sit in a category with one of the bleakest names in medicine: <em>variant of uncertain significance</em>. A family gets a sequencing result, and the answer is a shrug.</p>
+    <p>AlphaMissense closes a great deal of that gap at once, producing a calibrated prediction for effectively the whole space.<!-- VERIFY: share of the 71M classified as likely pathogenic / likely benign --> That is a genuinely moving result. And when I went looking for how it had been drawn, I found what usually gets made for work like this: a heat-mapped figure lifted straight from the paper, a stock double-helix, or nothing at all.</p>
+    <div class="pullquote">Research this consequential deserves better than a cropped figure and a stock helix. The visual should carry the <em>idea</em>, not just decorate the announcement.</div>
+    <p>So I set myself the brief a lab's design team would actually get: make this legible to a smart non-specialist in one scroll, without softening the science or overclaiming what the model does.</p>
+  </div>
+</section>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 02 — THE IDEA ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">02 &middot; The idea</span>
+    <h2>Draw the trick, not the topic.</h2>
+  </div>
+  <div class="essay-body">
+    <p>The easy version of this diagram explains what a mutation is. Anyone can draw that, and it teaches a reader nothing they couldn't have guessed. The <em>interesting</em> thing about this paper is the part that is hardest to picture, so that is the thing the diagram has to carry.</p>
+    <p>The model was never handed a list of mutations labelled &ldquo;causes disease.&rdquo; Those labels barely exist &mdash; that's the whole problem. Instead it learns from two quieter sources: structural intuition inherited from AlphaFold about what a correctly folded protein looks like, and <strong>population frequency</strong> &mdash; which variants turn up routinely in healthy humans and related primates, and which never appear at all.<!-- VERIFY: training signal — AlphaFold init + population frequency, no clinical labels as targets --></p>
+    <p>That absence is the signal. A substitution that is common in living people is, by the fact of those people, tolerable. A substitution that never occurs, in a position where mutation is otherwise common, is conspicuous by its silence &mdash; evolution has been quietly removing it. The model is reading a negative space.</p>
+    <div class="pullquote">Evolution already ran the experiment. The model is reading the results off the survivors.</div>
+    <p>Getting a reader to feel that inversion &mdash; <em>absence as evidence</em> &mdash; is the actual design problem here. Everything else in the piece is in service of it.</p>
+  </div>
+</section>
+
+<div class="pipeline reveal">
+  <span class="pipeline-context"><span class="dot"></span>The chain the diagram has to make legible in one read</span>
+  <div class="pipeline-flow">
+    <div class="pipe-node">
+      <div class="kind">Variant</div>
+      <div class="title">One letter</div>
+      <div class="why">A single base changes; one amino acid in the finished protein changes with it.</div>
+    </div>
+    <div class="pipe-arrow">&rarr;</div>
+    <div class="pipe-node">
+      <div class="kind">Structure</div>
+      <div class="title">Does it break?</div>
+      <div class="why">AlphaFold supplies the intuition for what an intact, correctly folded protein looks like.</div>
+    </div>
+    <div class="pipe-arrow">&rarr;</div>
+    <div class="pipe-node">
+      <div class="kind">Population</div>
+      <div class="title">Absence as evidence</div>
+      <div class="why">Common in healthy people means tolerated. Never observed means selected against. No clinical labels required.</div>
+    </div>
+    <div class="pipe-arrow">&rarr;</div>
+    <div class="pipe-node">
+      <div class="kind">Score</div>
+      <div class="title">0 &rarr; 1, calibrated</div>
+      <div class="why">One continuous number per variant, with the uncertainty kept visible rather than rounded away.</div>
+    </div>
+    <div class="pipe-arrow">&rarr;</div>
+    <div class="pipe-node">
+      <div class="kind">Scale</div>
+      <div class="title">The whole proteome</div>
+      <div class="why">Every possible missense variant, not only the ones a clinic has already seen.</div>
+    </div>
+  </div>
+</div>
+
+<div class="figblock reveal">
+  <span class="figlabel">The mechanism &mdash; absence as evidence</span>
+  <figure>
+    <img src="images/alphamissense/mechanism-diagram.svg" alt="Mechanism diagram: how AlphaMissense learns to score variant pathogenicity from protein structure and population frequency rather than from clinical labels">
+    <figcaption><strong>The diagram does the arguing.</strong> The chain above, drawn so the inversion at its centre lands: the model is not told which mutations are harmful &mdash; it infers it from which ones evolution has already removed.</figcaption>
+  </figure>
+</div>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 03 — THE VISUAL SYSTEM ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">03 &middot; The visual system</span>
+    <h2>Colour had to mean something, because a clinician might read it.</h2>
+  </div>
+  <div class="essay-body">
+    <p>Seven years of packaging in regulated healthcare leaves you with one reflex above all others: assume the reader will act on what you made. That changes how you pick a palette.</p>
+    <p>The obvious move is red-to-green. It is also the wrong one &mdash; red&ndash;green is the most common form of colour-vision deficiency, and this is precisely the wrong subject on which to lose eight percent of your male readers. The scale below runs <strong>teal to warm red</strong>, which survives that, and it carries a deliberate <strong>desaturated middle</strong>: the uncertain band should look uncertain, not like a confident yellow.</p>
+    <div class="scalewrap">
+      <div class="scalebar" role="img" aria-label="Pathogenicity colour scale running from teal at likely benign, through a desaturated neutral middle for uncertain, to warm red at likely pathogenic"></div>
+      <div class="scalekeys">
+        <span><b>Likely benign</b>0.0</span>
+        <span><b>Uncertain</b>0.5</span>
+        <span><b>Likely pathogenic</b>1.0</span>
+      </div>
+    </div>
+    <p style="margin-top:26px">Two further rules govern the rest of the system. <strong>Density is the argument</strong> &mdash; the matrix should feel overwhelming at full bleed, because seventy-one million is overwhelming, and then resolve into readable structure as you get closer. And <strong>the type stays quiet</strong>: a grotesque for reading, a mono for anything that is data, and no third voice. Science visualisation goes wrong when the design starts competing with the finding.</p>
+  </div>
+</section>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 04 — THE ANNOUNCEMENT ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">04 &middot; The announcement</span>
+    <h2>A key visual is only as good as the page it has to survive.</h2>
+  </div>
+  <div class="essay-body">
+    <p>An image that works in isolation and collapses in a template hasn't been designed, only drawn. So the last piece is the container: the research announcement as it would actually publish &mdash; hero, standfirst, the diagram in position, the numbers, and the paragraph that says what it means for someone waiting on a diagnosis.</p>
+    <p>It is also where the system gets stress-tested against a parent brand. A lab's identity has to be recognisably its own and unmistakably part of the larger house it sits in &mdash; which is the same problem I've spent seven years solving for consumer-health brands living under one master brand.</p>
+  </div>
+</section>
+
+<div class="figblock reveal">
+  <span class="figlabel">The announcement page &mdash; system in situ</span>
+  <figure>
+    <img src="images/alphamissense/announcement-layout.svg" alt="Research announcement page layout: hero key visual, standfirst, mechanism diagram in position, statistics row, and clinical-impact section">
+    <figcaption><strong>Where it all has to hold together.</strong> Hero, standfirst, diagram, the numbers, and the human consequence &mdash; in the order a reader meets them.</figcaption>
+  </figure>
+</div>
+
+<div class="stats reveal">
+  <div class="stat">
+    <div class="num">71<em>M</em></div>
+    <div class="lbl">Possible missense variants across the human proteome &mdash; the full space the model scores.<!-- VERIFY --></div>
+  </div>
+  <div class="stat">
+    <div class="num">~2<em>%</em></div>
+    <div class="lbl">Share of observed variants clinically classified before this work. The rest were uncertain.<!-- VERIFY --></div>
+  </div>
+  <div class="stat">
+    <div class="num">0 <em>labels</em></div>
+    <div class="lbl">Clinical pathogenicity labels used as training targets. The signal comes from structure and population frequency.<!-- VERIFY --></div>
+  </div>
+</div>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 05 — WHAT'S NEXT ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">05 &middot; What I'd do next</span>
+    <h2>Where this wants to go.</h2>
+  </div>
+  <div class="essay-body">
+    <div class="speculative">
+      <div class="spec-block">
+        <h3><span class="num">A</span>Make the matrix interactive.</h3>
+        <p>The static key visual is a photograph of a thing that wants to be explorable. Hover a cell and get the substitution, the score, and the confidence; scrub along the sequence and watch tolerance change as you cross a functional domain. The data is public, and I write the front-end &mdash; this is a build, not a mockup.</p>
+      </div>
+      <div class="spec-block">
+        <h3><span class="num">B</span>Design the uncertainty, not around it.</h3>
+        <p>Every prediction carries a confidence, and the honest version of this design shows it. Most science communication quietly rounds uncertainty away because it is inconvenient to draw. I'd rather make the ambiguous band legible than pretend the model is more certain than it is &mdash; particularly here, where a reader might act on it.</p>
+      </div>
+      <div class="spec-block">
+        <h3><span class="num">C</span>Turn it into a repeatable grammar.</h3>
+        <p>One paper is a poster. The valuable version is a system &mdash; a diagram grammar, a colour logic, a set of layouts &mdash; that the next twenty announcements inherit, so a lab's research reads as one body of work rather than twenty separate design projects.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================ CLOSING ================ -->
+<div class="closing reveal">
+  <div class="closing-mark"></div>
+  <p>The hard part of translating a paper was never the rendering. It was deciding what to leave out.</p>
+</div>
+
+<section class="essay">
+  <div class="essay-body">
+    <div class="specnote">
+      <strong>Source.</strong> J. Cheng et&nbsp;al., &ldquo;Accurate proteome-wide missense variant effect prediction with AlphaMissense,&rdquo; <em>Science</em> <strong>381</strong>, eadg7492 (2023). <a href="https://doi.org/10.1126/science.adg7492" target="_blank" rel="noopener">doi.org/10.1126/science.adg7492</a><!-- VERIFY: citation details --><br><br>
+      <strong>Disclosure.</strong> This is an independent design concept. It is <strong>not affiliated with, commissioned by, or endorsed by Google DeepMind</strong> or the paper's authors, and it is not official communication for the research. No DeepMind or Google brand assets are reproduced here. Some imagery is generative output.
+    </div>
+  </div>
+</section>
+
+<!-- ================ FOOTER ================ -->
+<footer>
+  <div class="foot-col">
+    <span class="label">Contact</span>
+    <a href="mailto:michaelscrivana@gmail.com" class="mono">michaelscrivana@gmail.com</a>
+    <a href="https://www.linkedin.com/in/michaelscrivana89" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://michaelscrivana.com" target="_blank" rel="noopener">michaelscrivana.com</a>
+  </div>
+  <div class="foot-col">
+    <span class="label">More work</span>
+    <a href='/creativelab'>CreativeLab &mdash; a generative pipeline</a>
+    <a href='/miralax'>MiraLAX &mdash; one system, two launches</a>
+    <a href='/'>All work</a>
+    <a href='/resume'>Résumé</a>
+  </div>
+  <div class="foot-col right">
+    <span class="label">Colophon</span>
+    <span class="copy">Self-directed concept &middot; unaffiliated</span>
+    <span class="copy">DM Sans &middot; JetBrains Mono</span>
+    <span class="copy">&copy; 2026 Michael Scrivana</span>
+  </div>
+</footer>
+
+
+<!-- ================ LIGHTBOX ================ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true">
+  <button class="lb-close" id="lbClose" type="button" aria-label="Close">&times;</button>
+  <button class="lb-nav lb-prev" id="lbPrev" type="button" aria-label="Previous image">&#8249;</button>
+  <button class="lb-nav lb-next" id="lbNext" type="button" aria-label="Next image">&#8250;</button>
+  <img id="lbImg" alt="">
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<!-- ============ SCROLL REVEAL ============ -->
+<script>
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+</script>
+
+<!-- ============ LIGHTBOX ============ -->
+<script>
+(function () {
+  var lb = document.getElementById('lightbox'),
+      img = document.getElementById('lbImg'),
+      cap = document.getElementById('lbCap'),
+      closeBtn = document.getElementById('lbClose'),
+      prevBtn = document.getElementById('lbPrev'),
+      nextBtn = document.getElementById('lbNext'),
+      items = Array.prototype.slice.call(document.querySelectorAll('figure img')),
+      current = 0, lastFocus = null;
+
+  function render(i) {
+    current = (i + items.length) % items.length;
+    var el = items[current], fig = el.closest('figure'),
+        figcap = fig ? fig.querySelector('figcaption') : null;
+    img.src = el.currentSrc || el.src; img.alt = el.alt || '';
+    if (figcap) { cap.innerHTML = figcap.innerHTML; cap.style.display = ''; }
+    else { cap.textContent = ''; cap.style.display = 'none'; }
+  }
+  function open(i) {
+    render(i);
+    lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    lastFocus = document.activeElement; closeBtn.focus();
+  }
+  function close() {
+    lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = ''; img.src = '';
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  function step(d) { render(current + d); }
+
+  items.forEach(function (el, i) { el.addEventListener('click', function () { open(i); }); });
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function (e) { e.stopPropagation(); step(-1); });
+  nextBtn.addEventListener('click', function (e) { e.stopPropagation(); step(1); });
+  lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  });
+})();
+</script>
+
+</body>
+</html>
