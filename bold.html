@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BOLD Tour — one idea, three years, every medium · Michael Scrivana</title>
+<meta name="description" content="How I led the design system for Bayer Consumer Health's BOLD Tour across three years — one identity carried through 3D, motion, a live stage, and merch, with a fresh theme each year.">
+<meta content="BOLD Tour — one idea, three years, every medium" property="og:title">
+<meta content="One brand system carried across three years and every medium it needed — the thinking behind an integrated, experiential campaign." property="og:description">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://creative.michaelscrivana.com/bold.html">
+<meta property="og:image" content="https://creative.michaelscrivana.com/images/BOLD-HERO2.png">
+<meta content="summary_large_image" name="twitter:card">
+<meta name="twitter:title" content="BOLD Tour — one idea, three years, every medium">
+<meta name="twitter:description" content="One brand system carried across three years and every medium it needed — the thinking behind an integrated, experiential campaign.">
+<meta name="twitter:image" content="https://creative.michaelscrivana.com/images/BOLD-HERO2.png">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/webclip.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   PX Design System v0.2 — LIGHT / PAPER tokens, scoped & inlined.
+   Case-study variant (matches creativelab.html): essay + artifacts + lightbox.
+   ══════════════════════════════════════════════════════════════ */
+:root {
+  --px-bg:          #f4f5f7;
+  --px-surface:     #ffffff;
+  --px-surface-2:   #ebedf0;
+  --px-surface-3:   #dde0e6;
+  --px-surface-4:   #c9cdd5;
+
+  --px-accent:       #2850D8;
+  --px-accent-deep:  #1B3AB0;
+  --px-accent-hover: #4368E8;
+  --px-accent-2:     #00867A;
+  --px-accent-dim:   rgba(40, 80, 216, 0.10);
+  --px-accent-glow:  rgba(40, 80, 216, 0.22);
+
+  --px-text:    #0a0d12;
+  --px-text-2:  #4a5058;
+  --px-text-3:  #8b9099;
+  --px-text-4:  #b8bcc4;
+
+  --px-border:    rgba(10, 13, 18, 0.08);
+  --px-border-2:  rgba(10, 13, 18, 0.14);
+  --px-border-3:  rgba(10, 13, 18, 0.24);
+
+  --px-font:  'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --px-mono:  'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+
+  --px-track-tight:    -0.025em;
+  --px-track-body:     -0.005em;
+  --px-track-mono:     0.14em;
+  --px-track-mono-lg:  0.18em;
+
+  --px-radius:     14px;
+  --px-radius-sm:  10px;
+  --px-radius-xs:  6px;
+
+  --px-shadow-sm:    0 1px 2px -1px rgba(10, 13, 18, 0.08);
+  --px-shadow:       0 4px 16px -8px rgba(10, 13, 18, 0.12);
+  --px-shadow-lg:    0 8px 32px -12px rgba(10, 13, 18, 0.18);
+  --px-shadow-accent:0 8px 30px -12px rgba(40, 80, 216, 0.25);
+
+  --px-ease:  cubic-bezier(0.2, 0, 0, 1);
+  --px-dur:   160ms;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background:
+    radial-gradient(ellipse 70% 40% at 50% -8%, var(--px-accent-dim), transparent 60%),
+    var(--px-bg);
+  color: var(--px-text);
+  font-family: var(--px-font);
+  font-size: 17px;
+  line-height: 1.65;
+  font-weight: 400;
+  letter-spacing: var(--px-track-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+::selection { background: var(--px-accent); color: #fff; }
+
+/* ============ NAV ============ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(244, 245, 247, 0.82);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border-bottom: 1px solid var(--px-border);
+}
+nav .name { font-family: var(--px-font); font-size: 14px; font-weight: 500; letter-spacing: var(--px-track-body); color: var(--px-text); text-decoration: none; }
+nav .name .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--px-accent); margin-right: 10px; vertical-align: middle; }
+nav .back { font-family: var(--px-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: var(--px-track-mono); color: var(--px-text-3); text-decoration: none; transition: color var(--px-dur) var(--px-ease); }
+nav .back:hover { color: var(--px-text); }
+
+/* ============ EYEBROW ============ */
+.px-eyebrow { font-family: var(--px-mono); text-transform: uppercase; letter-spacing: var(--px-track-mono-lg); font-size: 11px; font-weight: 500; color: var(--px-accent); }
+
+/* ============ HERO ============ */
+.hero { padding: 150px 40px 40px; max-width: 880px; margin: 0 auto; }
+.hero-eyebrow { margin-bottom: 28px; opacity: 0; animation: fadeUp 0.8s var(--px-ease) 0.15s forwards; }
+.hero h1 { font-family: var(--px-font); font-size: clamp(40px, 5.6vw, 66px); font-weight: 700; line-height: 1.06; letter-spacing: var(--px-track-tight); color: var(--px-text); margin-bottom: 30px; opacity: 0; animation: fadeUp 0.9s var(--px-ease) 0.3s forwards; }
+.hero h1 em { font-style: italic; font-weight: 400; color: var(--px-accent); }
+.hero-subtitle { font-family: var(--px-font); font-size: 19px; line-height: 1.6; font-weight: 400; color: var(--px-text-2); max-width: 660px; opacity: 0; animation: fadeUp 0.9s var(--px-ease) 0.45s forwards; }
+.hero-divider { height: 1px; background: var(--px-border); margin: 48px 0 28px; opacity: 0; animation: fadeIn 0.9s var(--px-ease) 0.6s forwards; }
+.hero-meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; opacity: 0; animation: fadeUp 0.9s var(--px-ease) 0.7s forwards; }
+.hero-meta dt { font-family: var(--px-mono); text-transform: uppercase; letter-spacing: var(--px-track-mono); font-size: 10.5px; font-weight: 500; color: var(--px-text-3); margin-bottom: 6px; }
+.hero-meta dd { font-family: var(--px-font); font-size: 15px; font-weight: 400; color: var(--px-text); }
+
+/* hero feature */
+.hero-feature { max-width: 1120px; margin: 44px auto 0; padding: 0 40px; opacity: 0; animation: fadeUp 0.9s var(--px-ease) 0.8s forwards; }
+.hero-feature figure { margin: 0; }
+.hero-feature img { width: 100%; height: auto; display: block; border-radius: var(--px-radius); border: 1px solid var(--px-border-2); box-shadow: var(--px-shadow-lg); background: var(--px-surface); }
+.hero-feature figcaption { font-family: var(--px-font); font-size: 13.5px; color: var(--px-text-3); margin-top: 14px; line-height: 1.55; text-align: center; }
+.hero-feature figcaption strong { color: var(--px-text-2); font-weight: 600; }
+
+/* ============ ESSAY ============ */
+section.essay { padding: 0 40px; max-width: 720px; margin: 0 auto; }
+.section-spacer { height: 88px; }
+.section-spacer-sm { height: 48px; }
+
+.essay-head { margin-bottom: 24px; }
+.essay-head .px-eyebrow { display: block; margin-bottom: 16px; }
+.essay-head h2 { font-family: var(--px-font); font-size: clamp(28px, 3.4vw, 38px); font-weight: 600; line-height: 1.18; letter-spacing: -0.02em; color: var(--px-text); }
+.essay-head h2 em { font-style: italic; font-weight: 400; }
+
+.essay-body p { font-size: 17px; line-height: 1.7; color: var(--px-text); margin-bottom: 20px; }
+.essay-body p:last-child { margin-bottom: 0; }
+.essay-body p.lead { font-size: 19px; line-height: 1.6; color: var(--px-text-2); margin-bottom: 32px; }
+.essay-body em { font-style: italic; }
+.essay-body strong { font-weight: 600; color: var(--px-text); }
+.essay-body code { font-family: var(--px-mono); font-size: 0.9em; color: var(--px-text); background: var(--px-surface-2); padding: 2px 6px; border-radius: var(--px-radius-xs); border: 1px solid var(--px-border); }
+
+/* ============ PULL QUOTE ============ */
+.pullquote { border-left: 3px solid var(--px-accent); padding: 4px 0 4px 28px; margin: 36px 0; font-size: clamp(20px, 2.4vw, 24px); line-height: 1.4; font-weight: 500; letter-spacing: -0.015em; color: var(--px-text); }
+.pullquote em { font-style: italic; font-weight: 400; color: var(--px-accent); }
+
+/* ============ FIGURES ============ */
+.figblock { max-width: 1000px; margin: 40px auto; padding: 0 40px; }
+.figblock--narrow { max-width: 820px; }
+.figlabel { font-family: var(--px-mono); text-transform: uppercase; letter-spacing: var(--px-track-mono); font-size: 10.5px; font-weight: 600; color: var(--px-text-3); margin-bottom: 14px; display: block; }
+figure { margin: 0; }
+figure img { width: 100%; height: auto; display: block; border-radius: var(--px-radius); border: 1px solid var(--px-border-2); background: var(--px-surface); box-shadow: var(--px-shadow); cursor: zoom-in; }
+figcaption { font-family: var(--px-font); font-size: 13.5px; color: var(--px-text-3); margin-top: 13px; line-height: 1.55; }
+figcaption strong { color: var(--px-text-2); font-weight: 600; }
+.fig-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.fig-trio { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.fig-pair figcaption, .fig-trio figcaption { margin-top: 10px; font-size: 12.5px; }
+@media (max-width: 720px) { .fig-pair, .fig-trio { grid-template-columns: 1fr; } }
+
+/* ============ VIDEO ============ */
+.px-video { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: var(--px-radius); overflow: hidden; border: 1px solid var(--px-border-2); box-shadow: var(--px-shadow); background: #0a0d12; }
+.px-video iframe, .px-video video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; object-fit: cover; }
+
+/* ============ STATS ============ */
+.stats { max-width: 1000px; margin: 44px auto; padding: 0 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.stat { background: var(--px-surface); border: 1px solid var(--px-border-2); padding: 28px 24px; }
+.stat:first-child { border-radius: var(--px-radius-sm) 0 0 var(--px-radius-sm); }
+.stat:last-child { border-radius: 0 var(--px-radius-sm) var(--px-radius-sm) 0; }
+.stat + .stat { border-left: none; }
+.stat .num { font-family: var(--px-font); font-size: clamp(28px, 3.4vw, 42px); font-weight: 700; line-height: 1; letter-spacing: -0.02em; color: var(--px-text); font-variant-numeric: tabular-nums; margin-bottom: 10px; }
+.stat .num em { font-style: normal; color: var(--px-accent); }
+.stat .lbl { font-family: var(--px-font); font-size: 14px; line-height: 1.5; color: var(--px-text-2); }
+@media (max-width: 720px) {
+  .stats { grid-template-columns: 1fr; gap: 0; }
+  .stat, .stat:first-child, .stat:last-child { border-radius: 0; }
+  .stat + .stat { border-top: none; border-left: 1px solid var(--px-border-2); }
+  .stat:first-child { border-radius: var(--px-radius-sm) var(--px-radius-sm) 0 0; }
+  .stat:last-child { border-radius: 0 0 var(--px-radius-sm) var(--px-radius-sm); }
+}
+
+/* ============ NEXT BLOCKS ============ */
+.speculative { margin-top: 28px; }
+.spec-block { padding: 30px 0; border-top: 1px solid var(--px-border); }
+.spec-block:last-child { border-bottom: 1px solid var(--px-border); }
+.spec-block h3 { font-family: var(--px-font); font-size: 20px; font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; color: var(--px-text); margin-bottom: 12px; display: flex; align-items: baseline; gap: 14px; }
+.spec-block h3 .num { font-family: var(--px-mono); font-size: 11px; font-weight: 500; letter-spacing: var(--px-track-mono); color: var(--px-accent); text-transform: uppercase; }
+.spec-block p { font-size: 16px; line-height: 1.7; color: var(--px-text-2); }
+
+/* ============ CLOSING ============ */
+.closing { padding: 0 40px; max-width: 640px; margin: 96px auto 0; text-align: center; }
+.closing-mark { width: 36px; height: 1px; background: var(--px-accent); margin: 0 auto 32px; }
+.closing p { font-family: var(--px-font); font-style: italic; font-weight: 400; font-size: clamp(20px, 2.4vw, 24px); line-height: 1.5; letter-spacing: -0.015em; color: var(--px-text); }
+.closing p::before { content: '\201C'; color: var(--px-accent); margin-right: 2px; }
+.closing p::after  { content: '\201D'; color: var(--px-accent); margin-left: 2px; }
+
+/* ============ FOOTER ============ */
+footer { margin-top: 110px; padding: 48px 40px 64px; max-width: 1120px; margin-left: auto; margin-right: auto; border-top: 1px solid var(--px-border); display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; align-items: start; }
+.foot-col { display: flex; flex-direction: column; gap: 10px; }
+.foot-col .label { font-family: var(--px-mono); text-transform: uppercase; letter-spacing: var(--px-track-mono); font-size: 10.5px; font-weight: 500; color: var(--px-text-3); margin-bottom: 4px; }
+.foot-col a { font-family: var(--px-font); font-size: 14px; color: var(--px-text); text-decoration: none; transition: color var(--px-dur) var(--px-ease); }
+.foot-col a:hover { color: var(--px-accent); }
+.foot-col .mono { font-family: var(--px-mono); font-size: 12.5px; letter-spacing: 0; text-transform: none; }
+.foot-col.right { text-align: right; }
+.foot-col.right .copy { font-family: var(--px-mono); text-transform: uppercase; letter-spacing: var(--px-track-mono); font-size: 10.5px; color: var(--px-text-3); }
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s var(--px-ease), transform 0.7s var(--px-ease); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ============ LIGHTBOX ============ */
+.lightbox { position: fixed; inset: 0; z-index: 200; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 4vh 4vw; background: rgba(10, 13, 18, 0.92); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); opacity: 0; visibility: hidden; transition: opacity .22s ease, visibility .22s ease; cursor: zoom-out; }
+.lightbox.open { opacity: 1; visibility: visible; }
+.lightbox img { max-width: 92vw; max-height: 84vh; width: auto; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 30px 80px -30px rgba(0,0,0,0.8); background: var(--px-surface); cursor: default; transform: scale(.98); transition: transform .22s ease; }
+.lightbox.open img { transform: scale(1); }
+.lightbox .lb-cap { max-width: 70ch; text-align: center; color: rgba(255,255,255,0.78); font-size: 13.5px; line-height: 1.55; cursor: default; }
+.lightbox .lb-cap strong { color: #fff; font-weight: 600; }
+.lightbox .lb-close { position: fixed; top: 18px; right: 22px; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.22); background: rgba(255,255,255,0.06); color: #fff; font-size: 20px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .15s; }
+.lightbox .lb-close:hover { background: rgba(255,255,255,0.16); }
+.lightbox .lb-nav { position: fixed; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.22); background: rgba(255,255,255,0.06); color: #fff; font-size: 24px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .15s; }
+.lightbox .lb-nav:hover { background: rgba(255,255,255,0.16); }
+.lightbox .lb-prev { left: 18px; }
+.lightbox .lb-next { right: 18px; }
+@media (max-width: 600px) { .lightbox .lb-prev { left: 8px; } .lightbox .lb-next { right: 8px; } .lightbox .lb-nav { width: 42px; height: 42px; } }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px) {
+  .hero-meta { grid-template-columns: 1fr; gap: 20px; }
+  footer { grid-template-columns: 1fr; }
+  .foot-col.right { text-align: left; }
+  .hero-feature, .figblock, .stats { padding-left: 24px; padding-right: 24px; }
+}
+@media (max-width: 640px) {
+  nav { padding: 14px 20px; }
+  .hero { padding: 124px 20px 40px; }
+  section.essay { padding: 0 20px; }
+  .closing { padding: 0 20px; }
+  footer { padding: 40px 20px 48px; }
+  .hero h1 { font-size: clamp(32px, 8vw, 46px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .hero-eyebrow, .hero h1, .hero-subtitle, .hero-divider, .hero-meta, .hero-feature { opacity: 1 !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class='name' href='/'><span class="dot"></span>Michael Scrivana</a>
+  <a class='back' href='/#experience'>&larr; Back to work</a>
+</nav>
+
+<!-- ================ HERO ================ -->
+<div class="hero">
+  <div class="hero-eyebrow px-eyebrow">Case study &middot; BOLD Tour</div>
+  <h1>One idea. <em>Three years.</em> Every medium it needed.</h1>
+  <p class="hero-subtitle">BOLD was Bayer Consumer Health's internal brand-building tour. I led its design system across three consecutive years &mdash; identity, 3D, motion, a live stage, and the objects in your hand &mdash; refreshing the theme each year while one system held it all together. This is the part a gallery can't show: how you keep a single idea coherent across three years, four formats, and a room full of your own marketers.</p>
+
+  <div class="hero-divider"></div>
+
+  <dl class="hero-meta">
+    <div>
+      <dt>Role</dt>
+      <dd>Design system + art direction lead</dd>
+    </div>
+    <div>
+      <dt>Run</dt>
+      <dd>Three consecutive years</dd>
+    </div>
+    <div>
+      <dt>Scope</dt>
+      <dd>Identity &middot; 3D &middot; motion &middot; live &middot; merch</dd>
+    </div>
+  </dl>
+</div>
+
+<!-- HERO FEATURE -->
+<div class="hero-feature">
+  <figure>
+    <img src="images/BOLD-HERO2.png" alt="BOLD Activation Tour key visual — the BOLD wordmark with a power-button O on a tech circuit field">
+    <figcaption><strong>The BOLD mark.</strong> A power-button &ldquo;O&rdquo; and a circuit-board field &mdash; the constant that let the theme change every year without the brand losing itself.</figcaption>
+  </figure>
+</div>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 01 — THE BRIEF ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">01 &middot; The brief</span>
+    <h2>Make your own marketers <em>feel</em> something &mdash; three years running.</h2>
+  </div>
+  <div class="essay-body">
+    <p class="lead">The audience was the hardest possible one: the people who make brands for a living. Bayer Consumer Health's own marketing organization, plus partners from Google, TikTok, Pinterest, and BBDO.</p>
+    <p>An internal summit usually looks like an internal summit &mdash; a logo, a template, a deck. The brief here was the opposite: make the company's annual brand-building event feel like <strong>a real brand</strong>, the kind these people would respect because they build them for a living. And it couldn't be a one-off. It had to run <strong>three years</strong>, survive a shift from <strong>virtual to hybrid to in-person</strong>, and feel new enough each year that no one thought they'd seen it before.</p>
+    <div class="pullquote">One poster is easy. A system that stays alive across three years, four formats, and every medium &mdash; that's the actual problem.</div>
+    <p>So the real design question wasn't &ldquo;what does this year's event look like.&rdquo; It was: <em>what stays fixed, and what gets to change,</em> so the tour reads as one thing over three years instead of three unrelated events.</p>
+  </div>
+</section>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 02 — THE INSIGHT ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">02 &middot; The insight</span>
+    <h2>Design a <em>kit</em>, not a poster. Fix the DNA; let the theme evolve.</h2>
+  </div>
+  <div class="essay-body">
+    <p>I built BOLD as a system with a constant core and a changing surface. The <strong>DNA stayed fixed</strong> every year: the BOLD wordmark with its power-button &ldquo;O,&rdquo; a tech-forward visual language, and Bayer's blue-green-magenta energy. The <strong>theme changed</strong> annually &mdash; each year got its own metaphor, motion, and mood:</p>
+    <p><strong>Ambition (year one)</strong> &mdash; &ldquo;Be bold. Be brave. Be ambitious.&rdquo; <strong>Activation (year two)</strong> &mdash; power on, the circuit lights up. <strong>Breakthrough (year three)</strong> &mdash; smash through the wall. Same brand, three chapters.</p>
+    <p>Because it was a kit and not a layout, years two and three were <em>reinterpretations, not rebuilds</em>. The wordmark, the color logic, the motion grammar, the section system all carried forward &mdash; which is exactly why three separate events still read as one tour.</p>
+  </div>
+</section>
+
+<div class="figblock reveal">
+  <span class="figlabel">One system, a new theme each year</span>
+  <div class="fig-pair">
+    <figure>
+      <img src="images/BoldKV1.webp" alt="BOLD Activation Tour key visual — circuit linework radiating from the wordmark">
+      <figcaption><strong>Activation.</strong> The circuit motif at full stretch &mdash; power on, light it up.</figcaption>
+    </figure>
+    <figure>
+      <img src="images/BreakthroughBanner-3D.webp" alt="BOLD Breakthrough Tour banner — 3D shattered wall in blue and green, NA BCH 7.21.22">
+      <figcaption><strong>Breakthrough.</strong> Year three &mdash; same DNA, a wall smashing open. Different metaphor, unmistakably the same tour.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 03 — MARK TO MOTION ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">03 &middot; From mark to motion</span>
+    <h2>The mark had to move &mdash; so I storyboarded it in 3D.</h2>
+  </div>
+  <div class="essay-body">
+    <p>Half of how an idea lands in a room is motion. I storyboarded the stage opener in Cinema 4D &mdash; the Bayer cross assembling itself from a field of building blocks, resolving into the logo &mdash; then built it out into the film that opened the event. Thinking in <strong>form and movement</strong>, not just static frames, is what made the identity feel alive on a screen the size of a wall.</p>
+  </div>
+</section>
+
+<div class="figblock reveal">
+  <span class="figlabel">Cinema 4D storyboards</span>
+  <div class="fig-pair">
+    <figure>
+      <img src="images/storyboard-01.webp" alt="Cinema 4D storyboard — 'This summer', the Bayer cross emerges from a grid of blocks">
+      <figcaption><strong>&ldquo;This summer.&rdquo;</strong> The reveal beat &mdash; letters rising out of the grid.</figcaption>
+    </figure>
+    <figure>
+      <img src="images/storyboard-02.webp" alt="Cinema 4D storyboard — 'Join us for our boldest event yet', building blocks resolve into the Bayer cross">
+      <figcaption><strong>&ldquo;Our boldest event yet.&rdquo;</strong> Building blocks resolve into the Bayer cross &mdash; the hero shot.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<div class="figblock reveal">
+  <span class="figlabel">The stage film</span>
+  <figure>
+    <div class="px-video">
+      <iframe src="https://player.vimeo.com/video/758432920?h=5c5996087f&amp;title=0&amp;byline=0&amp;portrait=0&amp;muted=1&amp;loop=1&amp;dnt=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="BOLD Tour stage-opener animation"></iframe>
+    </div>
+    <figcaption><strong>The opener that ran the room.</strong> Built from the storyboards above &mdash; animated identity for the main stage. Hover to play.</figcaption>
+  </figure>
+</div>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 04 — THE ROOM ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">04 &middot; The room</span>
+    <h2>The agenda was part of the identity, not a spreadsheet.</h2>
+  </div>
+  <div class="essay-body">
+    <p>A live event lives or dies on the details most people treat as admin. I designed the <strong>agenda itself as a piece of the brand</strong> &mdash; four themed acts (Bold Brand Building, More Shots on Goal, Lead with the Heart, Make It Personal), each with its own section graphic in the system. Every slide a speaker stood in front of belonged to the same world as the invite and the stage film. Over three years the format moved from virtual to hybrid to in-person, and the system carried it the whole way for a 200+ audience.</p>
+  </div>
+</section>
+
+<div class="figblock reveal">
+  <span class="figlabel">The designed agenda</span>
+  <figure>
+    <img src="images/Agenda2-2.webp" alt="BOLD Activation Tour agenda — four themed sections with speakers from Bayer, Google, TikTok, Pinterest, BBDO">
+    <figcaption><strong>One page, the whole day.</strong> Four acts, a speaker roster spanning Bayer, Google, TikTok, Pinterest, and BBDO &mdash; laid out inside the identity, not on top of it.</figcaption>
+  </figure>
+</div>
+
+<div class="figblock reveal">
+  <span class="figlabel">Section graphics &amp; stage slides</span>
+  <div class="fig-trio">
+    <figure><img src="images/Building-slide.webp" alt="BOLD section slide — Bold Brand Building, isometric cubes"><figcaption>Bold Brand Building</figcaption></figure>
+    <figure><img src="images/Heart-slide.webp" alt="BOLD section slide — Lead with the Heart"><figcaption>Lead with the Heart</figcaption></figure>
+    <figure><img src="images/Personal-slide-copy.webp" alt="BOLD section slide — Make It Personal"><figcaption>Make It Personal</figcaption></figure>
+  </div>
+</div>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 05 — IN THE HAND ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">05 &middot; In the hand</span>
+    <h2>The identity followed people home.</h2>
+  </div>
+  <div class="essay-body">
+    <p>The last surface is the one people keep. I carried the system onto the objects attendees took with them &mdash; a notebook that says <em>&ldquo;Be bold. Be brave. Be ambitious,&rdquo;</em> apparel with the year's mark. An integrated idea isn't done when the screen goes dark; it's done when it's sitting on someone's desk a year later.</p>
+  </div>
+</section>
+
+<div class="figblock reveal">
+  <span class="figlabel">Merch &amp; take-homes</span>
+  <div class="fig-pair">
+    <figure>
+      <img src="images/notebook.webp" alt="BOLD Ambition Tour notebook — 'Be bold. Be brave. Be ambitious.'">
+      <figcaption><strong>The notebook.</strong> The year-one theme, carried onto the thing people actually kept.</figcaption>
+    </figure>
+    <figure>
+      <img src="images/shirtback.webp" alt="BOLD Ambition Tour t-shirt back — BOLD Ambition Tour, Bayer NA CH Marketing Organization">
+      <figcaption><strong>The tee.</strong> Same DNA on fabric &mdash; the identity as something you wear out of the room.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 06 — WHAT HELD IT ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">06 &middot; What held it together</span>
+    <h2>A system, not a stack of deliverables.</h2>
+  </div>
+  <div class="essay-body">
+    <p class="lead">Three years, every medium, one recognizable idea. That continuity was the deliverable &mdash; more than any single asset.</p>
+  </div>
+</section>
+
+<div class="stats reveal">
+  <div class="stat">
+    <div class="num">3 <em>years</em></div>
+    <div class="lbl">Consecutive tours &mdash; Ambition, Activation, Breakthrough &mdash; on one design system.</div>
+  </div>
+  <div class="stat">
+    <div class="num">200<em>+</em></div>
+    <div class="lbl">Live audience, as the format evolved from virtual to hybrid to in-person.</div>
+  </div>
+  <div class="stat">
+    <div class="num">1 <em>DNA</em></div>
+    <div class="lbl">Wordmark, color, and motion grammar carried across identity, 3D, stage, and merch.</div>
+  </div>
+</div>
+
+<section class="essay reveal">
+  <div class="essay-body">
+    <!-- NOTE (Michael): drop in any real figures you have — exact attendee counts per year,
+         satisfaction/engagement scores, number of markets/teams reached. Keep them defensible. -->
+    <p>What I'd carry forward: the &ldquo;fixed DNA, evolving theme&rdquo; model is the reason this scaled without fatigue, and it's how I'd approach any multi-year brand platform. If I did it again, I'd formalize the kit even earlier &mdash; a documented motion and section grammar from day one &mdash; so partners and vendors could extend the system without me in the room. The point was never the individual poster or film. It was building something coherent enough to <em>run</em>.</p>
+  </div>
+</section>
+
+<!-- ================ CLOSING ================ -->
+<div class="closing reveal">
+  <div class="closing-mark"></div>
+  <p>One idea, taken across every medium it needed &mdash; and built to last three years, not one night.</p>
+</div>
+
+<!-- ================ FOOTER ================ -->
+<footer>
+  <div class="foot-col">
+    <span class="label">Contact</span>
+    <a href="mailto:mkscrivana@gmail.com" class="mono">mkscrivana@gmail.com</a>
+    <a href="https://www.linkedin.com/in/michaelscrivana89" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://michaelscrivana.com" target="_blank" rel="noopener">michaelscrivana.com</a>
+  </div>
+  <div class="foot-col">
+    <span class="label">More work</span>
+    <a href='/creativelab'>CreativeLab &mdash; a generative pipeline</a>
+    <a href='/oad-new-identity'>One A Day &mdash; identity at scale</a>
+    <a href='/miralax'>MiraLAX &mdash; one system, two launches</a>
+    <a href='/'>All work</a>
+  </div>
+  <div class="foot-col right">
+    <span class="label">Colophon</span>
+    <span class="copy">PX Design System v0.2</span>
+    <span class="copy">DM Sans &middot; JetBrains Mono</span>
+    <span class="copy">&copy; 2026 Michael Scrivana</span>
+  </div>
+</footer>
+
+<!-- ================ LIGHTBOX ================ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true">
+  <button class="lb-close" id="lbClose" type="button" aria-label="Close">&times;</button>
+  <button class="lb-nav lb-prev" id="lbPrev" type="button" aria-label="Previous image">&#8249;</button>
+  <button class="lb-nav lb-next" id="lbNext" type="button" aria-label="Next image">&#8250;</button>
+  <img id="lbImg" alt="">
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<!-- ============ SCROLL REVEAL ============ -->
+<script>
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+</script>
+
+<!-- ============ LIGHTBOX ============ -->
+<script>
+(function () {
+  var lb = document.getElementById('lightbox'),
+      img = document.getElementById('lbImg'),
+      cap = document.getElementById('lbCap'),
+      closeBtn = document.getElementById('lbClose'),
+      prevBtn = document.getElementById('lbPrev'),
+      nextBtn = document.getElementById('lbNext'),
+      items = Array.prototype.slice.call(document.querySelectorAll('figure img')),
+      current = 0, lastFocus = null;
+
+  function render(i) {
+    current = (i + items.length) % items.length;
+    var el = items[current], fig = el.closest('figure'),
+        figcap = fig ? fig.querySelector('figcaption') : null;
+    img.src = el.currentSrc || el.src; img.alt = el.alt || '';
+    if (figcap) { cap.innerHTML = figcap.innerHTML; cap.style.display = ''; }
+    else { cap.textContent = ''; cap.style.display = 'none'; }
+  }
+  function open(i) {
+    render(i);
+    lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    lastFocus = document.activeElement; closeBtn.focus();
+  }
+  function close() {
+    lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = ''; img.src = '';
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  function step(d) { render(current + d); }
+
+  items.forEach(function (el, i) { el.addEventListener('click', function () { open(i); }); });
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function (e) { e.stopPropagation(); step(-1); });
+  nextBtn.addEventListener('click', function (e) { e.stopPropagation(); step(1); });
+  lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  });
+})();
+</script>
+
+<!-- ============ VIMEO HOVER-PLAY ============ -->
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script>
+(function () {
+  if (!window.Vimeo) return;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (reduce || !fine) return;
+  document.querySelectorAll('.px-video iframe').forEach(function (iframe) {
+    var player = new Vimeo.Player(iframe);
+    player.setVolume(0);
+    var box = iframe.closest('.px-video');
+    box.addEventListener('mouseenter', function () { player.play().catch(function () {}); });
+    box.addEventListener('mouseleave', function () { player.pause().catch(function () {}); });
+  });
+})();
+</script>
+
+</body>
+</html>

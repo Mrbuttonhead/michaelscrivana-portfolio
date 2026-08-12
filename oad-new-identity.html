@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One A Day — identity at scale · Michael Scrivana</title>
+<meta name="description" content="How one modular key-visual system carried the One A Day relaunch across 50+ SKUs, five segments, two formats, and every channel — 1,000+ assets on one system.">
+<meta content="One A Day — identity at scale" property="og:title">
+<meta content="Fifty SKUs, five segments, two formats, every channel. How one modular key-visual system held a full portfolio relaunch together." property="og:description">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://creative.michaelscrivana.com/oad-new-identity.html">
+<meta property="og:image" content="https://creative.michaelscrivana.com/images/oad-new/oad-kv-lineup-orange.webp">
+<meta content="summary_large_image" name="twitter:card">
+<meta name="twitter:title" content="One A Day — identity at scale">
+<meta name="twitter:description" content="Fifty SKUs, five segments, two formats, every channel. One modular key-visual system.">
+<meta name="twitter:image" content="https://creative.michaelscrivana.com/images/oad-new/oad-kv-lineup-orange.webp">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/webclip.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   PX Design System v0.2 — LIGHT / PAPER tokens, scoped & inlined.
+   Case-study variant (matches creativelab.html / bold.html).
+   ══════════════════════════════════════════════════════════════ */
+:root {
+  --px-bg:          #f4f5f7;
+  --px-surface:     #ffffff;
+  --px-surface-2:   #ebedf0;
+  --px-surface-3:   #dde0e6;
+  --px-surface-4:   #c9cdd5;
+
+  --px-accent:       #2850D8;
+  --px-accent-deep:  #1B3AB0;
+  --px-accent-hover: #4368E8;
+  --px-accent-2:     #00867A;
+  --px-accent-dim:   rgba(40, 80, 216, 0.10);
+  --px-accent-glow:  rgba(40, 80, 216, 0.22);
+
+  --px-text:    #0a0d12;
+  --px-text-2:  #4a5058;
+  --px-text-3:  #8b9099;
+  --px-text-4:  #b8bcc4;
+
+  --px-border:    rgba(10, 13, 18, 0.08);
+  --px-border-2:  rgba(10, 13, 18, 0.14);
+  --px-border-3:  rgba(10, 13, 18, 0.24);
+
+  --px-font:  'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --px-mono:  'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+
+  --px-track-tight:    -0.025em;
+  --px-track-body:     -0.005em;
+  --px-track-mono:     0.14em;
+  --px-track-mono-lg:  0.18em;
+
+  --px-radius:     14px;
+  --px-radius-sm:  10px;
+  --px-radius-xs:  6px;
+
+  --px-shadow-sm:    0 1px 2px -1px rgba(10, 13, 18, 0.08);
+  --px-shadow:       0 4px 16px -8px rgba(10, 13, 18, 0.12);
+  --px-shadow-lg:    0 8px 32px -12px rgba(10, 13, 18, 0.18);
+
+  --px-ease:  cubic-bezier(0.2, 0, 0, 1);
+  --px-dur:   160ms;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background:
+    radial-gradient(ellipse 70% 40% at 50% -8%, var(--px-accent-dim), transparent 60%),
+    var(--px-bg);
+  color: var(--px-text);
+  font-family: var(--px-font);
+  font-size: 17px;
+  line-height: 1.65;
+  font-weight: 400;
+  letter-spacing: var(--px-track-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+::selection { background: var(--px-accent); color: #fff; }
+
+/* ============ NAV ============ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(244, 245, 247, 0.82);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border-bottom: 1px solid var(--px-border);
+}
+nav .name { font-family: var(--px-font); font-size: 14px; font-weight: 500; letter-spacing: var(--px-track-body); color: var(--px-text); text-decoration: none; }
+nav .name .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--px-accent); margin-right: 10px; vertical-align: middle; }
+nav .back { font-family: var(--px-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: var(--px-track-mono); color: var(--px-text-3); text-decoration: none; transition: color var(--px-dur) var(--px-ease); }
+nav .back:hover { color: var(--px-text); }
+
+/* ============ EYEBROW ============ */
+.px-eyebrow { font-family: var(--px-mono); text-transform: uppercase; letter-spacing: var(--px-track-mono-lg); font-size: 11px; font-weight: 500; color: var(--px-accent); }
+
+/* ============ HERO ============ */
+.hero { padding: 150px 40px 40px; max-width: 880px; margin: 0 auto; }
+.hero-eyebrow { margin-bottom: 28px; opacity: 0; animation: fadeUp 0.8s var(--px-ease) 0.15s forwards; }
+.hero h1 { font-family: var(--px-font); font-size: clamp(40px, 5.6vw, 66px); font-weight: 700; line-height: 1.06; letter-spacing: var(--px-track-tight); color: var(--px-text); margin-bottom: 30px; opacity: 0; animation: fadeUp 0.9s var(--px-ease) 0.3s forwards; }
+.hero h1 em { font-style: italic; font-weight: 400; color: var(--px-accent); }
+.hero-subtitle { font-family: var(--px-font); font-size: 19px; line-height: 1.6; font-weight: 400; color: var(--px-text-2); max-width: 660px; opacity: 0; animation: fadeUp 0.9s var(--px-ease) 0.45s forwards; }
+.hero-divider { height: 1px; background: var(--px-border); margin: 48px 0 28px; opacity: 0; animation: fadeIn 0.9s var(--px-ease) 0.6s forwards; }
+.hero-meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; opacity: 0; animation: fadeUp 0.9s var(--px-ease) 0.7s forwards; }
+.hero-meta dt { font-family: var(--px-mono); text-transform: uppercase; letter-spacing: var(--px-track-mono); font-size: 10.5px; font-weight: 500; color: var(--px-text-3); margin-bottom: 6px; }
+.hero-meta dd { font-family: var(--px-font); font-size: 15px; font-weight: 400; color: var(--px-text); }
+
+/* hero feature */
+.hero-feature { max-width: 1120px; margin: 44px auto 0; padding: 0 40px; opacity: 0; animation: fadeUp 0.9s var(--px-ease) 0.8s forwards; }
+.hero-feature figure { margin: 0; }
+.hero-feature img { width: 100%; height: auto; display: block; border-radius: var(--px-radius); border: 1px solid var(--px-border-2); box-shadow: var(--px-shadow-lg); background: var(--px-surface); }
+.hero-feature figcaption { font-family: var(--px-font); font-size: 13.5px; color: var(--px-text-3); margin-top: 14px; line-height: 1.55; text-align: center; }
+.hero-feature figcaption strong { color: var(--px-text-2); font-weight: 600; }
+
+/* ============ ESSAY ============ */
+section.essay { padding: 0 40px; max-width: 720px; margin: 0 auto; }
+.section-spacer { height: 88px; }
+.section-spacer-sm { height: 48px; }
+
+.essay-head { margin-bottom: 24px; }
+.essay-head .px-eyebrow { display: block; margin-bottom: 16px; }
+.essay-head h2 { font-family: var(--px-font); font-size: clamp(28px, 3.4vw, 38px); font-weight: 600; line-height: 1.18; letter-spacing: -0.02em; color: var(--px-text); }
+.essay-head h2 em { font-style: italic; font-weight: 400; }
+
+.essay-body p { font-size: 17px; line-height: 1.7; color: var(--px-text); margin-bottom: 20px; }
+.essay-body p:last-child { margin-bottom: 0; }
+.essay-body p.lead { font-size: 19px; line-height: 1.6; color: var(--px-text-2); margin-bottom: 32px; }
+.essay-body em { font-style: italic; }
+.essay-body strong { font-weight: 600; color: var(--px-text); }
+
+/* ============ PULL QUOTE ============ */
+.pullquote { border-left: 3px solid var(--px-accent); padding: 4px 0 4px 28px; margin: 36px 0; font-size: clamp(20px, 2.4vw, 24px); line-height: 1.4; font-weight: 500; letter-spacing: -0.015em; color: var(--px-text); }
+.pullquote em { font-style: italic; font-weight: 400; color: var(--px-accent); }
+
+/* ============ FIGURES ============ */
+.figblock { max-width: 1000px; margin: 40px auto; padding: 0 40px; }
+.figlabel { font-family: var(--px-mono); text-transform: uppercase; letter-spacing: var(--px-track-mono); font-size: 10.5px; font-weight: 600; color: var(--px-text-3); margin-bottom: 14px; display: block; }
+figure { margin: 0; }
+figure img { width: 100%; height: auto; display: block; border-radius: var(--px-radius); border: 1px solid var(--px-border-2); background: var(--px-surface); box-shadow: var(--px-shadow); cursor: zoom-in; }
+figcaption { font-family: var(--px-font); font-size: 13.5px; color: var(--px-text-3); margin-top: 13px; line-height: 1.55; }
+figcaption strong { color: var(--px-text-2); font-weight: 600; }
+.fig-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.fig-pair figcaption { margin-top: 10px; font-size: 12.5px; }
+.fig-trio { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.fig-trio figcaption { margin-top: 10px; font-size: 12.5px; }
+@media (max-width: 720px) { .fig-pair, .fig-trio { grid-template-columns: 1fr; } }
+
+/* ============ VIDEO ============ */
+.videoblock { max-width: 1000px; margin: 40px auto; padding: 0 40px; }
+.video-frame { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: var(--px-radius); overflow: hidden; border: 1px solid var(--px-border-2); box-shadow: var(--px-shadow); background: var(--px-surface-2); }
+.video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.videoblock figcaption { font-family: var(--px-font); font-size: 13.5px; color: var(--px-text-3); margin-top: 13px; line-height: 1.55; }
+.videoblock figcaption strong { color: var(--px-text-2); font-weight: 600; }
+
+/* ============ STATS ============ */
+.stats { max-width: 1000px; margin: 44px auto; padding: 0 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.stat { background: var(--px-surface); border: 1px solid var(--px-border-2); padding: 28px 24px; }
+.stat:first-child { border-radius: var(--px-radius-sm) 0 0 var(--px-radius-sm); }
+.stat:last-child { border-radius: 0 var(--px-radius-sm) var(--px-radius-sm) 0; }
+.stat + .stat { border-left: none; }
+.stat .num { font-family: var(--px-font); font-size: clamp(28px, 3.4vw, 42px); font-weight: 700; line-height: 1; letter-spacing: -0.02em; color: var(--px-text); font-variant-numeric: tabular-nums; margin-bottom: 10px; }
+.stat .num em { font-style: normal; color: var(--px-accent); }
+.stat .lbl { font-family: var(--px-font); font-size: 14px; line-height: 1.5; color: var(--px-text-2); }
+@media (max-width: 720px) {
+  .stats { grid-template-columns: 1fr; gap: 0; }
+  .stat, .stat:first-child, .stat:last-child { border-radius: 0; }
+  .stat + .stat { border-top: none; border-left: 1px solid var(--px-border-2); }
+  .stat:first-child { border-radius: var(--px-radius-sm) var(--px-radius-sm) 0 0; }
+  .stat:last-child { border-radius: 0 0 var(--px-radius-sm) var(--px-radius-sm); }
+}
+
+/* ============ NEXT BLOCKS ============ */
+.speculative { margin-top: 28px; }
+.spec-block { padding: 30px 0; border-top: 1px solid var(--px-border); }
+.spec-block:last-child { border-bottom: 1px solid var(--px-border); }
+.spec-block h3 { font-family: var(--px-font); font-size: 20px; font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; color: var(--px-text); margin-bottom: 12px; display: flex; align-items: baseline; gap: 14px; }
+.spec-block h3 .num { font-family: var(--px-mono); font-size: 11px; font-weight: 500; letter-spacing: var(--px-track-mono); color: var(--px-accent); text-transform: uppercase; }
+.spec-block p { font-size: 16px; line-height: 1.7; color: var(--px-text-2); }
+
+/* ============ CLOSING ============ */
+.closing { padding: 0 40px; max-width: 640px; margin: 96px auto 0; text-align: center; }
+.closing-mark { width: 36px; height: 1px; background: var(--px-accent); margin: 0 auto 32px; }
+.closing p { font-family: var(--px-font); font-style: italic; font-weight: 400; font-size: clamp(20px, 2.4vw, 24px); line-height: 1.5; letter-spacing: -0.015em; color: var(--px-text); }
+.closing p::before { content: '\201C'; color: var(--px-accent); margin-right: 2px; }
+.closing p::after  { content: '\201D'; color: var(--px-accent); margin-left: 2px; }
+
+/* ============ FOOTER ============ */
+footer { margin-top: 110px; padding: 48px 40px 64px; max-width: 1120px; margin-left: auto; margin-right: auto; border-top: 1px solid var(--px-border); display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; align-items: start; }
+.foot-col { display: flex; flex-direction: column; gap: 10px; }
+.foot-col .label { font-family: var(--px-mono); text-transform: uppercase; letter-spacing: var(--px-track-mono); font-size: 10.5px; font-weight: 500; color: var(--px-text-3); margin-bottom: 4px; }
+.foot-col a { font-family: var(--px-font); font-size: 14px; color: var(--px-text); text-decoration: none; transition: color var(--px-dur) var(--px-ease); }
+.foot-col a:hover { color: var(--px-accent); }
+.foot-col .mono { font-family: var(--px-mono); font-size: 12.5px; letter-spacing: 0; text-transform: none; }
+.foot-col.right { text-align: right; }
+.foot-col.right .copy { font-family: var(--px-mono); text-transform: uppercase; letter-spacing: var(--px-track-mono); font-size: 10.5px; color: var(--px-text-3); }
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s var(--px-ease), transform 0.7s var(--px-ease); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ============ LIGHTBOX ============ */
+.lightbox { position: fixed; inset: 0; z-index: 200; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 4vh 4vw; background: rgba(10, 13, 18, 0.92); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); opacity: 0; visibility: hidden; transition: opacity .22s ease, visibility .22s ease; cursor: zoom-out; }
+.lightbox.open { opacity: 1; visibility: visible; }
+.lightbox img { max-width: 92vw; max-height: 84vh; width: auto; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 30px 80px -30px rgba(0,0,0,0.8); background: var(--px-surface); cursor: default; transform: scale(.98); transition: transform .22s ease; }
+.lightbox.open img { transform: scale(1); }
+.lightbox .lb-cap { max-width: 70ch; text-align: center; color: rgba(255,255,255,0.78); font-size: 13.5px; line-height: 1.55; cursor: default; }
+.lightbox .lb-cap strong { color: #fff; font-weight: 600; }
+.lightbox .lb-close { position: fixed; top: 18px; right: 22px; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.22); background: rgba(255,255,255,0.06); color: #fff; font-size: 20px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .15s; }
+.lightbox .lb-close:hover { background: rgba(255,255,255,0.16); }
+.lightbox .lb-nav { position: fixed; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.22); background: rgba(255,255,255,0.06); color: #fff; font-size: 24px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .15s; }
+.lightbox .lb-nav:hover { background: rgba(255,255,255,0.16); }
+.lightbox .lb-prev { left: 18px; }
+.lightbox .lb-next { right: 18px; }
+@media (max-width: 600px) { .lightbox .lb-prev { left: 8px; } .lightbox .lb-next { right: 8px; } .lightbox .lb-nav { width: 42px; height: 42px; } }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px) {
+  .hero-meta { grid-template-columns: 1fr; gap: 20px; }
+  footer { grid-template-columns: 1fr; }
+  .foot-col.right { text-align: left; }
+  .hero-feature, .figblock, .videoblock, .stats { padding-left: 24px; padding-right: 24px; }
+}
+@media (max-width: 640px) {
+  nav { padding: 14px 20px; }
+  .hero { padding: 124px 20px 40px; }
+  section.essay { padding: 0 20px; }
+  .closing { padding: 0 20px; }
+  footer { padding: 40px 20px 48px; }
+  .hero h1 { font-size: clamp(32px, 8vw, 46px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .hero-eyebrow, .hero h1, .hero-subtitle, .hero-divider, .hero-meta, .hero-feature { opacity: 1 !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class='name' href='/'><span class="dot"></span>Michael Scrivana</a>
+  <a class='back' href='/#campaign'>&larr; Back to work</a>
+</nav>
+
+<!-- ================ HERO ================ -->
+<div class="hero">
+  <div class="hero-eyebrow px-eyebrow">Case study &middot; One A Day &middot; Brand relaunch</div>
+  <h1>Fifty SKUs. Five segments. <em>One system.</em></h1>
+  <p class="hero-subtitle">One A Day relaunched its entire portfolio under a new identity — "The ONE for you." I owned the key visuals: a modular system that carried 50+ SKUs across two formats and five consumer segments, from a Times Square billboard down to a mobile PDP tile, without ever breaking. Over a thousand assets. One system holding all of it.</p>
+
+  <div class="hero-divider"></div>
+
+  <dl class="hero-meta">
+    <div>
+      <dt>Role</dt>
+      <dd>Lead designer — key visuals, motion, 3D</dd>
+    </div>
+    <div>
+      <dt>Scale</dt>
+      <dd>50+ SKUs &middot; 1,000+ assets &middot; every channel</dd>
+    </div>
+    <div>
+      <dt>Scope</dt>
+      <dd>KV system &middot; motion &middot; renders &middot; brandbook</dd>
+    </div>
+  </dl>
+</div>
+
+<!-- HERO FEATURE -->
+<div class="hero-feature">
+  <figure>
+    <img src="images/oad-new/oad-kv-lineup-orange.webp" alt="One A Day portfolio lineup key visual — the full range on the orange brand field">
+    <figcaption><strong>The portfolio, unified.</strong> The full One A Day range on one brand field — the shot that had to prove the system worked.</figcaption>
+  </figure>
+</div>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 01 — THE PROBLEM ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">01 &middot; The problem</span>
+    <h2>Every segment needs its own identity. The brand can only have one.</h2>
+  </div>
+  <div class="essay-body">
+    <p class="lead">One A Day needed a unified visual identity that could scale across 50+ SKUs, two product formats — gummy and tablet — and five distinct consumer segments, each with its own color story. Without losing the master brand.</p>
+    <p>The tension is structural. Women's, Men's, Kids, Prenatal, and 50+ each speak to a different person and carry a different palette. Design each one on its own and the shelf turns into five brands wearing the same logo. Force them all into one look and every segment loses the color equity shoppers actually navigate by.</p>
+    <p>Then multiply by channel. Every visual had to be <strong>channel-ready by construction</strong>: sharp enough for a billboard, flexible enough for an Amazon A+ module, a Walmart PDP tile, a paid-social crop, and a print page — without a redesign at each step.</p>
+    <div class="pullquote">The brief wasn't "make fifty key visuals." It was <em>"make one system that makes fifty key visuals inevitable."</em></div>
+  </div>
+</section>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 02 — THE SYSTEM ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">02 &middot; The system</span>
+    <h2>Fix what carries the brand. Flex what carries the segment.</h2>
+  </div>
+  <div class="essay-body">
+    <p>I built the KV system around the new logo lockup and the "The ONE for you." tagline, and drew a hard line down the middle of the design: <strong>typography, lighting, and pack architecture never move; the brand field flexes by segment.</strong> Orange for the portfolio, blue for Men's, cyan for Kids — each segment gets its color story, and everything else is invariant.</p>
+    <p>That one rule is why the system scales. A new SKU isn't a new design problem — it's a slot in the matrix. And because the lighting and camera language were locked, the photoreal 3D renders for every pack could be produced consistently at volume, art-directed once and applied across the line.</p>
+    <p>To make the system survive beyond my own hands, I codified it into a <strong>digital brandbook</strong> and used it to direct agency partners — so work produced outside the building came back on-system, not just on-brief.</p>
+  </div>
+</section>
+
+<div class="figblock reveal">
+  <span class="figlabel">Key visuals by segment</span>
+  <div class="fig-pair">
+    <figure>
+      <img src="images/oad-new/oad-kv-mens-blue.webp" alt="One A Day Men's Multi key visual — blue brand field">
+      <figcaption><strong>Men's.</strong> Blue field, same typographic and lighting architecture.</figcaption>
+    </figure>
+    <figure>
+      <img src="images/oad-new/oad-kv-kids-cyan.webp" alt="One A Day Kids Multi key visual — cyan brand field">
+      <figcaption><strong>Kids.</strong> Cyan field — playful register, identical structure.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<div class="figblock reveal">
+  <div class="fig-pair">
+    <figure>
+      <img src="images/oad-new/oad-kv-womens-lineup.webp" alt="One A Day Women's and Prenatal key visual lineup">
+      <figcaption><strong>Women's &amp; Prenatal.</strong> The lineup treatment across life stages.</figcaption>
+    </figure>
+    <figure>
+      <img src="images/oad-new/oad-kv-gummy-tablet-lineup.webp" alt="One A Day gummy and tablet lineup key visual">
+      <figcaption><strong>Two formats, one language.</strong> Gummy and tablet in the same frame — the format split the system had to absorb.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 03 — MOTION ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">03 &middot; The system in motion</span>
+    <h2>If it only works as a still, it isn't a system.</h2>
+  </div>
+  <div class="essay-body">
+    <p>The relaunch lived on digital shelf and social before it lived anywhere else — so the identity had to hold up moving. The motion work uses the same brand fields, the same lighting, the same pack architecture as the stills: the KVs brought to life, not a separate campaign.</p>
+  </div>
+</section>
+
+<div class="videoblock reveal">
+  <span class="figlabel">Women's Multi Gummy — brand animation</span>
+  <figure>
+    <div class="video-frame">
+      <iframe src="https://player.vimeo.com/video/1203666719?h=95c98f0ba1&amp;title=0&amp;byline=0&amp;portrait=0&amp;dnt=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="One A Day Women's Multi Gummy brand animation"></iframe>
+    </div>
+    <figcaption><strong>The hero animation.</strong> Pack, product, and brand field in the motion language that carried the launch on social and digital shelf.</figcaption>
+  </figure>
+</div>
+
+<div class="videoblock reveal">
+  <span class="figlabel">Kids — character animation</span>
+  <figure>
+    <div class="video-frame">
+      <iframe src="https://player.vimeo.com/video/1203666606?title=0&amp;byline=0&amp;portrait=0&amp;dnt=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="One A Day Kids character animation"></iframe>
+    </div>
+    <figcaption><strong>Kids character motion.</strong> Same cyan field, same system — stretched into a register that works for the youngest segment.</figcaption>
+  </figure>
+</div>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 04 — CRAFT AT SKU LEVEL ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">04 &middot; Craft at SKU level</span>
+    <h2>A thousand assets is only impressive if the thousandth is as good as the first.</h2>
+  </div>
+  <div class="essay-body">
+    <p>Under the campaign layer sits the unglamorous majority of the work: individual photoreal renders for every SKU — each pack fully legible, lit for both shelf and screen, consistent with every other pack in the line. This is where the locked lighting and camera language earned its keep; the volume was only possible because the craft decisions were made once, at the system level.</p>
+  </div>
+</section>
+
+<div class="figblock reveal">
+  <span class="figlabel">SKU-level renders</span>
+  <div class="fig-trio">
+    <figure>
+      <img src="images/oad-new/oad-product-teen-gummy.webp" alt="One A Day Teen Multi Gummy photoreal render">
+      <figcaption><strong>Teen Multi Gummy.</strong></figcaption>
+    </figure>
+    <figure>
+      <img src="images/oad-new/oad-product-mens-50-tablet.webp" alt="One A Day Men's 50+ Multi photoreal render">
+      <figcaption><strong>Men's 50+ tablet.</strong></figcaption>
+    </figure>
+    <figure>
+      <img src="images/oad-new/oad-product-kids-multi.webp" alt="One A Day Kids Multi photoreal render">
+      <figcaption><strong>Kids Multi.</strong></figcaption>
+    </figure>
+  </div>
+</div>
+
+<div class="figblock reveal">
+  <span class="figlabel">The full matrix — waves 1 + 2</span>
+  <figure>
+    <img src="images/oad-new/oad-wave-overview.webp" alt="One A Day Wave 1 and 2 key visual matrix — every segment, format, and brand field">
+    <figcaption><strong>Every segment, every format, every field.</strong> The Wave 1 + 2 matrix in one view — the clearest picture of what "system" means here.</figcaption>
+  </figure>
+</div>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 05 — IMPACT ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">05 &middot; Impact</span>
+    <h2>One identity, shipped everywhere at once.</h2>
+  </div>
+  <div class="essay-body">
+    <p class="lead">The relaunch shipped as a single coherent identity across Amazon, Walmart, Target, retail, brand .com, social, and print — simultaneously, on one system.</p>
+  </div>
+</section>
+
+<div class="stats reveal">
+  <div class="stat">
+    <div class="num">50<em>+</em></div>
+    <div class="lbl">SKUs carried by one modular KV system — two formats, five segments.</div>
+  </div>
+  <div class="stat">
+    <div class="num">1,000<em>+</em></div>
+    <div class="lbl">Creative assets delivered across digital shelf, social, .com, retail, and print.</div>
+  </div>
+  <div class="stat">
+    <div class="num">1 <em>brandbook</em></div>
+    <div class="lbl">The system codified digitally — used to direct agency partners and keep external work on-system.</div>
+  </div>
+</div>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 06 — BEYOND THE SYSTEM ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">06 &middot; Beyond the system</span>
+    <h2>Where it went once the system was standing.</h2>
+  </div>
+  <div class="essay-body">
+    <p>A system this stable becomes a platform for work the original brief never asked for.</p>
+    <div class="speculative">
+      <div class="spec-block">
+        <h3><span class="num">a</span>Kids — live-action art direction</h3>
+        <p>I art-directed a full Kids photoshoot and video production — translating the cyan brand field and pack language into live action, so the photography sat beside the renders as one family rather than two campaigns.</p>
+      </div>
+      <div class="spec-block">
+        <h3><span class="num">b</span>AR &amp; gamification prototypes</h3>
+        <p>Prototype explorations for AR pack experiences and gamified brand interactions — unshipped, but the kind of question a locked system frees you to ask: what does "The ONE for you." do when the pack is a portal instead of a shelf object?</p>
+      </div>
+      <div class="spec-block">
+        <h3><span class="num">c</span>The generative pipeline</h3>
+        <p>This portfolio of segments, palettes, and pack architecture later became the training ground for <a href='/creativelab' style='color:var(--px-accent)'>CreativeLab</a> — the node-based generative tool that turns exactly this kind of brand system into channel-ready imagery in minutes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================ CLOSING ================ -->
+<div class="closing reveal">
+  <div class="closing-mark"></div>
+  <p>Fifty key visuals is output. A system where the fifty-first designs itself — that's the work.</p>
+</div>
+
+<!-- ================ FOOTER ================ -->
+<footer>
+  <div class="foot-col">
+    <span class="label">Contact</span>
+    <a href="mailto:mkscrivana@gmail.com" class="mono">mkscrivana@gmail.com</a>
+    <a href="https://www.linkedin.com/in/michaelscrivana89" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://michaelscrivana.com" target="_blank" rel="noopener">michaelscrivana.com</a>
+  </div>
+  <div class="foot-col">
+    <span class="label">More work</span>
+    <a href='/miralax'>MiraLAX — one system, two launches</a>
+    <a href='/creativelab'>CreativeLab — a generative pipeline</a>
+    <a href='/bold'>BOLD Tour — one idea, three years</a>
+    <a href='/'>All work</a>
+  </div>
+  <div class="foot-col right">
+    <span class="label">Colophon</span>
+    <span class="copy">PX Design System v0.2</span>
+    <span class="copy">DM Sans &middot; JetBrains Mono</span>
+    <span class="copy">&copy; 2026 Michael Scrivana</span>
+  </div>
+</footer>
+
+<!-- ================ LIGHTBOX ================ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true">
+  <button class="lb-close" id="lbClose" type="button" aria-label="Close">&times;</button>
+  <button class="lb-nav lb-prev" id="lbPrev" type="button" aria-label="Previous image">&#8249;</button>
+  <button class="lb-nav lb-next" id="lbNext" type="button" aria-label="Next image">&#8250;</button>
+  <img id="lbImg" alt="">
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<!-- ============ SCROLL REVEAL ============ -->
+<script>
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+</script>
+
+<!-- ============ LIGHTBOX ============ -->
+<script>
+(function () {
+  var lb = document.getElementById('lightbox'),
+      img = document.getElementById('lbImg'),
+      cap = document.getElementById('lbCap'),
+      closeBtn = document.getElementById('lbClose'),
+      prevBtn = document.getElementById('lbPrev'),
+      nextBtn = document.getElementById('lbNext'),
+      items = Array.prototype.slice.call(document.querySelectorAll('figure img')),
+      current = 0, lastFocus = null;
+
+  function render(i) {
+    current = (i + items.length) % items.length;
+    var el = items[current], fig = el.closest('figure'),
+        figcap = fig ? fig.querySelector('figcaption') : null;
+    img.src = el.currentSrc || el.src; img.alt = el.alt || '';
+    if (figcap) { cap.innerHTML = figcap.innerHTML; cap.style.display = ''; }
+    else { cap.textContent = ''; cap.style.display = 'none'; }
+  }
+  function open(i) {
+    render(i);
+    lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    lastFocus = document.activeElement; closeBtn.focus();
+  }
+  function close() {
+    lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = ''; img.src = '';
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  function step(d) { render(current + d); }
+
+  items.forEach(function (el, i) { el.addEventListener('click', function () { open(i); }); });
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function (e) { e.stopPropagation(); step(-1); });
+  nextBtn.addEventListener('click', function (e) { e.stopPropagation(); step(1); });
+  lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  });
+})();
+</script>
+
+</body>
+</html>

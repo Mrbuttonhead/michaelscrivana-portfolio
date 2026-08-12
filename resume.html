@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Michael Scrivana — Résumé</title>
+<meta name="description" content="Résumé — Michael Scrivana, brand designer and maker.">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/webclip.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://creative.michaelscrivana.com/resume.html">
+<meta property="og:title" content="Michael Scrivana — Résumé">
+<meta property="og:description" content="Brand designer and maker — seven years building brands across healthcare, now building with AI.">
+<meta property="og:image" content="https://creative.michaelscrivana.com/images/creativelab-graph/creativelab-app-womens50-video-full.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://creative.michaelscrivana.com/images/creativelab-graph/creativelab-app-womens50-video-full.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #f6f7f9;
+  --surface:   #ffffff;
+  --surface-2: #eceef1;
+  --accent:      #3a3a40;
+  --accent-deep: #26262b;
+  --accent-dim:  rgba(58, 58, 64, 0.07);
+  --ink:    #0a0d12;
+  --ink-2:  #45474f;
+  --ink-3:  #80828c;
+  --ink-4:  #a8aab2;
+  --border:      rgba(10, 13, 18, 0.10);
+  --border-soft: rgba(10, 13, 18, 0.06);
+  --font: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'JetBrains Mono', 'SF Mono', monospace;
+  --tight: -0.025em;
+  --track: 0.18em;
+  --shadow-sm: 0 2px 10px -6px rgba(10, 13, 18, 0.25);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background:
+    radial-gradient(ellipse 70% 40% at 50% -10%, var(--accent-dim), transparent 60%),
+    var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 16px; line-height: 1.65; letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--accent); color: #fff; }
+
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 28px; }
+
+.mono { font-family: var(--mono); text-transform: uppercase; letter-spacing: var(--track); font-size: 11px; font-weight: 500; }
+
+/* ── NAV ── */
+.topnav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(246, 247, 249, 0.82);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.topnav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 18px; max-width: 920px; }
+.topnav .brand {
+  font-weight: 700; letter-spacing: var(--tight); font-size: 15px;
+  color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 9px; white-space: nowrap;
+}
+.topnav .brand .logo { height: 22px; width: auto; display: block; flex: none; }
+.topnav .links { display: flex; align-items: center; gap: 18px; }
+.topnav .links a {
+  font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.1em;
+  font-size: 11px; font-weight: 500; color: var(--ink-3); text-decoration: none; transition: color .15s;
+}
+.topnav .links a:hover { color: var(--accent); }
+.topnav .links a.active { color: var(--accent); font-weight: 600; }
+
+/* ── HEADER ── */
+.resume-head { padding: 56px 0 40px; border-bottom: 1px solid var(--border); }
+.resume-head .kicker { color: var(--ink-3); margin-bottom: 20px; }
+.resume-head h1 {
+  font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 700;
+  letter-spacing: var(--tight); line-height: 1.08; margin-bottom: 8px;
+}
+.resume-head .role { font-size: 17px; color: var(--ink-2); margin-bottom: 18px; }
+.resume-head .contact {
+  display: flex; flex-wrap: wrap; gap: 6px 16px;
+  font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.resume-head .contact a { color: var(--accent); text-decoration: none; }
+.resume-head .contact a:hover { text-decoration: underline; }
+.resume-head .contact span { color: var(--ink-4); }
+
+/* ── BODY ── */
+.resume-body { padding: 40px 0 64px; }
+
+.summary {
+  font-size: 17px; line-height: 1.7; color: var(--ink-2);
+  margin-bottom: 48px; padding-bottom: 48px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.section { margin-bottom: 44px; }
+.section:last-child { margin-bottom: 0; }
+
+.section-label {
+  font-family: var(--mono); text-transform: uppercase; letter-spacing: var(--track);
+  font-size: 11px; font-weight: 600; color: var(--accent);
+  margin-bottom: 20px; padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.job { margin-bottom: 28px; }
+.job:last-child { margin-bottom: 0; }
+.job-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px; margin-bottom: 14px; }
+.job-title { font-size: 18px; font-weight: 600; letter-spacing: var(--tight); line-height: 1.25; }
+.job-meta { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-3); white-space: nowrap; }
+
+ul.bullets { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+ul.bullets > li {
+  position: relative; padding-left: 18px;
+  font-size: 15px; line-height: 1.65; color: var(--ink-2);
+}
+ul.bullets > li::before {
+  content: ''; position: absolute; left: 0; top: 0.62em;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+}
+
+.see-it {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--mono); font-size: 10px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--accent); text-decoration: none; margin-left: 6px;
+  white-space: nowrap;
+}
+.see-it:hover { text-decoration: underline; }
+
+.ai-para {
+  font-size: 15px; line-height: 1.65; color: var(--ink-2);
+  position: relative; padding-left: 18px;
+}
+.ai-para::before {
+  content: ''; position: absolute; left: 0; top: 0.62em;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+}
+
+.sub-block { margin-top: 22px; }
+.sub-block .sub-label {
+  font-size: 14px; font-weight: 600; color: var(--ink);
+  letter-spacing: var(--tight); margin-bottom: 12px;
+}
+
+.skills-grid { display: flex; flex-direction: column; gap: 14px; }
+.skill-row { font-size: 15px; line-height: 1.6; color: var(--ink-2); }
+.skill-row strong {
+  font-weight: 600; color: var(--ink);
+  font-family: var(--mono); font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.06em; display: inline-block; min-width: 4.5em;
+}
+
+.edu-list { display: flex; flex-direction: column; gap: 10px; }
+.edu-item { font-size: 15px; line-height: 1.6; color: var(--ink-2); }
+.edu-item strong { color: var(--ink); font-weight: 600; }
+
+.resume-foot {
+  padding: 28px 0 48px;
+  border-top: 1px solid var(--border-soft);
+  text-align: center;
+  font-family: var(--mono); font-size: 10px; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--ink-3);
+}
+
+@media (max-width: 640px) {
+  .topnav .brand .brand-name { display: none; }
+  .job-head { flex-direction: column; align-items: flex-start; gap: 4px; }
+}
+@media print {
+  .topnav { position: static; background: #fff; }
+  body { background: #fff; font-size: 11pt; }
+  .see-it::after { content: ' (' attr(href) ')'; font-size: 8pt; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="wrap">
+    <a class="brand" href="https://creative.michaelscrivana.com"><img class="logo" src="images/ms-logo-m.png" alt="" width="42" height="22"><span class="brand-name">Michael Scrivana</span></a>
+    <div class="links">
+      <a href="https://creative.michaelscrivana.com">Portfolio</a>
+      <a class='active' href='/resume'>Résumé</a>
+      <a href="mailto:mkscrivana@gmail.com">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="resume-head">
+  <div class="wrap">
+    <div class="kicker mono">Résumé · Brand · Craft · AI</div>
+    <h1>Michael Scrivana</h1>
+    <p class="role">Designer &amp; Maker · Brand, Craft &amp; AI</p>
+    <div class="contact">
+      <a href="mailto:mkscrivana@gmail.com">mkscrivana@gmail.com</a>
+      <span>·</span>
+      <span>973.919.7414</span>
+      <span>·</span>
+      <span>New York Metro</span>
+      <span>·</span>
+      <a href="https://creative.michaelscrivana.com">creative.michaelscrivana.com</a>
+      <span>·</span>
+      <a href="https://www.linkedin.com/in/michaelscrivana89/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</header>
+
+<main class="resume-body">
+  <div class="wrap">
+
+    <p class="summary">I'm a multidisciplinary designer who carries one idea through every medium it asks for — poster, motion, 3D, screen, the room itself. Seven years a brand designer in healthcare, classically trained at the easel, and as fluent in new tools as in old ones. Give me a blank brief and I'll take it to launch.</p>
+
+    <section class="section">
+      <h2 class="section-label">Experience</h2>
+
+      <article class="job">
+        <div class="job-head">
+          <h3 class="job-title">Brand Designer → AI Transformation Lead · Bayer Consumer Health</h3>
+          <span class="job-meta">Whippany, NJ · May 2019 — Present</span>
+        </div>
+        <ul class="bullets">
+          <li>Lead creative from brief to launch across a 115-person global product organization — concepting the idea, art-directing the look, driving it through to channel-ready execution. The job is to take one thought and make it land everywhere: pack, social, web, retail. Across six years, the work I've shipped has driven $100M+ in product revenue.</li>
+          <li>Led brand identity and packaging for MiraFIBER and MiraFAST — recreated the MiraLAX logo to read at shelf and built a modular design system; MiraFAST went inception to design-lock in three weeks. The two lines have driven ~$79M+ in combined retail sales, with MiraFAST the #1 overnight-laxative and #1 laxative-soft-chew SKU — the 3rd fastest-growing Digestive Health launch in five years. <a class='see-it' href='https://creative.michaelscrivana.com/miralax'>See it ↗</a></li>
+          <li>Led the One A Day brand platform across 50+ SKUs and every channel — Amazon, Walmart, Target, retail, digital, social — directing Mertz and Assembly agency partners. Includes the full digital shelf: product photography, 700+ renders, and Amazon A+ pages. <a class="see-it" href="https://creative.michaelscrivana.com/#campaign">See it ↗</a></li>
+          <li>Designed Iberogast's launch end to end — responsive brand site, mobile, and retail merchandising — one identity from hero image to add-to-cart. <a class="see-it" href="https://creative.michaelscrivana.com/#iberogast">See it ↗</a></li>
+          <li>Work side by side with marketing, copywriters, and producers — holding the through-line so one idea stays whole across channels, markets, and a hundred deliverables. Present and defend the work to senior stakeholders.</li>
+          <li>Since 2024, I've led AI transformation for PX — running it in 90-day sprints with a six-person team across research, design, and packaging: we build shared AI infrastructure and ship working experiments to pilot users each cycle. Player-coach — I set the direction <em>and</em> build the tools.</li>
+        </ul>
+
+        <div class="sub-block">
+          <p class="sub-label">Selected craft · commercial + personal — the full multidisciplinary range</p>
+          <ul class="bullets">
+            <li><strong>Posters &amp; illustration</strong> — hierarchy, contrast, and scale pushed until the message reads in one glance; digital painting and vector illustration alongside it. <a class="see-it" href="https://creative.michaelscrivana.com/#poster">See it ↗</a></li>
+            <li><strong>3D &amp; motion</strong> — I'd rather build a scene and light it than fake depth on a flat canvas: I model, light, and move the camera, art-directing in space before a single frame is locked. Social motion, particle/physics renders, and stage-opener animation — thinking in form and movement, not just static frames. <a class="see-it" href="https://creative.michaelscrivana.com/#motion">See it ↗</a></li>
+            <li><strong>Experiences — the BOLD Breakthrough Tour</strong> — one idea taken across every medium it needed: identity → 3D → motion → live stage → merch, run three consecutive years for a 200+-attendee event on a single design system. Also art-directed Bayer's NACDS trade-show booth, multiple years. <a class="see-it" href="https://creative.michaelscrivana.com/#experience">See it ↗</a></li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <section class="section">
+      <h2 class="section-label">AI as a Creative Medium</h2>
+      <p class="ai-para">I don't just use AI — I build with it. I designed and built a node-based generative pipeline (React Flow) I coded with Claude and wired to Gemini Nano Banana for image generation — because designers don't think in prompts, they think in <em>steps</em>, so I built the tool around composition: reference in, brand-rules check, generate, channel-fit, output. It's produced real channel work across digital and print. Beyond it, I explore generatively across product visualization, storyboarding, and micro-cellular science visuals, and taught the practice to my team in a talk, "AI for Designers." AI is just the newest material on my bench. <a class="see-it" href="https://creative.michaelscrivana.com/#ai">See it ↗</a></p>
+    </section>
+
+    <section class="section">
+      <h2 class="section-label">Skills</h2>
+      <div class="skills-grid">
+        <p class="skill-row"><strong>Craft</strong> Brand identity &amp; systems · packaging · campaign / advertising · poster &amp; editorial · illustration · 3D &amp; motion · live / spatial · painting from life.</p>
+        <p class="skill-row"><strong>Tools</strong> Adobe Creative Suite · Figma · After Effects / motion · Cinema 4D (3D) · Webflow.</p>
+        <p class="skill-row"><strong>Build</strong> React · Vite · vanilla front-end (HTML / CSS / JS) · built with Claude / Claude Code · physical prototyping with 3D printers · turning ideas into working tools.</p>
+        <p class="skill-row"><strong>AI</strong> Claude / Claude Code — daily creative + thinking partner · Gemini Nano Banana (image generation) · node-based generative pipelines · prompt &amp; agent design · MidJourney.</p>
+        <p class="skill-row"><strong>Practice</strong> An AI-augmented studio I built — Claude wired into an Obsidian knowledge base that briefs the work and tracks every project · brief to launch, many at once · directing cross-functional teams.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-label">Education</h2>
+      <div class="edu-list">
+        <p class="edu-item"><strong>BFA, Graphic Design</strong> · William Paterson University · 2017–2019 · Summa Cum Laude</p>
+        <p class="edu-item"><strong>AFA, Visual Arts</strong> · County College of Morris · 2016–2017</p>
+        <p class="edu-item"><strong>Drawing, Painting &amp; Sculpture from life</strong> · Art Students League of New York · 2011–2015</p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="resume-foot">
+  <div class="wrap">Michael Scrivana · Résumé · 2026 · Designer · Brand · Craft · AI</div>
+</footer>
+
+</body>
+</html>
