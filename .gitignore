@@ -1,1 +1,5 @@
-.DS_Store
+# local Netlify CLI state (contains siteId)
+.netlify/
+
+# build output for design.michaelscrivana.com — not part of this site
+dist-design/
