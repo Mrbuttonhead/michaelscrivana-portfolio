@@ -2,143 +2,362 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Michael Scrivana — Under Construction</title>
-  <meta name="description" content="michaelscrivana.com is being rebuilt. Portfolio work lives at creative.michaelscrivana.com for now.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex">
-  <meta property="og:title" content="Michael Scrivana — Under Construction">
-  <meta property="og:description" content="This site is being rebuilt. See the current portfolio at creative.michaelscrivana.com.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://michaelscrivana.com/">
+  <title>Understanding Is Not Enough — Michael Scrivana</title>
+  <meta name="description" content="Fifteen years of teaching four unrelated subjects — drawing, design, AI, bread — and the one thing that made any of it stick.">
+  <meta property="og:title" content="Understanding Is Not Enough">
+  <meta property="og:description" content="Fifteen years of teaching four unrelated subjects, and the one thing that made any of it stick.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://teaching.michaelscrivana.com/">
   <meta name="twitter:card" content="summary">
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="apple-touch-icon" href="images/webclip.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --bg: #f4f5f7;
-      --surface: #ffffff;
-      --ink: #0a0d12;
-      --ink-2: #4a5058;
-      --ink-3: #8b9099;
-      --accent: #2850D8;
-      --border: rgba(10, 13, 18, 0.10);
-      --font: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      --mono: 'JetBrains Mono', ui-monospace, monospace;
+      --paper:  #faf8f4;
+      --ink:    #17171a;
+      --ink-2:  #4b4b54;
+      --ink-3:  #666670;
+      --accent: #9c3d17;
+      --rule:   rgba(23,23,26,.15);
+      --rule-2: rgba(23,23,26,.07);
+      --panel:  #f1ede6;
+      --serif:  'Iowan Old Style', Charter, 'Source Serif Pro', Georgia, 'Times New Roman', serif;
+      --sans:   'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      color-scheme: light;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { min-height: 100%; }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --paper:  #131316;
+        --ink:    #ece8e2;
+        --ink-2:  #aeaaa4;
+        --ink-3:  #8d8983;
+        --accent: #e08a5f;
+        --rule:   rgba(236,232,226,.17);
+        --rule-2: rgba(236,232,226,.08);
+        --panel:  #1c1c20;
+        color-scheme: dark;
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --paper:  #131316;
+      --ink:    #ece8e2;
+      --ink-2:  #aeaaa4;
+      --ink-3:  #8d8983;
+      --accent: #e08a5f;
+      --rule:   rgba(236,232,226,.17);
+      --rule-2: rgba(236,232,226,.08);
+      --panel:  #1c1c20;
+      color-scheme: dark;
+    }
+
+    html { -webkit-text-size-adjust: 100%; }
+
     body {
-      font-family: var(--font);
+      background: var(--paper);
       color: var(--ink);
-      background:
-        radial-gradient(ellipse 70% 45% at 50% -10%, rgba(40, 80, 216, 0.10), transparent 60%),
-        var(--bg);
+      font-family: var(--serif);
+      font-size: 19px;
+      line-height: 1.62;
       -webkit-font-smoothing: antialiased;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      text-rendering: optimizeLegibility;
     }
-    .wrap {
-      width: min(640px, calc(100% - 48px));
-      margin: auto;
-      padding: 64px 0;
-      text-align: center;
+
+    .wide { max-width: 52rem; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* Prose sits in a narrow column aligned to the masthead's left edge;
+       figures and the comparison table are allowed the full measure. */
+    main > * { max-width: 34rem; }
+    main > figure, main > .six, main > .colophon { max-width: none; }
+
+    /* masthead */
+    header.top { border-top: 3px solid var(--accent); padding-top: 1.1rem; margin-bottom: 4rem; }
+    .kicker {
+      font-family: var(--sans); font-size: .72rem; font-weight: 700;
+      letter-spacing: .16em; text-transform: uppercase; color: var(--accent);
+      display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+      padding-bottom: 1rem; border-bottom: 1px solid var(--rule);
     }
-    .mark {
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      background: var(--accent);
-      margin: 0 auto 28px;
-      animation: pulse 1.8s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.45; transform: scale(0.85); }
-    }
-    .eyebrow {
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 20px;
-    }
+    .kicker .who { color: var(--ink); }
+
     h1 {
-      font-size: clamp(34px, 7vw, 52px);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.05;
-      margin-bottom: 18px;
+      font-weight: 400; font-size: clamp(2.5rem, 8vw, 4.3rem);
+      line-height: 1.03; letter-spacing: -.022em; margin: 2.5rem 0 1.1rem;
     }
-    h1 em {
-      font-style: italic;
-      font-weight: 400;
-      color: var(--accent);
+    .standfirst {
+      font-size: clamp(1.1rem, 3.2vw, 1.33rem); line-height: 1.45;
+      color: var(--ink-2); max-width: 30rem; margin-bottom: 1.7rem;
     }
-    p {
-      font-size: 17px;
-      line-height: 1.6;
-      color: var(--ink-2);
-      max-width: 38ch;
-      margin: 0 auto 36px;
+    .byline {
+      font-family: var(--sans); font-size: .78rem; letter-spacing: .06em;
+      color: var(--ink-3); padding-top: 1rem; border-top: 1px solid var(--rule-2);
     }
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
+
+    /* prose */
+    p { margin-bottom: 1.15rem; }
+    p.lede::first-letter {
+      float: left; font-size: 3.6rem; line-height: .84;
+      padding: .06em .09em 0 0; color: var(--accent);
     }
-    a.btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: 600;
-      text-decoration: none;
-      padding: 12px 18px;
-      border-radius: 999px;
-      transition: background .15s ease, color .15s ease, border-color .15s ease;
+    h2 {
+      font-family: var(--sans); font-size: .76rem; font-weight: 700;
+      letter-spacing: .17em; text-transform: uppercase; color: var(--accent);
+      margin: 3.4rem 0 1.3rem; padding-top: 1.1rem; border-top: 1px solid var(--rule);
     }
-    a.btn-primary {
-      background: var(--accent);
-      color: #fff;
+    .turn {
+      font-size: clamp(1.45rem, 5vw, 2rem); line-height: 1.25;
+      letter-spacing: -.015em; margin: 2.1rem 0;
     }
-    a.btn-primary:hover { background: #1B3AB0; }
-    a.btn-ghost {
-      background: var(--surface);
-      color: var(--ink);
-      border: 1px solid var(--border);
+    .turn em { color: var(--accent); font-style: italic; }
+
+    blockquote {
+      border-left: 3px solid var(--accent); padding: .3rem 0 .3rem 1.4rem;
+      margin: 2rem 0; font-size: 1.05rem;
     }
-    a.btn-ghost:hover { border-color: rgba(10, 13, 18, 0.28); }
-    footer {
-      padding: 28px 24px;
-      text-align: center;
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--ink-3);
+    blockquote .src {
+      display: block; margin-top: .7rem; font-family: var(--sans);
+      font-size: .74rem; letter-spacing: .05em; color: var(--ink-3);
     }
-    @media (prefers-reduced-motion: reduce) {
-      .mark { animation: none; }
+
+    .callout {
+      background: var(--panel); border-radius: 3px; padding: 1.3rem 1.5rem;
+      margin: 2.2rem 0; font-size: 1.02rem; line-height: 1.5;
     }
+    .callout strong { color: var(--accent); }
+
+    /* figures */
+    figure { margin: 2.5rem 0; }
+    figure img {
+      display: block; width: 100%; height: auto;
+      border: 1px solid var(--rule-2); border-radius: 2px; background: #fff;
+    }
+    figcaption {
+      font-family: var(--sans); font-size: .78rem; line-height: 1.5;
+      color: var(--ink-3); margin-top: .7rem;
+    }
+    figcaption b { color: var(--ink-2); font-weight: 600; }
+    figcaption em { font-style: italic; }
+
+    /* the six */
+    .six { margin: 2.3rem 0 1rem; }
+    .six-row {
+      display: grid; grid-template-columns: 5.4rem 1fr 1fr; gap: 1rem;
+      padding: .95rem 0; border-bottom: 1px solid var(--rule-2); align-items: baseline;
+    }
+    .six-row.head {
+      border-bottom: 1px solid var(--rule); padding-bottom: .55rem;
+      font-family: var(--sans); font-size: .68rem; font-weight: 700;
+      letter-spacing: .13em; text-transform: uppercase; color: var(--ink-3);
+    }
+    .six-row .yr { font-family: var(--sans); font-size: .8rem; letter-spacing: .04em; color: var(--accent); font-weight: 600; }
+    .six-row .what { font-size: .97rem; line-height: 1.42; }
+    .six-row .how { font-size: .97rem; line-height: 1.42; color: var(--ink-2); }
+    .six-row .how b { color: var(--ink); font-weight: 700; }
+
+    @media (max-width: 640px) {
+      .six-row { grid-template-columns: 1fr; gap: .18rem; padding: 1rem 0; }
+      .six-row.head { display: none; }
+      .six-row .how::before { content: "→ "; color: var(--accent); }
+    }
+
+    /* colophon */
+    .colophon {
+      background: var(--panel); border-radius: 3px; padding: 1.6rem;
+      margin-top: 3rem; font-family: var(--sans); font-size: .84rem;
+      line-height: 1.6; color: var(--ink-2);
+    }
+    .colophon h3 {
+      font-size: .72rem; font-weight: 700; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: .8rem;
+    }
+    .colophon p { margin-bottom: .8rem; }
+    .colophon ul { list-style: none; }
+    .colophon li { padding-left: 1rem; position: relative; margin-bottom: .35rem; }
+    .colophon li::before { content: "·"; position: absolute; left: .15rem; color: var(--accent); font-weight: 700; }
+
+    /* footer */
+    footer.end {
+      margin-top: 4.5rem; border-top: 3px solid var(--accent);
+      padding: 1.3rem 0 4rem; font-family: var(--sans); font-size: .82rem; color: var(--ink-2);
+    }
+    footer.end a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
+    footer.end a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+    footer.end .row { display: flex; justify-content: space-between; gap: 1.2rem; flex-wrap: wrap; }
+    footer.end .name { font-family: var(--serif); font-size: 1.05rem; color: var(--ink); }
+
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <div class="mark" aria-hidden="true"></div>
-    <div class="eyebrow">Under construction</div>
-    <h1>This site is being <em>rebuilt.</em></h1>
-    <p>michaelscrivana.com is getting a new home. Portfolio work is live at creative.michaelscrivana.com for now.</p>
-    <div class="actions">
-      <a class="btn btn-primary" href="https://creative.michaelscrivana.com/">View portfolio</a>
-      <a class="btn btn-ghost" href="mailto:mkscrivana@gmail.com">Contact</a>
+
+<div class="wide">
+  <header class="top">
+    <div class="kicker">
+      <span class="who">Michael Scrivana</span>
+      <span>Teaching &nbsp;·&nbsp; 2011 – present</span>
     </div>
-  </main>
-  <footer>© 2026 Michael Scrivana</footer>
+    <h1>Understanding is not enough</h1>
+    <p class="standfirst">Fifteen years of teaching four unrelated subjects — drawing, design, AI, bread — and the one thing that made any of it stick.</p>
+    <p class="byline">An essay on why people who understand a thing still don't do it</p>
+  </header>
+</div>
+
+<main class="wide">
+
+  <p class="lede">For eight years I taught drawing and painting to people who had never done it. Public classes of twenty-five to fifty, plus private students, adults and children — more than a thousand people in all, most of whom had not come to learn anything.</p>
+
+  <p>Beginners draw what they know instead of what they see. Ask for a hand and you get the symbol of a hand, because the head supplies an answer before the eye gets a turn. It is not a failure of effort or of talent. Recognition is faster than observation, and recognition wins.</p>
+
+  <p>You cannot fix that by explaining it. I explained it a thousand times, and I was good at explaining it. Every single person agreed with me — and then drew the symbol again thirty seconds later.</p>
+
+  <p class="turn">What works is a procedure that runs at the moment the decision gets made. Hold the pencil up. Measure the angle. Compare the width against the height. Not <em>see better</em>. <em>Measure.</em></p>
+
+  <p>That is the whole of it. The teaching has to survive the moment when the learner is not thinking about the teaching, which is every moment that matters. If a lesson only works while someone is concentrating on the lesson, it is not a lesson. It is a conversation they enjoyed.</p>
+
+  <h2>The room where I learned it</h2>
+
+  <p>People expect this credential to be an atelier. It was mostly a paint-and-sip studio, and that is the part I would defend hardest.</p>
+
+  <p>In a serious atelier you can say <em>observe more carefully</em> and a committed student will go away and work at it for a month. In a room of forty people who came out for a night — a glass of wine, two hours, and a finished painting expected at the end — that sentence does nothing at all. The only thing that functions is a procedure that works <em>without</em> understanding, for someone who did not come to learn and will not practise afterwards.</p>
+
+  <p>That is a harder instructional problem than teaching people who already want it, not an easier one. It is also much closer to teaching something to the general public, which is why I stopped being embarrassed about it a long time ago.</p>
+
+  <h2>Six times, four subjects</h2>
+
+  <p>I have taught four unrelated things since. Every time, without ever planning it, I did the same thing: taught the idea, watched it fail to survive the room, and then changed the situation rather than the person.</p>
+
+  <div class="six">
+    <div class="six-row head"><span>When</span><span>What I taught</span><span>What made it survive without me</span></div>
+    <div class="six-row">
+      <span class="yr">2011–19</span>
+      <span class="what">Drawing — your eye lies to you</span>
+      <span class="how"><b>Measure it.</b> A procedure at the moment of the decision</span>
+    </div>
+    <div class="six-row">
+      <span class="yr">2023–25</span>
+      <span class="what">How to write a design brief</span>
+      <span class="how"><b>A tool</b> that supplied the information people could not find</span>
+    </div>
+    <div class="six-row">
+      <span class="yr">2024</span>
+      <span class="what">Accessibility — your vision is not the user's</span>
+      <span class="how"><b>A contrast check at QC.</b> One line, near the end of 189 slides</span>
+    </div>
+    <div class="six-row">
+      <span class="yr">2025–26</span>
+      <span class="what">Brand standards, at volume</span>
+      <span class="how"><b>Machine-readable rules</b> consulted at every step, so the output is on-standard by construction</span>
+    </div>
+    <div class="six-row">
+      <span class="yr">2026</span>
+      <span class="what">AI, in an organisation running three systems at once</span>
+      <span class="how"><b>A knowledge layer</b> any tool can read, so the choice of tool stops mattering</span>
+    </div>
+    <div class="six-row">
+      <span class="yr">2025–</span>
+      <span class="what">Bread — when is the dough ready?</span>
+      <span class="how"><b>A check.</b> Poke test, windowpane, dough temperature — never "you'll know"</span>
+    </div>
+  </div>
+
+  <h2>189 slides and one line</h2>
+
+  <p>In 2024 I co-authored my company's inclusive design standard: 189 slides teaching designers, packaging engineers and outside agencies how to make material legible to people whose vision, cognition, motor control or hearing does not match the designer's.</p>
+
+  <p>It adopts WCAG AA across the entire consumer journey — print, web, mobile, pack, point of sale. Contrast ratios of 4.5&#8202;:&#8202;1 for regular text below 18pt and small icons, 3&#8202;:&#8202;1 for bold text above 18pt and large icons. Named tooling rather than good intentions: the Bridge-PCA contrast calculator, and Clari-Fi, the University of Cambridge Inclusive Design Toolkit's calibrated Gaussian-blur test. Five evaluation factors — visual, auditory and haptic, cognitive, 3D motor, and photographic representation — each with its own designer checklist.</p>
+
+  <figure>
+    <img src="images/teaching/letterforms.png" alt="Diagram labelling the anatomy of letterforms on the word 'Accessibility': apex junction, lowercase junction, ascender, cap height, x-height, aperture, counter, bowl, baseline flick and descender.">
+    <figcaption><b>Typography, at the letterform.</b> The standard specifies open apertures and counters, and letterforms where <em>I</em>, <em>l</em> and <em>1</em> stay distinct and <em>b/d</em> and <em>p/q</em> are not mirror images — because a typeface chosen on taste will fail a reader you never met.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/teaching/clarifi-blur.png" alt="Two identical Snellen eye charts side by side. The left is sharp; the right has a calibrated Gaussian blur applied, and the smaller rows of letters become unreadable.">
+    <figcaption><b>Your own eyes are not evidence.</b> A designer with good vision, at a calibrated monitor, at arm's length, is the worst possible instrument for judging whether a warning on a carton can be read in a pharmacy aisle by someone who is sixty-eight. So we stopped asking people to judge, and gave them a test.</figcaption>
+  </figure>
+
+  <p>The part I am proudest of is none of that. It is one line near the end.</p>
+
+  <blockquote>
+    <strong>The Rule.</strong> All text and graphics in digital assets to meet WCAG AA standard. Final check on contrast levels carried out at QC stage for all digital assets.
+    <span class="src">Inclusive Design standard, 2024 — slide 177</span>
+  </blockquote>
+
+  <figure>
+    <img src="images/teaching/qc-gate.png" alt="Process diagram. Check contrast levels of text and graphics against the background. Scores above 4.5 to 1 for small text and 3 to 1 for large text: the asset passes and can progress. Scores below: adjust and retest, then re-enter the check.">
+    <figcaption><b>The same rule, drawn as a gate.</b> Not advice about contrast — a step in a process, with a threshold, a retest loop and a pass condition, run by whoever happens to be doing QC that day.</figcaption>
+  </figure>
+
+  <p>One hundred and eighty-nine slides are knowledge. That line is the only reason the knowledge survives contact with a Tuesday afternoon and a shipping deadline. It works on somebody who was never in the training, has not read the standard and does not care about it — which is the only test that counts, because the material was written for colleagues and outside agencies who would never sit in a room with me.</p>
+
+  <h2>What I got wrong</h2>
+
+  <p>The year before, I co-authored a design capability curriculum. It launched as <em>required</em> training inside the marketing organisation — a hundred-plus marketers who had not asked to be there. I delivered three of the sessions myself. It is now mandatory on the company's learning platform, where it still runs without me.</p>
+
+  <p>One of its modules teaches how to write a design brief. The training worked: the briefs got better.</p>
+
+  <p>But the questions kept coming — and here I did the exact thing I tell everyone else not to do. I assumed the fix was to teach it again, harder.</p>
+
+  <p>When we finally went and looked at the briefing process itself, the obstacle was not knowledge at all. People knew perfectly well what a good brief contained. They could not assemble the pieces without three days of asking around, so under deadline they shipped what they had. Missing information, not missing knowledge — and no amount of additional teaching was ever going to touch that. So we built a tool that closes the information gap instead.</p>
+
+  <div class="callout">
+    <strong>When people fail to apply what you taught, teaching harder is usually the wrong response.</strong> Find out why the moment fails. Often it is not a knowledge problem at all, and the fix is to change the situation rather than the person.
+  </div>
+
+  <p>I had been doing this by instinct since the drawing classes and had never once said it out loud. Writing it down is the only reason I noticed it was the same move every time.</p>
+
+  <h2>A standard that reads itself</h2>
+
+  <p>There is a moment about 165 slides into the accessibility deck where it stops and asks the reader: <em>notice anything different?</em> It then lists what had been changed about the training template itself — a larger, more legible typeface among them — to bring the material into line with the standard it was teaching.</p>
+
+  <p>I like that page more than almost anything else in the document. A standard that has not been applied to itself is a proposal.</p>
+
+  <h2>What I teach now</h2>
+
+  <p>These days it is AI: for a 115-person global product organisation, and — as my part of a divisional roadmap covering more than a thousand people — a learning track I am still building.</p>
+
+  <p>The most common question is not <em>how do I write a better prompt</em>. It is <em>which tool am I supposed to use?</em>, because there are three of them running at once and nobody has said. For a long time I tried to answer that question. The answer is not to answer it. Move the knowledge out of the tools and into a layer any of them can read, and the choice stops being a decision worth agonising over. I have now built that three times without noticing it was the same idea: once for myself, once for a team, once for an organisation.</p>
+
+  <p>And on some weekends it is bread, at a flour mill, in groups of four to six, adults and children — where we start with where the grain and the flour come from, and where <em>you'll know when it feels right</em> is the single most useless sentence you can say to someone who has never felt it right. So instead: the poke test, the windowpane, the temperature of the dough, and timing scaled to the warmth of the room.</p>
+
+  <p>Different flour. Same pencil, held up at arm's length.</p>
+
+  <div class="colophon">
+    <h3>Notice anything different?</h3>
+    <p>This page is set to the standard it describes:</p>
+    <ul>
+      <li>All text meets or exceeds the WCAG AA contrast ratio against its background, in both light and dark appearance.</li>
+      <li>Body text is 19px on a 1.62 line height, at a measure of roughly 65 characters — long enough to read, short enough to find the next line.</li>
+      <li>Every image carries a description of what it demonstrates, not merely what it depicts.</li>
+      <li>The page follows your system's light or dark setting rather than overriding it, and honours a reduced-motion preference.</li>
+      <li>Structure is real headings in order, so it can be navigated by screen reader rather than by sight alone.</li>
+    </ul>
+  </div>
+
+</main>
+
+<div class="wide">
+  <footer class="end">
+    <div class="row">
+      <div>
+        <div class="name">Michael Scrivana</div>
+        <div>Teaching &amp; curriculum · AI fluency · New York metro</div>
+      </div>
+      <div>
+        <a href="mailto:mkscrivana@gmail.com">mkscrivana@gmail.com</a><br>
+        <a href="https://creative.michaelscrivana.com">creative.michaelscrivana.com</a><br>
+        <a href="https://www.linkedin.com/in/michaelscrivana89/">linkedin.com/in/michaelscrivana89</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
 </body>
 </html>
