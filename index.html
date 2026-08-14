@@ -34,8 +34,8 @@
   --accent-line: rgba(58, 58, 64, 0.20);
   --ink:    #0a0d12;
   --ink-2:  #45474f;
-  --ink-3:  #80828c;
-  --ink-4:  #a8aab2;
+  --ink-3:  #6b6d77;   /* was #80828c — 3.57:1, failed WCAG AA */
+  --ink-4:  #6b6d77;   /* was #a8aab2 — 2.16:1 */
   --border:      rgba(10, 13, 18, 0.10);
   --border-soft: rgba(10, 13, 18, 0.06);
   --font: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -64,10 +64,15 @@ body {
 .mono { font-family: var(--mono); text-transform: uppercase; letter-spacing: var(--track); font-size: 11px; font-weight: 500; }
 .eyebrow { color: var(--accent); }
 
+/* ── SKIP LINK ── */
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: 8px; top: 8px; z-index: 200; position: fixed; background: var(--surface); color: var(--ink);
+  padding: 10px 14px; border-radius: 8px; box-shadow: var(--shadow); outline: 2px solid var(--accent-deep); outline-offset: 2px; }
+
 /* ── TOP NAV ── */
 .topnav {
   position: sticky; top: 0; z-index: 50;
-  background: rgba(246, 247, 249, 0.82);
+  background: rgba(246, 247, 249, 0.97);   /* was 0.82 — dark panels dropped nav links to 2.42:1 */
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
 }
@@ -245,7 +250,7 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
 figure img { cursor: zoom-in; }
 .lightbox {
   position: fixed; inset: 0; z-index: 100;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  display: flex; flex-direction: column; align-items: center; justify-content: safe center; overflow-y: auto;
   gap: 16px; padding: 4vh 4vw;
   background: rgba(10, 13, 18, 0.92);
   backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
@@ -254,7 +259,7 @@ figure img { cursor: zoom-in; }
 }
 .lightbox.open { opacity: 1; visibility: visible; }
 .lightbox img {
-  max-width: 92vw; max-height: 84vh; width: auto; height: auto;
+  max-width: 92vw; max-height: 70vh; width: auto; height: auto;
   object-fit: contain; border-radius: 10px;
   box-shadow: 0 30px 80px -30px rgba(0,0,0,0.8);
   background: var(--surface); cursor: default;
@@ -297,23 +302,65 @@ figure img { cursor: zoom-in; }
   html { scroll-behavior: auto; }
   .reveal, .reveal-wipe { opacity: 1 !important; transform: none !important; clip-path: none !important; transition: none !important; }
 }
+
+/* ── WORK MARQUEE (auto-scrolling strip under the hero) ── */
+.work-marquee {
+  --card-h: 220px;
+  --gap: 20px;
+  --speed: 60s;
+  padding: 40px 0 44px;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.work-marquee__track {
+  display: flex;
+  gap: var(--gap);
+  width: max-content;
+  animation: work-marquee-scroll var(--speed) linear infinite;
+}
+.work-marquee:hover .work-marquee__track { animation-play-state: paused; }
+.work-marquee__item {
+  flex: none;
+  height: var(--card-h);
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  background: var(--surface-2);
+}
+.work-marquee__item img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+@keyframes work-marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-50% - (var(--gap) / 2))); }
+}
+@media (max-width: 640px) { .work-marquee { --card-h: 160px; --speed: 45s; } }
+@media (prefers-reduced-motion: reduce) {
+  .work-marquee__track { animation: none; }
+  .work-marquee { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+}
 </style>
 </head>
 <body>
 
+<a class="skip" href="#main">Skip to content</a>
 <nav class="topnav">
   <div class="wrap">
-    <a class="brand" href="/"><img class="logo" src="images/ms-logo-m.png" alt="" width="42" height="22"><span class="brand-name">Michael Scrivana</span></a>
+    <a class="brand" href="/" aria-label="Michael Scrivana — home"><img class="logo" src="images/ms-logo-m.png" alt="" width="42" height="22"><span class="brand-name">Michael Scrivana</span></a>
     <div class="links">
-      <a class="case-link" href="#ai">AI</a>
       <a class="case-link" href="#campaign">Brand</a>
+      <a class="case-link" href="#ai">AI</a>
       <a class="case-link" href="#poster">Type</a>
       <a class="case-link" href="#motion">Motion</a>
       <a class="case-link" href="#experience">Live</a>
       <a class="case-link" href="#fineart">Art</a>
       <a href='/about'>Bio</a>
-      <a class='resume' href='/resume'>Résumé</a>
-      <a class="contact" href="mailto:mkscrivana@gmail.com">Contact</a>
+      <a class="contact" href="mailto:michaelscrivana@gmail.com">Contact</a>
     </div>
   </div>
 </nav>
@@ -328,140 +375,66 @@ figure img { cursor: zoom-in; }
   </div>
 </header>
 
-<section class="thesis">
-  <div class="wrap">
-    <p>I make across every medium I can get my hands on — and let <span class="hl">each new tool</span> reshape how I make.</p>
+<!-- WORK MARQUEE — auto-scrolling strip. The two halves must stay identical for a seamless loop. -->
+<main id="main">
+
+<section class="work-marquee" aria-label="Selected work">
+  <div class="work-marquee__track">
+    <!-- HALF A -->
+    <div class="work-marquee__item"><img src="images/marquee/oad-wellness-lineup.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item"><img src="images/marquee/mirafast-hero.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item"><img src="images/marquee/iberogast-mobile.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item"><img src="images/marquee/age-factor-cell-defense.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item"><img src="images/marquee/midol-tray.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item"><img src="images/marquee/atom-3d.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item"><img src="images/marquee/sleep-well-pillow.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item"><img src="images/marquee/science-cell.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item"><img src="images/marquee/the-mix-magazine.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item"><img src="images/marquee/business-card.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item"><img src="images/marquee/science-cell-bloom.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item"><img src="images/marquee/science-lucid-portrait.png" alt="" loading="lazy"></div>
+    <!-- HALF B (duplicate of A for the loop) -->
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/oad-wellness-lineup.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/mirafast-hero.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/iberogast-mobile.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/age-factor-cell-defense.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/midol-tray.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/atom-3d.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/sleep-well-pillow.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/science-cell.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/the-mix-magazine.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/business-card.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/science-cell-bloom.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/science-lucid-portrait.png" alt="" loading="lazy"></div>
   </div>
 </section>
 
-<!-- 01 — AI AS A CREATIVE MEDIUM -->
-<section class="case" id="ai">
+<!-- 01 — BRAND AT SCALE -->
+<section class="case" id="campaign">
   <div class="wrap">
     <div class="case-head">
       <div class="case-num"><span class="tick" style="background:var(--accent)"></span>01</div>
       <div>
-        <div class="case-title">AI as a creative medium</div>
-        <div class="case-sub">Pushing what the tools can do · built in code</div>
-      </div>
-    </div>
-    <div class="case-body">
-
-      <div class="block">
-        <div class="label mono">In practice</div>
-        <p>I don't just use AI — I <strong>build with it</strong>. The work below is branded lifestyle imagery: pack shots, colour systems, typography rules, and channel specs fed in as structured brand data, then generated through <strong>Gemini</strong> inside a node-based tool I built in React. Designers wire the pipeline — reference in, brand-rules check, generate, channel-fit, compliance, output — and get channel-ready lifestyle frames in minutes, not days. Last year I gave a talk, <em>"AI for Designers,"</em> teaching the practice to my team.</p>
-      </div>
-      <div class="block">
-        <div class="label mono">Why I love it</div>
-        <p>AI is just the newest material on my bench. The same instinct that pulled me from graphite to oil to clay to 3D pulls me here: a new medium shows up and I <em>have</em> to make something with it — and, increasingly, build the tool that makes it.</p>
-      </div>
-      <div class="jd-tag">
-        <span>branded lifestyle</span><span>brand data in</span><span>Gemini</span><span>builds in code</span>
-      </div>
-
-      <div class="shots">
-        <div class="lead-label">Act one — the tool I built</div>
-        <figure class="wide">
-          <img src="images/creativelab-graph/creativelab-canvas-womens50-video-graph.jpg" alt="Node-based React Flow canvas — pack reference in, Gemini iterate out, Veo video at the end">
-          <figcaption><strong>The system, not a prompt box.</strong> Brand data — pack reference, colours, rules, channel specs — flows through a composable graph. Gemini generates and iterates the still; a Video node wires the keeper frame to Veo. Reference in, generate, iterate, output, animate — the user wires the graph; the graph runs.</figcaption>
-        </figure>
-        <figure class="wide row-gap">
-          <div class="video">
-            <iframe src="https://player.vimeo.com/video/1204031227?title=0&amp;byline=0&amp;portrait=0&amp;muted=1&amp;loop=1&amp;dnt=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="One A Day Women&rsquo;s 50+ Multi Gummy — Veo animation from Gemini-generated still"></iframe>
-          </div>
-          <figcaption><strong>Still to motion.</strong> Women&rsquo;s 50+ Multi Gummy — pack reference in, Gemini iterates the hero still, Veo 3.1 animates it out. Nothing photographed; the full chain runs inside the tool in minutes.</figcaption>
-        </figure>
-
-        <div class="case-cta">
-          <div class="cta-text"><strong>How I built it — the full case study.</strong> The problem, the dead ends, the architecture decision, and the impact.</div>
-          <a class='cta-link' href='/creativelab'>Read the case study &rarr;</a>
-        </div>
-
-        <div class="lead-label">Act two — client output · NACDS 2026 booth panels</div>
-        <p class="gallery-cap gallery-lead">The same pipeline, at trade-show scale — lifestyle panels and close-up heroes generated through CreativeLab for One A Day&rsquo;s NACDS booth. Pack reference, brand colours, and segment briefs in; booth-ready environmental graphics out. Every frame below is Gemini output from structured brand data, not photography.</p>
-        <figure class="wide">
-          <img src="images/nacds-gen/NACDS_BoothPanel_OAD_TeenHer_Breakfast_v2.jpg" alt="One A Day Teen Her — AI-generated breakfast lifestyle panel for NACDS booth">
-          <figcaption><strong>Teen Her · breakfast.</strong> Lifestyle panel — Teen Multi Gummy, morning kitchen scene.</figcaption>
-        </figure>
-        <div class="pair row-gap">
-          <figure>
-            <img src="images/nacds-gen/NACDS_CloseupHero_WomensMulti_Kitchen_v1.jpg" alt="One A Day Women&rsquo;s Multi Gummy — AI-generated kitchen close-up for NACDS booth">
-            <figcaption><strong>Women&rsquo;s Multi Gummy · kitchen.</strong> Close-up hero — gummy line, morning routine.</figcaption>
-          </figure>
-          <figure>
-            <img src="images/nacds-gen/NACDS_BoothPanel_OAD_50Plus_CloseupKitchen_v1.jpg" alt="One A Day Men&rsquo;s 50+ — AI-generated kitchen close-up for NACDS booth">
-            <figcaption><strong>Men&rsquo;s 50+ · kitchen.</strong> Close-up hero — pack-forward, segment-specific scene.</figcaption>
-          </figure>
-        </div>
-
-        <div class="lead-label">Act three — exploring with the tools · product visualization</div>
-        <div class="gallery-strip">
-          <figure><img src="images/Product-MJ001.webp" alt="Generative product render"></figure>
-          <figure><img src="images/Product-MJ002.webp" alt="Generative product render"></figure>
-          <figure><img src="images/Product-MJ003.webp" alt="Generative product render"></figure>
-          <figure><img src="images/Product-MJ004.webp" alt="Generative product render"></figure>
-          <figure><img src="images/Product-MJ007.webp" alt="Generative product render"></figure>
-          <figure><img src="images/Product-MJ016.webp" alt="Generative product render"></figure>
-        </div>
-        <p class="gallery-cap"><strong>Product visualization</strong> — where I make the early calls on colour, form, and texture, fast. The tool accelerates the judgment; the judgment stays mine.</p>
-
-        <div class="lead-label">Storyboarding — narrative into image</div>
-        <div class="gallery-strip">
-          <figure><img src="images/Movie-MJ001.webp" alt="Generative storyboard frame"></figure>
-          <figure><img src="images/Movie-MJ005.webp" alt="Generative storyboard frame"></figure>
-          <figure><img src="images/Movie-MJ006.webp" alt="Generative storyboard frame"></figure>
-          <figure><img src="images/Movie-MJ007.webp" alt="Generative storyboard frame"></figure>
-          <figure><img src="images/Movie-MJ009.webp" alt="Generative storyboard frame"></figure>
-          <figure><img src="images/Movie-MJ010.webp" alt="Generative storyboard frame"></figure>
-        </div>
-        <p class="gallery-cap"><strong>Storyboarding</strong> — written narratives turned into vivid frames for stories and mood boards.</p>
-
-        <div class="lead-label">Science visuals — micro-cellular &amp; lucid</div>
-        <div class="gallery-strip">
-          <figure><img src="images/cell-MJ006.webp" alt="Generative cellular science visual"></figure>
-          <figure><img src="images/cell-MJ007.webp" alt="Generative cellular science visual"></figure>
-          <figure><img src="images/cell-MJ014.webp" alt="Generative cellular science visual"></figure>
-          <figure><img src="images/cell-MJ015.webp" alt="Generative cellular science visual"></figure>
-          <figure><img src="images/cell-MJ016.webp" alt="Generative cellular science visual"></figure>
-          <figure><img src="images/cell-MJ017.webp" alt="Generative cellular science visual"></figure>
-          <figure><img src="images/Lucid-MJ001.webp" alt="Generative lucid science visual"></figure>
-          <figure><img src="images/Lucid-MJ002.webp" alt="Generative lucid science visual"></figure>
-          <figure><img src="images/Lucid-MJ005.webp" alt="Generative lucid science visual"></figure>
-          <figure><img src="images/Lucid-MJ006.webp" alt="Generative lucid science visual"></figure>
-          <figure><img src="images/Lucid-MJ003.webp" alt="Generative lucid science visual"></figure>
-          <figure><img src="images/Lucid-MJ008.webp" alt="Generative lucid science visual"></figure>
-        </div>
-        <p class="gallery-cap"><strong>Science visuals</strong> — micro-cellular and abstract imagery from a decade making sense of healthcare science. Using the tools to <em>see</em>, not just to generate.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 02 — BRAND AT SCALE -->
-<section class="case" id="campaign">
-  <div class="wrap">
-    <div class="case-head">
-      <div class="case-num"><span class="tick" style="background:var(--accent)"></span>02</div>
-      <div>
-        <div class="case-title">Brand at scale</div>
+        <h2 class="case-title">Brand at scale</h2>
         <div class="case-sub">Brief to launch · identity · shelf · web</div>
       </div>
     </div>
     <div class="case-body">
 
       <div class="block">
-        <div class="label mono">The work</div>
+        <h4 class="label mono">The work</h4>
         <p>I lead creative <strong>from the blank brief to launch</strong> — concepting the idea, art-directing the look, and driving it through to channel-ready execution across pack, film, social, retail, and web. Side by side with marketers, insights, animators, ecomm, copywriters, and producers — I hold the through-line so one idea stays whole as it fans out.</p>
       </div>
       <div class="block">
-        <div class="label mono">How I work</div>
-        <p>One visual system, every channel it needs to live on. The flagship work below is the new One A Day identity; the rest fans out across the digital shelf, a full brand launch, and line extensions — each with its own case study.</p>
+        <h4 class="label mono">How I work</h4>
+        <p>One visual system, every channel it needs to live on. Two flagship programs below — the new One A Day identity, and the MiraLAX logo and system that carried two launches to a combined <strong>~$79M+</strong> in retail sales. The rest fans out across the digital shelf and a full market entry, each with its own case study.</p>
       </div>
       <div class="jd-tag">
         <span>brief → launch</span><span>integrated campaign</span><span>digital shelf</span><span>cross-functional</span>
       </div>
 
       <div class="shots">
-        <div class="lead-label">Act one — One A Day · new brand identity</div>
+        <h3 class="lead-label">Act one — One A Day · new brand identity</h3>
         <figure class="wide">
           <div class="video">
             <iframe src="https://player.vimeo.com/video/1203666719?h=95c98f0ba1&amp;title=0&amp;byline=0&amp;portrait=0&amp;muted=1&amp;loop=1&amp;dnt=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="One A Day Women&rsquo;s Multi Gummy brand animation"></iframe>
@@ -490,9 +463,32 @@ figure img { cursor: zoom-in; }
           <a class='cta-link' href='/oad-new-identity'>Read the case study &rarr;</a>
         </div>
 
-        <div class="lead-label lead-label--break" id="commerce" style="scroll-margin-top:72px">Act two — more brand work</div>
+        <div class="lead-label lead-label--break">Act two — MiraLAX · a logo, a system, and two launches</div>
+        <p class="gallery-cap gallery-lead">Bayer&rsquo;s number-one laxative brand had one format and an identity that lost the fight at shelf. I redrew the logo so it would hold at arm&rsquo;s length under retail lighting, built a modular system underneath it, and used that system to carry two new-to-market launches — <strong>MiraFIBER</strong> and <strong>MiraFAST</strong>. MiraFAST went from inception to design lock in a <strong>three-week sprint</strong>, fast because I designed it hands-on in-house instead of briefing it out.</p>
+
+        <figure class="wide">
+          <img src="images/Mira-BeforeAfter_1.avif" alt="MiraLAX logo before and after the redesign">
+          <figcaption><strong>The logo, redrawn to read at shelf.</strong> Legibility at distance was the whole brief — everything else in the system hangs off it.</figcaption>
+        </figure>
+
+        <div class="pair row-gap">
+          <figure><img src="images/MiraLAX-OLD_1.avif" alt="MiraLAX packaging before the redesign"><figcaption>Before — the shelf set as it stood.</figcaption></figure>
+          <figure><img src="images/mirafiber-line_1.avif" alt="MiraFIBER line packaging"><figcaption><strong>MiraFIBER</strong> — the first extension off the new system.</figcaption></figure>
+        </div>
+
+        <figure class="wide row-gap">
+          <img src="images/MiraFAST-hero.png" alt="MiraFAST soft chews pack with mixed berries on a purple brand field">
+          <figcaption><strong>MiraFAST Overnight Chewables.</strong> ~$38M in retail sales in fifteen months; the <strong>#1 Overnight Laxative</strong> and <strong>#1 Laxative Soft Chew</strong> SKU, and the third fastest-growing Digestive Health launch in five years. With MiraFIBER, <strong>~$79M+ combined</strong> — one modular system turning a single-format brand into a platform.</figcaption>
+        </figure>
+
+        <div class="case-cta">
+          <div class="cta-text"><strong>The logo, the system, and both launches — the full case study.</strong></div>
+          <a class='cta-link' href='/miralax'>Read the case study &rarr;</a>
+        </div>
+
+        <div class="lead-label lead-label--break" id="commerce" style="scroll-margin-top:72px">Act three — more brand work</div>
         <span id="iberogast" style="display:block;scroll-margin-top:72px;height:0" aria-hidden="true"></span>
-        <p class="gallery-cap gallery-lead">Same discipline, different briefs — the digital shelf, a market entry, and a line extension. Each links to a full project write-up.</p>
+        <p class="gallery-cap gallery-lead">Same discipline, different briefs — the digital shelf and a market entry. Each links to a full project write-up.</p>
 
         <div class="case-cta-row">
           <a class='case-cta-mini' href='/ecommerce1'>
@@ -511,15 +507,116 @@ figure img { cursor: zoom-in; }
               <span class="mini-link">View project &rarr;</span>
             </div>
           </a>
-          <a class='case-cta-mini' href='/miralax'>
-            <img src="images/MiraFAST-hero.png" alt="MiraFAST soft chews pack with mixed berries on a purple brand field">
-            <div class="mini-body">
-              <div class="mini-title">MiraLAX &middot; line extensions</div>
-              <div class="mini-desc">One modular system, two launches — ~$79M+ combined retail sales, with MiraFAST designed in a three-week sprint.</div>
-              <span class="mini-link">View project &rarr;</span>
-            </div>
-          </a>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 — AI AS A CREATIVE MEDIUM -->
+<section class="case" id="ai">
+  <div class="wrap">
+    <div class="case-head">
+      <div class="case-num"><span class="tick" style="background:var(--accent)"></span>02</div>
+      <div>
+        <h2 class="case-title">AI as a creative medium</h2>
+        <div class="case-sub">Pushing what the tools can do · built in code</div>
+      </div>
+    </div>
+    <div class="case-body">
+
+      <div class="block">
+        <h4 class="label mono">In practice</h4>
+        <p>I don't just use AI — I <strong>build with it</strong>. The work below is branded lifestyle imagery: pack shots, colour systems, typography rules, and channel specs fed in as structured brand data, then generated through <strong>Gemini</strong> inside a node-based tool I built in React. Designers wire the pipeline — reference in, brand-rules check, generate, channel-fit, compliance, output — and get channel-ready lifestyle frames in minutes, not days. Last year I gave a talk, <em>"AI for Designers,"</em> teaching the practice to my team.</p>
+      </div>
+      <div class="block">
+        <h4 class="label mono">Why I love it</h4>
+        <p>AI is just the newest material on my bench. The same instinct that pulled me from graphite to oil to clay to 3D pulls me here: a new medium shows up and I <em>have</em> to make something with it — and, increasingly, build the tool that makes it.</p>
+      </div>
+      <div class="jd-tag">
+        <span>branded lifestyle</span><span>brand data in</span><span>Gemini</span><span>builds in code</span>
+      </div>
+
+      <div class="shots">
+        <h3 class="lead-label">Act one — the tool I built</h3>
+        <figure class="wide">
+          <img src="images/creativelab-graph/creativelab-canvas-womens50-video-graph.jpg" alt="Node-based React Flow canvas — pack reference in, Gemini iterate out, Veo video at the end">
+          <figcaption><strong>The system, not a prompt box.</strong> Brand data — pack reference, colours, rules, channel specs — flows through a composable graph. Gemini generates and iterates the still; a Video node wires the keeper frame to Veo. Reference in, generate, iterate, output, animate — the user wires the graph; the graph runs.</figcaption>
+        </figure>
+        <figure class="wide row-gap">
+          <div class="video">
+            <iframe src="https://player.vimeo.com/video/1204031227?title=0&amp;byline=0&amp;portrait=0&amp;muted=1&amp;loop=1&amp;dnt=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="One A Day Women&rsquo;s 50+ Multi Gummy — Veo animation from Gemini-generated still"></iframe>
+          </div>
+          <figcaption><strong>Still to motion.</strong> Women&rsquo;s 50+ Multi Gummy — pack reference in, Gemini iterates the hero still, Veo 3.1 animates it out. Nothing photographed; the full chain runs inside the tool in minutes.</figcaption>
+        </figure>
+
+        <div class="case-cta">
+          <div class="cta-text"><strong>How I built it — the full case study.</strong> The problem, the dead ends, the architecture decision, and the impact.</div>
+          <a class='cta-link' href='/creativelab'>Read the case study &rarr;</a>
+        </div>
+
+        <h3 class="lead-label">Act two — client output · NACDS 2026 booth panels</h3>
+        <p class="gallery-cap gallery-lead">The same pipeline, at trade-show scale — lifestyle panels and close-up heroes generated through CreativeLab for One A Day&rsquo;s NACDS booth. Pack reference, brand colours, and segment briefs in; booth-ready environmental graphics out. Every frame below is Gemini output from structured brand data, not photography.</p>
+        <figure class="wide">
+          <img src="images/nacds-gen/NACDS_BoothPanel_OAD_TeenHer_Breakfast_v2.jpg" alt="One A Day Teen Her — AI-generated breakfast lifestyle panel for NACDS booth">
+          <figcaption><strong>Teen Her · breakfast.</strong> Lifestyle panel — Teen Multi Gummy, morning kitchen scene.</figcaption>
+        </figure>
+        <div class="pair row-gap">
+          <figure>
+            <img src="images/nacds-gen/NACDS_CloseupHero_WomensMulti_Kitchen_v1.jpg" alt="One A Day Women&rsquo;s Multi Gummy — AI-generated kitchen close-up for NACDS booth">
+            <figcaption><strong>Women&rsquo;s Multi Gummy · kitchen.</strong> Close-up hero — gummy line, morning routine.</figcaption>
+          </figure>
+          <figure>
+            <img src="images/nacds-gen/NACDS_BoothPanel_OAD_50Plus_CloseupKitchen_v1.jpg" alt="One A Day Men&rsquo;s 50+ — AI-generated kitchen close-up for NACDS booth">
+            <figcaption><strong>Men&rsquo;s 50+ · kitchen.</strong> Close-up hero — pack-forward, segment-specific scene.</figcaption>
+          </figure>
+        </div>
+
+        <div class="lead-label lead-label--break">Act three — scientific visualization · making a mechanism legible</div>
+        <p class="gallery-cap gallery-lead">Most of what matters in healthcare science can&rsquo;t be photographed. A mechanism of action, a process at cellular scale, a structure doing something to another structure — you have to <strong>build</strong> the picture, and every choice inside it is an argument about what the viewer should walk away understanding. Years of putting technical material in front of non-technical rooms taught me the hard part was never the rendering. It was deciding what to leave out.</p>
+        <div class="gallery-strip">
+          <figure><img src="images/science-cell-06.webp" alt="Cellular-scale scientific visualization — toroidal structure"></figure>
+          <figure><img src="images/science-cell-09.webp" alt="Cellular-scale scientific visualization — radial cell body"></figure>
+          <figure><img src="images/science-cell-12.webp" alt="Cellular-scale scientific visualization — receptor-studded cell"></figure>
+          <figure><img src="images/science-cell-15.webp" alt="Cellular-scale scientific visualization — lattice sphere"></figure>
+          <figure><img src="images/science-cell-18.webp" alt="Cellular-scale scientific visualization — organelles within a membrane"></figure>
+          <figure><img src="images/science-cell-21.webp" alt="Cellular-scale scientific visualization — cluster within a membrane"></figure>
+          <figure><img src="images/science-cell-24.webp" alt="Cellular-scale scientific visualization — soft-tissue structure"></figure>
+          <figure><img src="images/science-cell-27.webp" alt="Cellular-scale scientific visualization — porous capsid"></figure>
+          <figure><img src="images/science-cell-30.webp" alt="Cellular-scale scientific visualization — cell in suspension"></figure>
+          <figure><img src="images/science-cell-33.webp" alt="Cellular-scale scientific visualization — encapsulated nucleus"></figure>
+          <figure><img src="images/science-cell-40.webp" alt="Cellular-scale scientific visualization — bound particles on a cell surface"></figure>
+          <figure><img src="images/science-cell-46.webp" alt="Cellular-scale scientific visualization — energised core"></figure>
+        </div>
+        <p class="gallery-cap"><strong>Micro-cellular imagery</strong> — the visual language I reach for when the subject is invisible: scale, process, and structure made into something a room can follow. The same problem a research diagram solves, in a different discipline.</p>
+
+        <h3 class="lead-label">Product visualization — early calls, fast</h3>
+        <div class="gallery-strip">
+          <figure><img src="images/product-viz-03.webp" alt="Generative product render"></figure>
+          <figure><img src="images/product-viz-06.webp" alt="Generative product render"></figure>
+          <figure><img src="images/product-viz-09.webp" alt="Generative product render"></figure>
+          <figure><img src="images/product-viz-12.webp" alt="Generative product render"></figure>
+          <figure><img src="images/product-viz-18.webp" alt="Generative product render"></figure>
+          <figure><img src="images/product-viz-33.webp" alt="Generative product render"></figure>
+        </div>
+        <p class="gallery-cap"><strong>Product visualization</strong> — where I make the early calls on colour, form, and texture, fast. The tool accelerates the judgment; the judgment stays mine.</p>
+
+        <h3 class="lead-label">Storyboarding &amp; mood frames — narrative into image</h3>
+        <div class="gallery-strip">
+          <figure><img src="images/storyboard-04.webp" alt="Generative storyboard frame"></figure>
+          <figure><img src="images/storyboard-15.webp" alt="Generative storyboard frame"></figure>
+          <figure><img src="images/storyboard-18.webp" alt="Generative storyboard frame"></figure>
+          <figure><img src="images/storyboard-21.webp" alt="Generative storyboard frame"></figure>
+          <figure><img src="images/storyboard-25.webp" alt="Generative storyboard frame"></figure>
+          <figure><img src="images/storyboard-29.webp" alt="Generative storyboard frame"></figure>
+          <figure><img src="images/science-lucid-04.webp" alt="Generative mood frame — surreal portrait"></figure>
+          <figure><img src="images/science-lucid-08.webp" alt="Generative mood frame — surreal portrait"></figure>
+          <figure><img src="images/science-lucid-15.webp" alt="Generative mood frame — surreal portrait"></figure>
+          <figure><img src="images/science-lucid-18.webp" alt="Generative mood frame — surreal portrait"></figure>
+          <figure><img src="images/science-lucid-12.webp" alt="Generative mood frame — surreal portrait"></figure>
+          <figure><img src="images/science-lucid-22.webp" alt="Generative mood frame — surreal portrait"></figure>
+        </div>
+        <p class="gallery-cap"><strong>Storyboarding &amp; mood frames</strong> — written narratives turned into images: cinematic beats for stories, and the surreal, atmospheric end of the range for mood boards.</p>
       </div>
     </div>
   </div>
@@ -531,14 +628,14 @@ figure img { cursor: zoom-in; }
     <div class="case-head">
       <div class="case-num"><span class="tick" style="background:var(--accent)"></span>03</div>
       <div>
-        <div class="case-title">Typography &amp; poster</div>
+        <h2 class="case-title">Typography &amp; poster</h2>
         <div class="case-sub">Type · layout · colour · composition</div>
       </div>
     </div>
     <div class="case-body">
 
       <div class="block full">
-        <div class="label mono">The discipline</div>
+        <h4 class="label mono">The discipline</h4>
         <p>Where the fundamentals live. Type set with intent, hierarchy that survives a glance, colour that carries the idea rather than decorating it — a single frame pushed until it reads at any size. It's the same discipline that makes a logo work at shelf and a headline work on a launch page. <strong>Concept and execution.</strong></p>
       </div>
       <div class="jd-tag">
@@ -546,7 +643,7 @@ figure img { cursor: zoom-in; }
       </div>
 
       <div class="shots">
-        <div class="lead-label">Posters — type, colour, composition</div>
+        <h3 class="lead-label">Posters — type, colour, composition</h3>
         <figure>
           <img src="images/poster005.webp" alt="Day 4 poster — a 3D particle-rendered head over op-art linework">
           <figcaption><strong>Poster experiment</strong> — exploring type, color, and the overlap between 2D and 3D in one frame. I love seeing how far a single composition can go.</figcaption>
@@ -556,6 +653,29 @@ figure img { cursor: zoom-in; }
           <figure><img src="images/poster004.webp" alt="Typographic poster"></figure>
           <figure><img src="images/yellowposter-thumb.webp" alt="Typographic poster in yellow"></figure>
         </div>
+
+        <div class="lead-label lead-label--break">Editorial &amp; magazine — type at length</div>
+        <p class="gallery-cap gallery-lead">Long-form layout is where type has to earn its keep — a grid that holds across a spread, a hierarchy that walks the eye through columns, and a cover that has to land in one glance. A few editorial pieces: a university literary magazine, a NASA feature concept, and two science-magazine spreads.</p>
+        <figure class="wide">
+          <img src="images/pubmag1.webp" alt="Science magazine concept — 'Augmented Reality in Medicine' feature spread with a red ECG line">
+          <figcaption><strong>Science magazine — feature spread.</strong> Big display type against a full-bleed operating-room image, with a running body-copy grid. Concept and layout.</figcaption>
+        </figure>
+        <div class="pair row-gap">
+          <figure>
+            <img src="images/pubmag2.webp" alt="Science magazine concept — interior spread with an anatomical figure and multi-column body text">
+            <figcaption><strong>Interior spread.</strong> Multi-column reading grid built around an anatomical figure — hierarchy that survives dense copy.</figcaption>
+          </figure>
+          <figure>
+            <img src="images/newsletter-spread.webp" alt="NASA-themed magazine feature spread on human exploration of the solar system">
+            <figcaption><strong>NASA feature concept.</strong> Editorial spread pairing archival photography with a disciplined text grid.</figcaption>
+          </figure>
+        </div>
+        <div class="trio row-gap">
+          <figure><img src="images/mix-01.webp" alt="'The Mix' literary magazine — cover and contents spread"></figure>
+          <figure><img src="images/mix-02.webp" alt="'The Mix' magazine — 'We're Not Just Teachers' feature spread"></figure>
+          <figure><img src="images/mix-03-thumb.webp" alt="'The Mix' magazine — 'Life Without Coffee' feature spread"></figure>
+        </div>
+        <p class="gallery-cap"><strong>The Mix</strong> — cover-to-feature design for a university literary magazine: cover system, contents, and article layouts that each carry their own voice while staying inside one type system.</p>
       </div>
     </div>
   </div>
@@ -567,14 +687,14 @@ figure img { cursor: zoom-in; }
     <div class="case-head">
       <div class="case-num"><span class="tick" style="background:var(--accent)"></span>04</div>
       <div>
-        <div class="case-title">3D &amp; motion</div>
+        <h2 class="case-title">3D &amp; motion</h2>
         <div class="case-sub">Form · light · things in motion</div>
       </div>
     </div>
     <div class="case-body">
 
       <div class="block full">
-        <div class="label mono">The thread</div>
+        <h4 class="label mono">The thread</h4>
         <p>I design things that move and things with dimension — from these explorations to launch films, stage-opener animation, and photoreal product renders built from one system for the digital shelf. Thinking in <strong>motion and form</strong>, not just static frames, is half of how a new technology gets shown to people. <em>(The BOLD Breakthrough Tour below carries this into a full campaign.)</em></p>
       </div>
       <div class="jd-tag">
@@ -582,7 +702,7 @@ figure img { cursor: zoom-in; }
       </div>
 
       <div class="shots">
-        <div class="lead-label">3D — particles &amp; form</div>
+        <h3 class="lead-label">3D — particles &amp; form</h3>
         <div class="trio">
           <figure><img src="images/particle005-thumb.webp" alt="3D particle render"></figure>
           <figure><img src="images/particle006-thumb.webp" alt="3D particle render"></figure>
@@ -595,7 +715,7 @@ figure img { cursor: zoom-in; }
         </div>
         <figcaption style="margin-top:12px;"><strong>3D — particles, physics, texture, light.</strong> Renders made to chase a feeling, a frame at a time.</figcaption>
 
-        <div class="lead-label">Experiments — particles in motion</div>
+        <h3 class="lead-label">Experiments — particles in motion</h3>
         <p class="gallery-cap gallery-lead">I like to work in 3D — I love experimenting with particles and the interesting outputs that simulation can generate. These are some personal experiments playing with that.</p>
         <div class="video-pair">
           <div class="video"><iframe src="https://player.vimeo.com/video/885181792?title=0&amp;byline=0&amp;portrait=0&amp;muted=1&amp;loop=1&amp;dnt=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Particle experiment — cell"></iframe></div>
@@ -615,14 +735,14 @@ figure img { cursor: zoom-in; }
     <div class="case-head">
       <div class="case-num"><span class="tick" style="background:var(--accent)"></span>05</div>
       <div>
-        <div class="case-title">Experiences you can walk through</div>
+        <h2 class="case-title">Experiences you can walk through</h2>
         <div class="case-sub">The BOLD Breakthrough Tour · one idea, every medium</div>
       </div>
     </div>
     <div class="case-body">
 
       <div class="block full">
-        <div class="label mono">The point</div>
+        <h4 class="label mono">The point</h4>
         <p>The BOLD Breakthrough Tour is one idea taken across <strong>every medium it needed</strong> — identity, 3D, motion, a live stage, and the objects in your hand — and run for three years straight, held together by a single design system. It's the kind of integrated, end-to-end making I love most.</p>
       </div>
       <div class="jd-tag">
@@ -637,7 +757,7 @@ figure img { cursor: zoom-in; }
       <div class="shots">
         <p class="gallery-cap gallery-lead"><strong>Three years of events below.</strong> What follows is work from across the full run — virtual, hybrid, and in-person — so you&rsquo;ll see different logo marks and identity treatments year to year. Same design system, three annual events.</p>
 
-        <div class="lead-label">Motion — the BOLD Ambition Tour films</div>
+        <h3 class="lead-label">Motion — the BOLD Ambition Tour films</h3>
         <figure class="wide">
           <img src="images/BreakthroughBanner-3D.webp" alt="BOLD 3D event banner">
           <figcaption>3D key-visual banner, built from the mark.</figcaption>
@@ -647,7 +767,7 @@ figure img { cursor: zoom-in; }
         </div>
         <p class="gallery-cap"><strong>Stage films &amp; animated identity</strong> — the motion that ran the room, built from the Cinema 4D storyboards below.</p>
 
-        <div class="lead-label">Cinema 4D storyboards &amp; animated identity</div>
+        <h3 class="lead-label">Cinema 4D storyboards &amp; animated identity</h3>
         <div class="trio">
           <figure><img src="images/storyboard-01.webp" alt="Cinema 4D motion storyboard frame"></figure>
           <figure><img src="images/storyboard-02.webp" alt="Cinema 4D motion storyboard frame"></figure>
@@ -658,7 +778,7 @@ figure img { cursor: zoom-in; }
           <figure><img src="images/shirtback.webp" alt="3D apparel render for the tour"><figcaption><strong>3D apparel render</strong> — the mark carried onto merch.</figcaption></figure>
         </div>
 
-        <div class="lead-label">Three years on stage — virtual → hybrid → in-person</div>
+        <h3 class="lead-label">Three years on stage — virtual → hybrid → in-person</h3>
         <figure class="wide">
           <img src="images/Agenda2-2.webp" alt="BOLD tour event agenda and stage design">
           <figcaption><strong>Live production across three consecutive years</strong> for a 200+-attendee event — the tour evolved from virtual to hybrid to in-person, and the design system carried it the whole way.</figcaption>
@@ -680,14 +800,14 @@ figure img { cursor: zoom-in; }
     <div class="case-head">
       <div class="case-num"><span class="tick" style="background:var(--accent)"></span>06</div>
       <div>
-        <div class="case-title">Foundations</div>
+        <h2 class="case-title">Foundations</h2>
         <div class="case-sub">Where the hand-skill comes from</div>
       </div>
     </div>
     <div class="case-body">
 
       <div class="block full">
-        <div class="label mono">Underneath the rest</div>
+        <h4 class="label mono">Underneath the rest</h4>
         <p>Four years at the Art Students League of New York, drawing and painting and modeling from life — learning to render what you actually see rather than what you think you know. It isn't the work I'm hired for, but it's the observational discipline under every decision above. Two collections, if you want to look.</p>
       </div>
 
@@ -713,14 +833,15 @@ figure img { cursor: zoom-in; }
   </div>
 </section>
 
+</main>
+
 <footer>
   <div class="wrap">
-    <div class="big">I'm a maker who loves technology. Let's make something.</div>
+    <h2 class="big">I'm a maker who loves technology. Let's make something.</h2>
     <div class="links">
-      <a href="mailto:mkscrivana@gmail.com">mkscrivana@gmail.com</a> &nbsp;·&nbsp;
+      <a href="mailto:michaelscrivana@gmail.com">michaelscrivana@gmail.com</a> &nbsp;·&nbsp;
       <a href="https://www.michaelscrivana.com">michaelscrivana.com</a> &nbsp;·&nbsp;
-      <a href="https://www.linkedin.com/in/michaelscrivana89/">linkedin</a> &nbsp;·&nbsp;
-      <a href='/resume'>résumé</a>
+      <a href="https://www.linkedin.com/in/michaelscrivana89/">linkedin</a>
     </div>
     <div class="fine">Michael Scrivana · Selected work across disciplines · 2026<br>Some imagery is concept/pilot output, including AI-generated work.</div>
   </div>
@@ -755,21 +876,37 @@ figure img { cursor: zoom-in; }
     if (figcap) { cap.innerHTML = figcap.innerHTML; cap.style.display = ''; }
     else { cap.textContent = ''; cap.style.display = 'none'; }
   }
+  var pageRegions = document.querySelectorAll('nav.topnav, header.hero, main, footer, .skip');
+  function setInert(on) {
+    Array.prototype.forEach.call(pageRegions, function (n) {
+      if (on) { n.setAttribute('inert',''); n.inert = true; } else { n.removeAttribute('inert'); n.inert = false; }
+    });
+  }
+
   function open(i) {
     render(i);
     lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-    lastFocus = document.activeElement; closeBtn.focus();
+    lastFocus = items[current] || document.activeElement;   // the trigger, not <body>
+    setInert(true);
+    closeBtn.focus();
   }
   function close() {
     lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = ''; img.src = '';
-    if (lastFocus && lastFocus.focus) lastFocus.focus();
+    setInert(false);
+    if (lastFocus && lastFocus !== document.body && lastFocus.focus) lastFocus.focus();
   }
   function step(d) { render(current + d); }
 
   items.forEach(function (el, i) {
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+    el.setAttribute('role', 'button');
+    el.setAttribute('aria-label', el.alt ? 'View larger: ' + el.alt : 'View larger image');
     el.addEventListener('click', function () { open(i); });
+    el.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); open(i); }
+    });
   });
 
   closeBtn.addEventListener('click', close);
@@ -782,6 +919,12 @@ figure img { cursor: zoom-in; }
     if (e.key === 'Escape') close();
     else if (e.key === 'ArrowLeft') step(-1);
     else if (e.key === 'ArrowRight') step(1);
+    else if (e.key === 'Tab') {
+      var ring = [closeBtn, prevBtn, nextBtn], at = ring.indexOf(document.activeElement);
+      if (at === -1) { e.preventDefault(); closeBtn.focus(); }
+      else if (e.shiftKey && at === 0) { e.preventDefault(); ring[ring.length - 1].focus(); }
+      else if (!e.shiftKey && at === ring.length - 1) { e.preventDefault(); ring[0].focus(); }
+    }
   });
 })();
 </script>
