@@ -135,7 +135,40 @@
   footer.end p b { color: var(--ink-soft); font-weight: 620; }
   footer.end a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--rule); }
   footer.end a:hover { border-bottom-color: var(--accent); }
+  /* ---------- top bar ---------- */
+  nav.topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--bg);
+    border-bottom: 1px solid var(--rule);
+  }
+  nav.topbar .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px; gap: 18px;
+  }
+  nav.topbar .brand {
+    font-size: 15px; font-weight: 620; letter-spacing: -.02em;
+    color: var(--ink); text-decoration: none; white-space: nowrap;
+  }
+  nav.topbar a.nav-link {
+    font: 500 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--accent); text-decoration: none;
+    border-bottom: 1px solid transparent; padding-bottom: 3px; white-space: nowrap;
+  }
+  nav.topbar a.nav-link:hover { border-bottom-color: var(--accent); }
+  nav.topbar a:focus-visible, footer.end a:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px;
+  }
+  header.top { padding-top: 64px; }
+
 </style>
+
+<nav class="topbar">
+  <div class="wrap">
+    <a class="brand" href="/">Michael Scrivana</a>
+    <a class="nav-link" href="https://creative.michaelscrivana.com">Craft portfolio &rarr;</a>
+  </div>
+</nav>
 
 <div class="wrap">
 
