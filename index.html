@@ -1,354 +1,470 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Understanding Is Not Enough — Michael Scrivana</title>
-  <meta name="description" content="Fifteen years of teaching four unrelated subjects — drawing, design, AI, bread — and the one thing that made any of it stick.">
-  <meta property="og:title" content="Understanding Is Not Enough">
-  <meta property="og:description" content="Fifteen years of teaching four unrelated subjects, and the one thing that made any of it stick.">
-  <meta property="og:type" content="article">
-  <meta property="og:url" content="https://teaching.michaelscrivana.com/">
-  <meta name="twitter:card" content="summary">
-  <link rel="icon" type="image/png" href="images/favicon.png">
-  <link rel="apple-touch-icon" href="images/webclip.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Understanding Is Not Enough — Michael Scrivana</title>
+<meta name="description" content="Fifteen years of teaching four unrelated subjects — drawing, design, AI, bread — and the one thing that made any of it stick.">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/webclip.png">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://teaching.michaelscrivana.com/">
+<meta property="og:title" content="Understanding Is Not Enough">
+<meta property="og:description" content="Fifteen years of teaching four unrelated subjects, and the one thing that made any of it stick.">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   Teaching — matches creative.michaelscrivana.com's design language
+   (DM Sans / JetBrains Mono, light paper, graphite ink), with the
+   palette corrected so every text pair passes WCAG AA.
+   --ink-3 was #80828c on the craft site: 3.57:1, a fail. Now #666870.
+   --ink-4 is decorative only and never carries text.
+   ══════════════════════════════════════════════════════════════ */
+:root {
+  --bg:        #f6f7f9;
+  --surface:   #ffffff;
+  --surface-2: #eceef1;
+  --accent:      #3a3a40;
+  --accent-deep: #26262b;
+  --accent-dim:  rgba(58, 58, 64, 0.07);
+  --accent-line: rgba(58, 58, 64, 0.20);
+  --ink:    #0a0d12;
+  --ink-2:  #45474f;
+  --ink-3:  #666870;            /* corrected for AA — 5.18:1 on bg */
+  --rule:   rgba(10, 13, 18, 0.10);
+  --rule-2: rgba(10, 13, 18, 0.06);
+  --pass:   #1c6b4a;
+  --fail:   #9a2b1e;
+  --font: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
+  --serif: 'Iowan Old Style', Charter, 'Source Serif Pro', Georgia, serif;
+  --tight: -0.025em;
+  --track: 0.18em;
+  --shadow:    0 8px 30px -18px rgba(10, 13, 18, 0.30);
+  --shadow-sm: 0 2px 10px -6px rgba(10, 13, 18, 0.25);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background:
+    radial-gradient(ellipse 70% 40% at 50% -10%, var(--accent-dim), transparent 60%),
+    var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 16px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased; min-height: 100vh;
+}
+::selection { background: var(--accent); color: #fff; }
 
-    :root {
-      --paper:  #faf8f4;
-      --ink:    #17171a;
-      --ink-2:  #4b4b54;
-      --ink-3:  #666670;
-      --accent: #9c3d17;
-      --rule:   rgba(23,23,26,.15);
-      --rule-2: rgba(23,23,26,.07);
-      --panel:  #f1ede6;
-      --serif:  'Iowan Old Style', Charter, 'Source Serif Pro', Georgia, 'Times New Roman', serif;
-      --sans:   'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-      color-scheme: light;
-    }
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 28px; }
+.col  { max-width: 34rem; }
 
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) {
-        --paper:  #131316;
-        --ink:    #ece8e2;
-        --ink-2:  #aeaaa4;
-        --ink-3:  #8d8983;
-        --accent: #e08a5f;
-        --rule:   rgba(236,232,226,.17);
-        --rule-2: rgba(236,232,226,.08);
-        --panel:  #1c1c20;
-        color-scheme: dark;
-      }
-    }
+.mono { font-family: var(--mono); text-transform: uppercase; letter-spacing: var(--track); font-size: 11px; font-weight: 500; }
+.eyebrow { color: var(--accent); }
 
-    :root[data-theme="dark"] {
-      --paper:  #131316;
-      --ink:    #ece8e2;
-      --ink-2:  #aeaaa4;
-      --ink-3:  #8d8983;
-      --accent: #e08a5f;
-      --rule:   rgba(236,232,226,.17);
-      --rule-2: rgba(236,232,226,.08);
-      --panel:  #1c1c20;
-      color-scheme: dark;
-    }
+/* ── nav ── */
+.topnav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(246, 247, 249, 0.86);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rule);
+}
+.topnav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 18px; }
+.topnav .brand { font-weight: 700; letter-spacing: var(--tight); font-size: 15px; color: var(--ink); text-decoration: none; }
+.topnav .back { color: var(--ink-2); text-decoration: none; }
+.topnav .back:hover { color: var(--accent-deep); text-decoration: underline; }
 
-    html { -webkit-text-size-adjust: 100%; }
+/* ── hero ── */
+.hero { padding: 76px 0 54px; border-bottom: 1px solid var(--rule); }
+.hero h1 {
+  font-size: clamp(38px, 7vw, 68px); font-weight: 700;
+  letter-spacing: var(--tight); line-height: 1.02;
+  margin: 20px 0 20px; max-width: 15ch;
+}
+.hero .standfirst { font-size: clamp(17px, 2.4vw, 21px); line-height: 1.5; color: var(--ink-2); max-width: 46ch; }
+.hero .facts { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 30px; }
+.hero .facts div { border-left: 2px solid var(--accent-line); padding-left: 12px; }
+.hero .facts .n { font-weight: 700; font-size: 19px; letter-spacing: var(--tight); display: block; }
+.hero .facts .l { color: var(--ink-3); font-size: 13px; }
 
-    body {
-      background: var(--paper);
-      color: var(--ink);
-      font-family: var(--serif);
-      font-size: 19px;
-      line-height: 1.62;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
+/* ── sections ── */
+section { padding: 58px 0; border-bottom: 1px solid var(--rule-2); }
+h2 { font-size: clamp(24px, 3.4vw, 33px); font-weight: 700; letter-spacing: var(--tight); line-height: 1.15; margin: 12px 0 20px; max-width: 22ch; }
+h3 { font-size: 18px; font-weight: 700; letter-spacing: var(--tight); margin-bottom: 8px; }
+p { margin-bottom: 16px; max-width: 34rem; }
+.lead { font-size: 18px; line-height: 1.62; }
+em { font-style: italic; }
 
-    .wide { max-width: 52rem; margin: 0 auto; padding: 0 1.5rem; }
+.turn {
+  font-family: var(--serif); font-size: clamp(22px, 4vw, 31px);
+  line-height: 1.28; letter-spacing: -0.01em; color: var(--ink);
+  margin: 30px 0; max-width: 26ch; font-weight: 400;
+}
+.turn b { font-weight: 400; color: var(--accent-deep); font-style: italic; }
 
-    /* Prose sits in a narrow column aligned to the masthead's left edge;
-       figures and the comparison table are allowed the full measure. */
-    main > * { max-width: 34rem; }
-    main > figure, main > .six, main > .colophon { max-width: none; }
+blockquote {
+  border-left: 3px solid var(--accent); background: var(--surface);
+  padding: 20px 24px; margin: 28px 0; max-width: 36rem;
+  box-shadow: var(--shadow-sm); border-radius: 0 3px 3px 0;
+}
+blockquote p { margin: 0; }
+blockquote cite { display: block; margin-top: 10px; font-style: normal; color: var(--ink-3); font-size: 13px; }
 
-    /* masthead */
-    header.top { border-top: 3px solid var(--accent); padding-top: 1.1rem; margin-bottom: 4rem; }
-    .kicker {
-      font-family: var(--sans); font-size: .72rem; font-weight: 700;
-      letter-spacing: .16em; text-transform: uppercase; color: var(--accent);
-      display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
-      padding-bottom: 1rem; border-bottom: 1px solid var(--rule);
-    }
-    .kicker .who { color: var(--ink); }
+.callout { background: var(--surface-2); border-radius: 3px; padding: 20px 24px; margin: 28px 0; max-width: 36rem; }
+.callout p { margin: 0; }
+.callout strong { color: var(--accent-deep); }
 
-    h1 {
-      font-weight: 400; font-size: clamp(2.5rem, 8vw, 4.3rem);
-      line-height: 1.03; letter-spacing: -.022em; margin: 2.5rem 0 1.1rem;
-    }
-    .standfirst {
-      font-size: clamp(1.1rem, 3.2vw, 1.33rem); line-height: 1.45;
-      color: var(--ink-2); max-width: 30rem; margin-bottom: 1.7rem;
-    }
-    .byline {
-      font-family: var(--sans); font-size: .78rem; letter-spacing: .06em;
-      color: var(--ink-3); padding-top: 1rem; border-top: 1px solid var(--rule-2);
-    }
+/* ── the six ── */
+.six { margin-top: 26px; border-top: 1px solid var(--accent-line); }
+.six-row { display: grid; grid-template-columns: 92px 1fr 1.15fr; gap: 18px; padding: 15px 0; border-bottom: 1px solid var(--rule-2); align-items: baseline; }
+.six-row .yr { font-family: var(--mono); font-size: 11px; color: var(--accent); font-weight: 600; letter-spacing: .06em; }
+.six-row .what { font-size: 15px; }
+.six-row .how { font-size: 15px; color: var(--ink-2); }
+.six-row .how b { color: var(--ink); }
+@media (max-width: 700px) {
+  .six-row { grid-template-columns: 1fr; gap: 3px; }
+  .six-row .how::before { content: "→ "; color: var(--accent); }
+}
 
-    /* prose */
-    p { margin-bottom: 1.15rem; }
-    p.lede::first-letter {
-      float: left; font-size: 3.6rem; line-height: .84;
-      padding: .06em .09em 0 0; color: var(--accent);
-    }
-    h2 {
-      font-family: var(--sans); font-size: .76rem; font-weight: 700;
-      letter-spacing: .17em; text-transform: uppercase; color: var(--accent);
-      margin: 3.4rem 0 1.3rem; padding-top: 1.1rem; border-top: 1px solid var(--rule);
-    }
-    .turn {
-      font-size: clamp(1.45rem, 5vw, 2rem); line-height: 1.25;
-      letter-spacing: -.015em; margin: 2.1rem 0;
-    }
-    .turn em { color: var(--accent); font-style: italic; }
+/* ── demos ── */
+.demo { background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 22px; margin: 26px 0; box-shadow: var(--shadow-sm); }
+.demo .label { color: var(--ink-3); margin-bottom: 14px; }
+.demo .note { font-size: 13px; color: var(--ink-3); margin: 12px 0 0; max-width: none; }
 
-    blockquote {
-      border-left: 3px solid var(--accent); padding: .3rem 0 .3rem 1.4rem;
-      margin: 2rem 0; font-size: 1.05rem;
-    }
-    blockquote .src {
-      display: block; margin-top: .7rem; font-family: var(--sans);
-      font-size: .74rem; letter-spacing: .05em; color: var(--ink-3);
-    }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 620px) { .pair { grid-template-columns: 1fr; } }
 
-    .callout {
-      background: var(--panel); border-radius: 3px; padding: 1.3rem 1.5rem;
-      margin: 2.2rem 0; font-size: 1.02rem; line-height: 1.5;
-    }
-    .callout strong { color: var(--accent); }
+.swatch { padding: 18px; border-radius: 3px; }
+.swatch .t { font-size: 15px; font-weight: 500; }
+.swatch .r { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; margin-top: 10px; display: block; }
+.sw-pass { background: #eef3f0; color: #14503a; }
+.sw-pass .r { color: #14503a; }
+.sw-fail { background: #f2f3f5; color: #a9adb4; }
+.sw-fail .r { color: #5c5f66; }
 
-    /* figures */
-    figure { margin: 2.5rem 0; }
-    figure img {
-      display: block; width: 100%; height: auto;
-      border: 1px solid var(--rule-2); border-radius: 2px; background: #fff;
-    }
-    figcaption {
-      font-family: var(--sans); font-size: .78rem; line-height: 1.5;
-      color: var(--ink-3); margin-top: .7rem;
-    }
-    figcaption b { color: var(--ink-2); font-weight: 600; }
-    figcaption em { font-style: italic; }
+.verdict { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; font-weight: 600; }
+.v-pass { color: var(--pass); }
+.v-fail { color: var(--fail); }
 
-    /* the six */
-    .six { margin: 2.3rem 0 1rem; }
-    .six-row {
-      display: grid; grid-template-columns: 5.4rem 1fr 1fr; gap: 1rem;
-      padding: .95rem 0; border-bottom: 1px solid var(--rule-2); align-items: baseline;
-    }
-    .six-row.head {
-      border-bottom: 1px solid var(--rule); padding-bottom: .55rem;
-      font-family: var(--sans); font-size: .68rem; font-weight: 700;
-      letter-spacing: .13em; text-transform: uppercase; color: var(--ink-3);
-    }
-    .six-row .yr { font-family: var(--sans); font-size: .8rem; letter-spacing: .04em; color: var(--accent); font-weight: 600; }
-    .six-row .what { font-size: .97rem; line-height: 1.42; }
-    .six-row .how { font-size: .97rem; line-height: 1.42; color: var(--ink-2); }
-    .six-row .how b { color: var(--ink); font-weight: 700; }
+.blurbox { background: var(--surface-2); padding: 20px; border-radius: 3px; }
+.blurbox .sample { font-size: 19px; font-weight: 600; letter-spacing: var(--tight); }
+.blurbox .small { font-size: 12px; margin-top: 8px; color: var(--ink-2); }
+.blurred { filter: blur(1.7px); }
 
-    @media (max-width: 640px) {
-      .six-row { grid-template-columns: 1fr; gap: .18rem; padding: 1rem 0; }
-      .six-row.head { display: none; }
-      .six-row .how::before { content: "→ "; color: var(--accent); }
-    }
+.glyphs { display: flex; gap: 30px; flex-wrap: wrap; }
+.glyphs .g { text-align: center; }
+.glyphs .g .chars { font-size: 40px; line-height: 1.1; letter-spacing: .06em; }
+.glyphs .g .fam { font-family: var(--mono); font-size: 10px; letter-spacing: .08em; color: var(--ink-3); margin-top: 6px; }
+.g-grotesque .chars { font-family: Arial, Helvetica, sans-serif; }
+.g-humanist .chars { font-family: 'DM Sans', sans-serif; }
+.g-serif .chars { font-family: Georgia, serif; }
 
-    /* colophon */
-    .colophon {
-      background: var(--panel); border-radius: 3px; padding: 1.6rem;
-      margin-top: 3rem; font-family: var(--sans); font-size: .84rem;
-      line-height: 1.6; color: var(--ink-2);
-    }
-    .colophon h3 {
-      font-size: .72rem; font-weight: 700; letter-spacing: .15em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: .8rem;
-    }
-    .colophon p { margin-bottom: .8rem; }
-    .colophon ul { list-style: none; }
-    .colophon li { padding-left: 1rem; position: relative; margin-bottom: .35rem; }
-    .colophon li::before { content: "·"; position: absolute; left: .15rem; color: var(--accent); font-weight: 700; }
+.chips { display: flex; gap: 12px; flex-wrap: wrap; }
+.chip { padding: 12px 16px; border-radius: 3px; font-size: 14px; font-weight: 600; color: #fff; }
+.c-red { background: #b8322a; }
+.c-grn { background: #2f7d4f; }
+.grayed { filter: grayscale(1); }
 
-    /* footer */
-    footer.end {
-      margin-top: 4.5rem; border-top: 3px solid var(--accent);
-      padding: 1.3rem 0 4rem; font-family: var(--sans); font-size: .82rem; color: var(--ink-2);
-    }
-    footer.end a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
-    footer.end a:hover { color: var(--accent); border-bottom-color: var(--accent); }
-    footer.end .row { display: flex; justify-content: space-between; gap: 1.2rem; flex-wrap: wrap; }
-    footer.end .name { font-family: var(--serif); font-size: 1.05rem; color: var(--ink); }
+/* ── QC gate flow ── */
+.flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 10px; margin: 24px 0; }
+.flow .step {
+  background: var(--accent-deep); color: #fff; border-radius: 3px;
+  padding: 14px 16px; font-size: 13.5px; line-height: 1.4; flex: 1 1 165px; min-width: 150px;
+}
+.flow .step b { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .1em; opacity: .75; margin-bottom: 5px; font-weight: 600; }
+.flow .arrow { align-self: center; color: var(--accent); font-size: 18px; }
+.flow .step.pass { background: var(--pass); }
+.flow .step.retest { background: var(--surface-2); color: var(--ink); }
+.flow .step.retest b { opacity: .65; }
 
-    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
-  </style>
+/* ── modules ── */
+.modules { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin-top: 24px; }
+.module { background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 18px; }
+.module .n { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; color: var(--accent); }
+.module h3 { margin: 8px 0 6px; font-size: 15.5px; }
+.module p { font-size: 14px; color: var(--ink-2); margin: 0; }
+
+/* ── figures ── */
+figure { margin: 26px 0; }
+figure img { display: block; width: 100%; height: auto; border-radius: 4px; box-shadow: var(--shadow); }
+figcaption { font-size: 13.5px; color: var(--ink-3); margin-top: 10px; max-width: 34rem; }
+.photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.photo-grid img { aspect-ratio: 4/3; object-fit: cover; }
+
+/* ── colophon + footer ── */
+.colophon { background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 24px; margin-top: 8px; }
+.colophon ul { list-style: none; margin-top: 12px; }
+.colophon li { position: relative; padding-left: 18px; margin-bottom: 7px; font-size: 14.5px; color: var(--ink-2); max-width: 44rem; }
+.colophon li::before { content: "✓"; position: absolute; left: 0; color: var(--pass); font-weight: 700; }
+
+footer { padding: 40px 0 64px; }
+footer .row { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+footer a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
+footer a:hover { color: var(--accent-deep); border-bottom-color: var(--accent); }
+footer .name { font-weight: 700; letter-spacing: var(--tight); font-size: 17px; }
+
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-deep); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
+</style>
 </head>
 <body>
 
-<div class="wide">
-  <header class="top">
-    <div class="kicker">
-      <span class="who">Michael Scrivana</span>
-      <span>Teaching &nbsp;·&nbsp; 2011 – present</span>
-    </div>
+<nav class="topnav">
+  <div class="wrap">
+    <a class="brand" href="/">Michael Scrivana</a>
+    <a class="back mono" href="https://creative.michaelscrivana.com">Craft portfolio →</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="mono eyebrow">Teaching &nbsp;·&nbsp; 2011 – present</div>
     <h1>Understanding is not enough</h1>
     <p class="standfirst">Fifteen years of teaching four unrelated subjects — drawing, design, AI, bread — and the one thing that made any of it stick.</p>
-    <p class="byline">An essay on why people who understand a thing still don't do it</p>
-  </header>
-</div>
-
-<main class="wide">
-
-  <p class="lede">For eight years I taught drawing and painting to people who had never done it. Public classes of twenty-five to fifty, plus private students, adults and children — more than a thousand people in all, most of whom had not come to learn anything.</p>
-
-  <p>Beginners draw what they know instead of what they see. Ask for a hand and you get the symbol of a hand, because the head supplies an answer before the eye gets a turn. It is not a failure of effort or of talent. Recognition is faster than observation, and recognition wins.</p>
-
-  <p>You cannot fix that by explaining it. I explained it a thousand times, and I was good at explaining it. Every single person agreed with me — and then drew the symbol again thirty seconds later.</p>
-
-  <p class="turn">What works is a procedure that runs at the moment the decision gets made. Hold the pencil up. Measure the angle. Compare the width against the height. Not <em>see better</em>. <em>Measure.</em></p>
-
-  <p>That is the whole of it. The teaching has to survive the moment when the learner is not thinking about the teaching, which is every moment that matters. If a lesson only works while someone is concentrating on the lesson, it is not a lesson. It is a conversation they enjoyed.</p>
-
-  <h2>The room where I learned it</h2>
-
-  <p>People expect this credential to be an atelier. It was mostly a paint-and-sip studio, and that is the part I would defend hardest.</p>
-
-  <p>In a serious atelier you can say <em>observe more carefully</em> and a committed student will go away and work at it for a month. In a room of forty people who came out for a night — a glass of wine, two hours, and a finished painting expected at the end — that sentence does nothing at all. The only thing that functions is a procedure that works <em>without</em> understanding, for someone who did not come to learn and will not practise afterwards.</p>
-
-  <p>That is a harder instructional problem than teaching people who already want it, not an easier one. It is also much closer to teaching something to the general public, which is why I stopped being embarrassed about it a long time ago.</p>
-
-  <h2>Six times, four subjects</h2>
-
-  <p>I have taught four unrelated things since. Every time, without ever planning it, I did the same thing: taught the idea, watched it fail to survive the room, and then changed the situation rather than the person.</p>
-
-  <div class="six">
-    <div class="six-row head"><span>When</span><span>What I taught</span><span>What made it survive without me</span></div>
-    <div class="six-row">
-      <span class="yr">2011–19</span>
-      <span class="what">Drawing — your eye lies to you</span>
-      <span class="how"><b>Measure it.</b> A procedure at the moment of the decision</span>
-    </div>
-    <div class="six-row">
-      <span class="yr">2023–25</span>
-      <span class="what">How to write a design brief</span>
-      <span class="how"><b>A tool</b> that supplied the information people could not find</span>
-    </div>
-    <div class="six-row">
-      <span class="yr">2024</span>
-      <span class="what">Accessibility — your vision is not the user's</span>
-      <span class="how"><b>A contrast check at QC.</b> One line, near the end of 189 slides</span>
-    </div>
-    <div class="six-row">
-      <span class="yr">2025–26</span>
-      <span class="what">Brand standards, at volume</span>
-      <span class="how"><b>Machine-readable rules</b> consulted at every step, so the output is on-standard by construction</span>
-    </div>
-    <div class="six-row">
-      <span class="yr">2026</span>
-      <span class="what">AI, in an organisation running three systems at once</span>
-      <span class="how"><b>A knowledge layer</b> any tool can read, so the choice of tool stops mattering</span>
-    </div>
-    <div class="six-row">
-      <span class="yr">2025–</span>
-      <span class="what">Bread — when is the dough ready?</span>
-      <span class="how"><b>A check.</b> Poke test, windowpane, dough temperature — never "you'll know"</span>
+    <div class="facts">
+      <div><span class="n">1,000+</span><span class="l">beginners taught to draw</span></div>
+      <div><span class="n">100+</span><span class="l">marketers, required training</span></div>
+      <div><span class="n">4</span><span class="l">unrelated subjects</span></div>
+      <div><span class="n">1</span><span class="l">method</span></div>
     </div>
   </div>
+</header>
 
-  <h2>189 slides and one line</h2>
+<main>
 
-  <p>In 2024 I co-authored my company's inclusive design standard: 189 slides teaching designers, packaging engineers and outside agencies how to make material legible to people whose vision, cognition, motor control or hearing does not match the designer's.</p>
+<section>
+  <div class="wrap">
+    <div class="mono eyebrow">Where it starts</div>
+    <h2>A thousand people who agreed with me and then did it wrong anyway</h2>
+    <p class="lead">For eight years I taught drawing and painting to people who had never done it. Public classes of twenty-five to fifty, plus private students, adults and children — more than a thousand people in all, most of whom had not come to learn anything.</p>
+    <p>Beginners draw what they know instead of what they see. Ask for a hand and you get the symbol of a hand, because the head supplies an answer before the eye gets a turn. It is not a failure of effort or of talent. Recognition is faster than observation, and recognition wins.</p>
+    <p>You cannot fix that by explaining it. I explained it a thousand times, and I was good at explaining it. Every single person agreed with me — and then drew the symbol again thirty seconds later.</p>
 
-  <p>It adopts WCAG AA across the entire consumer journey — print, web, mobile, pack, point of sale. Contrast ratios of 4.5&#8202;:&#8202;1 for regular text below 18pt and small icons, 3&#8202;:&#8202;1 for bold text above 18pt and large icons. Named tooling rather than good intentions: the Bridge-PCA contrast calculator, and Clari-Fi, the University of Cambridge Inclusive Design Toolkit's calibrated Gaussian-blur test. Five evaluation factors — visual, auditory and haptic, cognitive, 3D motor, and photographic representation — each with its own designer checklist.</p>
+    <p class="turn">What works is a procedure that runs at the moment the decision gets made. Hold the pencil up. Measure the angle. Compare the width against the height. Not <b>see better</b>. <b>Measure.</b></p>
 
-  <figure>
-    <img src="images/teaching/letterforms.png" alt="Diagram labelling the anatomy of letterforms on the word 'Accessibility': apex junction, lowercase junction, ascender, cap height, x-height, aperture, counter, bowl, baseline flick and descender.">
-    <figcaption><b>Typography, at the letterform.</b> The standard specifies open apertures and counters, and letterforms where <em>I</em>, <em>l</em> and <em>1</em> stay distinct and <em>b/d</em> and <em>p/q</em> are not mirror images — because a typeface chosen on taste will fail a reader you never met.</figcaption>
-  </figure>
+    <p>That is the whole of it. The teaching has to survive the moment when the learner is not thinking about the teaching, which is every moment that matters. If a lesson only works while someone is concentrating on the lesson, it is not a lesson. It is a conversation they enjoyed.</p>
 
-  <figure>
-    <img src="images/teaching/clarifi-blur.png" alt="Two identical Snellen eye charts side by side. The left is sharp; the right has a calibrated Gaussian blur applied, and the smaller rows of letters become unreadable.">
-    <figcaption><b>Your own eyes are not evidence.</b> A designer with good vision, at a calibrated monitor, at arm's length, is the worst possible instrument for judging whether a warning on a carton can be read in a pharmacy aisle by someone who is sixty-eight. So we stopped asking people to judge, and gave them a test.</figcaption>
-  </figure>
-
-  <p>The part I am proudest of is none of that. It is one line near the end.</p>
-
-  <blockquote>
-    <strong>The Rule.</strong> All text and graphics in digital assets to meet WCAG AA standard. Final check on contrast levels carried out at QC stage for all digital assets.
-    <span class="src">Inclusive Design standard, 2024 — slide 177</span>
-  </blockquote>
-
-  <figure>
-    <img src="images/teaching/qc-gate.png" alt="Process diagram. Check contrast levels of text and graphics against the background. Scores above 4.5 to 1 for small text and 3 to 1 for large text: the asset passes and can progress. Scores below: adjust and retest, then re-enter the check.">
-    <figcaption><b>The same rule, drawn as a gate.</b> Not advice about contrast — a step in a process, with a threshold, a retest loop and a pass condition, run by whoever happens to be doing QC that day.</figcaption>
-  </figure>
-
-  <p>One hundred and eighty-nine slides are knowledge. That line is the only reason the knowledge survives contact with a Tuesday afternoon and a shipping deadline. It works on somebody who was never in the training, has not read the standard and does not care about it — which is the only test that counts, because the material was written for colleagues and outside agencies who would never sit in a room with me.</p>
-
-  <h2>What I got wrong</h2>
-
-  <p>The year before, I co-authored a design capability curriculum. It launched as <em>required</em> training inside the marketing organisation — a hundred-plus marketers who had not asked to be there. I delivered three of the sessions myself. It is now mandatory on the company's learning platform, where it still runs without me.</p>
-
-  <p>One of its modules teaches how to write a design brief. The training worked: the briefs got better.</p>
-
-  <p>But the questions kept coming — and here I did the exact thing I tell everyone else not to do. I assumed the fix was to teach it again, harder.</p>
-
-  <p>When we finally went and looked at the briefing process itself, the obstacle was not knowledge at all. People knew perfectly well what a good brief contained. They could not assemble the pieces without three days of asking around, so under deadline they shipped what they had. Missing information, not missing knowledge — and no amount of additional teaching was ever going to touch that. So we built a tool that closes the information gap instead.</p>
-
-  <div class="callout">
-    <strong>When people fail to apply what you taught, teaching harder is usually the wrong response.</strong> Find out why the moment fails. Often it is not a knowledge problem at all, and the fix is to change the situation rather than the person.
+    <h3>The room where I learned it</h3>
+    <p>People expect this credential to be an atelier. It was mostly a paint-and-sip studio, and that is the part I would defend hardest. In a serious atelier you can say <em>observe more carefully</em> and a committed student will go away and work at it for a month. In a room of forty people who came out for a night — a glass of wine, two hours, and a finished painting expected at the end — that sentence does nothing at all.</p>
+    <p>The only thing that functions is a procedure that works <em>without</em> understanding, for someone who did not come to learn and will not practise afterwards. That is a harder instructional problem than teaching people who already want it, not an easier one. It is also much closer to teaching something to the general public.</p>
   </div>
+</section>
 
-  <p>I had been doing this by instinct since the drawing classes and had never once said it out loud. Writing it down is the only reason I noticed it was the same move every time.</p>
-
-  <h2>A standard that reads itself</h2>
-
-  <p>There is a moment about 165 slides into the accessibility deck where it stops and asks the reader: <em>notice anything different?</em> It then lists what had been changed about the training template itself — a larger, more legible typeface among them — to bring the material into line with the standard it was teaching.</p>
-
-  <p>I like that page more than almost anything else in the document. A standard that has not been applied to itself is a proposal.</p>
-
-  <h2>What I teach now</h2>
-
-  <p>These days it is AI: for a 115-person global product organisation, and — as my part of a divisional roadmap covering more than a thousand people — a learning track I am still building.</p>
-
-  <p>The most common question is not <em>how do I write a better prompt</em>. It is <em>which tool am I supposed to use?</em>, because there are three of them running at once and nobody has said. For a long time I tried to answer that question. The answer is not to answer it. Move the knowledge out of the tools and into a layer any of them can read, and the choice stops being a decision worth agonising over. I have now built that three times without noticing it was the same idea: once for myself, once for a team, once for an organisation.</p>
-
-  <p>And on some weekends it is bread, at a flour mill, in groups of four to six, adults and children — where we start with where the grain and the flour come from, and where <em>you'll know when it feels right</em> is the single most useless sentence you can say to someone who has never felt it right. So instead: the poke test, the windowpane, the temperature of the dough, and timing scaled to the warmth of the room.</p>
-
-  <p>Different flour. Same pencil, held up at arm's length.</p>
-
-  <div class="colophon">
-    <h3>Notice anything different?</h3>
-    <p>This page is set to the standard it describes:</p>
-    <ul>
-      <li>All text meets or exceeds the WCAG AA contrast ratio against its background, in both light and dark appearance.</li>
-      <li>Body text is 19px on a 1.62 line height, at a measure of roughly 65 characters — long enough to read, short enough to find the next line.</li>
-      <li>Every image carries a description of what it demonstrates, not merely what it depicts.</li>
-      <li>The page follows your system's light or dark setting rather than overriding it, and honours a reduced-motion preference.</li>
-      <li>Structure is real headings in order, so it can be navigated by screen reader rather than by sight alone.</li>
-    </ul>
+<section>
+  <div class="wrap">
+    <div class="mono eyebrow">The pattern</div>
+    <h2>Six times, four subjects</h2>
+    <p>Every time, without ever planning it, I did the same thing: taught the idea, watched it fail to survive the room, then changed the situation rather than the person.</p>
+    <div class="six">
+      <div class="six-row"><span class="yr">2011–19</span><span class="what">Drawing — your eye lies to you</span><span class="how"><b>Measure it.</b> A procedure at the moment of the decision</span></div>
+      <div class="six-row"><span class="yr">2023–25</span><span class="what">How to write a design brief</span><span class="how"><b>A tool</b> that supplied the information people could not find</span></div>
+      <div class="six-row"><span class="yr">2024</span><span class="what">Accessibility — your vision is not the user's</span><span class="how"><b>A contrast check at QC.</b> One line, near the end of 189 slides</span></div>
+      <div class="six-row"><span class="yr">2025–26</span><span class="what">Brand standards, at volume</span><span class="how"><b>Machine-readable rules</b> consulted at every step, so output is on-standard by construction</span></div>
+      <div class="six-row"><span class="yr">2026</span><span class="what">AI, in an organisation running three systems at once</span><span class="how"><b>A knowledge layer</b> any tool can read, so the choice of tool stops mattering</span></div>
+      <div class="six-row"><span class="yr">2025–</span><span class="what">Bread — when is the dough ready?</span><span class="how"><b>A check.</b> Poke test, windowpane, dough temperature — never "you'll know"</span></div>
+    </div>
   </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="mono eyebrow">Teaching materials</div>
+    <h2>What I have actually built and taught</h2>
+    <p>Two organisation-wide programmes at Bayer Consumer Health, both written to be delivered by people other than me — which is the only test of a curriculum that counts.</p>
+
+    <h3>Design Capability Curriculum <span class="mono" style="color:var(--ink-3)">&nbsp;· 2023 · co-author</span></h3>
+    <p>Five modules. It launched as <strong>required</strong> training inside the marketing organisation — a hundred-plus marketers who had not asked to be there. I delivered three of the sessions myself. It is now mandatory on the internal learning platform, where it still runs without me, and it was later extended beyond marketing, including to the Science organisation.</p>
+
+    <div class="modules">
+      <div class="module">
+        <div class="n">Module 01</div>
+        <h3>Cognitive Science Applied to Branding</h3>
+        <p>System 1 and System 2 decision-making, mental availability, distinctive assets.</p>
+      </div>
+      <div class="module">
+        <div class="n">Module 02</div>
+        <h3>Writing Remarkable Design Briefs</h3>
+        <p>The module that worked, and then taught me the most when it didn't go far enough.</p>
+      </div>
+      <div class="module">
+        <div class="n">Module 03</div>
+        <h3>The 4D Design Process</h3>
+        <p>Discover, Define, Develop, Deliver — a shared vocabulary between design and its partners.</p>
+      </div>
+      <div class="module">
+        <div class="n">Module 04</div>
+        <h3>Brand case study</h3>
+        <p>The principles run against a real portfolio brand rather than an invented one.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:34px">Inclusive Design standard <span class="mono" style="color:var(--ink-3)">&nbsp;· 2024 · co-author · 189 slides</span></h3>
+    <p>A standard for internal colleagues <em>and external agency partners</em> — people who would never sit in a room with me — teaching how to make material legible to people whose vision, cognition, motor control or hearing does not match the designer's. It adopts WCAG AA across the entire consumer journey: print, web, mobile, pack, point of sale. Five evaluation factors, each with its own designer checklist.</p>
+    <p>The demonstrations below are rebuilt here, live, rather than shown as screenshots — partly because a page about legibility should be legible, and partly because a test you can see running is a better argument than a picture of one.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="mono eyebrow">The hard idea</div>
+    <h2>Your own eyes are not evidence</h2>
+    <p>A designer with good vision, at a calibrated monitor, at arm's length, is the worst possible instrument for judging whether a warning on a carton can be read in a pharmacy aisle by someone who is sixty-eight. So the standard stops asking people to judge, and gives them tests.</p>
+
+    <div class="demo">
+      <div class="mono label">Test 01 — Contrast, measured not eyeballed</div>
+      <div class="pair">
+        <div class="swatch sw-pass">
+          <div class="t">Take one tablet daily with water.</div>
+          <span class="r">8.36 : 1 &nbsp;— &nbsp;<span class="verdict v-pass">passes AA</span></span>
+        </div>
+        <div class="swatch sw-fail">
+          <div class="t">Take one tablet daily with water.</div>
+          <span class="r">2.03 : 1 &nbsp;— &nbsp;<span class="verdict v-fail">fails AA</span></span>
+        </div>
+      </div>
+      <p class="note">Both of these looked fine to somebody. The threshold is <strong>4.5&#8202;:&#8202;1</strong> for regular text below 18pt and small icons, <strong>3&#8202;:&#8202;1</strong> for bold text above 18pt and large icons. The ratios above are computed, not estimated — which is the entire point. Taste has no opinion a calculator will respect.</p>
+    </div>
+
+    <div class="demo">
+      <div class="mono label">Test 02 — Perceptibility, at a calibrated blur</div>
+      <div class="blurbox">
+        <div class="sample">Maximum strength · non-drowsy</div>
+        <div class="small">Contains 500 mg per caplet. Do not exceed six in 24 hours.</div>
+      </div>
+      <div class="blurbox" style="margin-top:12px" aria-hidden="true">
+        <div class="sample blurred">Maximum strength · non-drowsy</div>
+        <div class="small blurred">Contains 500 mg per caplet. Do not exceed six in 24 hours.</div>
+      </div>
+      <p class="note">The same panel, blurred to approximate reduced acuity. The headline survives; the dosage line — the part that actually matters — does not. The standard names a tool for this rather than leaving it to judgement: Clari-Fi, the University of Cambridge Inclusive Design Toolkit's calibrated Gaussian-blur test. The second panel is decorative and hidden from screen readers; it repeats the text above it.</p>
+    </div>
+
+    <div class="demo">
+      <div class="mono label">Test 03 — Letterforms, where a typeface betrays you</div>
+      <div class="glyphs">
+        <div class="g g-grotesque"><div class="chars">Il1</div><div class="fam">Grotesque</div></div>
+        <div class="g g-humanist"><div class="chars">Il1</div><div class="fam">Humanist</div></div>
+        <div class="g g-serif"><div class="chars">Il1</div><div class="fam">Serif</div></div>
+      </div>
+      <p class="note">Capital <em>I</em>, lowercase <em>l</em>, numeral <em>1</em>, set in three typefaces at the same size. In the first they are very nearly the same mark. The standard specifies open apertures and counters, and letterforms where these three stay distinct and <em>b/d</em> and <em>p/q</em> are not mirror images — because a typeface chosen on taste will fail a reader you never met. On a dosage, that is not an aesthetic problem.</p>
+    </div>
+
+    <div class="demo">
+      <div class="mono label">Test 04 — Colour, reviewed in grayscale</div>
+      <div class="chips">
+        <span class="chip c-red">Do not exceed</span>
+        <span class="chip c-grn">Safe daily dose</span>
+      </div>
+      <div class="chips" style="margin-top:10px" aria-hidden="true">
+        <span class="chip c-red grayed">Do not exceed</span>
+        <span class="chip c-grn grayed">Safe daily dose</span>
+      </div>
+      <p class="note">Red and green at similar tonal values. In grayscale — which is how the standard asks you to review, and roughly how a red-green colour-deficient reader receives it — the two collapse into the same grey, and the only thing distinguishing a warning from a reassurance is the word itself. The second row is decorative and repeats the first.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="mono eyebrow">The line that matters</div>
+    <h2>189 slides are knowledge. One line is the reason it survives.</h2>
+    <p>The part I am proudest of is none of the tests. It is a single sentence near the end of the document.</p>
+
+    <blockquote>
+      <p><strong>The Rule.</strong> All text and graphics in digital assets to meet WCAG AA standard. Final check on contrast levels carried out at QC stage for all digital assets.</p>
+      <cite>Inclusive Design standard, 2024</cite>
+    </blockquote>
+
+    <p>Not advice about contrast. A step in a process, with a threshold, a retest loop and a pass condition — run by whoever happens to be doing QC that day:</p>
+
+    <div class="flow">
+      <div class="step"><b>Step</b>Check contrast of text and graphics against background</div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div class="step"><b>Threshold</b>4.5&#8202;:&#8202;1 small text · 3&#8202;:&#8202;1 large text</div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div class="step pass"><b>Above</b>Asset passes and can progress</div>
+      <span class="arrow" aria-hidden="true">↳</span>
+      <div class="step retest"><b>Below</b>Adjust and retest, then re-enter the check</div>
+    </div>
+
+    <p>That line is the only reason the knowledge survives contact with a Tuesday afternoon and a shipping deadline. It works on somebody who was never in the training, has not read the standard and does not care about it — which is the only test that counts.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="mono eyebrow">What I got wrong</div>
+    <h2>I assumed it was a knowledge problem</h2>
+    <p>One module of the capability curriculum teaches how to write a design brief. The training worked: the briefs got better.</p>
+    <p>But the questions kept coming — and here I did the exact thing I tell everyone else not to do. I assumed the fix was to teach it again, harder.</p>
+    <p>When we finally went and looked at the briefing process itself, the obstacle was not knowledge at all. People knew perfectly well what a good brief contained. They could not assemble the pieces without three days of asking around, so under deadline they shipped what they had. <strong>Missing information, not missing knowledge</strong> — and no amount of additional teaching was ever going to touch that. So we built a tool that closes the information gap instead.</p>
+
+    <div class="callout">
+      <p><strong>When people fail to apply what you taught, teaching harder is usually the wrong response.</strong> Find out why the moment fails. Often it is not a knowledge problem at all, and the fix is to change the situation rather than the person.</p>
+    </div>
+
+    <p>I had been doing this by instinct since the drawing classes and had never once said it out loud. Writing it down is the only reason I noticed it was the same move every time.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="mono eyebrow">Still teaching</div>
+    <h2>Bread, at a flour mill, in groups of six</h2>
+    <p>Since 2025 I have taught bread-making to adults and children at a flour mill — small community groups of four to six, starting with where the grain and the flour come from rather than with the recipe.</p>
+    <p>Fermentation is the hardest possible case for the argument in this essay. The feedback loop is hours long and most of the variables are invisible, so <em>you'll know when it feels right</em> is the single most useless sentence you can say to somebody who has never once felt it right. So instead: the poke test, the windowpane, the temperature of the dough, and timing scaled to the warmth of the room.</p>
+
+    <div class="photo-grid">
+      <figure style="margin:0"><img src="images/teaching/bread-crumb.jpg" alt="A sourdough loaf cut open on linen, showing an open, irregular crumb structure."></figure>
+      <figure style="margin:0"><img src="images/teaching/bread-rack.jpg" alt="A bakery rack holding several dozen finished sourdough loaves on wire shelves."></figure>
+      <figure style="margin:0"><img src="images/teaching/bread-pastry.jpg" alt="A round iced apple pastry cooling on a wire rack."></figure>
+    </div>
+    <p style="margin-top:14px; color:var(--ink-3); font-size:13.5px; max-width:34rem">Different flour. Same pencil, held up at arm's length.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="mono eyebrow">What I teach now</div>
+    <h2>Which tool am I supposed to use?</h2>
+    <p>These days it is AI: for a 115-person global product organisation, and — as my part of a divisional roadmap covering more than a thousand people — a learning track I am still building.</p>
+    <p>The most common question is not <em>how do I write a better prompt</em>. It is <em>which tool am I supposed to use?</em>, because there are three of them running at once and nobody has said. For a long time I tried to answer that question. The answer is not to answer it. Move the knowledge out of the tools and into a layer any of them can read, and the choice stops being a decision worth agonising over.</p>
+    <p>I have now built that three times without noticing it was the same idea: once for myself, once for a team, once for an organisation. It is the contrast check at QC again, wearing different clothes.</p>
+  </div>
+</section>
+
+<section style="border-bottom:none">
+  <div class="wrap">
+    <div class="mono eyebrow">Colophon</div>
+    <h2>Notice anything different?</h2>
+    <p>About 165 slides into the accessibility standard, it stops and asks the reader exactly that — then lists what had been changed about the training template itself to bring it in line with what it was teaching. A standard that has not been applied to itself is a proposal.</p>
+    <div class="colophon">
+      <p style="margin:0"><strong>So this page is set to the standard it describes:</strong></p>
+      <ul>
+        <li>Every text and background pair was computed and passes WCAG AA. The muted grey inherited from my craft portfolio measured 3.57&#8202;:&#8202;1 — a fail — and was darkened until it passed.</li>
+        <li>The two intentionally failing samples above are demonstrations, labelled as such, and carry no information that is not also stated in the text.</li>
+        <li>Decorative duplicates — the blurred panel, the grayscale chips — are hidden from screen readers so nothing is announced twice.</li>
+        <li>Every image describes what it demonstrates, not merely what it depicts.</li>
+        <li>Headings run in real order, focus states are visible, and a reduced-motion preference is honoured.</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
 </main>
 
-<div class="wide">
-  <footer class="end">
+<footer>
+  <div class="wrap">
     <div class="row">
       <div>
         <div class="name">Michael Scrivana</div>
-        <div>Teaching &amp; curriculum · AI fluency · New York metro</div>
+        <div style="color:var(--ink-3)">Teaching &amp; curriculum · AI fluency · New York metro</div>
       </div>
       <div>
         <a href="mailto:mkscrivana@gmail.com">mkscrivana@gmail.com</a><br>
@@ -356,8 +472,8 @@
         <a href="https://www.linkedin.com/in/michaelscrivana89/">linkedin.com/in/michaelscrivana89</a>
       </div>
     </div>
-  </footer>
-</div>
+  </div>
+</footer>
 
 </body>
 </html>
