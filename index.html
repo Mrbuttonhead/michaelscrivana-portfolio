@@ -188,6 +188,16 @@ blockquote cite { display: block; margin-top: 10px; font-style: normal; color: v
 .module h3 { margin: 8px 0 6px; font-size: 15.5px; }
 .module p { font-size: 14px; color: var(--ink-2); margin: 0; }
 
+/* ── curriculum slides ── */
+.slides { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 20px; margin: 28px 0 8px; }
+.slides figure { margin: 0; }
+.slides img {
+  display: block; width: 100%; height: auto; background: #fff;
+  border: 1px solid var(--rule); border-radius: 4px; box-shadow: var(--shadow-sm);
+}
+.slides figcaption { font-size: 13px; line-height: 1.5; color: var(--ink-3); margin-top: 9px; max-width: none; }
+.slides figcaption b { color: var(--ink-2); font-weight: 600; }
+
 /* ── figures ── */
 figure { margin: 26px 0; }
 figure img { display: block; width: 100%; height: auto; border-radius: 4px; box-shadow: var(--shadow); }
@@ -310,6 +320,51 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-deep); o
         <h3>Brand case study</h3>
         <p>The principles run against a real portfolio brand rather than an invented one.</p>
       </div>
+    </div>
+
+    <p style="margin-top:26px">The anchor module runs to <strong>103 slides</strong>, and it is built the way I would build any course: teach the mental model before any tactic, give every chapter its own science, strategies and exercise, and make the learner <strong>commit to a diagnosis before being told the answer</strong>.</p>
+
+    <div class="slides">
+      <figure>
+        <img src="images/teaching/curriculum/cogsci-02-curriculum-map.jpg" alt="Contents slide laying the module out as an introduction plus four chapters — core idea, cut-through, consistent, connection — each with its own page reference.">
+        <figcaption><b>The architecture.</b> One framework, four chapters. Each chapter carries its own science, its own strategies and its own exercise, so the structure repeats and the learner always knows where they are.</figcaption>
+      </figure>
+      <figure>
+        <img src="images/teaching/curriculum/cogsci-03-system1-system2.jpg" alt="Slide contrasting System 1 and System 2 thinking, showing System 1 as fast, intuitive and always active, carrying 95 percent of decisions, against System 2 as slow and deliberate at 5 percent.">
+        <figcaption><b>The mental model first.</b> Before a single tactic: how people actually decide. System 1 carries 95% of it. Everything downstream in the course is a consequence of that one slide.</figcaption>
+      </figure>
+      <figure>
+        <img src="images/teaching/curriculum/cogsci-04-four-principles.jpg" alt="Slide listing the four-part rubric: have a core idea, cut through the noise, be consistent everywhere, drive a connection.">
+        <figcaption><b>The rubric the whole programme hangs on.</b> Four principles, stated once, then used as the spine of every chapter and recalled at the end.</figcaption>
+      </figure>
+      <figure>
+        <img src="images/teaching/curriculum/cogsci-05-yourturn-tropicana.jpg" alt="A 'your turn' exercise slide showing the Tropicana carton before and after its 2009 redesign, asking learners why the redesign was not successful.">
+        <figcaption><b>Diagnosis before the answer.</b> Learners are handed a real failure — the 2009 Tropicana redesign, sales down 20% in two months — and must say what went wrong <em>before</em> being told. This is the part I would keep in any subject.</figcaption>
+      </figure>
+      <figure>
+        <img src="images/teaching/curriculum/cogsci-07-summary.jpg" alt="Closing summary slide restating all four principles with their supporting strategies on a single page.">
+        <figcaption><b>The whole framework on one page.</b> A closing recall slide, so what a learner leaves with is a structure rather than a stack of notes.</figcaption>
+      </figure>
+      <figure>
+        <img src="images/teaching/curriculum/brief-01-anatomy.jpg" alt="Slide annotating a design brief template field by field — stakeholders, who, what, how, objectives, strategies, success criteria, timing and why.">
+        <figcaption><b>Anatomy of a brief.</b> The artifact itself, annotated field by field — teaching the document people actually have to fill in, not the theory of it.</figcaption>
+      </figure>
+      <figure>
+        <img src="images/teaching/curriculum/brief-03-checklist.jpg" alt="A design brief checklist slide with eight yes-or-no questions to run through before briefing a project.">
+        <figcaption><b>The takeaway.</b> The module compressed into something usable on a Tuesday. This is the same instinct as the contrast check at QC — put the lesson where the decision happens.</figcaption>
+      </figure>
+      <figure>
+        <img src="images/teaching/curriculum/process-01-capability-map.jpg" alt="Capability map slide listing what the design discipline does across strategy, expression, experience and process.">
+        <figcaption><b>What the discipline actually does.</b> Written for partners outside design, because most of the friction came from people not knowing what to ask us for.</figcaption>
+      </figure>
+      <figure>
+        <img src="images/teaching/curriculum/midol-02-consistency.jpg" alt="Case study slide showing Midol packaging, digital and retail work side by side, illustrating consistency across touchpoints.">
+        <figcaption><b>Applied end to end.</b> The final module runs the whole framework against one real brand, so the principles are seen working rather than asserted.</figcaption>
+      </figure>
+      <figure>
+        <img src="images/teaching/curriculum/cogsci-01-cover.jpg" alt="Module cover slide reading 'How our brains are wired (applied to branding)', with a neon brain illustration.">
+        <figcaption><b>Every module opens and closes the same way</b>, so five modules read as one programme rather than five one-offs.</figcaption>
+      </figure>
     </div>
 
     <h3 style="margin-top:34px">Inclusive Design standard <span class="mono" style="color:var(--ink-3)">&nbsp;· 2024 · co-author · 189 slides</span></h3>
