@@ -297,6 +297,48 @@ figure img { cursor: zoom-in; }
   html { scroll-behavior: auto; }
   .reveal, .reveal-wipe { opacity: 1 !important; transform: none !important; clip-path: none !important; transition: none !important; }
 }
+
+/* ── WORK MARQUEE (auto-scrolling strip under the hero) ── */
+.work-marquee {
+  --card-h: 220px;
+  --gap: 20px;
+  --speed: 60s;
+  padding: 40px 0 44px;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.work-marquee__track {
+  display: flex;
+  gap: var(--gap);
+  width: max-content;
+  animation: work-marquee-scroll var(--speed) linear infinite;
+}
+.work-marquee:hover .work-marquee__track { animation-play-state: paused; }
+.work-marquee__item {
+  flex: none;
+  height: var(--card-h);
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  background: var(--surface-2);
+}
+.work-marquee__item img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+@keyframes work-marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-50% - (var(--gap) / 2))); }
+}
+@media (max-width: 640px) { .work-marquee { --card-h: 160px; --speed: 45s; } }
+@media (prefers-reduced-motion: reduce) {
+  .work-marquee__track { animation: none; }
+  .work-marquee { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+}
 </style>
 </head>
 <body>
@@ -312,8 +354,7 @@ figure img { cursor: zoom-in; }
       <a class="case-link" href="#experience">Live</a>
       <a class="case-link" href="#fineart">Art</a>
       <a href='/about'>Bio</a>
-      <a class='resume' href='/resume'>Résumé</a>
-      <a class="contact" href="mailto:mkscrivana@gmail.com">Contact</a>
+      <a class="contact" href="mailto:michaelscrivana@gmail.com">Contact</a>
     </div>
   </div>
 </nav>
@@ -328,9 +369,35 @@ figure img { cursor: zoom-in; }
   </div>
 </header>
 
-<section class="thesis">
-  <div class="wrap">
-    <p>I make across every medium I can get my hands on — and let <span class="hl">each new tool</span> reshape how I make.</p>
+<!-- WORK MARQUEE — auto-scrolling strip. The two halves must stay identical for a seamless loop. -->
+<section class="work-marquee" aria-label="Selected work">
+  <div class="work-marquee__track">
+    <!-- HALF A -->
+    <div class="work-marquee__item"><img src="images/marquee/oad-wellness-lineup.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item"><img src="images/marquee/mirafast-hero.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item"><img src="images/marquee/iberogast-mobile.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item"><img src="images/marquee/age-factor-cell-defense.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item"><img src="images/marquee/midol-tray.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item"><img src="images/marquee/atom-3d.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item"><img src="images/marquee/sleep-well-pillow.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item"><img src="images/marquee/science-cell.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item"><img src="images/marquee/the-mix-magazine.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item"><img src="images/marquee/business-card.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item"><img src="images/marquee/science-cell-bloom.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item"><img src="images/marquee/science-lucid-portrait.png" alt="" loading="lazy"></div>
+    <!-- HALF B (duplicate of A for the loop) -->
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/oad-wellness-lineup.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/mirafast-hero.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/iberogast-mobile.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/age-factor-cell-defense.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/midol-tray.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/atom-3d.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/sleep-well-pillow.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/science-cell.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/the-mix-magazine.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/business-card.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/science-cell-bloom.png" alt="" loading="lazy"></div>
+    <div class="work-marquee__item" aria-hidden="true"><img src="images/marquee/science-lucid-portrait.png" alt="" loading="lazy"></div>
   </div>
 </section>
 
@@ -620,7 +687,7 @@ figure img { cursor: zoom-in; }
 
       <div class="block full">
         <div class="label mono">The thread</div>
-        <p>I design things that move and things with dimension — from these explorations to launch films, stage-opener animation, and photoreal product renders built from one system for the digital shelf. Thinking in <strong>motion and form</strong>, not just static frames, is half of how a new technology gets shown to people. <em>(The BOLD Breakthrough Tour below carries this into a full campaign.)</em></p>
+        <p>I design things that move and things with dimension — from these explorations to launch films, stage-opener animation, and photoreal product renders built from one system for the digital shelf. Thinking in <strong>motion and form</strong>, not just static frames, is half of how a new technology gets shown to people. <em>(The BOLD Ambition Tour below carries this into a full campaign.)</em></p>
       </div>
       <div class="jd-tag">
         <span>3D rendering</span><span>motion design</span><span>animation</span><span>generative media</span>
@@ -661,14 +728,14 @@ figure img { cursor: zoom-in; }
       <div class="case-num"><span class="tick" style="background:var(--accent)"></span>05</div>
       <div>
         <div class="case-title">Experiences you can walk through</div>
-        <div class="case-sub">The BOLD Breakthrough Tour · one idea, every medium</div>
+        <div class="case-sub">The BOLD Ambition Tour · one idea, every medium</div>
       </div>
     </div>
     <div class="case-body">
 
       <div class="block full">
         <div class="label mono">The point</div>
-        <p>The BOLD Breakthrough Tour is one idea taken across <strong>every medium it needed</strong> — identity, 3D, motion, a live stage, and the objects in your hand — and run for three years straight, held together by a single design system. It's the kind of integrated, end-to-end making I love most.</p>
+        <p>The BOLD Ambition Tour is one idea taken across <strong>every medium it needed</strong> — identity, 3D, motion, a live stage, and the objects in your hand — and run for three years straight, held together by a single design system. It's the kind of integrated, end-to-end making I love most.</p>
       </div>
       <div class="jd-tag">
         <span>integrated campaign</span><span>motion + 3D</span><span>live production</span><span>spatial / experiential</span>
@@ -762,10 +829,9 @@ figure img { cursor: zoom-in; }
   <div class="wrap">
     <div class="big">I'm a maker who loves technology. Let's make something.</div>
     <div class="links">
-      <a href="mailto:mkscrivana@gmail.com">mkscrivana@gmail.com</a> &nbsp;·&nbsp;
+      <a href="mailto:michaelscrivana@gmail.com">michaelscrivana@gmail.com</a> &nbsp;·&nbsp;
       <a href="https://www.michaelscrivana.com">michaelscrivana.com</a> &nbsp;·&nbsp;
-      <a href="https://www.linkedin.com/in/michaelscrivana89/">linkedin</a> &nbsp;·&nbsp;
-      <a href='/resume'>résumé</a>
+      <a href="https://www.linkedin.com/in/michaelscrivana89/">linkedin</a>
     </div>
     <div class="fine">Michael Scrivana · Selected work across disciplines · 2026<br>Some imagery is concept/pilot output, including AI-generated work.</div>
   </div>
