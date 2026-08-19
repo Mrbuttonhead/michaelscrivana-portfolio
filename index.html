@@ -81,17 +81,6 @@ body {
 
 /* ── HERO ── */
 header.hero { padding: 84px 0 52px; border-bottom: 1px solid var(--border); }
-.hero-figure { margin: 44px 0 0; }
-.hero-figure img {
-  width: 100%; height: auto; display: block; border-radius: 10px;
-  border: 1px solid var(--border);
-  box-shadow: 0 1px 2px rgba(16,18,27,0.04), 0 18px 44px rgba(16,18,27,0.10);
-}
-.hero-figure figcaption {
-  font-size: 13px; color: var(--ink-3); margin-top: 14px; line-height: 1.55; max-width: 74ch;
-}
-.hero-figure figcaption strong { color: var(--ink-2); font-weight: 600; }
-@media (max-width: 680px) { .hero-figure { margin-top: 30px; } }
 .hero .kicker { color: var(--ink-3); margin-bottom: 26px; display: flex; align-items: center; gap: 10px; }
 .hero .kicker .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
 .hero h1 {
@@ -153,6 +142,12 @@ header.hero { padding: 84px 0 52px; border-bottom: 1px solid var(--border); }
 .judge-pair.single { grid-template-columns: 1fr; }
 .judge-pair.single figcaption { max-width: 74ch; }
 figure { margin: 0; }
+.graph-figure { margin: 0 0 18px; }
+.graph-figure img {
+  width: 100%; height: auto; display: block; border-radius: 10px;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 2px rgba(16,18,27,0.04), 0 18px 44px rgba(16,18,27,0.10);
+}
 .video-figure { margin: 0 0 18px; }
 .video-figure video {
   width: 100%; height: auto; display: block; border-radius: 10px;
@@ -229,11 +224,6 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
     <h1>A standard nobody remembers is not a standard — <em>so I put the check where the decision actually gets made.</em></h1>
     <p class="lede">Five cases from two years spent evolving how visual design gets enabled and delivered inside a regulated healthcare organization: AI-enabled workflows that designers actually adopted, brand and regulatory standards made executable instead of advisory, a knowledge layer that survives the next tool decision, the craft record underneath all of it, and — the part this role is really about — how several hundred people were brought along.</p>
     <p class="who"><strong>Michael Scrivana</strong> — Senior Designer &amp; AI Lead, Product Experience, Bayer Consumer Health. Seven years in a Fortune 100 consumer-health organization: first designing the packaging and launch creative behind ~$79MM in retail sales, then leading AI transformation for the 115-person global design organization that made it. &nbsp;<a href="https://www.linkedin.com/in/michaelscrivana89/">linkedin</a></p>
-
-    <figure class="hero-figure">
-      <img src="images/creativelab-graph/creativelab-canvas-womens50-video-graph.jpg" alt="The CreativeLab node canvas: pack reference and prompt in, generate, two iterate passes, outputs, and a video node at the end of the chain">
-      <figcaption><strong>The system, not a prompt box.</strong> Brand data — pack reference, colors, rules, channel specs — flows through a composable graph: <em>reference in → generate → iterate → output → animate</em>. The user wires the graph; the graph runs. The pipeline itself is the artifact, so the next campaign starts from a graph rather than a blank brief.</figcaption>
-    </figure>
   </div>
 </header>
 
@@ -256,6 +246,10 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
     <div class="case-body">
 
       <div class="shots">
+        <figure class="graph-figure">
+          <img src="images/creativelab-graph/creativelab-canvas-womens50-video-graph.jpg" alt="The CreativeLab node canvas: pack reference and prompt in, generate, two iterate passes, outputs, and a video node at the end of the chain">
+          <figcaption><strong>The system, not a prompt box.</strong> Brand data — pack reference, colors, rules, channel specs — flows through a composable graph: <em>reference in → generate → iterate → output → animate</em>. The user wires the graph; the graph runs. The pipeline itself is the artifact, so the next campaign starts from a graph rather than a blank brief.</figcaption>
+        </figure>
         <figure class="video-figure">
           <video src="images/creativelab-graph/oad-womens50-gummy-veo-8s.mp4" poster="images/creativelab-graph/oad-womens50-gummy-veo-frame-1.jpg" controls muted loop playsinline preload="metadata"></video>
           <figcaption><strong>Still to motion, inside the same graph.</strong> One A Day Women&rsquo;s 50+ — pack reference in, the hero still generated and iterated, then a video node wires the keeper frame straight out to motion. Nothing photographed, nothing briefed out; the whole chain runs in minutes.</figcaption>
