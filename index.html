@@ -81,6 +81,17 @@ body {
 
 /* ── HERO ── */
 header.hero { padding: 84px 0 52px; border-bottom: 1px solid var(--border); }
+.hero-figure { margin: 44px 0 0; }
+.hero-figure img {
+  width: 100%; height: auto; display: block; border-radius: 10px;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 2px rgba(16,18,27,0.04), 0 18px 44px rgba(16,18,27,0.10);
+}
+.hero-figure figcaption {
+  font-size: 13px; color: var(--ink-3); margin-top: 14px; line-height: 1.55; max-width: 74ch;
+}
+.hero-figure figcaption strong { color: var(--ink-2); font-weight: 600; }
+@media (max-width: 680px) { .hero-figure { margin-top: 30px; } }
 .hero .kicker { color: var(--ink-3); margin-bottom: 26px; display: flex; align-items: center; gap: 10px; }
 .hero .kicker .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
 .hero h1 {
@@ -139,6 +150,8 @@ header.hero { padding: 84px 0 52px; border-bottom: 1px solid var(--border); }
 .shots { grid-column: 1 / -1; margin: 2px 0; }
 .judge-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 @media (max-width: 680px) { .judge-pair { grid-template-columns: 1fr; } }
+.judge-pair.single { grid-template-columns: 1fr; }
+.judge-pair.single figcaption { max-width: 74ch; }
 figure { margin: 0; }
 figure img {
   width: 100%; height: auto; display: block;
@@ -189,6 +202,11 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
     <h1>A standard nobody remembers is not a standard — <em>so I put the check where the decision actually gets made.</em></h1>
     <p class="lede">Five cases from two years spent evolving how visual design gets enabled and delivered inside a regulated healthcare organization: AI-enabled workflows that designers actually adopted, brand and regulatory standards made executable instead of advisory, a knowledge layer that survives the next tool decision, the craft record underneath all of it, and — the part this role is really about — how several hundred people were brought along.</p>
     <p class="who"><strong>Michael Scrivana</strong> — Senior Designer &amp; AI Lead, Product Experience, Bayer Consumer Health. Seven years in a Fortune 100 consumer-health organization: first designing the packaging and launch creative behind ~$79MM in retail sales, then leading AI transformation for the 115-person global design organization that made it. &nbsp;<a href="https://www.linkedin.com/in/michaelscrivana89/">linkedin</a></p>
+
+    <figure class="hero-figure">
+      <img src="images/creativelab-canvas-oad-kids.jpg" alt="The CreativeLab node canvas: a graph of reference, prompt, generate and iterate nodes wired together over a product concept, with a brand-context panel on the left">
+      <figcaption><strong>The canvas.</strong> A React Flow graph editor over image-generation backends, running <em>concept → variant → mask-edit → compliance-check</em>. Each step is a node and the brand context sits in the left rail, so the pipeline itself is the artifact — the next campaign starts from a graph rather than a blank brief.</figcaption>
+    </figure>
   </div>
 </header>
 
@@ -213,22 +231,12 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
       <div class="shots">
         <div class="judge-pair">
           <figure>
-            <img src="images/creativelab-canvas-oad-kids.jpg" alt="The CreativeLab node canvas: a graph of generation, mask-edit and compliance-check nodes wired together over a product concept">
-            <figcaption><strong>The canvas.</strong> A React Flow graph editor over image-generation backends, running <em>concept → variant → mask-edit → compliance-check</em>. Each step is a node; the pipeline is the artifact, so the next campaign starts from a graph rather than a blank brief.</figcaption>
-          </figure>
-          <figure>
             <img src="images/creativelab-oad-kids-hero.jpg" alt="A generated One A Day Kids hero image produced through the CreativeLab pipeline">
             <figcaption><strong>Output, on-guideline by construction.</strong> Brand guidelines are held as machine-readable rules alongside reference assets and compliance scoring — what I call the <em>brand brain</em> — consulted at every step, so work arrives on-brand rather than being corrected back onto it.</figcaption>
           </figure>
-        </div>
-        <div class="judge-pair" style="margin-top:16px">
           <figure>
             <img src="images/creativelab-claritin-lifestyle.jpg" alt="A Claritin lifestyle variant generated through the same pipeline">
-            <figcaption><strong>One master, many channels.</strong> The same graph re-runs across brands and formats. Claritin sequenced behind the One A Day pilot.</figcaption>
-          </figure>
-          <figure>
-            <img src="images/creativelab-glp1-companion-shelf.jpg" alt="A shelf-context concept variant generated through the pipeline">
-            <figcaption><strong>Shelf context, generated.</strong> Work that used to mean a photoshoot and an agency turnaround now takes hours.</figcaption>
+            <figcaption><strong>One master, many channels.</strong> The same graph re-runs across brands and formats. Claritin sequenced behind the One A Day pilot. Work that used to mean a photoshoot and an agency turnaround now takes hours.</figcaption>
           </figure>
         </div>
       </div>
@@ -376,14 +384,10 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
             <figcaption><strong>One A Day, at volume.</strong> I digitized the brand book into the single standard every agency and internal team worked from, then held consistency across a relaunch of <strong>50+ SKUs and 1,000+ creative assets</strong> — and coordinated <strong>700+ product renders</strong> for GS1 syndication into EDAM/PIM.</figcaption>
           </figure>
         </div>
-        <div class="judge-pair" style="margin-top:16px">
+        <div class="judge-pair single" style="margin-top:16px">
           <figure>
             <img src="images/storyboard-01.webp" alt="Cinema 4D storyboard frames for the BOLD Ambition Tour stage opener">
-            <figcaption><strong>Static, video and 3D, by my own hand.</strong> Storyboards and styleframes for the BOLD Ambition Tour stage opener — drawn and animated by me, then built into the films that ran the room.</figcaption>
-          </figure>
-          <figure>
-            <img src="images/BoldKV1.webp" alt="BOLD Ambition Tour 3D key visual built from the identity mark">
-            <figcaption><strong>One system, three formats.</strong> The identity carried three consecutive years through virtual, hybrid and in-person events — different marks each year, one design system underneath.</figcaption>
+            <figcaption><strong>Static, video and 3D, by my own hand.</strong> Storyboards and styleframes for the BOLD Ambition Tour stage opener — drawn and animated by me, then built into the films that ran the room. One system carried three consecutive years through virtual, hybrid and in-person formats.</figcaption>
           </figure>
         </div>
       </div>
@@ -435,6 +439,16 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
             <figcaption><strong>And the second one, for the science organization.</strong> Same discipline, different audience — the AI learning track I am building now covers the Product Experience domain inside a roadmap spanning an organization of 1,000+.</figcaption>
           </figure>
         </div>
+        <div class="judge-pair" style="margin-top:16px">
+          <figure>
+            <img src="images/hub/hub-01-hero.jpg" alt="The PX AI Hub home page: a mission line reading One PX, Amplified by AI, a plain-English sentence, a search field, and Docs, FAQ, Learn, About and Knowledge in the nav">
+            <figcaption><strong>The front door — where the learning resources actually live.</strong> Not a deck about adoption: the surface people open when they do not know where to start. A mission line, one sentence of plain English, and a search field. Docs, FAQ, Learn, About, Knowledge — everything tagged and findable from one place. Sole designer, writer and builder; audience is designers and PMs, mostly non-engineers.</figcaption>
+          </figure>
+          <figure>
+            <img src="images/hub/hub-07-pick-path-progress.jpg" alt="A Hub learning path: ordered steps with one decision at a time and a progress checklist that saves in the browser">
+            <figcaption><strong>And the check, again.</strong> Ordered steps, one decision at a time, and a progress checklist that saves in the browser — because adults abandon self-serve training when they lose their place, and that is the cheapest possible fix. The program is committed in public too: four outcomes on a 90-day cycle, each carrying a status, two in flight and two named as upcoming rather than quietly implied.</figcaption>
+          </figure>
+        </div>
       </div>
 
       <div class="block">
@@ -447,7 +461,7 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
       </div>
       <div class="block full">
         <div class="label mono">And the honest version</div>
-        <p>All of that happened somewhere I had seven years of relationships and a mandate. Coming into a global organization from outside, coaching designers in pods and partner agencies who have no reason to take my word for anything, is a harder problem and I would not pretend otherwise. What I would say is that the hardest room I have ever taught was not at Bayer: for eight years I taught drawing to the general public, twenty-five to fifty people at a time, most with no prior experience and no particular intention of learning anything, all of whom had two hours to leave with a painting they were not embarrassed by. Explaining that their eye was lying to them never worked — they nodded and drew the symbol again. <strong>What worked was a procedure that runs at the moment of the decision.</strong> Hold the pencil up and measure it. Everything on this page is a version of that check.</p>
+        <p>All of that happened somewhere I had seven years of relationships and a mandate. Coming into a global organization from outside, coaching designers in pods and partner agencies who have no reason to take my word for anything, is a harder problem and I would not pretend otherwise. What I would say is that the method does not depend on the mandate. Everything on this page is the same shape: teach the idea, find out why it did not survive the deadline, then change the situation rather than the person — and <strong>leave behind a check that runs at the moment of the decision</strong> rather than a document people are asked to remember. That part travels.</p>
       </div>
       <div class="outcomes">
         <div class="outcome"><div class="o-lead">Zero to active use in 12 months</div><div class="o-sub">All six craft disciplines of a 115-person organization. Adoption, not seats.</div></div>
