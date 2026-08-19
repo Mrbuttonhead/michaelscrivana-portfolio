@@ -153,6 +153,11 @@ header.hero { padding: 84px 0 52px; border-bottom: 1px solid var(--border); }
 .judge-pair.single { grid-template-columns: 1fr; }
 .judge-pair.single figcaption { max-width: 74ch; }
 figure { margin: 0; }
+.video-figure { margin: 0 0 18px; }
+.video-figure video {
+  width: 100%; height: auto; display: block; border-radius: 10px;
+  border: 1px solid var(--border); background: #000;
+}
 .cta-module { margin-top: 18px; }
 .cta-module img {
   width: 100%; height: auto; display: block;
@@ -226,8 +231,8 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
     <p class="who"><strong>Michael Scrivana</strong> — Senior Designer &amp; AI Lead, Product Experience, Bayer Consumer Health. Seven years in a Fortune 100 consumer-health organization: first designing the packaging and launch creative behind ~$79MM in retail sales, then leading AI transformation for the 115-person global design organization that made it. &nbsp;<a href="https://www.linkedin.com/in/michaelscrivana89/">linkedin</a></p>
 
     <figure class="hero-figure">
-      <img src="images/creativelab-canvas-oad-kids.jpg" alt="The CreativeLab node canvas: a graph of reference, prompt, generate and iterate nodes wired together over a product concept, with a brand-context panel on the left">
-      <figcaption><strong>The canvas.</strong> A React Flow graph editor over image-generation backends, running <em>concept → variant → mask-edit → compliance-check</em>. Each step is a node and the brand context sits in the left rail, so the pipeline itself is the artifact — the next campaign starts from a graph rather than a blank brief.</figcaption>
+      <img src="images/creativelab-graph/creativelab-canvas-womens50-video-graph.jpg" alt="The CreativeLab node canvas: pack reference and prompt in, generate, two iterate passes, outputs, and a video node at the end of the chain">
+      <figcaption><strong>The system, not a prompt box.</strong> Brand data — pack reference, colors, rules, channel specs — flows through a composable graph: <em>reference in → generate → iterate → output → animate</em>. The user wires the graph; the graph runs. The pipeline itself is the artifact, so the next campaign starts from a graph rather than a blank brief.</figcaption>
     </figure>
   </div>
 </header>
@@ -251,6 +256,10 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
     <div class="case-body">
 
       <div class="shots">
+        <figure class="video-figure">
+          <video src="images/creativelab-graph/oad-womens50-gummy-veo-8s.mp4" poster="images/creativelab-graph/oad-womens50-gummy-veo-frame-1.jpg" controls muted loop playsinline preload="metadata"></video>
+          <figcaption><strong>Still to motion, inside the same graph.</strong> One A Day Women&rsquo;s 50+ — pack reference in, the hero still generated and iterated, then a video node wires the keeper frame straight out to motion. Nothing photographed, nothing briefed out; the whole chain runs in minutes.</figcaption>
+        </figure>
         <div class="judge-pair">
           <figure>
             <img src="images/creativelab-oad-kids-hero.jpg" alt="A generated One A Day Kids hero image produced through the CreativeLab pipeline">
@@ -406,15 +415,6 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
             <figcaption><strong>One A Day, at volume.</strong> I digitized the brand book into the single standard every agency and internal team worked from, then held consistency across a relaunch of <strong>50+ SKUs and 1,000+ creative assets</strong> — and coordinated <strong>700+ product renders</strong> for GS1 syndication into EDAM/PIM.</figcaption>
           </figure>
         </div>
-        <div class="cta-module">
-          <img src="images/MiraFAST-hero.png" alt="MiraFAST Overnight Chewables pack photography on the launch identity">
-          <div class="cta-bar">
-            <div class="cta-copy">The logo, the system, and the brand launches — plus the storyboards, stage films and digital-shelf work.
-              <span>Static, video and 3D, by my own hand. The full craft portfolio.</span>
-            </div>
-            <a class="cta-btn" href="https://design.michaelscrivana.com">See the portfolio &rarr;</a>
-          </div>
-        </div>
       </div>
 
       <div class="block">
@@ -495,6 +495,20 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
       </div>
       <div class="jd-tag">
         <span>adoption against resistance</span><span>workshops &amp; live builds</span><span>diagnosing the real blocker</span><span>measured in usage</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="case" id="portfolio">
+  <div class="wrap">
+    <div class="cta-module" style="margin-top:0">
+      <img src="images/MiraFAST-hero.png" alt="MiraFAST Overnight Chewables pack photography on the launch identity">
+      <div class="cta-bar">
+        <div class="cta-copy">The logo, the system, and the brand launches — plus the storyboards, stage films and digital-shelf work.
+          <span>Static, video and 3D, by my own hand. The full craft portfolio.</span>
+        </div>
+        <a class="cta-btn" href="https://design.michaelscrivana.com">See the portfolio &rarr;</a>
       </div>
     </div>
   </div>
