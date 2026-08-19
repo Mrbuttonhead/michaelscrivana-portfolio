@@ -153,6 +153,28 @@ header.hero { padding: 84px 0 52px; border-bottom: 1px solid var(--border); }
 .judge-pair.single { grid-template-columns: 1fr; }
 .judge-pair.single figcaption { max-width: 74ch; }
 figure { margin: 0; }
+.cta-module { margin-top: 18px; }
+.cta-module img {
+  width: 100%; height: auto; display: block;
+  border-radius: 10px 10px 0 0; border: 1px solid var(--border); border-bottom: none;
+}
+.cta-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  padding: 20px 24px; border: 1px solid var(--border); border-radius: 0 0 10px 10px;
+  background: var(--accent-dim);
+}
+.cta-bar .cta-copy { font-size: 15px; line-height: 1.5; color: var(--ink); font-weight: 600; max-width: 62ch; }
+.cta-bar .cta-copy span { display: block; font-weight: 400; color: var(--ink-3); font-size: 13.5px; margin-top: 4px; }
+.cta-bar a.cta-btn {
+  flex: none; display: inline-block; text-decoration: none; white-space: nowrap;
+  background: var(--accent); color: #fff; font-family: var(--mono);
+  font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 13px 22px; border-radius: 999px; transition: background .15s ease;
+}
+.cta-bar a.cta-btn:hover { background: var(--accent-deep); }
+@media (max-width: 680px) {
+  .cta-bar { flex-direction: column; align-items: flex-start; gap: 16px; }
+}
 figure img {
   width: 100%; height: auto; display: block;
   border-radius: 14px; border: 1px solid var(--border);
@@ -343,7 +365,7 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
       </div>
       <div class="block">
         <div class="label mono">What I built</div>
-        <p>I moved the knowledge out of the tools. A multi-cell <strong>MCP server</strong> to the 2025-06-18 spec — FastAPI and FastMCP on AWS Lambda and API Gateway, deployed through the company's Terraform module with OAuth On-Behalf-Of — covering six sub-homes across five knowledge domains. <strong>One deployment answering from three AI surfaces</strong>: the internal assistant, Microsoft 365 Copilot, and Claude Desktop and Code.</p>
+        <p>I moved the knowledge out of the tools. A multi-cell <strong>MCP server</strong> — FastAPI and FastMCP on AWS Lambda and API Gateway, deployed through the company's Terraform module with OAuth On-Behalf-Of — covering six sub-homes across five knowledge domains. <strong>One deployment answering from three AI surfaces</strong>: the internal assistant, Microsoft 365 Copilot, and Claude Desktop and Code.</p>
       </div>
       <div class="block full">
         <div class="label mono">Why it belongs in this application</div>
@@ -384,11 +406,14 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
             <figcaption><strong>One A Day, at volume.</strong> I digitized the brand book into the single standard every agency and internal team worked from, then held consistency across a relaunch of <strong>50+ SKUs and 1,000+ creative assets</strong> — and coordinated <strong>700+ product renders</strong> for GS1 syndication into EDAM/PIM.</figcaption>
           </figure>
         </div>
-        <div class="judge-pair single" style="margin-top:16px">
-          <figure>
-            <img src="images/storyboard-01.webp" alt="Cinema 4D storyboard frames for the BOLD Ambition Tour stage opener">
-            <figcaption><strong>Static, video and 3D, by my own hand.</strong> Storyboards and styleframes for the BOLD Ambition Tour stage opener — drawn and animated by me, then built into the films that ran the room. One system carried three consecutive years through virtual, hybrid and in-person formats.</figcaption>
-          </figure>
+        <div class="cta-module">
+          <img src="images/MiraFAST-hero.png" alt="MiraFAST Overnight Chewables pack photography on the launch identity">
+          <div class="cta-bar">
+            <div class="cta-copy">The logo, the system, and both launches — plus the storyboards, stage films and digital-shelf work.
+              <span>Static, video and 3D, by my own hand. The full craft portfolio.</span>
+            </div>
+            <a class="cta-btn" href="https://design.michaelscrivana.com">See the portfolio &rarr;</a>
+          </div>
         </div>
       </div>
 
