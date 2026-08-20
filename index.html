@@ -117,12 +117,6 @@ header.hero { padding: 84px 0 52px; border-bottom: 1px solid var(--border); }
 @media (max-width: 680px) { .metrics .wrap { grid-template-columns: 1fr 1fr; gap: 16px; } }
 
 /* forward-looking plan */
-.block-wide { grid-column: 1 / -1; }
-.block-wide .cols { column-count: 2; column-gap: 40px; }
-.block-wide .cols p + p { margin-top: 12px; }
-.block-wide .cols p:first-child { margin-top: 0; }
-@media (max-width: 680px) { .block-wide .cols { column-count: 1; } }
-
 .plan { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 40px; margin-top: 6px; }
 @media (max-width: 680px) { .plan { grid-template-columns: 1fr; } }
 .plan .step { border-top: 2px solid var(--accent); padding-top: 12px; }
@@ -452,13 +446,11 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
         </div>
       </div>
 
-      <div class="block block-wide">
+      <div class="block full">
         <div class="label mono">The story I would tell in the first interview</div>
-        <div class="cols">
-          <p><strong>Nobody asked me to lead AI transformation.</strong> In 2024 the role did not exist on any org chart in our organization; I started doing the work, and it was formalized in my title two years later. What turned it from something I was doing on the side into a mandate was a room in Cambridge.</p>
-          <p>I spent <strong>several days with the division's Science President</strong> — demonstrating what the technology could actually do, and being straight about where it would not help. No slideware about disruption; working things, and an honest account of the limits. That conversation led to my being made <strong>Product Experience Science AI lead</strong>, and then to the transformation remit I hold now — and to a <strong>divisional AI roadmap I co-author as one of five cross-functional representatives</strong>, alongside Product Development, Regulatory and Medical, covering a science organization of more than a thousand people.</p>
-          <p>I would tell it because it names the part of this work people underestimate. <strong>The hard problem was never the technology.</strong> It was earning the right to change how a 115-person organization spends its week — and that gets earned in rooms where you show a leader something real and tell them plainly what it cannot yet do. Everything downstream of that room — the champion network, the six-person sprint team, the learning track I am building now — only works because the mandate was argued for rather than assumed.</p>
-        </div>
+        <p><strong>Nobody asked me to lead AI transformation.</strong> In 2024 the role did not exist on any org chart in our organization; I started doing the work, and it was formalized in my title two years later. What turned it from something I was doing on the side into a mandate was a room in Cambridge.</p>
+        <p>I spent <strong>several days with the division's Science President</strong> — demonstrating what the technology could actually do, and being straight about where it would not help. No slideware about disruption; working things, and an honest account of the limits. That conversation led to my being made <strong>Product Experience Science AI lead</strong>, and then to the transformation remit I hold now — and to a <strong>divisional AI roadmap I co-author as one of five cross-functional representatives</strong>, alongside Product Development, Regulatory and Medical, covering a science organization of more than a thousand people.</p>
+        <p>I would tell it because it names the part of this work people underestimate. <strong>The hard problem was never the technology.</strong> It was earning the right to change how a 115-person organization spends its week — and that gets earned in rooms where you show a leader something real and tell them plainly what it cannot yet do. Everything downstream of that room — the champion network, the six-person sprint team, the learning track I am building now — only works because the mandate was argued for rather than assumed.</p>
       </div>
       <div class="block">
         <div class="label mono">The workshop that ships software</div>
@@ -508,7 +500,7 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
           </figure>
         </div>
       </div>
-      <div class="block">
+      <div class="block full">
         <div class="label mono">The end-to-end, by name</div>
         <p><strong>Briefs to assets</strong> — I wrote the design briefs, and the RFPs used to solicit and score agency bids. <strong>Brand systems and tokens</strong> — I build and maintain the Figma library others design from, and its CSS custom-property token base; I co-authored the inclusive-design standard that put WCAG AA across print, web, mobile, pack and point of sale, with the contrast check written into the <strong>QC gate</strong> rather than left as a rule to remember. <strong>Masters to channel variants</strong> — MiraFAST and MiraFIBER from shelf to screen, ~$79MM+ combined. <strong>Global masters, local adaptation</strong> — I design the masters local markets adapt, and the template and modular-content systems both sides work from; localization carried by the system rather than asset by asset. <strong>Into the DAM and back out through review</strong> — 700+ renders into EDAM/PIM, with the compliance gate in case 02 sitting in front of legal and regulatory.</p>
       </div>
