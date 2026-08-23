@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CreativeLab — a node-based generative pipeline · Michael Scrivana</title>
+<meta name="description" content="How I built CreativeLab: a node-based React tool that turns brand data into channel-ready lifestyle imagery through Gemini and Veo. The problem, the dead ends, the architecture, and the impact.">
+<meta content="CreativeLab — a node-based generative pipeline" property="og:title">
+<meta content="A node graph, not a prompt box: turning brand data into channel-ready imagery. The thinking behind the tool." property="og:description">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://adobe.michaelscrivana.com/creativelab.html">
+<meta property="og:image" content="https://adobe.michaelscrivana.com/images/creativelab-graph/creativelab-app-womens50-video-full.jpg">
+<meta content="summary_large_image" name="twitter:card">
+<meta name="twitter:title" content="CreativeLab — a node-based generative pipeline">
+<meta name="twitter:description" content="A node graph, not a prompt box: turning brand data into channel-ready imagery. The thinking behind the tool.">
+<meta name="twitter:image" content="https://adobe.michaelscrivana.com/images/creativelab-graph/creativelab-app-womens50-video-full.jpg">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/webclip.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   PX Design System v0.2 — LIGHT / PAPER tokens, scoped & inlined.
+   Case-study variant: essay + process artifacts + lightbox.
+   Self-contained: no external CSS dependency.
+   ══════════════════════════════════════════════════════════════ */
+:root {
+  --px-bg:          #f4f5f7;
+  --px-surface:     #ffffff;
+  --px-surface-2:   #ebedf0;
+  --px-surface-3:   #dde0e6;
+  --px-surface-4:   #c9cdd5;
+
+  --px-accent:       #2850D8;
+  --px-accent-deep:  #1B3AB0;
+  --px-accent-hover: #4368E8;
+  --px-accent-2:     #00867A;
+  --px-accent-dim:   rgba(40, 80, 216, 0.10);
+  --px-accent-glow:  rgba(40, 80, 216, 0.22);
+
+  --px-text:    #0a0d12;
+  --px-text-2:  #4a5058;
+  --px-text-3:  #8b9099;
+  --px-text-4:  #b8bcc4;
+
+  --px-border:    rgba(10, 13, 18, 0.08);
+  --px-border-2:  rgba(10, 13, 18, 0.14);
+  --px-border-3:  rgba(10, 13, 18, 0.24);
+
+  --px-font:  'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --px-mono:  'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+
+  --px-track-tight:    -0.025em;
+  --px-track-body:     -0.005em;
+  --px-track-mono:     0.14em;
+  --px-track-mono-lg:  0.18em;
+
+  --px-radius:     14px;
+  --px-radius-sm:  10px;
+  --px-radius-xs:  6px;
+
+  --px-shadow-sm:    0 1px 2px -1px rgba(10, 13, 18, 0.08);
+  --px-shadow:       0 4px 16px -8px rgba(10, 13, 18, 0.12);
+  --px-shadow-lg:    0 8px 32px -12px rgba(10, 13, 18, 0.18);
+  --px-shadow-accent:0 8px 30px -12px rgba(40, 80, 216, 0.25);
+
+  --px-ease:  cubic-bezier(0.2, 0, 0, 1);
+  --px-dur:   160ms;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background:
+    radial-gradient(ellipse 70% 40% at 50% -8%, var(--px-accent-dim), transparent 60%),
+    var(--px-bg);
+  color: var(--px-text);
+  font-family: var(--px-font);
+  font-size: 17px;
+  line-height: 1.65;
+  font-weight: 400;
+  letter-spacing: var(--px-track-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+::selection { background: var(--px-accent); color: #fff; }
+
+/* ============ NAV ============ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(244, 245, 247, 0.82);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border-bottom: 1px solid var(--px-border);
+}
+nav .name {
+  font-family: var(--px-font);
+  font-size: 14px; font-weight: 500;
+  letter-spacing: var(--px-track-body);
+  color: var(--px-text); text-decoration: none;
+}
+nav .name .dot {
+  display: inline-block; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--px-accent);
+  margin-right: 10px; vertical-align: middle;
+}
+nav .back {
+  font-family: var(--px-mono);
+  font-size: 11px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: var(--px-track-mono);
+  color: var(--px-text-3); text-decoration: none;
+  transition: color var(--px-dur) var(--px-ease);
+}
+nav .back:hover { color: var(--px-text); }
+
+/* ============ EYEBROW + MONO UTILITIES ============ */
+.px-eyebrow {
+  font-family: var(--px-mono);
+  text-transform: uppercase; letter-spacing: var(--px-track-mono-lg);
+  font-size: 11px; font-weight: 500; color: var(--px-accent);
+}
+
+/* ============ HERO ============ */
+.hero {
+  padding: 150px 40px 40px;
+  max-width: 880px; margin: 0 auto;
+}
+.hero-eyebrow { margin-bottom: 28px; opacity: 0; animation: fadeUp 0.8s var(--px-ease) 0.15s forwards; }
+.hero h1 {
+  font-family: var(--px-font);
+  font-size: clamp(40px, 5.6vw, 66px);
+  font-weight: 700; line-height: 1.06;
+  letter-spacing: var(--px-track-tight);
+  color: var(--px-text); margin-bottom: 30px;
+  opacity: 0; animation: fadeUp 0.9s var(--px-ease) 0.3s forwards;
+}
+.hero h1 em { font-style: italic; font-weight: 400; color: var(--px-accent); }
+.hero-subtitle {
+  font-family: var(--px-font);
+  font-size: 19px; line-height: 1.6; font-weight: 400;
+  color: var(--px-text-2); max-width: 660px;
+  opacity: 0; animation: fadeUp 0.9s var(--px-ease) 0.45s forwards;
+}
+.hero-divider { height: 1px; background: var(--px-border); margin: 48px 0 28px; opacity: 0; animation: fadeIn 0.9s var(--px-ease) 0.6s forwards; }
+.hero-meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; opacity: 0; animation: fadeUp 0.9s var(--px-ease) 0.7s forwards; }
+.hero-meta dt { font-family: var(--px-mono); text-transform: uppercase; letter-spacing: var(--px-track-mono); font-size: 10.5px; font-weight: 500; color: var(--px-text-3); margin-bottom: 6px; }
+.hero-meta dd { font-family: var(--px-font); font-size: 15px; font-weight: 400; color: var(--px-text); }
+
+/* hero feature image */
+.hero-feature { max-width: 1120px; margin: 44px auto 0; padding: 0 40px; opacity: 0; animation: fadeUp 0.9s var(--px-ease) 0.8s forwards; }
+.hero-feature figure { margin: 0; }
+.hero-feature img { width: 100%; height: auto; display: block; border-radius: var(--px-radius); border: 1px solid var(--px-border-2); box-shadow: var(--px-shadow-lg); background: var(--px-surface); }
+.hero-feature figcaption { font-family: var(--px-font); font-size: 13.5px; color: var(--px-text-3); margin-top: 14px; line-height: 1.55; text-align: center; }
+.hero-feature figcaption strong { color: var(--px-text-2); font-weight: 600; }
+
+/* ============ ESSAY SECTIONS ============ */
+section.essay { padding: 0 40px; max-width: 720px; margin: 0 auto; }
+.section-spacer { height: 88px; }
+.section-spacer-sm { height: 48px; }
+
+.essay-head { margin-bottom: 24px; }
+.essay-head .px-eyebrow { display: block; margin-bottom: 16px; }
+.essay-head h2 {
+  font-family: var(--px-font);
+  font-size: clamp(28px, 3.4vw, 38px);
+  font-weight: 600; line-height: 1.18;
+  letter-spacing: -0.02em; color: var(--px-text);
+}
+.essay-head h2 em { font-style: italic; font-weight: 400; }
+
+.essay-body p { font-size: 17px; line-height: 1.7; color: var(--px-text); margin-bottom: 20px; }
+.essay-body p:last-child { margin-bottom: 0; }
+.essay-body p.lead { font-size: 19px; line-height: 1.6; color: var(--px-text-2); margin-bottom: 32px; }
+.essay-body em { font-style: italic; }
+.essay-body strong { font-weight: 600; color: var(--px-text); }
+.essay-body code {
+  font-family: var(--px-mono); font-size: 0.9em; color: var(--px-text);
+  background: var(--px-surface-2); padding: 2px 6px;
+  border-radius: var(--px-radius-xs); border: 1px solid var(--px-border);
+}
+
+/* ============ PULL QUOTE ============ */
+.pullquote {
+  border-left: 3px solid var(--px-accent);
+  padding: 4px 0 4px 28px;
+  margin: 36px 0;
+  font-size: clamp(20px, 2.4vw, 24px);
+  line-height: 1.4; font-weight: 500;
+  letter-spacing: -0.015em; color: var(--px-text);
+}
+.pullquote em { font-style: italic; font-weight: 400; color: var(--px-accent); }
+
+/* ============ FIGURES / GALLERY (wide, break out of the 720 column) ============ */
+.figblock { max-width: 1000px; margin: 40px auto; padding: 0 40px; }
+.figblock--narrow { max-width: 820px; }
+.figlabel {
+  font-family: var(--px-mono); text-transform: uppercase;
+  letter-spacing: var(--px-track-mono); font-size: 10.5px; font-weight: 600;
+  color: var(--px-text-3); margin-bottom: 14px; display: block;
+}
+figure { margin: 0; }
+figure img { width: 100%; height: auto; display: block; border-radius: var(--px-radius); border: 1px solid var(--px-border-2); background: var(--px-surface); box-shadow: var(--px-shadow); cursor: zoom-in; }
+figcaption { font-family: var(--px-font); font-size: 13.5px; color: var(--px-text-3); margin-top: 13px; line-height: 1.55; }
+figcaption strong { color: var(--px-text-2); font-weight: 600; }
+.fig-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.fig-trio { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.fig-quad { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.fig-pair figcaption, .fig-trio figcaption, .fig-quad figcaption { margin-top: 10px; font-size: 12.5px; }
+@media (max-width: 720px) {
+  .fig-pair, .fig-trio, .fig-quad { grid-template-columns: 1fr; }
+}
+
+/* ============ VIDEO ============ */
+.px-video { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: var(--px-radius); overflow: hidden; border: 1px solid var(--px-border-2); box-shadow: var(--px-shadow); background: #0a0d12; }
+.px-video video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; object-fit: cover; }
+
+/* ============ PIPELINE DIAGRAM ============ */
+.pipeline { max-width: 1000px; margin: 40px auto; padding: 0 40px; }
+.pipeline-context {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--px-mono); font-size: 11px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: var(--px-track-mono);
+  color: var(--px-accent-deep); background: var(--px-accent-dim);
+  border: 1px solid rgba(40,80,216,0.22); border-radius: 100px;
+  padding: 7px 14px; margin-bottom: 22px;
+}
+.pipeline-context .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--px-accent); }
+.pipeline-flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; }
+.pipe-node {
+  flex: 1 1 150px; min-width: 150px;
+  background: var(--px-surface); border: 1px solid var(--px-border-2);
+  border-radius: var(--px-radius-sm); padding: 18px 18px 20px;
+  box-shadow: var(--px-shadow-sm);
+}
+.pipe-node .kind { font-family: var(--px-mono); font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: var(--px-track-mono); color: var(--px-accent); margin-bottom: 8px; }
+.pipe-node .title { font-family: var(--px-font); font-size: 15px; font-weight: 600; color: var(--px-text); margin-bottom: 6px; }
+.pipe-node .why { font-family: var(--px-font); font-size: 13px; line-height: 1.5; color: var(--px-text-2); }
+.pipe-arrow { flex: 0 0 34px; display: flex; align-items: center; justify-content: center; color: var(--px-text-4); font-size: 20px; }
+@media (max-width: 720px) {
+  .pipeline-flow { flex-direction: column; }
+  .pipe-node { flex-basis: auto; }
+  .pipe-arrow { flex-basis: auto; height: 26px; transform: rotate(90deg); }
+}
+
+/* ============ STATS ============ */
+.stats { max-width: 1000px; margin: 44px auto; padding: 0 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.stat { background: var(--px-surface); border: 1px solid var(--px-border-2); padding: 28px 24px; }
+.stat:first-child { border-radius: var(--px-radius-sm) 0 0 var(--px-radius-sm); }
+.stat:last-child { border-radius: 0 var(--px-radius-sm) var(--px-radius-sm) 0; }
+.stat + .stat { border-left: none; }
+.stat .num { font-family: var(--px-font); font-size: clamp(28px, 3.4vw, 42px); font-weight: 700; line-height: 1; letter-spacing: -0.02em; color: var(--px-text); font-variant-numeric: tabular-nums; margin-bottom: 10px; }
+.stat .num em { font-style: normal; color: var(--px-accent); }
+.stat .lbl { font-family: var(--px-font); font-size: 14px; line-height: 1.5; color: var(--px-text-2); }
+@media (max-width: 720px) {
+  .stats { grid-template-columns: 1fr; gap: 0; }
+  .stat, .stat:first-child, .stat:last-child { border-radius: 0; }
+  .stat + .stat { border-top: none; border-left: 1px solid var(--px-border-2); }
+  .stat:first-child { border-radius: var(--px-radius-sm) var(--px-radius-sm) 0 0; }
+  .stat:last-child { border-radius: 0 0 var(--px-radius-sm) var(--px-radius-sm); }
+}
+
+/* ============ SPECULATIVE / NEXT BLOCKS ============ */
+.speculative { margin-top: 28px; }
+.spec-block { padding: 30px 0; border-top: 1px solid var(--px-border); }
+.spec-block:last-child { border-bottom: 1px solid var(--px-border); }
+.spec-block h3 { font-family: var(--px-font); font-size: 20px; font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; color: var(--px-text); margin-bottom: 12px; display: flex; align-items: baseline; gap: 14px; }
+.spec-block h3 .num { font-family: var(--px-mono); font-size: 11px; font-weight: 500; letter-spacing: var(--px-track-mono); color: var(--px-accent); text-transform: uppercase; }
+.spec-block p { font-size: 16px; line-height: 1.7; color: var(--px-text-2); }
+
+/* ============ CLOSING ============ */
+.closing { padding: 0 40px; max-width: 640px; margin: 96px auto 0; text-align: center; }
+.closing-mark { width: 36px; height: 1px; background: var(--px-accent); margin: 0 auto 32px; }
+.closing p { font-family: var(--px-font); font-style: italic; font-weight: 400; font-size: clamp(20px, 2.4vw, 24px); line-height: 1.5; letter-spacing: -0.015em; color: var(--px-text); }
+.closing p::before { content: '\201C'; color: var(--px-accent); margin-right: 2px; }
+.closing p::after  { content: '\201D'; color: var(--px-accent); margin-left: 2px; }
+
+/* ============ FOOTER ============ */
+footer { margin-top: 110px; padding: 48px 40px 64px; max-width: 1120px; margin-left: auto; margin-right: auto; border-top: 1px solid var(--px-border); display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; align-items: start; }
+.foot-col { display: flex; flex-direction: column; gap: 10px; }
+.foot-col .label { font-family: var(--px-mono); text-transform: uppercase; letter-spacing: var(--px-track-mono); font-size: 10.5px; font-weight: 500; color: var(--px-text-3); margin-bottom: 4px; }
+.foot-col a { font-family: var(--px-font); font-size: 14px; color: var(--px-text); text-decoration: none; transition: color var(--px-dur) var(--px-ease); }
+.foot-col a:hover { color: var(--px-accent); }
+.foot-col .mono { font-family: var(--px-mono); font-size: 12.5px; letter-spacing: 0; text-transform: none; }
+.foot-col.right { text-align: right; }
+.foot-col.right .copy { font-family: var(--px-mono); text-transform: uppercase; letter-spacing: var(--px-track-mono); font-size: 10.5px; color: var(--px-text-3); }
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s var(--px-ease), transform 0.7s var(--px-ease); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ============ LIGHTBOX ============ */
+.lightbox { position: fixed; inset: 0; z-index: 200; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 4vh 4vw; background: rgba(10, 13, 18, 0.92); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); opacity: 0; visibility: hidden; transition: opacity .22s ease, visibility .22s ease; cursor: zoom-out; }
+.lightbox.open { opacity: 1; visibility: visible; }
+.lightbox img { max-width: 92vw; max-height: 84vh; width: auto; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 30px 80px -30px rgba(0,0,0,0.8); background: var(--px-surface); cursor: default; transform: scale(.98); transition: transform .22s ease; }
+.lightbox.open img { transform: scale(1); }
+.lightbox .lb-cap { max-width: 70ch; text-align: center; color: rgba(255,255,255,0.78); font-size: 13.5px; line-height: 1.55; cursor: default; }
+.lightbox .lb-cap strong { color: #fff; font-weight: 600; }
+.lightbox .lb-close { position: fixed; top: 18px; right: 22px; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.22); background: rgba(255,255,255,0.06); color: #fff; font-size: 20px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .15s; }
+.lightbox .lb-close:hover { background: rgba(255,255,255,0.16); }
+.lightbox .lb-nav { position: fixed; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.22); background: rgba(255,255,255,0.06); color: #fff; font-size: 24px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .15s; }
+.lightbox .lb-nav:hover { background: rgba(255,255,255,0.16); }
+.lightbox .lb-prev { left: 18px; }
+.lightbox .lb-next { right: 18px; }
+@media (max-width: 600px) { .lightbox .lb-prev { left: 8px; } .lightbox .lb-next { right: 8px; } .lightbox .lb-nav { width: 42px; height: 42px; } }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px) {
+  .hero-meta { grid-template-columns: 1fr; gap: 20px; }
+  footer { grid-template-columns: 1fr; }
+  .foot-col.right { text-align: left; }
+  .hero-feature, .figblock, .pipeline, .stats { padding-left: 24px; padding-right: 24px; }
+}
+@media (max-width: 640px) {
+  nav { padding: 14px 20px; }
+  .hero { padding: 124px 20px 40px; }
+  section.essay { padding: 0 20px; }
+  .closing { padding: 0 20px; }
+  footer { padding: 40px 20px 48px; }
+  .hero h1 { font-size: clamp(32px, 8vw, 46px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .hero-eyebrow, .hero h1, .hero-subtitle, .hero-divider, .hero-meta, .hero-feature { opacity: 1 !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class='name' href='/'><span class="dot"></span>Michael Scrivana</a>
+  <a class='back' href='/#ai'>&larr; Back to work</a>
+</nav>
+
+<!-- ================ HERO ================ -->
+<div class="hero">
+  <div class="hero-eyebrow px-eyebrow">Case study &middot; CreativeLab</div>
+  <h1>I didn't build a prompt box. I built a <em>system</em>.</h1>
+  <p class="hero-subtitle">CreativeLab is a node-based tool I built in React that turns brand data &mdash; pack, palette, rules, channel specs &mdash; into channel-ready lifestyle imagery through Gemini and Veo. This is the part a gallery can't show: the problem I was actually solving, the dead ends, the architecture decision at the heart of it, and what it changed.</p>
+
+  <div class="hero-divider"></div>
+
+  <dl class="hero-meta">
+    <div>
+      <dt>Role</dt>
+      <dd>Designed &amp; built it end-to-end</dd>
+    </div>
+    <div>
+      <dt>Stack</dt>
+      <dd>React &middot; React&nbsp;Flow &middot; Gemini &middot; Veo</dd>
+    </div>
+    <div>
+      <dt>Read time</dt>
+      <dd>7 minutes</dd>
+    </div>
+  </dl>
+</div>
+
+<!-- HERO FEATURE -->
+<div class="hero-feature">
+  <figure>
+    <img src="images/creativelab-graph/creativelab-app-womens50-video-full.jpg" alt="CreativeLab — the full node-based canvas: brand context on the left, a graph of Prompt, Reference, Generate, Iterate, Output, and Video nodes wiring a One A Day gummy from reference to Veo animation">
+    <figcaption><strong>CreativeLab v0.1.</strong> Brand context is loaded once on the left; the graph on the right runs Reference &rarr; Generate &rarr; Iterate &rarr; Output &rarr; Video. The designer wires the pipeline; the graph runs it.</figcaption>
+  </figure>
+</div>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 01 — THE PROBLEM ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">01 &middot; The problem</span>
+    <h2>Brand-safe lifestyle imagery didn't scale. The math was the problem.</h2>
+  </div>
+  <div class="essay-body">
+    <p class="lead">For the last seven years I've built brands across healthcare. The recurring bottleneck was never taste &mdash; it was volume against a compliance bar.</p>
+    <p>Take one launch. One A Day alone spans Women's, Men's, Kids, Prenatal, Teen, and 50+ &mdash; each in gummy <em>and</em> tablet, each needing lifestyle imagery for Amazon, retailer platforms, brand&nbsp;.com, social, print, and the trade-show booth. Multiply segment &times; format &times; channel and you're staring at hundreds of unique frames, every one of which has to be <strong>on-palette, on-pack, and legally clean</strong> before it ships.</p>
+    <p>The two ways to make those frames both broke at scale. A photoshoot is days of lead time and five figures per setup &mdash; you can't reshoot because a retailer wants a squarer crop. And the AI tools that were supposed to help were <em>prompt boxes</em>: type a paragraph, roll the dice, get something beautiful and slightly wrong. Change one word and the whole image changes. There was no way to hold the brand still while you moved one variable.</p>
+    <div class="pullquote">Everyone was doing <em>prompt-box roulette</em> &mdash; gorgeous output, zero guarantees, and no way to say &ldquo;keep everything, change only this.&rdquo;</div>
+    <p>That was the real tension I set out to solve. Not &ldquo;make images faster.&rdquo; Make images fast <em>while guaranteeing the brand survives the trip</em> &mdash; and make the control legible enough that a designer, not an engineer, drives it.</p>
+  </div>
+</section>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 02 — THE INSIGHT ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">02 &middot; The insight</span>
+    <h2>The system, not the prompt. Make brand the <em>environment</em>, not a sentence.</h2>
+  </div>
+  <div class="essay-body">
+    <p>The unlock was reframing what a designer should be touching. In a chat interface, the brand lives <em>inside</em> the prompt string &mdash; buried in prose, re-typed every time, impossible to hold constant. That's backwards. Brand isn't a sentence you write; it's the environment the work happens in.</p>
+    <p>So CreativeLab loads brand context <strong>once</strong>, at the top of the canvas &mdash; palette, pack references, a brand toolbox &mdash; and every node inherits it. What the designer actually manipulates is a <strong>graph</strong>: composable nodes wired together, each one a small, legible decision. Reference in. Generate. Look. Change one thing. Pin the keeper. Animate it.</p>
+    <p>Choosing a node graph over a chat box was the core design-technologist decision, and it wasn't cosmetic. A graph makes the pipeline <em>visible and re-runnable</em>. You can see where brand enters, where a choice was made, where the compliance check sits. You can swap a reference and re-run just the tail. It turns &ldquo;generate an image&rdquo; from a slot-machine pull into <strong>a wiring diagram a designer can reason about</strong>.</p>
+  </div>
+</section>
+
+<div class="pipeline reveal">
+  <span class="pipeline-context"><span class="dot"></span>Brand context loaded once &mdash; every node inherits it</span>
+  <div class="pipeline-flow">
+    <div class="pipe-node">
+      <div class="kind">Reference</div>
+      <div class="title">Brand in</div>
+      <div class="why">Pack shot, palette, and rules enter as structured inputs &mdash; not as prose in a prompt.</div>
+    </div>
+    <div class="pipe-arrow">&rarr;</div>
+    <div class="pipe-node">
+      <div class="kind">Generate</div>
+      <div class="title">Gemini</div>
+      <div class="why">Nano Banana&nbsp;2 renders variations <em>against</em> the reference, not from scratch.</div>
+    </div>
+    <div class="pipe-arrow">&rarr;</div>
+    <div class="pipe-node">
+      <div class="kind">Iterate</div>
+      <div class="title">Delta only</div>
+      <div class="why">The reference stays anchored; only your delta prompt re-rolls. Keep everything, change one thing.</div>
+    </div>
+    <div class="pipe-arrow">&rarr;</div>
+    <div class="pipe-node">
+      <div class="kind">Output</div>
+      <div class="title">Pin the keeper</div>
+      <div class="why">Composite and lock a channel-ready still. The compliance check lives here.</div>
+    </div>
+    <div class="pipe-arrow">&rarr;</div>
+    <div class="pipe-node">
+      <div class="kind">Video</div>
+      <div class="title">Veo</div>
+      <div class="why">Wire the keeper frame into a Veo node and the still becomes motion.</div>
+    </div>
+  </div>
+</div>
+
+<div class="figblock reveal">
+  <span class="figlabel">The canvas — one graph, brief to motion</span>
+  <figure>
+    <img src="images/creativelab-graph/creativelab-canvas-womens50-video-graph.jpg" alt="CreativeLab canvas close-up: Prompt and Reference nodes feed a Generate node running Gemini Nano Banana 2, into Output, into an Iterate node with a delta prompt, into a final Output and a Veo Video node">
+    <figcaption><strong>Reference in, motion out.</strong> A real graph for One A Day Women's 50+ Multi Gummy: the pack reference feeds Generate, an Iterate node carries a delta prompt (&ldquo;overhead view, more dramatic lighting&rdquo;), and the pinned keeper wires into a Veo node. Every node is a decision you can see and re-run.</figcaption>
+  </figure>
+</div>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 03 — WHAT DIDN'T WORK ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">03 &middot; What didn't work</span>
+    <h2>The first version failed in exactly the way healthcare can't afford.</h2>
+  </div>
+  <div class="essay-body">
+    <p class="lead">The honest part. My first pass was closer to everyone else's prompt box &mdash; and it broke on the one thing regulated brands can't compromise: the pack.</p>
+    <p>The generations were gorgeous and <em>wrong</em>. The model would render a beautiful scene and quietly mangle the label &mdash; &ldquo;Nxtritional Support,&rdquo; a garbled serving line, a logo lockup that drifted a few degrees off. In consumer healthcare, that's not a cute artifact; it's the thing legal rejects and the reason the whole approach gets thrown out. A tool that generates non-compliant packaging faster is worse than no tool.</p>
+  </div>
+</section>
+
+<div class="figblock reveal">
+  <span class="figlabel">The tell — beautiful, and off-brand</span>
+  <div class="fig-trio">
+    <figure>
+      <img src="images/creativelab-graph/oad-womens50-gummy-gen-v1.png" alt="First generation of the Women's 50+ gummy — clean studio scene but the pack copy reads 'Nxtritional Support', an AI text-drift error">
+      <figcaption><strong>Gen v1.</strong> Look closely: the pack copy has drifted. Studio-clean, legally unusable.</figcaption>
+    </figure>
+    <figure>
+      <img src="images/creativelab-graph/oad-womens50-gummy-iterate-bright.png" alt="Iteration with warm kitchen light — improved mood, but serving text still garbled">
+      <figcaption><strong>Iterate, warm.</strong> Better mood after a delta prompt &mdash; but re-rolling still nudged the label.</figcaption>
+    </figure>
+    <figure>
+      <img src="images/creativelab-graph/oad-womens50-gummy-iterate-overhead.png" alt="Iteration with dramatic overhead lighting on a dark ground">
+      <figcaption><strong>Iterate, dramatic.</strong> A single delta &mdash; &ldquo;overhead, darker&rdquo; &mdash; without re-rolling the whole frame.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<section class="essay reveal">
+  <div class="essay-body">
+    <p>Two failures taught me the architecture. First: <strong>a prompt string can't guarantee a pack.</strong> That pushed pack and brand rules out of the prose and into <em>structured reference inputs</em> the model treats as fixed &mdash; and it's why the real pipeline ends on an <strong>Output node where the compliance check lives</strong>, not on whatever the model happened to spit out.</p>
+    <p>Second: <strong>re-rolling changed everything at once.</strong> Nudge the lighting and you'd lose the composition you liked. So the Iterate node became a <em>mask-free global re-roll that keeps the reference anchored and applies only the delta</em> &mdash; keep everything, change one thing. For tighter work, a Modify path does brush-masked local edits. That single behavior &mdash; deltas over re-rolls &mdash; is what turned the tool from a slot machine into an instrument.</p>
+    <p>I cut a lot to get there: a freeform chat mode, a &ldquo;surprise me&rdquo; button, an early auto-compositor that fought the designer. None of them respected the real constraint. The tool got <em>smaller and sharper</em> the more I understood the failure.</p>
+  </div>
+</section>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 04 — STILL TO MOTION ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">04 &middot; Still to motion</span>
+    <h2>The last node turns a keeper frame into a shot.</h2>
+  </div>
+  <div class="essay-body">
+    <p>Once a still is pinned and clean, the designer wires it into a <strong>Video node</strong> &mdash; Veo, eight seconds, 720p &mdash; and the frame animates. No handoff to a motion team, no re-briefing, no losing the brand between tools. The chain that started at a pack reference ends as a moving shot, all inside one graph, in minutes.</p>
+  </div>
+</section>
+
+<div class="figblock reveal">
+  <span class="figlabel">The video node — Veo, wired to the keeper</span>
+  <div class="fig-pair">
+    <figure>
+      <img src="images/creativelab-graph/creativelab-canvas-video-chain.jpg" alt="Close-up of the Iterate, Output, and Video nodes — the pinned still wired into a Veo 3.1 video node rendering an 8-second clip">
+      <figcaption><strong>Wiring the shot.</strong> The pinned Output feeds a Veo node. Image in, motion out &mdash; the tail of the same graph.</figcaption>
+    </figure>
+    <figure>
+      <div class="px-video">
+        <video src="images/creativelab-graph/oad-womens50-gummy-veo-8s.mp4" poster="images/creativelab-graph/oad-womens50-gummy-veo-frame-1.jpg" muted loop playsinline controls preload="metadata"></video>
+      </div>
+      <figcaption><strong>The output.</strong> Women's 50+ Multi Gummy &mdash; Veo animation from the Gemini-generated keeper. Nothing photographed.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<div class="figblock reveal">
+  <span class="figlabel">Veo frames — the shot, decomposed</span>
+  <div class="fig-quad">
+    <figure><img src="images/creativelab-graph/oad-womens50-gummy-veo-frame-1.jpg" alt="Veo animation frame 1"></figure>
+    <figure><img src="images/creativelab-graph/oad-womens50-gummy-veo-frame-2.jpg" alt="Veo animation frame 2"></figure>
+    <figure><img src="images/creativelab-graph/oad-womens50-gummy-veo-frame-4.jpg" alt="Veo animation frame 4"></figure>
+    <figure><img src="images/creativelab-graph/oad-womens50-gummy-veo-frame-5.jpg" alt="Veo animation frame 5"></figure>
+  </div>
+</div>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 05 — IMPACT ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">05 &middot; Impact</span>
+    <h2>Days to minutes &mdash; and a practice the team could keep.</h2>
+  </div>
+  <div class="essay-body">
+    <p class="lead">The headline is honest and it's the one that matters: a brand-compliant lifestyle frame that used to take days of shoot-or-source now takes minutes on the canvas.</p>
+  </div>
+</section>
+
+<div class="stats reveal">
+  <div class="stat">
+    <div class="num">Days <em>&rarr;</em> min</div>
+    <div class="lbl">Time to a brand-compliant lifestyle frame, shoot-or-source vs. canvas.</div>
+  </div>
+  <div class="stat">
+    <div class="num">1 <em>graph</em></div>
+    <div class="lbl">Reference to still to motion in a single pipeline &mdash; no tool-to-tool handoff.</div>
+  </div>
+  <div class="stat">
+    <div class="num">NACDS <em>'26</em></div>
+    <div class="lbl">Same pipeline ran at trade-show scale for One&nbsp;A&nbsp;Day's booth panels and heroes.</div>
+  </div>
+</div>
+
+<section class="essay reveal">
+  <div class="essay-body">
+    <!-- NOTE (Michael): swap in your real figures where you have them —
+         # of NACDS panels generated, # of SKUs run through the tool,
+         team size that adopted it, cost-per-shoot avoided. Keep them
+         defensible; a Google reviewer is allergic to inflated "10x". -->
+    <p>Beyond speed, two things mattered more for how the work read. It stayed <strong>on-brand by construction</strong> &mdash; brand context is the environment, and the compliance check is a node, so &ldquo;fast&rdquo; never meant &ldquo;off-brief.&rdquo; And it was <strong>legible enough to hand off</strong>: I taught the practice to my team in a talk called <em>&ldquo;AI for Designers,&rdquo;</em> and designers &mdash; not engineers &mdash; could wire graphs themselves. The same pipeline that made a single hero also produced One A Day's <a href='/nacds'>NACDS 2026 booth</a> panels and close-up heroes.</p>
+    <p>I'm deliberately not inflating this. The win isn't a made-up multiplier; it's that a regulated brand got a repeatable, compliant, designer-driven way to make lifestyle imagery at the volume the digital shelf actually demands.</p>
+  </div>
+</section>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 06 — WHAT'S NEXT ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">06 &middot; What's next</span>
+    <h2>Where I'd take it.</h2>
+  </div>
+  <div class="essay-body">
+    <div class="speculative">
+      <div class="spec-block">
+        <h3><span class="num">A</span>Compliance as a first-class node.</h3>
+        <p>Right now the compliance check is a discipline at the Output stage. The next version makes it a real node with brand rules encoded &mdash; palette tolerances, logo geometry, required legal copy &mdash; that flags a frame <em>before</em> a human has to catch a mangled label. The tool should know its own brand bar.</p>
+      </div>
+      <div class="spec-block">
+        <h3><span class="num">B</span>Shareable graphs as brand templates.</h3>
+        <p>A wired graph is institutional knowledge. If a great &ldquo;kitchen hero&rdquo; pipeline could be saved and handed to a teammate as a starting point &mdash; brand context and all &mdash; the tool becomes a way a team accumulates craft, not just a faster way to render.</p>
+      </div>
+      <div class="spec-block">
+        <h3><span class="num">C</span>The graph as the brief.</h3>
+        <p>The most interesting direction: the graph itself becomes the deliverable a stakeholder reviews. Instead of approving 200 finished frames, you approve the <em>pipeline</em> &mdash; and trust it to run. That's a different relationship between design, review, and generation, and it's the one I'd want to keep pulling on.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================ CLOSING ================ -->
+<div class="closing reveal">
+  <div class="closing-mark"></div>
+  <p>AI is just the newest material on my bench. The instinct that pulled me from graphite to oil to clay to 3D pulls me here &mdash; and increasingly, to building the tool that makes the work.</p>
+</div>
+
+<!-- ================ FOOTER ================ -->
+<footer>
+  <div class="foot-col">
+    <span class="label">Contact</span>
+    <a href="mailto:mkscrivana@gmail.com" class="mono">mkscrivana@gmail.com</a>
+    <a href="https://www.linkedin.com/in/michaelscrivana89" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="index.html">adobe.michaelscrivana.com</a>
+  </div>
+  <div class="foot-col">
+    <span class="label">More work</span>
+    <a href='/oad-new-identity'>One A Day &mdash; identity at scale</a>
+    <a href='/miralax'>MiraLAX &mdash; one system, two launches</a>
+    <a href='/'>All work</a>
+    <a href='/resume'>Résumé</a>
+  </div>
+  <div class="foot-col right">
+    <span class="label">Colophon</span>
+    <span class="copy">PX Design System v0.2</span>
+    <span class="copy">DM Sans &middot; JetBrains Mono</span>
+    <span class="copy">&copy; 2026 Michael Scrivana</span>
+  </div>
+</footer>
+
+<!-- ================ LIGHTBOX ================ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true">
+  <button class="lb-close" id="lbClose" type="button" aria-label="Close">&times;</button>
+  <button class="lb-nav lb-prev" id="lbPrev" type="button" aria-label="Previous image">&#8249;</button>
+  <button class="lb-nav lb-next" id="lbNext" type="button" aria-label="Next image">&#8250;</button>
+  <img id="lbImg" alt="">
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<!-- ============ SCROLL REVEAL ============ -->
+<script>
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+</script>
+
+<!-- ============ LIGHTBOX ============ -->
+<script>
+(function () {
+  var lb = document.getElementById('lightbox'),
+      img = document.getElementById('lbImg'),
+      cap = document.getElementById('lbCap'),
+      closeBtn = document.getElementById('lbClose'),
+      prevBtn = document.getElementById('lbPrev'),
+      nextBtn = document.getElementById('lbNext'),
+      items = Array.prototype.slice.call(document.querySelectorAll('figure img')),
+      current = 0, lastFocus = null;
+
+  function render(i) {
+    current = (i + items.length) % items.length;
+    var el = items[current], fig = el.closest('figure'),
+        figcap = fig ? fig.querySelector('figcaption') : null;
+    img.src = el.currentSrc || el.src; img.alt = el.alt || '';
+    if (figcap) { cap.innerHTML = figcap.innerHTML; cap.style.display = ''; }
+    else { cap.textContent = ''; cap.style.display = 'none'; }
+  }
+  function open(i) {
+    render(i);
+    lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    lastFocus = document.activeElement; closeBtn.focus();
+  }
+  function close() {
+    lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = ''; img.src = '';
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  function step(d) { render(current + d); }
+
+  items.forEach(function (el, i) { el.addEventListener('click', function () { open(i); }); });
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function (e) { e.stopPropagation(); step(-1); });
+  nextBtn.addEventListener('click', function (e) { e.stopPropagation(); step(1); });
+  lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  });
+})();
+</script>
+
+<!-- ============ HOVER-PLAY LOCAL VIDEO ============ -->
+<script>
+(function () {
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (reduce || !fine) return;
+  document.querySelectorAll('.px-video video').forEach(function (video) {
+    video.muted = true;
+    var box = video.closest('.px-video');
+    box.addEventListener('mouseenter', function () { video.play().catch(function () {}); });
+    box.addEventListener('mouseleave', function () { video.pause(); });
+  });
+})();
+</script>
+
+</body>
+</html>
