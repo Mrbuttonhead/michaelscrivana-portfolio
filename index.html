@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dense systems, simple screens — Michael Scrivana · Ramp</title>
-<meta name="description" content="Four case studies in systems design, design systems at scale, structured data, and making dense, rule-bound workflows feel effortless. Application for Product Designer at Ramp.">
+<title>Brand operations at scale — Michael Scrivana · DePuy Synthes</title>
+<meta name="description" content="Five case studies in brand governance, asset taxonomy, self-service tooling, stakeholder education, and holding a brand system together while everything around it moves. Application for Sr. Manager, Brand Operations and Marketing at DePuy Synthes.">
+<meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -17,10 +18,10 @@
   --bg:        #f4f5f7;
   --surface:   #ffffff;
   --surface-2: #eceef1;
-  --accent:      #8a6d2f;   /* Ramp bronze — single-var swap (Netflix red #B81D24 · PX blue #2850D8) */
-  --accent-deep: #6f5824;
-  --accent-dim:  rgba(138, 109, 47, 0.08);
-  --accent-line: rgba(138, 109, 47, 0.22);
+  --accent:      #0b4a8f;   /* deep clinical blue — single-var swap (Ramp bronze #8a6d2f · Netflix red #B81D24) */
+  --accent-deep: #083a70;
+  --accent-dim:  rgba(11, 74, 143, 0.08);
+  --accent-line: rgba(11, 74, 143, 0.22);
   --ink:    #0a0d12;
   --ink-2:  #45474f;
   --ink-3:  #80828c;
@@ -171,246 +172,267 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
 
 <nav class="topnav">
   <div class="wrap">
-    <a class="brand" href="https://www.michaelscrivana.com"><span class="dot"></span>Michael Scrivana</a>
+    <a class="brand" href="#top"><span class="dot"></span>Michael Scrivana</a>
     <div class="links">
-      <a class="case-link" href="#knowledge">Knowledge Layer</a>
-      <a class="case-link" href="#systems">Design Systems</a>
-      <a class="case-link" href="#pipeline">Creative Pipeline</a>
-      <a class="case-link" href="#personas">Personas</a>
-      <a class="contact" href="mailto:mkscrivana@gmail.com">Contact</a>
+      <a class="case-link" href="#standard">The Standard</a>
+      <a class="case-link" href="#taxonomy">Taxonomy</a>
+      <a class="case-link" href="#tooling">Self-Service</a>
+      <a class="case-link" href="#education">Enablement</a>
+      <a class="case-link" href="#change">Under Change</a>
     </div>
   </div>
 </nav>
 
-<header class="hero">
+<header class="hero" id="top">
   <div class="wrap">
-    <div class="kicker mono"><span class="dot"></span>Michael Scrivana &nbsp;·&nbsp; for Ramp · Product Designer</div>
-    <h1>Make the dense thing feel simple — <em>even when the logic underneath isn't.</em></h1>
-    <p class="lede">Four things I designed and shipped — a machine-readable knowledge layer, the design-system layer two organizations build on, a node-based pipeline that hides hard compliance rules behind one simple action, and a persona studio that turns research into structured data. The systems beneath the screen, not just the screen.</p>
-    <p class="who"><strong>Michael Scrivana</strong> — Product Designer &amp; Creative Technologist, AI Transformation Lead at Bayer Consumer Health. &nbsp;<a href="https://www.michaelscrivana.com">michaelscrivana.com</a></p>
+    <p class="kicker"><span class="dot"></span>Sr. Manager, Brand Operations and Marketing &nbsp;·&nbsp; DePuy Synthes &nbsp;·&nbsp; R-094539</p>
+    <h1>A standard nobody can follow at the moment of work <em>is a document, not a standard.</em></h1>
+    <p class="lede">Seven years governing brand systems for a global consumer-health portfolio — and building the operational machinery that keeps them consistent when a hundred people, a dozen agencies and fifty SKUs are all touching them at once. Five cases, in the order this job would meet them.</p>
+    <p class="who"><strong>Michael Scrivana</strong> — Senior Designer, AI Lead at Bayer Consumer Health. Eight years in regulated healthcare. &nbsp;<a href="mailto:mkscrivana@gmail.com">mkscrivana@gmail.com</a></p>
   </div>
 </header>
 
 <section class="thesis">
   <div class="wrap">
-    <p>I design for the seam where dense systems meet a <span class="hl">simple</span> screen — and I build the structured data underneath so it stays simple as it scales.</p>
+    <p>Brand governance fails operationally, <span class="hl">not creatively.</span> The rules are usually fine. Finding them, at speed, under a deadline, is the problem.</p>
   </div>
 </section>
 
-<!-- CASE 1 — MACHINE-READABLE KNOWLEDGE LAYER -->
-<section class="case" id="knowledge">
+<!-- ─────────────── 01 ─────────────── -->
+<section class="case" id="standard">
   <div class="wrap">
     <div class="case-head">
       <div class="case-num">01</div>
       <div>
-        <div class="case-title">Machine-Readable Knowledge Layer</div>
-        <div class="case-sub">One source of truth · structured content modeling · systems thinking</div>
+        <div class="case-title">The Single Standard</div>
+        <div class="case-sub">Brand governance · guidelines · agency enablement</div>
       </div>
     </div>
     <div class="case-body">
 
-      <div class="shots">
-        <figure class="wide">
-          <img src="images/knowledge-layer-architecture.png" alt="Architecture: six disciplines of scattered documents refactored into one canonical model exposed via MCP to three AI surfaces">
-          <figcaption><strong>From scattered prose to one machine-readable model.</strong> Six disciplines' documentation refactored into canonical objects — stable IDs, typed cross-references — exposed through a single MCP server, so the same knowledge answers across every AI surface.</figcaption>
-        </figure>
-        <figure class="wide">
-          <img src="images/knowledge-layer-canonical-object.png" alt="A real canonical-object markdown cell on the left and the find_canonical MCP call and JSON response on the right">
-          <figcaption><strong>What “machine-consumable” actually looks like.</strong> A real cell (left) and the MCP call an agent makes (right): it reads structure rather than prose, resolves typed cross-refs, and follows the graph to related cells.</figcaption>
-        </figure>
+      <div class="block">
+        <div class="label">The situation</div>
+        <p>One A Day relaunched its identity across <strong>50+ SKUs and more than a thousand creative assets</strong>. Multiple agencies, every retail and digital channel, one relaunch window. The brand book existed. It was a PDF, and it lived wherever the last person had emailed it.</p>
       </div>
 
       <div class="block">
-        <div class="label mono">The problem</div>
-        <p>A 115-person org's knowledge — brand rules, research insights, packaging standards — lived as scattered documents across six disciplines. Humans could barely find it. <strong>AI couldn't reliably ingest it at all.</strong> Agents need structure, stable identity, and metadata; documentation gives them prose.</p>
+        <div class="label">What I did</div>
+        <p>I <strong>digitized the brand book into the single standard every agency and internal team accessed and worked from</strong> — one live resource instead of a circulating file — then coordinated pack renders across every SKU and held consistency through Amazon (including A+ pages), Walmart, Target, retail, digital and social. I wrote the design briefs and reviewed partner deliverables against the standard rather than against taste.</p>
       </div>
-      <div class="block">
-        <div class="label mono">What I built</div>
-        <p>I refactored it into a <strong>single structured model that serves as the source of truth for both humans and AI</strong>: a canonical-object-with-cross-reference schema — stable IDs, frontmatter, typed cross-refs — exposed through an MCP server (<span class="code">find_canonical</span>, <span class="code">search</span>, <span class="code">list_cells</span>) so any agent can ingest and reason over the system reliably.</p>
+
+      <div class="shots">
+        <div class="judge-pair">
+          <figure>
+            <img src="images/OAD-OLD-M_1.avif" alt="One A Day Men's packaging in the previous identity, before the portfolio relaunch">
+            <figcaption><strong>Before.</strong> The identity the portfolio was relaunching out of.</figcaption>
+          </figure>
+          <figure>
+            <img src="images/OAD_Group_02.webp" alt="Multiple One A Day SKUs in the relaunched identity, shown as a family on shelf">
+            <figcaption><strong>After, at volume.</strong> Consistency across a portfolio is a governance outcome before it is a design one.</figcaption>
+          </figure>
+        </div>
       </div>
+
       <div class="block full">
-        <div class="label mono">Why it matters for Ramp</div>
-        <p>Ramp's product is dense by nature — policies, controls, ledgers, and approvals all referencing the same underlying truth. The discipline this shows is exactly that: take sprawling, inconsistent information and give it <strong>one structured spine</strong>, so every surface that touches it stays consistent. I think in systems and data models, not just screens — and the same model serves people <em>and</em> software from a single build.</p>
+        <div class="label">Also on the record</div>
+        <p>I authored the <strong>15-page ecommerce content standards brief</strong> defining best-in-class specs for Amazon, Walmart and Target, and co-authored Bayer Consumer Health's <strong>189-slide Inclusive Design standard</strong> — WCAG AA contrast adopted across print, web, mobile, pack and POS, written for internal colleagues <em>and</em> external agency partners.</p>
       </div>
-      <div class="outcomes">
-        <div class="outcome"><div class="o-lead">One spine, every surface stays consistent</div><div class="o-sub">Prose scattered across six disciplines became a structured model anything can read reliably.</div></div>
-        <div class="outcome"><div class="o-lead">Built for people and software at once</div><div class="o-sub">The same system answers from the internal GenAI platform, M365 Copilot, and Claude Code.</div></div>
-        <div class="outcome"><div class="o-lead">A single source of truth</div><div class="o-sub">Six disciplines' rules now resolve to one canonical model instead of competing files.</div></div>
-      </div>
+
       <div class="jd-tag">
-        <span>structured content modeling</span><span>one source of truth</span><span>stable IDs &amp; cross-refs</span><span>systems thinking</span>
+        <span>Brand governance</span><span>Brand guidelines</span><span>Stakeholder enablement</span><span>Agency partners</span><span>Digital brand governance</span>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- CASE 2 — DESIGN SYSTEMS FOR AI -->
-<section class="case" id="systems">
+<!-- ─────────────── 02 ─────────────── -->
+<section class="case" id="taxonomy">
   <div class="wrap">
     <div class="case-head">
       <div class="case-num">02</div>
       <div>
-        <div class="case-title">Design Systems at Scale</div>
-        <div class="case-sub">Token systems · AI-assisted build · adoption across two organizations</div>
+        <div class="case-title">Asset Taxonomy &amp; the Digital Shelf</div>
+        <div class="case-sub">Naming · tagging · publishing · content governance</div>
       </div>
     </div>
     <div class="case-body">
 
-      <div class="shots">
-        <div class="judge-pair">
-          <figure>
-            <img src="images/designsystem-px-showcase.png" alt="Design-system showcase — token swatches for surface, text, and brand colour, with type pairing">
-            <figcaption><strong>System one.</strong> Tokens, brand mark, type pairing, and component patterns as one shared vocabulary — the design language for one organization.</figcaption>
-          </figure>
-          <figure>
-            <img src="images/designsystem-science-showcase.png" alt="Sister design-system showcase — same token foundation, a deliberately different visual dialect">
-            <figcaption><strong>System two — its sister org.</strong> Same skeleton, a deliberately different dialect — built on the same token foundation, so the two stay coherent without being identical.</figcaption>
-          </figure>
-        </div>
+      <div class="block">
+        <div class="label">Publishing at volume</div>
+        <p>I oversaw <strong>700+ product renders</strong> through <strong>GS1 syndication into EDAM/PIM</strong> — the naming, tagging, versioning and publishing discipline that decides whether the right image appears on the right retailer's page. Set the aesthetic standards with the render vendors; owned the pipeline that carried them out.</p>
       </div>
 
       <div class="block">
-        <div class="label mono">The problem</div>
-        <p>A design system only earns its name when it's actually <em>applied</em> — consistently, across an entire organization, not as a style guide no one opens. And the moment a second organization needs one, you find out whether your foundation scales or was a one-off.</p>
+        <div class="label">The schema underneath</div>
+        <p>I designed the <strong>PX Taxonomy Framework</strong> — five facets across six craft sub-homes, on a canonical-object schema with cross-references — so a person or a machine can find the one authoritative version of a thing rather than the nearest copy of it.</p>
       </div>
-      <div class="block">
-        <div class="label mono">What I built</div>
-        <p>Two sister design systems on <strong>one shared token foundation</strong> (CSS custom properties) — deliberately differentiated by dialect. I <strong>used AI to help build and maintain them</strong>, and governance recipes do the scaling work: clear rules and decision trees that keep the system coherent as it's adopted, <strong>without a committee</strong> gatekeeping every change.</p>
-      </div>
+
       <div class="block full">
-        <div class="label mono">Why it matters for Ramp</div>
-        <p>A product the size of Ramp's lives or dies on whether its design system is actually <em>applied</em> — consistently, as it scales to new surfaces and a growing team. I've proven a <strong>single token foundation scales to a second org with no rebuild</strong>, and used AI to keep construction and maintenance fast without lowering the craft bar. That's the systems-design backbone a dense product needs to stay coherent as it grows.</p>
+        <div class="label">Components, not files</div>
+        <p>I built <strong>master-and-adaptation template systems</strong>, modular assets held in a DAM, and reusable regulated-copy modules, so brands, markets and partners assemble from parts rather than commissioning finished files. I design the global masters local markets adapt, and I build and maintain the <strong>Figma library and token base</strong> that a 115-person organization designs from.</p>
       </div>
+
       <div class="outcomes">
-        <div class="outcome"><div class="o-lead">Proved it scales to a second org</div><div class="o-sub">A second organization adopted the system with no rebuild — just a new dialect on the same foundation.</div></div>
-        <div class="outcome"><div class="o-lead">Built and maintained with AI</div><div class="o-sub">Modern AI used to help construct tokens, marks, templates, and governance — faster, and consistent.</div></div>
-        <div class="outcome"><div class="o-lead">Applied across the whole org</div><div class="o-sub">Not a guide on a shelf — adopted in real work throughout each organization.</div></div>
+        <div class="outcome"><div class="o-lead">One authoritative version</div><div class="o-sub">A canonical-object schema with cross-references, not a folder convention.</div></div>
+        <div class="outcome"><div class="o-lead">700+ renders syndicated</div><div class="o-sub">GS1 into EDAM/PIM — the digital shelf, end to end.</div></div>
+        <div class="outcome"><div class="o-lead">Assembled, not commissioned</div><div class="o-sub">Master-and-adaptation templates plus modular regulated copy.</div></div>
       </div>
+
       <div class="jd-tag">
-        <span>design systems at scale</span><span>design tokens</span><span>governance &amp; adoption</span><span>AI-augmented construction</span>
+        <span>Asset taxonomy</span><span>Tagging &amp; naming</span><span>Publishing &amp; archiving</span><span>Content governance</span><span>DAM</span><span>SharePoint</span>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- CASE 3 — GENERATIVE CREATIVE PIPELINE -->
-<section class="case" id="pipeline">
+<!-- ─────────────── 03 ─────────────── -->
+<section class="case" id="tooling">
   <div class="wrap">
     <div class="case-head">
       <div class="case-num">03</div>
       <div>
-        <div class="case-title">Generative Creative Pipeline</div>
-        <div class="case-sub">Hard rules behind one simple action · compliance built-in · multimodal</div>
+        <div class="case-title">Self-Service That Displaces the Agency Brief</div>
+        <div class="case-sub">Scalable tools · adoption · reducing external reliance</div>
       </div>
     </div>
     <div class="case-body">
 
-      <div class="shots">
-        <figure class="wide">
-          <img src="images/creativelab-canvas-oad-kids.jpg" alt="The CreativeLab node-based canvas — Reference, Generate, and Iterate nodes wired together">
-          <figcaption><strong>The actual tool — a node-based canvas anyone on the team can drive.</strong> Load the brand, drop in a real pack as the reference, describe the change in plain language — <em>“instead of a girl, a boy in a Knicks cap”</em> — and iterate into on-brand variants. The reference stays anchored; only the delta you describe moves.</figcaption>
-        </figure>
-
-        <figure class="wide">
-          <img src="images/creativelab-oad-kids-hero.jpg" alt="Channel-ready One A Day Kids hero — a boy in a Knicks cap and his mother at a kitchen table with the pack in scene">
-          <figcaption><strong>The channel-ready hero that graph produced.</strong> A warm, on-brand family moment with the pack in scene — minutes from prompt to finished frame, where today that means a photoshoot or an agency brief. Nothing here was photographed.</figcaption>
-        </figure>
-
-        <p class="block label mono" style="margin:18px 0 -6px;">More from the same engine</p>
-        <div class="judge-pair">
-          <figure>
-            <img src="images/creativelab-glp1-companion-shelf.jpg" alt="GLP-1 companion category shelf concept organising Bayer brands by shopper need">
-            <figcaption><strong>Retail category concept.</strong> Bayer brands organised around the GLP-1 shopper journey — digestion, daily nutrition, skin care. Generated to spark a leadership conversation, not commissioned from an agency.</figcaption>
-          </figure>
-          <figure>
-            <img src="images/creativelab-claritin-lifestyle.jpg" alt="Claritin brand lifestyle scene — a woman holding the pack in a spring blossom setting">
-            <figcaption><strong>Brand lifestyle, channel-ready.</strong> Built from Claritin’s own pack and brand colours into an on-brand seasonal scene — the kind of asset that today means a photoshoot or an agency brief.</figcaption>
-          </figure>
-        </div>
-      </div>
-
-      <div class="block">
-        <div class="label mono">The problem</div>
-        <p>Almost every brand visual routes out to an external agency — weeks of turnaround, an invoice per asset, and version drift across channels and markets. Marketing moves at the speed of its slowest creative dependency.</p>
-      </div>
-      <div class="block">
-        <div class="label mono">What I built</div>
-        <p>A <strong>node-based creative-iteration platform</strong> (React Flow) that wires agentic feedback loops and multimodal inputs into a visual graph: load a brand, reference a real pack, describe a plain-language change, iterate. Graph topology is preserved so any path is reproducible, and brand rules inject as a node — applied as the work is made, so speed never costs compliance.</p>
-      </div>
       <div class="block full">
-        <div class="label mono">Why it matters for Ramp</div>
-        <p>This is the design problem that recurs across Ramp's surfaces: <strong>wrap a lot of branching logic and hard, non-negotiable rules behind something that feels like one simple action</strong>. Brand and compliance rules inject as a node and apply <em>while</em> the work is made — so speed never costs accuracy. Making a high-stakes, rule-bound workflow feel effortless is the core craft, whether the rules are brand or financial.</p>
+        <div class="label">The premise</div>
+        <p>We default to briefing outward because it is the path of least resistance, not because the work needs an agency. Change the path and the default changes with it. <strong>Five internal tools in twelve months</strong>, all built to be used by people who are not designers.</p>
       </div>
-      <div class="outcomes">
-        <div class="outcome"><div class="o-lead">Weeks of turnaround collapsed to minutes</div><div class="o-sub">What was weeks-and-an-invoice per asset — a photoshoot or agency brief — is now prompt to finished frame.</div></div>
-        <div class="outcome"><div class="o-lead">Compliance built in, not policed after</div><div class="o-sub">Rules inject as a node and apply while the work is made, so speed never costs accuracy.</div></div>
-        <div class="outcome"><div class="o-lead">One brief, every variant — reproducibly</div><div class="o-sub">A single input flows to all formats and markets — repeatable, because the graph is preserved.</div></div>
+
+      <div class="metrics">
+        <div class="metric"><div class="n">&lt;1 <span class="unit">min</span></div><div class="l">Artwork review against regulatory and brand-system rules — down from 15–20 minutes, and it catches the single-character marks people miss.</div></div>
+        <div class="metric"><div class="n">60 <span class="unit">sec</span></div><div class="l">One SKU through five channels with three regulated tweaks, for Amazon Prime Day.</div></div>
+        <div class="metric"><div class="n">6 <span class="unit">/ 6</span></div><div class="l">Craft disciplines in active use of the self-service hub, from zero, inside twelve months.</div></div>
+        <div class="metric"><div class="n">days <span class="unit">not weeks</span></div><div class="l">Internal delivery speed against a typical 4–6-week agency cycle.</div></div>
       </div>
+
+      <div class="block">
+        <div class="label">How the rules got inside the tools</div>
+        <p>The compliance layer runs on what I call a <strong>brand brain</strong> — brand guidelines encoded as machine-readable rules, plus reference assets and scoring, consulted at every step of the pipeline. Output is on-guideline by construction rather than by review. The same architectural move as the digitized brand book, one level down.</p>
+      </div>
+
+      <div class="block">
+        <div class="label">Where it ships</div>
+        <p>The hub sits behind corporate single sign-on so it is a work tool, not a curiosity. I ship agents callable from the tools people already live in, because <strong>adoption is mostly the removal of a trip</strong> — not evangelism.</p>
+      </div>
+
       <div class="jd-tag">
-        <span>dense workflow made simple</span><span>compliance built-in</span><span>multimodal inputs</span><span>speed at scale</span>
+        <span>Scalable self-service tools</span><span>Adoption</span><span>Reduced agency reliance</span><span>Workflow management</span><span>Operational efficiency</span>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- CASE 4 — SYNTHETIC PERSONA STUDIO -->
-<section class="case" id="personas">
+<!-- ─────────────── 04 ─────────────── -->
+<section class="case" id="education">
   <div class="wrap">
     <div class="case-head">
       <div class="case-num">04</div>
       <div>
-        <div class="case-title">Synthetic Persona Studio</div>
-        <div class="case-sub">Structured research data · agent-ready · concept evaluation</div>
+        <div class="case-title">Enablement That Outlives the Teacher</div>
+        <div class="case-sub">Training programs · self-service resources · stakeholder education</div>
       </div>
     </div>
     <div class="case-body">
 
-      <div class="shots">
-        <div class="judge-pair">
-          <figure>
-            <img src="images/persona-structured-object.png" alt="A persona rendered as a structured object — decision style, AI agent delegation model, and evaluation criteria">
-            <figcaption><strong>Every persona is a structured object, not a slide.</strong> Decision style, purchase triggers and dealbreakers, and — crucially — an explicit <em>AI-agent delegation model</em> and the criteria it would evaluate on. Research, typed for machines.</figcaption>
-          </figure>
-          <figure>
-            <img src="images/persona-evaluate-concept.png" alt="Deep-dive view with PX implications including an Agent Data spec, and a Test a Concept panel to evaluate a claim as the persona">
-            <figcaption><strong>Then use it as a lens.</strong> Each persona carries an <em>“Agent Data”</em> spec — the machine-readable fields a product needs — and a <em>“Test a Concept”</em> panel: evaluate any claim or pack as that persona, an AI reasoning through their eyes before you commit a real study.</figcaption>
-          </figure>
-        </div>
+      <div class="block">
+        <div class="label">The program</div>
+        <p>I co-authored Bayer Consumer Health's org-wide <strong>Design Capability Curriculum</strong> — five modules covering cognitive science applied to branding, writing remarkable briefs, the 4D design process, giving feedback, and a brand case study. It launched as <strong>required training inside the marketing organization</strong>. I delivered <strong>three sessions personally to 100+ marketers</strong>, then it was published to the internal learning platform as <strong>mandatory training that still runs without me</strong>, and later extended into the Science organization.</p>
       </div>
 
       <div class="block">
-        <div class="label mono">The problem</div>
-        <p>Understanding diverse consumer decision-making is months of user research per cycle — and the output is usually a deck no downstream system can read. Teams need research that is both human-legible <em>and</em> machine-consumable.</p>
+        <div class="label">The failure that taught me the most</div>
+        <p>Briefs got better. They also kept stalling. When I went looking for why, the cause was not missing knowledge — people knew what a good brief contained. It was <strong>missing information, and the cost of going to find it</strong>. So I stopped teaching the module harder and built the <strong>Brief Translator</strong> to close the gap instead.</p>
       </div>
-      <div class="block">
-        <div class="label mono">What I built</div>
-        <p>A persona studio, co-built with Product Research, that renders research-grounded archetypes as <strong>structured objects</strong> — a typed schema of decision style, triggers, an explicit agent-delegation model, and evaluation criteria. A built-in concept test lets anyone evaluate a claim through a persona's eyes. Multi-provider (Claude / Azure OpenAI / internal platform), swappable without code.</p>
-      </div>
+
       <div class="block full">
-        <div class="label mono">Why it matters for Ramp</div>
-        <p>Two things at once. It's <strong>structured data modeling</strong> — turning fuzzy research into typed objects a system can read. And it's a <strong>human-in-the-loop way to pressure-test a direction</strong> before committing real resources to it. Designing with evidence, and building the lightweight tooling to get it, is how I keep dense product decisions grounded instead of guessed.</p>
+        <div class="label">The pattern, stated plainly</div>
+        <p>Every time I have taught something, I have followed the teaching with a change to <em>the situation</em> rather than to the person. Drawing students were told to measure rather than trust their eye. The accessibility standard is not just 189 slides — it is <strong>a contrast check sitting in the QC gate</strong>. Brand standards became machine-readable rules the pipeline consults. <strong>A written standard is necessary and never sufficient; what makes it survive a deadline is a check that runs at the moment of the decision.</strong></p>
       </div>
-      <div class="outcomes">
-        <div class="outcome"><div class="o-lead">Research becomes structured data</div><div class="o-sub">Decks turned into typed objects — decision style, triggers, evaluation criteria — a system can read.</div></div>
-        <div class="outcome"><div class="o-lead">Test a direction before funding it</div><div class="o-sub">Evaluate any claim through a persona's eyes first, then commit real research with intent.</div></div>
-        <div class="outcome"><div class="o-lead">Provider-agnostic by design</div><div class="o-sub">Claude, Azure OpenAI, or the internal platform — swappable without touching the product.</div></div>
-      </div>
+
       <div class="jd-tag">
-        <span>structured data modeling</span><span>human-in-the-loop</span><span>concept evaluation</span><span>designing with evidence</span>
+        <span>Training programs</span><span>Stakeholder education</span><span>Self-service resources</span><span>Governance systems</span><span>Influence without authority</span>
       </div>
+
     </div>
   </div>
 </section>
 
+<!-- ─────────────── 05 ─────────────── -->
+<section class="case" id="change">
+  <div class="wrap">
+    <div class="case-head">
+      <div class="case-num">05</div>
+      <div>
+        <div class="case-title">Holding a System Together While Everything Moves</div>
+        <div class="case-sub">Rebrand · acquisition · architecture · environmental &amp; event</div>
+      </div>
+    </div>
+    <div class="case-body">
+
+      <div class="block full">
+        <div class="label">A mark rebuilt to hold at shelf</div>
+        <p>I designed the new MiraLAX base-brand logo, engineered to read at shelf distance, and the modular system it anchors across packaging, digital shelf, retail and social.</p>
+      </div>
+
+      <div class="shots">
+        <figure class="wide">
+          <img src="images/Mira-BeforeAfter_1.avif" alt="The MiraLAX brand mark before and after redesign, shown side by side">
+          <figcaption><strong>Before and after.</strong> A rebrand is judged at four feet in a drugstore aisle, not at 100% on a monitor.</figcaption>
+        </figure>
+      </div>
+
+      <div class="block">
+        <div class="label">Architecture</div>
+        <p>MiraFAST and MiraFIBER expanded MiraLAX from a single-format brand into a <strong>multi-format platform on one cohesive system</strong> — roughly <strong>$79MM+ combined retail sales</strong>. MiraFAST went from inception to design lock in a <strong>three-week sprint</strong>, achieved specifically by designing hands-on in-house instead of briefing agencies; it now ranks #1 Overnight Laxative and #1 Laxative Soft Chew.</p>
+      </div>
+
+      <div class="block">
+        <div class="label">A brand that arrived by acquisition</div>
+        <p><strong>Iberogast came into Bayer through the Steigerwald acquisition.</strong> I launched it end to end for its new parent — responsive brand site, mobile, retail merchandising — establishing it in a new market under new ownership.</p>
+      </div>
+
+      <div class="shots">
+        <div class="judge-pair">
+          <figure>
+            <img src="images/nacds/Annual-2025_render-wide-angle.png" alt="Wide-angle render of the Bayer NACDS trade-show booth, a 20 by 30 foot exhibit environment">
+            <figcaption><strong>Environmental branding.</strong> The NACDS booth, art-directed across consecutive years — 20×30-ft footprint, six-figure budget, vendor management and production timelines.</figcaption>
+          </figure>
+          <figure>
+            <img src="images/BOLD-HERO2.png" alt="Key visual from the BOLD Ambition Tour, the identity system built for a 200-plus attendee Bayer event">
+            <figcaption><strong>Event branding.</strong> The BOLD Ambition Tour — one design system carried across three consecutive years and three different formats, virtual to hybrid to in-person.</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="jd-tag">
+        <span>Rebrand</span><span>Acquisition</span><span>Brand architecture</span><span>Packaging guidance</span><span>Environmental branding</span><span>Event branding</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────── FOOTER ─────────────── -->
 <footer>
   <div class="wrap">
-    <div class="big">I'd like to design Ramp's densest, highest-stakes surfaces so they feel effortless.</div>
+    <div class="big">DePuy Synthes has to answer, thousands of times and at speed, what its brand is when nobody can just ask J&amp;J anymore.</div>
     <div class="links">
       <a href="mailto:mkscrivana@gmail.com">mkscrivana@gmail.com</a> &nbsp;·&nbsp;
-      <a href="https://www.michaelscrivana.com">michaelscrivana.com</a> &nbsp;·&nbsp;
-      <a href="https://www.linkedin.com/in/michaelscrivana89/">linkedin</a>
+      <a href="tel:+19739197414">973.919.7414</a> &nbsp;·&nbsp;
+      <a href="https://www.linkedin.com/in/michaelscrivana89/">linkedin.com/in/michaelscrivana89</a> &nbsp;·&nbsp;
+      <a href="https://design.michaelscrivana.com">design.michaelscrivana.com</a>
     </div>
-    <div class="fine">Michael Scrivana · Case studies · June 2026 · Prepared for Ramp · Product Designer<br>Internal tools built on Bayer-internal infrastructure; imagery shown is concept/pilot output.</div>
+    <div class="fine">
+      Michael Scrivana · New York Metro Area, Raritan-commutable, hybrid<br>
+      Prepared for requisition R-094539 · Sr. Manager, Brand Operations and Marketing · DePuy Synthes
+    </div>
   </div>
 </footer>
 
