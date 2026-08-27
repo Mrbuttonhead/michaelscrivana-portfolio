@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Houdini → WebGL: vertex animation textures</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #06070a; }
+  body {
+    font: 13px/1.5 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    color: #cfd6e4;
+    background:
+      radial-gradient(120% 90% at 50% 8%, #16202f 0%, #0a0d14 45%, #05060a 100%);
+  }
+  canvas { display: block; touch-action: none; }
+
+  .panel {
+    position: fixed; backdrop-filter: blur(12px);
+    background: rgba(10, 14, 22, .62);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 10px; padding: 12px 14px;
+  }
+  #stats { top: 16px; left: 16px; min-width: 232px; }
+  #stats h1 {
+    margin: 0 0 9px; font-size: 11px; letter-spacing: .09em;
+    text-transform: uppercase; color: #6f7d95; font-weight: 600;
+  }
+  #stats dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 2px 14px; }
+  #stats dt { color: #6f7d95; }
+  #stats dd { margin: 0; text-align: right; color: #e6ebf5; font-variant-numeric: tabular-nums; }
+
+  #ctl { bottom: 16px; left: 16px; display: grid; gap: 10px; min-width: 232px; }
+  #ctl label { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; color: #6f7d95; }
+  #ctl label span:last-child { color: #e6ebf5; font-variant-numeric: tabular-nums; }
+  #ctl input[type=range] { grid-column: 1 / -1; width: 100%; accent-color: #ff8a4c; margin: 0; }
+  #ctl .row { display: flex; align-items: center; gap: 8px; color: #cfd6e4; }
+  #ctl input[type=checkbox] { accent-color: #ff8a4c; margin: 0; }
+
+  #hint {
+    bottom: 16px; right: 16px; max-width: 260px; color: #8b98ae;
+  }
+  #hint b { color: #e6ebf5; font-weight: 600; }
+  #err { top: 50%; left: 50%; transform: translate(-50%,-50%); color: #ff8a8a; display: none; max-width: 60ch; }
+</style>
+  <script type="module" crossorigin src="./assets/index-DFg3esrY.js"></script>
+</head>
+<body>
+  <div class="panel" id="stats">
+    <h1>Baked Vellum cloth</h1>
+    <dl>
+      <dt>points</dt><dd id="s-pts">—</dd>
+      <dt>triangles</dt><dd id="s-tris">—</dd>
+      <dt>baked frames</dt><dd id="s-frames">—</dd>
+      <dt>payload</dt><dd id="s-size">—</dd>
+      <dt>frame</dt><dd id="s-frame">—</dd>
+      <dt>fps</dt><dd id="s-fps">—</dd>
+    </dl>
+  </div>
+
+  <div class="panel" id="ctl">
+    <label><span>playback</span><span id="s-speed">1.00×</span>
+      <input id="speed" type="range" min="0" max="200" value="100" />
+    </label>
+    <label><span>push strength</span><span id="s-poke">0.45</span>
+      <input id="poke" type="range" min="0" max="150" value="45" />
+    </label>
+    <div class="row"><input type="checkbox" id="pingpong" checked /><label for="pingpong" style="display:inline">ping-pong loop</label></div>
+  </div>
+
+  <div class="panel" id="hint">
+    <b>drag</b> to orbit · <b>scroll</b> to zoom<br />
+    <b>move the cursor</b> over the cloth to push it — that displacement is live,
+    layered on top of the baked solve.
+  </div>
+
+  <div class="panel" id="err"></div>
+</body>
+</html>

@@ -181,14 +181,28 @@ footer .links a:hover { text-decoration: underline; }
 footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-family: var(--mono); letter-spacing: 0.06em; line-height: 1.6; }
 
 /* ── inline answer pills (Baseten page) ── */
-.pill { display: inline-block; font-family: var(--mono); font-size: 9.5px; font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.1em; padding: 3px 9px; border-radius: 100px;
-  vertical-align: 1px; margin-left: 7px; }
-.pill.yes  { background: var(--green-dim); color: var(--green); border: 1px solid rgba(26,143,67,0.35); }
-.pill.no   { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(169,120,12,0.35); }
-.pill.part { background: var(--surface-2); color: var(--ink-3); border: 1px solid var(--border); }
 .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 3px;
   border: 1px solid var(--border); vertical-align: 0; margin: 0 4px 0 1px; }
+
+/* ── embedded VAT demo (Baseten page) ── */
+.demo { grid-column: 1 / -1; margin: 2px 0 6px; }
+.demo .frame {
+  position: relative; border-radius: 16px; overflow: hidden;
+  border: 1px solid rgba(10,22,14,0.16); background: #06070a;
+  box-shadow: var(--shadow); aspect-ratio: 16 / 10;
+}
+.demo .frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+.demo .cap {
+  display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: baseline;
+  margin-top: 11px; font-size: 12.5px; color: var(--ink-3); line-height: 1.5;
+}
+.demo .cap strong { color: var(--ink-2); font-weight: 600; }
+.demo .cap .spec { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.07em;
+  text-transform: uppercase; color: var(--ink-4); }
+.demo .cap a { color: var(--accent); font-weight: 600; text-decoration: none;
+  border-bottom: 1px solid var(--accent-line); }
+.demo .cap a:hover { border-bottom-color: var(--accent); }
+@media (max-width: 680px) { .demo .frame { aspect-ratio: 4 / 5; } }
 </style></head>
 <body>
 
@@ -200,7 +214,6 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
       <a class="case-link" href="#system">The System</a>
       <a class="case-link" href="#webgl">Web 3D</a>
       <a class="case-link" href="#clarity">Clarity</a>
-      <a class="case-link" href="#straight">Straight Answers</a>
       <a class="contact" href="mailto:mkscrivana@gmail.com">Contact</a>
     </div>
   </div>
@@ -210,7 +223,7 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
   <div class="wrap">
     <div class="kicker mono"><span class="dot"></span>Michael Scrivana &nbsp;·&nbsp; for Baseten · Design Engineer (Brand Team)</div>
     <h1>You are hiring one person to do both halves. <em>I have been doing both halves for years — they were just filed under different job titles.</em></h1>
-    <p class="lede">Seven years designing brand systems that had to hold at volume: identity, packaging, motion, live stage, the digital shelf. Two years designing <em>and building</em> the software a 115-person organization now works through every day — React and TypeScript, written by me, deployed by me, still being shipped into. This page is four cases at that seam, and one section of straight answers about what I have not done.</p>
+    <p class="lede">Seven years designing brand systems that had to hold at volume: identity, packaging, motion, live stage, the digital shelf. Two years designing <em>and building</em> the software a 115-person organization now works through every day — React and TypeScript, written by me, deployed by me, still being shipped into. This page is four cases at that seam — and the third one is running live further down, not described.</p>
     <p class="who"><strong>Michael Scrivana</strong> — Senior Designer &amp; AI Lead, Product Experience, Bayer Consumer Health. &nbsp;<a href="https://design.michaelscrivana.com">design &amp; motion portfolio</a> &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/michaelscrivana89/">linkedin</a></p>
   </div>
 </header>
@@ -308,30 +321,49 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
       <div class="case-num">03</div>
       <div>
         <div class="case-title">Web 3D and motion — from a simulation in Houdini to a shader in the browser</div>
-        <div class="case-sub">Three.js and React Three Fiber · vertex animation textures · hand-written GLSL · storyboard to finished film</div>
+        <div class="case-sub">A live three.js scene, running below &middot; vertex animation textures &middot; hand-written GLSL &middot; storyboard to finished film</div>
       </div>
     </div>
     <div class="case-body">
+
+      <div class="demo">
+        <div class="frame">
+          <iframe src="vat/" title="Live WebGL demo: a Vellum cloth solve baked out of Houdini into a vertex animation texture and played back in a three.js vertex shader" loading="lazy" allow="fullscreen"></iframe>
+        </div>
+        <div class="cap">
+          <span><strong>This is running now, in your browser.</strong> Drag to orbit, scroll to zoom, and move the cursor across the cloth — that push is live, layered on top of the baked solve.</span>
+          <span class="spec">1,617 points · 3,072 triangles · 180 baked frames @ 24fps · 2.40 MB</span>
+          <a href="vat/" target="_blank" rel="noopener">open full screen &nearr;</a>
+        </div>
+      </div>
 
       <div class="shots">
         <div class="judge-pair">
           <figure>
             <img src="images/storyboard-01.webp" alt="Cinema 4D storyboard panel: the opening beat of a stage film, drawn shot by shot">
-            <figcaption><strong>The frames.</strong> I storyboarded the stage opener myself, in Cinema 4D — shot by shot, to sell the direction before anything was built.</figcaption>
+            <figcaption><strong>The other end of the same instinct.</strong> I storyboarded the stage opener myself, in Cinema 4D &mdash; shot by shot, to sell the direction before anything was built.</figcaption>
           </figure>
           <figure>
             <img src="images/BoldKV1.webp" alt="3D key visual built from the event identity mark">
-            <figcaption><strong>The film built from them.</strong> Same hand, same system: identity into 3D into the motion that ran the room. The frames and the finished films sit together on <a href="https://design.michaelscrivana.com">design.michaelscrivana.com</a>.</figcaption>
+            <figcaption><strong>And the film built from them.</strong> Same hand, same system: identity into 3D into the motion that ran the room. The frames and the finished films sit together on <a href="https://design.michaelscrivana.com">design.michaelscrivana.com</a>.</figcaption>
           </figure>
         </div>
       </div>
 
       <div class="block">
-        <div class="label mono">Houdini &rarr; WebGL</div>
-        <p>A cloth simulation baked out of Houdini into a <strong>vertex animation texture</strong> and reconstructed in a browser scene — the simulation authored in a 3D package, transported through a texture, replayed at runtime on the web. I care about this one more than any single scene, because it is a <em>pipeline</em>: proof that work can move from a DCC into a page and still perform there.</p>
+        <div class="label mono">What you are actually looking at</div>
+        <p>A <strong>Vellum cloth solve</strong> built in Houdini, baked into a <strong>vertex animation texture</strong>, and played back in a three.js vertex shader. Nothing above is video. <strong>The mesh has no positions in its vertex buffer at all</strong> — every vertex reads its position out of a texture, every frame, and the shader samples two frame rows and blends them by hand so sub-frame playback and slow motion work.</p>
       </div>
       <div class="block">
-        <div class="label mono">And underneath, by hand</div>
+        <div class="label mono">Three decisions worth defending</div>
+        <p><strong>Raw binary rather than EXR or PNG.</strong> The standard VAT export writes EXR, which browsers cannot decode; 16-bit PNG silently collapses to 8 bits through a canvas. So the baker writes a flat half-float buffer straight into a <span class="code">DataTexture</span> — full precision, no loader, no decode cost. <strong>Nearest filtering, time interpolated in the shader</strong>, because adjacent texels along x are unrelated points and hardware filtering would smear the mesh. <strong>Neighbour indices instead of a normal texture</strong> — 26 KB of point indices rather than another 2.3 MB of baked normals, central-differenced against the <em>live</em> positions so the normal stays correct under the cursor push, which a baked normal map could not do.</p>
+      </div>
+      <div class="block full">
+        <div class="label mono">And what it does not do</div>
+        <p>The loop is ping-pong rather than a true cycle, and cloth played backwards is faintly uncanny at the turnaround — the honest fix is a periodic wind and exactly one exported period. It is soft-mode only, so constant topology: fluids and fracture debris change point count per frame and need a different mode. Texture width equals point count, so past roughly 8k points you wrap rows or split textures. I would rather tell you where it ends than let you find the edge yourself.</p>
+      </div>
+      <div class="block">
+        <div class="label mono">The same thing, at home</div>
         <p>For a voice assistant I built at home, I wrote the character&rsquo;s <strong>GLSL fragment shaders</strong> directly: fbm noise, a 40,000-point particle sphere, a five-state visual vocabulary — idle, listening, thinking, speaking, error — so the thing reads the same on a TV, a wall tablet and a phone.</p>
       </div>
       <div class="block full">
@@ -390,36 +422,6 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
   </div>
 </section>
 
-<!-- STRAIGHT ANSWERS -->
-<section class="case" id="straight">
-  <div class="wrap">
-    <div class="case-head">
-      <div class="case-num">05</div>
-      <div>
-        <div class="case-title">Straight answers, including the unflattering ones</div>
-        <div class="case-sub">What I have done, what I have not, and what I would need a week for</div>
-      </div>
-    </div>
-    <div class="case-body">
-      <div class="block">
-        <div class="label mono">DatoCMS <span class="pill no">never used</span></div>
-        <p><strong>I have never used a headless CMS</strong> — not Dato, not Contentful, not Sanity. What I have done is design content taxonomies, modular master-and-adaptation template systems and the tooling that assembles them, so I expect the concepts to be familiar and the product to take about a week. I would rather tell you than have you find out.</p>
-      </div>
-      <div class="block">
-        <div class="label mono">Public marketing sites <span class="pill part">half of it</span></div>
-        <p>The surface I have owned continuously is <strong>internal</strong>, behind SSO. The public brand sites I have shipped — a responsive brand site, mobile and retail merchandising for an acquired brand launched into a new market — <strong>I designed and an agency implemented</strong>. Both halves are real; I have not yet held them together on one public marketing site. That is precisely why this job interests me.</p>
-      </div>
-      <div class="block">
-        <div class="label mono">Next.js <span class="pill yes">yes</span></div>
-        <p>Used. My production work has run on Vite + React and Node; I am comfortable in the framework and happy to talk through it in detail rather than let a bullet point stand in for the conversation.</p>
-      </div>
-      <div class="block full">
-        <div class="label mono">Everything else on your list <span class="pill yes">yes</span></div>
-        <p>React, TypeScript, HTML and CSS — daily, in production. Figma into code and owning the result — the last two years. Typography, layout, interaction, motion, responsiveness — seven years, and a written accessibility standard to go with it. Reusable components rather than page-by-page solutions — a system in two places. Three.js, React Three Fiber, shaders, WebGL, creative coding — above. Strong opinions about the web — you may have gathered.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <footer>
   <div class="wrap">
