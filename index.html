@@ -226,6 +226,22 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
 .demo-lite .cap strong { color: var(--ink-2); font-weight: 600; }
 .demo-lite .cap a { color: var(--accent); font-weight: 600; text-decoration: none;
   border-bottom: 1px solid var(--accent-line); }
+.demo-lite .frame-link { display: block; text-decoration: none; }
+.demo-lite .frame-link:hover .play span { background: rgba(8,12,18,0.86); border-color: rgba(255,255,255,0.34); }
+.demo-lite.demo-solo { grid-column: 1 / -1; margin: 4px 0 6px; }
+.demo-lite.demo-solo .frame { aspect-ratio: 16 / 10; }
+.hero-demo .frame { aspect-ratio: 16 / 9; }
+.hero-demo .frame img { transition: transform 8s ease; }
+.hero-demo .frame:hover img { transform: scale(1.03); }
+.hero-demo .frame { cursor: pointer; display: block; text-decoration: none; }
+.hero-demo .frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-demo .play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.hero-demo .play span {
+  font-family: var(--mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.13em;
+  text-transform: uppercase; color: #fff; background: rgba(8,12,18,0.62);
+  border: 1px solid rgba(255,255,255,0.24); border-radius: 100px; padding: 10px 19px;
+  backdrop-filter: blur(8px); transition: background .25s ease, border-color .25s ease; }
+.hero-demo .frame:hover .play span { background: rgba(8,12,18,0.84); border-color: rgba(255,255,255,0.4); }
 </style></head>
 <body>
 
@@ -343,11 +359,30 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
     <div class="case-head">
       <div class="case-num">03</div>
       <div>
-        <div class="case-title">Web 3D and motion — from a simulation in Houdini to a shader in the browser</div>
-        <div class="case-sub">A live three.js scene, running below &middot; vertex animation textures &middot; hand-written GLSL &middot; storyboard to finished film</div>
+        <div class="case-title">Web 3D and motion — shaders by hand, and a pipeline from a 3D package into the browser</div>
+        <div class="case-sub">Seven hand-written GLSL looks &middot; three.js and React Three Fiber &middot; vertex animation textures &middot; storyboard to finished film</div>
       </div>
     </div>
     <div class="case-body">
+
+      <div class="demo hero-demo">
+        <a class="frame frame-link" href="lab/" target="_blank" rel="noopener">
+          <img src="images/nabu-gloss-hero.jpg" alt="A generative shader look: glossy multicoloured tube-ribbons flowing around a small refracting sphere at the center">
+          <div class="play"><span>open the lab &nearr;</span></div>
+        </a>
+        <div class="cap">
+          <span><strong>One of seven shader looks, and the instrument I wrote them in.</strong> The lab runs the avatar&rsquo;s real renderer with its GLSL open for live editing &mdash; every control changes what the thing <em>is</em>, not a preview of it. Audio is an input: bass drives the swell, highs drive the churn.</span>
+          <span class="spec">7 hand-written fragment shaders &middot; 11 presets &middot; live recompile &middot; mic or tab audio</span>
+        </div>
+      </div>
+
+      <div class="demo-lite demo-solo">
+        <div class="frame" data-src="pearl/">
+          <img src="images/nabu-pearl-poster.jpg" alt="The Nabu voice-assistant avatar: a luminous particle sphere inside an iridescent rim, captioned 'idle — amoeba drift, breathing'">
+          <div class="play"><span>&#9654;&nbsp; run the state loop</span></div>
+        </div>
+        <div class="cap"><strong>The same renderer, doing its day job.</strong> idle &rarr; listening &rarr; thinking &rarr; speaking, cycling. One visual vocabulary so the character reads the same on a TV, a wall tablet and a phone. <a href="pearl/" target="_blank" rel="noopener">full screen &nearr;</a></div>
+      </div>
 
       <div class="demo">
         <div class="frame">
@@ -357,23 +392,6 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
           <span><strong>This is running now, in your browser.</strong> Drag to orbit, scroll to zoom, and move the cursor across the cloth — that push is live, layered on top of the baked solve.</span>
           <span class="spec">1,617 points · 3,072 triangles · 180 baked frames @ 24fps · 2.40 MB</span>
           <a href="vat/" target="_blank" rel="noopener">open full screen &nearr;</a>
-        </div>
-      </div>
-
-      <div class="demo-pair">
-        <div class="demo-lite">
-          <div class="frame" data-src="pearl/">
-            <img src="images/nabu-pearl-poster.jpg" alt="The Nabu voice-assistant avatar: a luminous particle sphere inside an iridescent rim, captioned 'idle — amoeba drift, breathing'">
-            <div class="play"><span>&#9654;&nbsp; run the state loop</span></div>
-          </div>
-          <div class="cap"><strong>The state language, cycling.</strong> idle &rarr; listening &rarr; thinking &rarr; speaking, in the avatar&rsquo;s real renderer. One vocabulary so the character reads the same on a TV, a wall tablet and a phone. <a href="pearl/" target="_blank" rel="noopener">full screen &nearr;</a></div>
-        </div>
-        <div class="demo-lite">
-          <div class="frame" data-src="lab/">
-            <img src="images/nabu-lab-poster.jpg" alt="The Pearl Lab on its Gloss preset: glossy multicoloured tube-ribbons around a refracting sphere, with the lab's control panel at right">
-            <div class="play"><span>&#9654;&nbsp; open the lab</span></div>
-          </div>
-          <div class="cap"><strong>And the instrument I explored it with.</strong> Seven hand-written GLSL looks, editable live in the panel, with audio as an input &mdash; bass drives the swell, highs drive the churn, from the mic or a captured tab. <a href="lab/" target="_blank" rel="noopener">full screen &nearr;</a></div>
         </div>
       </div>
 
@@ -391,7 +409,15 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
       </div>
 
       <div class="block">
-        <div class="label mono">What you are actually looking at</div>
+        <div class="label mono">About the Nabu work above</div>
+        <p>A voice assistant I built <strong>at home, over about three weeks of evenings</strong>, starting in late July. The users are my own household. I am flagging that plainly because the scale matters: this is personal practice, not shipped product work, and it sits below everything else on this page. What it is good evidence <em>of</em> is narrower and, I think, more useful — that I write shaders by hand, design a state vocabulary that survives three very different screens, and build myself an instrument rather than editing constants and reloading.</p>
+      </div>
+      <div class="block">
+        <div class="label mono">The parts worth judging</div>
+        <p>The character is <strong>GLSL written directly</strong>: fbm noise, a 40,000-point particle sphere, a two-pass ping-pong feedback buffer for the rim trail. Five states — idle, listening, thinking, speaking, error — each a row in a table of tint, churn and silhouette, so the language is data rather than four hand-tuned scenes. It renders on a desktop with a 3090, a wall tablet, and a Google TV Streamer whose GPU is a PowerVR GE9215, from <strong>one codebase with a frame-rate watchdog that walks quality down</strong> instead of shipping three builds. The same shaders were later ported to <strong>React Three Fiber</strong>, byte-identical, to prove the port was scaffolding rather than a rewrite.</p>
+      </div>
+      <div class="block">
+        <div class="label mono">The cloth demo — what it actually is</div>
         <p>A <strong>Vellum cloth solve</strong> built in Houdini, baked into a <strong>vertex animation texture</strong>, and played back in a three.js vertex shader. Nothing above is video. <strong>The mesh has no positions in its vertex buffer at all</strong> — every vertex reads its position out of a texture, every frame, and the shader samples two frame rows and blends them by hand so sub-frame playback and slow motion work.</p>
       </div>
       <div class="block">
@@ -401,14 +427,6 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
       <div class="block full">
         <div class="label mono">And what it does not do</div>
         <p>The loop is ping-pong rather than a true cycle, and cloth played backwards is faintly uncanny at the turnaround — the honest fix is a periodic wind and exactly one exported period. It is soft-mode only, so constant topology: fluids and fracture debris change point count per frame and need a different mode. Texture width equals point count, so past roughly 8k points you wrap rows or split textures. I would rather tell you where it ends than let you find the edge yourself.</p>
-      </div>
-      <div class="block">
-        <div class="label mono">What the two tiles above are</div>
-        <p>A voice assistant I built <strong>at home, over about three weeks of evenings</strong>, starting in late July. The users are my own household. I am flagging that plainly because the scale matters: this is personal practice, not shipped product work, and it sits below everything else on this page. What it is good evidence <em>of</em> is narrower and, I think, more useful — that I write shaders by hand, design a state vocabulary that survives three very different screens, and build myself an instrument rather than editing constants and reloading.</p>
-      </div>
-      <div class="block">
-        <div class="label mono">The parts worth judging</div>
-        <p>The character is <strong>GLSL written directly</strong>: fbm noise, a 40,000-point particle sphere, a two-pass ping-pong feedback buffer for the rim trail. Five states — idle, listening, thinking, speaking, error — each a row in a table of tint, churn and silhouette, so the language is data rather than four hand-tuned scenes. It renders on a desktop with a 3090, a wall tablet, and a Google TV Streamer whose GPU is a PowerVR GE9215, from <strong>one codebase with a frame-rate watchdog that walks quality down</strong> instead of shipping three builds. The same shaders were later ported to <strong>React Three Fiber</strong>, byte-identical, to prove the port was scaffolding rather than a rewrite.</p>
       </div>
       <div class="block full">
         <div class="label mono">The detail I would want to be judged on</div>
