@@ -203,6 +203,29 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
   border-bottom: 1px solid var(--accent-line); }
 .demo .cap a:hover { border-bottom-color: var(--accent); }
 @media (max-width: 680px) { .demo .frame { aspect-ratio: 4 / 5; } }
+
+/* ── click-to-load demo tiles (Baseten page) ── */
+.demo-pair { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 4px 0 6px; }
+@media (max-width: 680px) { .demo-pair { grid-template-columns: 1fr; } }
+.demo-lite .frame { position: relative; border-radius: 14px; overflow: hidden;
+  border: 1px solid rgba(10,22,14,0.16); background: #06070a; box-shadow: var(--shadow);
+  aspect-ratio: 16 / 11; cursor: pointer; }
+.demo-lite .frame img { position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: block; transition: opacity .35s ease, transform 6s ease; }
+.demo-lite .frame:hover img { transform: scale(1.02); }
+.demo-lite .frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+.demo-lite .play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 9px; transition: opacity .3s ease; }
+.demo-lite .play span {
+  font-family: var(--mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.13em;
+  text-transform: uppercase; color: #fff; background: rgba(8,12,18,0.68);
+  border: 1px solid rgba(255,255,255,0.22); border-radius: 100px; padding: 9px 17px;
+  backdrop-filter: blur(8px); }
+.demo-lite .frame.on .play, .demo-lite .frame.on img { opacity: 0; pointer-events: none; }
+.demo-lite .cap { margin-top: 10px; font-size: 12.5px; color: var(--ink-3); line-height: 1.5; }
+.demo-lite .cap strong { color: var(--ink-2); font-weight: 600; }
+.demo-lite .cap a { color: var(--accent); font-weight: 600; text-decoration: none;
+  border-bottom: 1px solid var(--accent-line); }
 </style></head>
 <body>
 
@@ -223,7 +246,7 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
   <div class="wrap">
     <div class="kicker mono"><span class="dot"></span>Michael Scrivana &nbsp;·&nbsp; for Baseten · Design Engineer (Brand Team)</div>
     <h1>You are hiring one person to do both halves. <em>I have been doing both halves for years — they were just filed under different job titles.</em></h1>
-    <p class="lede">Seven years designing brand systems that had to hold at volume: identity, packaging, motion, live stage, the digital shelf. Two years designing <em>and building</em> the software a 115-person organization now works through every day — React and TypeScript, written by me, deployed by me, still being shipped into. This page is four cases at that seam — and the third one is running live further down, not described.</p>
+    <p class="lede">Seven years designing brand systems that had to hold at volume: identity, packaging, motion, live stage, the digital shelf. Two years designing <em>and building</em> the software a 115-person organization now works through every day — React and TypeScript, written by me, deployed by me, still being shipped into. This page is four cases at that seam — and the third one runs live, three ways, rather than being described.</p>
     <p class="who"><strong>Michael Scrivana</strong> — Senior Designer &amp; AI Lead, Product Experience, Bayer Consumer Health. &nbsp;<a href="https://design.michaelscrivana.com">design &amp; motion portfolio</a> &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/michaelscrivana89/">linkedin</a></p>
   </div>
 </header>
@@ -337,6 +360,23 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
         </div>
       </div>
 
+      <div class="demo-pair">
+        <div class="demo-lite">
+          <div class="frame" data-src="pearl/">
+            <img src="images/nabu-pearl-poster.jpg" alt="The Nabu voice-assistant avatar: a luminous particle sphere inside an iridescent rim, captioned 'idle — amoeba drift, breathing'">
+            <div class="play"><span>&#9654;&nbsp; run the state loop</span></div>
+          </div>
+          <div class="cap"><strong>The state language, cycling.</strong> idle &rarr; listening &rarr; thinking &rarr; speaking, in the avatar&rsquo;s real renderer. One vocabulary so the character reads the same on a TV, a wall tablet and a phone. <a href="pearl/" target="_blank" rel="noopener">full screen &nearr;</a></div>
+        </div>
+        <div class="demo-lite">
+          <div class="frame" data-src="lab/">
+            <img src="images/nabu-lab-poster.jpg" alt="The Pearl Lab on its Gloss preset: glossy multicoloured tube-ribbons around a refracting sphere, with the lab's control panel at right">
+            <div class="play"><span>&#9654;&nbsp; open the lab</span></div>
+          </div>
+          <div class="cap"><strong>And the instrument I explored it with.</strong> Seven hand-written GLSL looks, editable live in the panel, with audio as an input &mdash; bass drives the swell, highs drive the churn, from the mic or a captured tab. <a href="lab/" target="_blank" rel="noopener">full screen &nearr;</a></div>
+        </div>
+      </div>
+
       <div class="shots">
         <div class="judge-pair">
           <figure>
@@ -363,8 +403,12 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
         <p>The loop is ping-pong rather than a true cycle, and cloth played backwards is faintly uncanny at the turnaround — the honest fix is a periodic wind and exactly one exported period. It is soft-mode only, so constant topology: fluids and fracture debris change point count per frame and need a different mode. Texture width equals point count, so past roughly 8k points you wrap rows or split textures. I would rather tell you where it ends than let you find the edge yourself.</p>
       </div>
       <div class="block">
-        <div class="label mono">The same thing, at home</div>
-        <p>For a voice assistant I built at home, I wrote the character&rsquo;s <strong>GLSL fragment shaders</strong> directly: fbm noise, a 40,000-point particle sphere, a five-state visual vocabulary — idle, listening, thinking, speaking, error — so the thing reads the same on a TV, a wall tablet and a phone.</p>
+        <div class="label mono">What the two tiles above are</div>
+        <p>A voice assistant I built <strong>at home, over about three weeks of evenings</strong>, starting in late July. The users are my own household. I am flagging that plainly because the scale matters: this is personal practice, not shipped product work, and it sits below everything else on this page. What it is good evidence <em>of</em> is narrower and, I think, more useful — that I write shaders by hand, design a state vocabulary that survives three very different screens, and build myself an instrument rather than editing constants and reloading.</p>
+      </div>
+      <div class="block">
+        <div class="label mono">The parts worth judging</div>
+        <p>The character is <strong>GLSL written directly</strong>: fbm noise, a 40,000-point particle sphere, a two-pass ping-pong feedback buffer for the rim trail. Five states — idle, listening, thinking, speaking, error — each a row in a table of tint, churn and silhouette, so the language is data rather than four hand-tuned scenes. It renders on a desktop with a 3090, a wall tablet, and a Google TV Streamer whose GPU is a PowerVR GE9215, from <strong>one codebase with a frame-rate watchdog that walks quality down</strong> instead of shipping three builds. The same shaders were later ported to <strong>React Three Fiber</strong>, byte-identical, to prove the port was scaffolding rather than a rewrite.</p>
       </div>
       <div class="block full">
         <div class="label mono">The detail I would want to be judged on</div>
@@ -435,5 +479,22 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
   </div>
 </footer>
 
+
+<script>
+// Demo tiles load on click, not on scroll. Three live WebGL contexts on one
+// page is a real cost to pay for something most readers will not open.
+document.querySelectorAll('.demo-lite .frame[data-src]').forEach(function (f) {
+  f.addEventListener('click', function () {
+    if (f.classList.contains('on')) return;
+    var i = document.createElement('iframe');
+    i.src = f.dataset.src;
+    i.setAttribute('allow', 'fullscreen; microphone; display-capture');
+    i.setAttribute('title', f.querySelector('img').alt);
+    f.appendChild(i);
+    f.classList.add('on');
+    f.style.cursor = 'default';
+  });
+});
+</script>
 </body>
 </html>
