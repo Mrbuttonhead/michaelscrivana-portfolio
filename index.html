@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>I built it by hand first — Michael Scrivana · Adobe</title>
-<meta name="description" content="Five case studies: a node-based generative production pipeline, a machine-readable brand layer, an automated artwork-compliance gate, the content supply chain behind ~$79MM in retail, and how each one earned its usage. Application for Lead Forward Deployed Creative Technologist at Adobe.">
+<title>Both halves of the job — Michael Scrivana · Baseten</title>
+<meta name="description" content="Four cases: a live web surface owned end to end, a design system that exists in Figma and in code, web 3D from Houdini to the browser, and making a hard technical product legible. Application for Design Engineer (Brand Team) at Baseten.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="images/storyboard-01.webp">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ══════════════════════════════════════════════════════════════
@@ -14,18 +16,19 @@
    Self-contained: no external CSS dependency.
    ══════════════════════════════════════════════════════════════ */
 :root {
-  --bg:        #f4f5f7;
+  --bg:        #f5f8f4;
   --surface:   #ffffff;
-  --surface-2: #eceef1;
-  --accent:      #b0201a;   /* Adobe red — single-var swap (Ramp bronze #8a6d2f · Netflix red #B81D24 · PX blue #2850D8) */
-  --accent-deep: #8b1914;
-  --accent-dim:  rgba(176, 32, 26, 0.08);
-  --accent-line: rgba(176, 32, 26, 0.22);
+  --surface-2: #e9efe6;
+  --accent:      #00693d;   /* Baseten green, darkened to clear WCAG AA on their paper — single-var swap (Adobe red #b0201a · Ramp bronze #8a6d2f · Netflix red #B81D24 · PX blue #2850D8) */
+  --signal:      #19e76e;   /* Baseten signal green — non-text use only, 2.4:1 on paper */
+  --accent-deep: #004f2e;
+  --accent-dim:  rgba(0, 105, 61, 0.08);
+  --accent-line: rgba(0, 105, 61, 0.22);
   --ink:    #0a0d12;
   --ink-2:  #45474f;
   --ink-3:  #80828c;
   --ink-4:  #a8aab2;
-  --border:      rgba(10, 13, 18, 0.10);
+  --border:      rgba(10, 22, 14, 0.11);
   --border-soft: rgba(10, 13, 18, 0.06);
   --green: #1a8f43;
   --green-dim: rgba(26, 143, 67, 0.10);
@@ -176,19 +179,28 @@ footer .links { font-size: 15px; color: var(--ink-2); }
 footer .links a { color: var(--accent); text-decoration: none; font-weight: 500; }
 footer .links a:hover { text-decoration: underline; }
 footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-family: var(--mono); letter-spacing: 0.06em; line-height: 1.6; }
-</style>
-</head>
+
+/* ── inline answer pills (Baseten page) ── */
+.pill { display: inline-block; font-family: var(--mono); font-size: 9.5px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.1em; padding: 3px 9px; border-radius: 100px;
+  vertical-align: 1px; margin-left: 7px; }
+.pill.yes  { background: var(--green-dim); color: var(--green); border: 1px solid rgba(26,143,67,0.35); }
+.pill.no   { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(169,120,12,0.35); }
+.pill.part { background: var(--surface-2); color: var(--ink-3); border: 1px solid var(--border); }
+.swatch { display: inline-block; width: 10px; height: 10px; border-radius: 3px;
+  border: 1px solid var(--border); vertical-align: 0; margin: 0 4px 0 1px; }
+</style></head>
 <body>
 
 <nav class="topnav">
   <div class="wrap">
     <a class="brand" href="#top"><span class="dot"></span>Michael Scrivana</a>
     <div class="links">
-      <a class="case-link" href="#pipeline">Pipeline</a>
-      <a class="case-link" href="#gate">Compliance Gate</a>
-      <a class="case-link" href="#knowledge">Knowledge Layer</a>
-      <a class="case-link" href="#supplychain">Supply Chain</a>
-      <a class="case-link" href="#adoption">Adoption</a>
+      <a class="case-link" href="#surface">The Surface</a>
+      <a class="case-link" href="#system">The System</a>
+      <a class="case-link" href="#webgl">Web 3D</a>
+      <a class="case-link" href="#clarity">Clarity</a>
+      <a class="case-link" href="#straight">Straight Answers</a>
       <a class="contact" href="mailto:mkscrivana@gmail.com">Contact</a>
     </div>
   </div>
@@ -196,97 +208,63 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
 
 <header class="hero" id="top">
   <div class="wrap">
-    <div class="kicker mono"><span class="dot"></span>Michael Scrivana &nbsp;·&nbsp; for Adobe · Lead Forward Deployed Creative Technologist</div>
-    <h1>I built a rough version of what you sell — <em>because a regulated organization needed it and Firefly Services didn't exist yet.</em></h1>
-    <p class="lede">A node-based creative production pipeline. A brand layer the machines can read. An artwork-compliance gate that runs before legal and regulatory review. Underneath all of it, seven years actually running the content supply chain it automates — briefs, brand books, masters to channel variants, 700+ renders into the DAM. And in every case, the part I care about most: how it earned its usage from people who never asked for it.</p>
-    <p class="who"><strong>Michael Scrivana</strong> — Senior Designer &amp; AI Lead, Product Experience, Bayer Consumer Health. Seven years in a Fortune 100 consumer-health organization: first designing the packaging behind ~$79MM in retail sales, then building the AI tooling a 115-person creative organization runs on. &nbsp;<a href="https://www.linkedin.com/in/michaelscrivana89/">linkedin</a></p>
+    <div class="kicker mono"><span class="dot"></span>Michael Scrivana &nbsp;·&nbsp; for Baseten · Design Engineer (Brand Team)</div>
+    <h1>You are hiring one person to do both halves. <em>I have been doing both halves for years — they were just filed under different job titles.</em></h1>
+    <p class="lede">Seven years designing brand systems that had to hold at volume: identity, packaging, motion, live stage, the digital shelf. Two years designing <em>and building</em> the software a 115-person organization now works through every day — React and TypeScript, written by me, deployed by me, still being shipped into. This page is four cases at that seam, and one section of straight answers about what I have not done.</p>
+    <p class="who"><strong>Michael Scrivana</strong> — Senior Designer &amp; AI Lead, Product Experience, Bayer Consumer Health. &nbsp;<a href="https://design.michaelscrivana.com">design &amp; motion portfolio</a> &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/michaelscrivana89/">linkedin</a></p>
   </div>
 </header>
 
 <section class="thesis">
   <div class="wrap">
-    <p>Nobody was told to adopt any of this. It got used because I went to the team with the deadline, not the team with the org chart — and <span class="hl">usage that repeats</span> is the only thing I count.</p>
+    <p>Most organizations split this role in two and then spend the difference on handoffs. The reason I can hold both is not talent, it is stubbornness: when the deploy queue ran in weeks, I <span class="hl">read the infrastructure documentation until I could ship it myself</span>.</p>
   </div>
 </section>
 
-<!-- CASE 1 — NODE-BASED PIPELINE + BRAND BRAIN -->
-<section class="case" id="pipeline">
+<!-- CASE 1 — THE SURFACE -->
+<section class="case" id="surface">
   <div class="wrap">
     <div class="case-head">
       <div class="case-num">01</div>
       <div>
-        <div class="case-title">CreativeLab — a node-based creative production pipeline</div>
-        <div class="case-sub">Graph editor over generative backends · a machine-readable brand layer · shipped with the ecommerce team</div>
+        <div class="case-title">A live surface I own end to end — designed, built, deployed, still changing</div>
+        <div class="case-sub">Vite + React + TypeScript · Azure Static Web Apps behind SSO · a year of continuous shipping, not a relaunch</div>
       </div>
     </div>
     <div class="case-body">
 
-      <div class="shots">
-        <div class="judge-pair">
-          <figure>
-            <img src="images/creativelab-canvas-oad-kids.jpg" alt="The CreativeLab node canvas: a graph of generation, mask-edit and compliance-check nodes wired together over a product concept">
-            <figcaption><strong>The canvas.</strong> A React Flow graph editor over image-generation backends, running <em>concept → variant → mask-edit → compliance-check</em>. Each step is a node; the pipeline is the artifact, so the next campaign starts from a graph rather than a blank brief.</figcaption>
-          </figure>
-          <figure>
-            <img src="images/creativelab-oad-kids-hero.jpg" alt="A generated One A Day Kids hero image produced through the CreativeLab pipeline">
-            <figcaption><strong>Output, on-guideline by construction.</strong> Brand guidelines are held as machine-readable rules alongside reference assets and compliance scoring — what I call the <em>brand brain</em> — consulted at every step, so work arrives on-brand rather than being corrected back onto it.</figcaption>
-          </figure>
-        </div>
-        <div class="judge-pair" style="margin-top:16px">
-          <figure>
-            <img src="images/creativelab-claritin-lifestyle.jpg" alt="A Claritin lifestyle variant generated through the same pipeline">
-            <figcaption><strong>One master, many channels.</strong> The same graph re-runs across brands and formats. Claritin sequenced behind the One A Day pilot.</figcaption>
-          </figure>
-          <figure>
-            <img src="images/creativelab-glp1-companion-shelf.jpg" alt="A shelf-context concept variant generated through the pipeline">
-            <figcaption><strong>Shelf context, generated.</strong> Work that used to mean a photoshoot and an agency turnaround now takes hours.</figcaption>
-          </figure>
-        </div>
-        <div class="judge-pair" style="margin-top:16px">
-          <figure>
-            <img src="images/creativelab-graph/creativelab-canvas-womens50-video-graph.jpg" alt="CreativeLab canvas close-up: Prompt and Reference nodes feed a Generate node, into an Output, into an Iterate node that changes one thing at a time, into a final Output wired to a video node">
-            <figcaption><strong>The real graph, brief to motion.</strong> One A Day Women&rsquo;s 50+ Multi Gummy: the pack reference feeds Generate, an Iterate node changes <em>one thing at a time</em> &mdash; <em>&ldquo;overhead view, more dramatic lighting&rdquo;</em>, with everything else held &mdash; and the keeper frame wires into a video node. Every node is a decision you can see, re-run, and hand to somebody else.</figcaption>
-          </figure>
-          <figure>
-            <video src="images/creativelab-graph/oad-womens50-gummy-veo-8s.mp4" poster="images/creativelab-graph/oad-womens50-gummy-veo-frame-1.jpg" muted loop playsinline controls preload="metadata"></video>
-            <figcaption><strong>The output &mdash; nothing photographed.</strong> Eight seconds of motion generated from the pinned still, at the tail of the same graph. No handoff to a motion team, no re-brief, no losing the brand between tools.</figcaption>
-          </figure>
-        </div>
-      </div>
-
       <div class="block">
         <div class="label mono">The problem</div>
-        <p>A regulated consumer-health portfolio needs thousands of on-brand variations a year across static, video and 3D — and every one of them has rules attached that a generic image model knows nothing about. The bottleneck was never the idea. It was the distance between the idea and something legally shippable.</p>
+        <p>A 115-person creative organization had no front door for any of this. Every tool that existed lived somewhere different, and the internal path to deploying anything ran through a queue measured in weeks. The usual answer is to file a ticket and wait, or to brief an agency and wait longer.</p>
       </div>
       <div class="block">
-        <div class="label mono">What I built</div>
-        <p>A node-based pipeline where the brand is a first-class input: guidelines encoded as <strong>machine-readable rules</strong>, reference assets retrievable, compliance scored at every hop. Built solo, <strong>full-stack</strong> — React and TypeScript on the front, Node and Express behind it, over image-generation backends, deployed on Azure.</p>
+        <div class="label mono">What I did</div>
+        <p>I read the enterprise infrastructure and platform documentation myself until I understood exactly what I was permitted to deploy, where, and under which controls — and then built <strong>PX Hub</strong>: a Vite + React + TypeScript monorepo on Azure Static Web Apps behind enterprise SSO, hosting five tools. I designed it, I wrote it, I deploy it. <strong>That is the only reason there are five tools and not one.</strong></p>
       </div>
       <div class="block full">
-        <div class="label mono">How it earned its usage</div>
-        <p>I did not launch it with the design team. They were my own function and would have been polite about it. <strong>I launched it with ecommerce</strong>, because they had Amazon Prime Day and a real problem — and we put <strong>one SKU through five channels with three regulated tweaks in sixty seconds</strong>. Nobody was told to adopt anything; they had a deadline and this was faster. That is the whole method: find the person whose week is actually on fire, and be the thing that puts it out.</p>
-        <a class="case-more" href="creativelab.html">Read the full CreativeLab case &rarr;</a>
+        <div class="label mono">Why it matters for this role</div>
+        <p>Your posting asks for a site treated as <em>a product that&rsquo;s constantly evolving rather than something we redesign every few years</em>. That is not an aspiration I am agreeing to — it is how this thing has run for a year. New tools, new sections, new patterns, shipped continuously into a surface that never went dark for a redesign. The organization went from <strong>zero AI literacy to active use across all six craft disciplines in twelve months</strong>, and the front door is the reason.</p>
       </div>
       <div class="outcomes">
-        <div class="outcome"><div class="o-lead">60 seconds, five channels, three regulated tweaks</div><div class="o-sub">Amazon Prime Day, co-launched with ecommerce rather than design.</div></div>
-        <div class="outcome"><div class="o-lead">On-guideline by construction</div><div class="o-sub">Brand rules consulted at every step, not applied as a correction afterward.</div></div>
-        <div class="outcome"><div class="o-lead">Weeks to hours</div><div class="o-sub">Replaced a photoshoot-and-agency cycle for concept and variant work.</div></div>
+        <div class="outcome"><div class="o-lead">Designed, built and deployed by one person</div><div class="o-sub">Figma to production, including the auth, the access control and the pipeline.</div></div>
+        <div class="outcome"><div class="o-lead">A year of continuous shipping</div><div class="o-sub">Five tools live on it; no relaunch cycle, no redesign freeze.</div></div>
+        <div class="outcome"><div class="o-lead">Days, not four-to-six weeks</div><div class="o-sub">The internal cycle against the typical agency turnaround it replaced.</div></div>
       </div>
       <div class="jd-tag">
-        <span>node-based workflow builder</span><span>generative APIs</span><span>brand validation</span><span>masters to channel variants</span><span>earned adoption</span>
+        <span>own the site day to day</span><span>concept through production</span><span>react + typescript</span><span>constantly evolving</span><span>ship without waiting</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CASE 2 — COMPLIANCE GATE -->
-<section class="case" id="gate">
+<!-- CASE 2 — THE SYSTEM -->
+<section class="case" id="system">
   <div class="wrap">
     <div class="case-head">
       <div class="case-num">02</div>
       <div>
-        <div class="case-title">DartReviewerPX — the compliance gate the reviewers asked to keep</div>
-        <div class="case-sub">Text-plus-vision dual-channel diff · designed for calibrated trust · 15–20 minutes to under one</div>
+        <div class="case-title">A design system that exists in Figma <em>and</em> in code, maintained by the same person</div>
+        <div class="case-sub">One token base, two visual dialects · a Figma library others build from · DM Sans + JetBrains Mono</div>
       </div>
     </div>
     <div class="case-body">
@@ -294,95 +272,87 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
       <div class="shots">
         <div class="judge-pair">
           <figure>
-            <img src="images/MIRAFAST.png" alt="MiraFAST Overnight Chewables packaging — the kind of regulated artwork the review agent reads">
-            <figcaption><strong>This is what the gate reads.</strong> Regulated OTC packaging, where a missing ™ or a stray † is not a typo — it is a regulatory problem that reaches the shelf. The gate runs <strong>ahead of medical, legal and regulatory (MLR) review</strong>, not after it.</figcaption>
+            <img src="images/designsystem-px-showcase.png" alt="PX Design System showcase: the dark chrome dialect, showing type scale, color tokens, components and states">
+            <figcaption><strong>One token base, two dialects.</strong> CSS custom properties carrying a dark chrome voice and a light paper voice from the same source. Change the token, change every surface — which is what stops a system from quietly forking into six.</figcaption>
           </figure>
           <figure>
-            <img src="images/mirafiber-line_1.avif" alt="MiraFIBER line packaging across formats">
-            <figcaption><strong>And it reads it at line scale.</strong> A portfolio's worth of artwork, every variant carrying its own claims, marks and mandatories.</figcaption>
+            <img src="images/designsystem-science-showcase.png" alt="The same design system in its second visual dialect, applied to a different internal product surface">
+            <figcaption><strong>The second dialect, same system.</strong> A different audience and a different product, wearing the same bones. This page is the third: the tokens below are Baseten&rsquo;s palette dropped into the same base.</figcaption>
           </figure>
         </div>
       </div>
 
       <div class="block">
-        <div class="label mono">The problem</div>
-        <p>Packaging artwork goes through legal, medical and regulatory review. Anything caught late is expensive; anything missed is worse. The pass that precedes it was manual, slow, and — because it is a search for a single character across dozens of pages — exactly the task human attention is worst at.</p>
+        <div class="label mono">Both sides of the line</div>
+        <p>I built and maintain the <strong>Figma library</strong> — components, variants and styles the wider organization designs from — <em>and</em> the CSS custom-property token base the applications are actually built on. Designers pull from the first, apps compile the second, and one person keeps them honest with each other. In my experience that is the entire difference between a design system and a folder of screenshots.</p>
       </div>
       <div class="block">
-        <div class="label mono">What I built</div>
-        <p>An agent that reads artwork on <strong>two channels at once</strong> — a pdf.js text extraction and a vision pass — and diffs them against the regulatory and brand-system rules. It catches the single-character marks people miss. Claude Opus on Azure, built for the Graphics Operations AI Workshop and demoed live.</p>
+        <div class="label mono">And the standard underneath it</div>
+        <p>I co-authored the organization&rsquo;s <strong>inclusive design standard</strong>: WCAG AA adopted across print, web, mobile, packaging and point of sale, with named validation tooling and — the part that made it real — <strong>the contrast check written into the QC gate</strong> rather than left to goodwill. Accessibility that depends on remembering is not a standard, it is a hope.</p>
       </div>
       <div class="block full">
-        <div class="label mono">The design decision that mattered</div>
-        <p>An automated check that reviewers cannot audit is a check they will quietly stop trusting, and then quietly stop using. So the interface is built for <strong>calibrated trust</strong> rather than for confidence: confidence scores per finding, citation backlinks into the source page, and visual diff overlays. The reviewer can check the machine in seconds. That is why it stayed in the workflow after the novelty wore off — and it is the same reason I would not ship a generative workflow to a creative team without giving them somewhere to look when it is wrong.</p>
-      </div>
-      <div class="outcomes">
-        <div class="outcome"><div class="o-lead">15–20 minutes to under one</div><div class="o-sub">The pre-review pass, per artwork round.</div></div>
-        <div class="outcome"><div class="o-lead">Catches what people miss</div><div class="o-sub">Single-character regulatory marks — ™, † — found by diffing text against vision.</div></div>
-        <div class="outcome"><div class="o-lead">Auditable by design</div><div class="o-sub">Confidence scores, citation backlinks, visual diff overlays. Trust you can check.</div></div>
+        <div class="label mono">A small demonstration</div>
+        <p>This page is dressed in your palette. Your signal green — <span class="swatch" style="background:#19e76e"></span><span class="code">#19E76E</span> — sits at about <strong>2.4:1</strong> against your off-white — beautiful as a signal, unusable as text. So the text accent here is a darkened relative — <span class="swatch" style="background:#00693d"></span><span class="code">#00693D</span> — at <strong>6.4:1</strong>, and the bright green is reserved for things that are not read. That took two minutes and it is the whole job in miniature: know the rule, keep the brand, do not make the reader pay for it.</p>
       </div>
       <div class="jd-tag">
-        <span>brand &amp; regulatory validation</span><span>review-and-approval</span><span>human-in-the-loop</span><span>catching when the output is wrong</span>
+        <span>reusable components and patterns</span><span>systems thinking</span><span>design tokens</span><span>typography</span><span>figma to code</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CASE 3 — KNOWLEDGE LAYER -->
-<section class="case" id="knowledge">
+<!-- CASE 3 — WEB 3D -->
+<section class="case" id="webgl">
   <div class="wrap">
     <div class="case-head">
       <div class="case-num">03</div>
       <div>
-        <div class="case-title">The knowledge layer — one deployment, three AI surfaces</div>
-        <div class="case-sub">MCP server authorship · brand standards as structured data · integrating into the stack people already use</div>
+        <div class="case-title">Web 3D and motion — from a simulation in Houdini to a shader in the browser</div>
+        <div class="case-sub">Three.js and React Three Fiber · vertex animation textures · hand-written GLSL · storyboard to finished film</div>
       </div>
     </div>
     <div class="case-body">
 
       <div class="shots">
-        <figure class="wide">
-          <img src="images/knowledge-layer-architecture.png" alt="Architecture: six disciplines of scattered documents refactored into one canonical model exposed via MCP to three AI surfaces">
-          <figcaption><strong>From scattered prose to one machine-readable model.</strong> Six disciplines' documentation — brand standards, regulatory artwork rules, consumer research — refactored into canonical objects with stable IDs and typed cross-references, exposed through a single MCP server.</figcaption>
-        </figure>
-        <figure class="wide">
-          <img src="images/knowledge-layer-canonical-object.png" alt="A canonical-object markdown cell on the left and the find_canonical MCP call and JSON response on the right">
-          <figcaption><strong>What machine-consumable actually looks like.</strong> A real cell (left) and the call an agent makes (right): <span class="code">find_canonical</span>, <span class="code">search</span>, <span class="code">list_cells</span> — it reads structure rather than prose and follows typed cross-refs to related cells.</figcaption>
-        </figure>
+        <div class="judge-pair">
+          <figure>
+            <img src="images/storyboard-01.webp" alt="Cinema 4D storyboard panel: the opening beat of a stage film, drawn shot by shot">
+            <figcaption><strong>The frames.</strong> I storyboarded the stage opener myself, in Cinema 4D — shot by shot, to sell the direction before anything was built.</figcaption>
+          </figure>
+          <figure>
+            <img src="images/BoldKV1.webp" alt="3D key visual built from the event identity mark">
+            <figcaption><strong>The film built from them.</strong> Same hand, same system: identity into 3D into the motion that ran the room. The frames and the finished films sit together on <a href="https://design.michaelscrivana.com">design.michaelscrivana.com</a>.</figcaption>
+          </figure>
+        </div>
       </div>
 
       <div class="block">
-        <div class="label mono">The problem</div>
-        <p>The organization was running Claude, Microsoft Copilot and internal models at the same time, and the question I got more than any other was <em>which tool do I use?</em> Answering it by picking a winner would have been wrong within a quarter.</p>
+        <div class="label mono">Houdini &rarr; WebGL</div>
+        <p>A cloth simulation baked out of Houdini into a <strong>vertex animation texture</strong> and reconstructed in a browser scene — the simulation authored in a 3D package, transported through a texture, replayed at runtime on the web. I care about this one more than any single scene, because it is a <em>pipeline</em>: proof that work can move from a DCC into a page and still perform there.</p>
       </div>
       <div class="block">
-        <div class="label mono">What I built</div>
-        <p>I moved the knowledge out of the tools. A multi-cell <strong>MCP server</strong> to the 2025-06-18 spec — FastAPI and FastMCP on AWS Lambda and API Gateway, deployed through the company's Terraform module with OAuth On-Behalf-Of, <strong>authenticated against corporate Entra ID SSO</strong> — covering six sub-homes across five knowledge domains. <strong>One deployment answering from three AI surfaces</strong>: the internal assistant, Microsoft 365 Copilot, and Claude Desktop and Code.</p>
+        <div class="label mono">And underneath, by hand</div>
+        <p>For a voice assistant I built at home, I wrote the character&rsquo;s <strong>GLSL fragment shaders</strong> directly: fbm noise, a 40,000-point particle sphere, a five-state visual vocabulary — idle, listening, thinking, speaking, error — so the thing reads the same on a TV, a wall tablet and a phone.</p>
       </div>
       <div class="block full">
-        <div class="label mono">Why it belongs in this application</div>
-        <p>This is the same move as the brand brain, one level up: <strong>put the knowledge outside the tool, and meet people wherever they already are.</strong> A forward-deployed engagement lives or dies on that instinct — the win that sticks is the one that shows up inside Figma, or Premiere, or the DAM the team already has open, not in a new destination they have to remember to visit. It is also the clearest evidence I ramp an unfamiliar API surface quickly: I read the MCP spec and shipped a conformant multi-tool server against it.</p>
-      </div>
-      <div class="outcomes">
-        <div class="outcome"><div class="o-lead">One deployment, three surfaces</div><div class="o-sub">Internal assistant, M365 Copilot, Claude Desktop and Code — same answers everywhere.</div></div>
-        <div class="outcome"><div class="o-lead">Standards became queryable</div><div class="o-sub">Brand rules and regulatory artwork requirements, readable by any agent.</div></div>
-        <div class="outcome"><div class="o-lead">A new spec, shipped</div><div class="o-sub">Conformant MCP server on Lambda with OAuth On-Behalf-Of, via Terraform.</div></div>
+        <div class="label mono">The detail I would want to be judged on</div>
+        <p>That character had a glow, and wherever the glow met the edge of its canvas it stopped in a straight line. A square, printed around a round object. The fix was not a CSS mask — it was reworking how the shader wrote coverage: <strong>premultiplying it, letting the glow coefficients double as alpha, fading radially to zero <em>inside</em> the canvas bounds</strong> so there was nothing left to clip by the time the edge arrived. A designer noticed it. Only someone willing to open the fragment shader could fix it. That gap is the reason this role exists.</p>
       </div>
       <div class="jd-tag">
-        <span>MCP depth</span><span>integrations</span><span>light back-ends</span><span>ramping a new API surface</span>
+        <span>three.js</span><span>react three fiber</span><span>shaders</span><span>webgl</span><span>motion design</span><span>creative coding</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CASE 4 — CONTENT SUPPLY CHAIN -->
-<section class="case" id="supplychain">
+<!-- CASE 4 — CLARITY -->
+<section class="case" id="clarity">
   <div class="wrap">
     <div class="case-head">
       <div class="case-num">04</div>
       <div>
-        <div class="case-title">The content supply chain — I ran it for seven years before I automated it</div>
-        <div class="case-sub">Briefs to assets · brand systems and tokens · masters to channel variants · into the DAM and back out through review</div>
+        <div class="case-title">Making something genuinely hard feel clear, without flattening it</div>
+        <div class="case-sub">Brand systems at volume · conversion on the digital shelf · two years explaining AI to people who did not ask</div>
       </div>
     </div>
     <div class="case-body">
@@ -390,94 +360,62 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
       <div class="shots">
         <div class="judge-pair">
           <figure>
-            <img src="images/MiraFAST-Endcard.jpg" alt="MiraFAST launch creative">
-            <figcaption><strong>MiraFAST Overnight Chewables.</strong> I designed the packaging and led go-to-market creative — drawn in <strong>Illustrator and Photoshop</strong>, inception to design lock in a three-week sprint, in-house rather than briefed out. <strong>~$38MM in retail within 15 months</strong>, #1 Laxative Soft Chew and #1 Overnight Laxative SKU, launched at <strong>5× the sales velocity</strong> of its predecessor.</figcaption>
+            <img src="images/MIRAFAST.png" alt="MiraFAST Overnight Chewables packaging design in the retail lineup">
+            <figcaption><strong>Concept to design lock in three weeks</strong>, executed in-house rather than briefed out. Now the #1 Overnight Laxative SKU and one of the fastest digestive-health launches in five years.</figcaption>
           </figure>
           <figure>
-            <img src="images/OAD_Group_02.webp" alt="One A Day portfolio packaging across SKUs">
-            <figcaption><strong>One A Day, at volume.</strong> I rebuilt the brand book in <strong>InDesign</strong> as the single standard every agency and internal team worked from, then held consistency across a relaunch of <strong>50+ SKUs and 1,000+ creative assets</strong> — and coordinated <strong>700+ product renders</strong> for GS1 syndication into EDAM/PIM.</figcaption>
-          </figure>
-        </div>
-        <div class="judge-pair" style="margin-top:16px">
-          <figure>
-            <img src="images/storyboard-01.webp" alt="Cinema 4D storyboard frames for the BOLD Ambition Tour stage opener">
-            <figcaption><strong>Static, video and 3D, by my own hand.</strong> Storyboards and styleframes for the BOLD Ambition Tour stage opener — drawn by hand, animated by me in <strong>After Effects</strong> with <strong>Cinema 4D</strong> for the 3D, then built into the films that ran the room.</figcaption>
-          </figure>
-          <figure>
-            <img src="images/BoldKV1.webp" alt="BOLD Ambition Tour 3D key visual built from the identity mark">
-            <figcaption><strong>One system, three formats.</strong> The identity carried three consecutive years through virtual, hybrid and in-person events — different marks each year, one design system underneath.</figcaption>
+            <img src="images/creativelab-canvas-oad-kids.jpg" alt="A node-based creative pipeline canvas: generation, mask-edit and compliance-check nodes wired together">
+            <figcaption><strong>The same instinct in software.</strong> A React Flow graph editor over swappable image-generation backends, with brand rules held machine-readable so output arrives on-guideline rather than being corrected back onto it.</figcaption>
           </figure>
         </div>
       </div>
 
       <div class="block">
-        <div class="label mono">Why this section exists</div>
-        <p>Your posting says the content supply chain is the floor, not the ceiling — the part you do not teach, and the reason a skeptical creative director either trusts someone in the first meeting or does not. I have been the creative director in that meeting.</p>
+        <div class="label mono">Clarity is not simplification</div>
+        <p>I have spent two years making a difficult technology legible to people with no reason to care about it — a 115-person organization taken from nothing to daily use, and multi-day sessions with a division&rsquo;s Science President. The lesson never changed: <strong>the audience can tell when you have made something simple by removing the part that was true.</strong> Your readers are engineers evaluating inference infrastructure. They will notice faster than most.</p>
       </div>
       <div class="block">
-        <div class="label mono">The end-to-end, by name</div>
-        <p><strong>Briefs to assets</strong> — I wrote the design briefs, and the RFPs used to solicit and score agency bids. <strong>Brand systems and tokens</strong> — I build and maintain the Figma library others design from, and its CSS custom-property token base; I co-authored the inclusive-design standard that put WCAG AA across print, web, mobile, pack and point of sale, with the contrast check written into the <strong>QC gate</strong> rather than left as a rule to remember. <strong>Masters to channel variants</strong> — MiraFAST and MiraFIBER from shelf to screen, ~$79MM+ combined. <strong>Into the DAM and back out through review</strong> — 700+ renders into EDAM/PIM, with the compliance gate in case 02 sitting in front of legal and regulatory.</p>
+        <div class="label mono">Designing against a number</div>
+        <p>I have run <strong>A/B and conversion testing on the retail digital shelf</strong> — content and creative variants tested against conversion across Amazon, Walmart and Target — alongside the fifteen-page visual brief that defined the standard and 700+ product renders syndicated into it. Not web experimentation, and I will not pretend otherwise: it is somebody else&rsquo;s platform. But it is real conversion work under real commercial pressure, and it taught me the thing your posting is careful about — <em>where the line sits between making a page work and turning it into a growth hack.</em></p>
       </div>
-      <div class="block full">
-        <div class="label mono">The part that transfers</div>
-        <p>Every automation in cases 01 through 03 exists because I had personally felt the thing it removes. I built the artwork gate because I had sat in the review. I built the brand brain because I had written the brand book and watched it get ignored under deadline. <strong>I am not guessing at where a creative team's week goes.</strong> And I have sat on the buying side of this table too — requirements set, proposals scored — which is a useful thing to have done before walking into a customer's organization on the vendor's side of it.</p>
-      </div>
-      <div class="outcomes">
-        <div class="outcome"><div class="o-lead">~$79MM+ combined retail</div><div class="o-sub">MiraFAST and MiraFIBER — packaging and launch creative, shelf to screen.</div></div>
-        <div class="outcome"><div class="o-lead">50+ SKUs, 1,000+ assets</div><div class="o-sub">One A Day relaunch, consistency held at volume from one digitized brand book.</div></div>
-        <div class="outcome"><div class="o-lead">700+ renders into the DAM</div><div class="o-sub">GS1 syndication to EDAM/PIM, aesthetic standard set with render vendors.</div></div>
+      <div class="metrics">
+        <div class="metric"><div class="n">~$79<span class="unit">MM+</span></div><div class="l">Combined retail sales on brand systems I designed</div></div>
+        <div class="metric"><div class="n">115</div><div class="l">Person organization, zero to active use in 12 months</div></div>
+        <div class="metric"><div class="n">700<span class="unit">+</span></div><div class="l">Product renders syndicated to the digital shelf</div></div>
       </div>
       <div class="jd-tag">
-        <span>briefs to assets</span><span>brand systems &amp; design tokens</span><span>masters to channel variants</span><span>DAM &amp; review handoff</span><span>static, video, 3D</span>
+        <span>complex technical products made clear</span><span>conversion without the growth hack</span><span>brand at volume</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CASE 5 — ADOPTION -->
-<section class="case" id="adoption">
+<!-- STRAIGHT ANSWERS -->
+<section class="case" id="straight">
   <div class="wrap">
     <div class="case-head">
       <div class="case-num">05</div>
       <div>
-        <div class="case-title">Earning it — what I do when the training works and nothing changes</div>
-        <div class="case-sub">Diagnose the moment, not the person · the workshop that ships software · zero to active use in twelve months</div>
+        <div class="case-title">Straight answers, including the unflattering ones</div>
+        <div class="case-sub">What I have done, what I have not, and what I would need a week for</div>
       </div>
     </div>
     <div class="case-body">
-
-      <div class="shots">
-        <div class="judge-pair">
-          <figure>
-            <img src="images/designsystem-px-showcase.png" alt="The PX design system showcase — tokens, type pairing and component patterns">
-            <figcaption><strong>The system a 115-person organization designs from.</strong> One token base, the Figma library beside it — built so the standard is the path of least resistance rather than a document people are asked to honor.</figcaption>
-          </figure>
-          <figure>
-            <img src="images/designsystem-science-showcase.png" alt="A second design-system showcase for the science organization">
-            <figcaption><strong>And the second one, for the science organization.</strong> Same discipline, different audience — the AI learning track I am building now covers the Product Experience domain inside a roadmap spanning an organization of 1,000+.</figcaption>
-          </figure>
-        </div>
-      </div>
-
       <div class="block">
-        <div class="label mono">The story I would tell in the first interview</div>
-        <p>I co-authored a module on writing design briefs and delivered it to <strong>100+ marketers</strong> as required training. It worked — briefs measurably improved, and it still runs on the internal learning platform without me. It also produced questions that would not stop. The obvious move was to teach it again, harder. Instead I went and watched what happens when someone sits down to write one, and found the obstacle was never missing knowledge. <strong>It was missing information, and the cost of going to find it.</strong> So I built the Brief Translator, which closes the gap at the moment of work rather than in a classroom three months earlier.</p>
+        <div class="label mono">DatoCMS <span class="pill no">never used</span></div>
+        <p><strong>I have never used a headless CMS</strong> — not Dato, not Contentful, not Sanity. What I have done is design content taxonomies, modular master-and-adaptation template systems and the tooling that assembles them, so I expect the concepts to be familiar and the product to take about a week. I would rather tell you than have you find out.</p>
       </div>
       <div class="block">
-        <div class="label mono">The workshop that ships software</div>
-        <p>I facilitate the division's <strong>two-day AI hackathons</strong> — master classes on AI and vibe-coding as the run-up, domain experts paired with technical champions, coaching through the day, judging at the end. It is a format nobody leaves without having built something. <strong>Seven tools were ready to scale after the first event</strong> — hours rather than months — and <strong>two of those builds outlived the event</strong>, including one now launching across its department.</p>
+        <div class="label mono">Public marketing sites <span class="pill part">half of it</span></div>
+        <p>The surface I have owned continuously is <strong>internal</strong>, behind SSO. The public brand sites I have shipped — a responsive brand site, mobile and retail merchandising for an acquired brand launched into a new market — <strong>I designed and an agency implemented</strong>. Both halves are real; I have not yet held them together on one public marketing site. That is precisely why this job interests me.</p>
+      </div>
+      <div class="block">
+        <div class="label mono">Next.js <span class="pill yes">yes</span></div>
+        <p>Used. My production work has run on Vite + React and Node; I am comfortable in the framework and happy to talk through it in detail rather than let a bullet point stand in for the conversation.</p>
       </div>
       <div class="block full">
-        <div class="label mono">And the honest version</div>
-        <p>All of that happened somewhere I had seven years of relationships and a mandate. Walking into a customer's creative organization weeks after somebody else signed the contract is a harder problem and I would not pretend otherwise. What I would bring is the habit above: not teaching the thing again, harder, but going to watch where the work actually stalls and then <strong>building the check that runs at the moment of the decision</strong> rather than in a classroom three months earlier. Everything on this page is a version of that check.</p>
-      </div>
-      <div class="outcomes">
-        <div class="outcome"><div class="o-lead">Zero to active use in 12 months</div><div class="o-sub">All six craft disciplines of a 115-person organization. Adoption, not seats.</div></div>
-        <div class="outcome"><div class="o-lead">Seven tools ready to scale</div><div class="o-sub">From the first two-day hackathon. Two builds outlived the event.</div></div>
-        <div class="outcome"><div class="o-lead">Prototype, then park or kill</div><div class="o-sub">Ship in days against a four-to-six-week agency cycle — and stop the ones nobody uses.</div></div>
-      </div>
-      <div class="jd-tag">
-        <span>adoption against resistance</span><span>workshops &amp; live builds</span><span>diagnosing the real blocker</span><span>measured in usage</span>
+        <div class="label mono">Everything else on your list <span class="pill yes">yes</span></div>
+        <p>React, TypeScript, HTML and CSS — daily, in production. Figma into code and owning the result — the last two years. Typography, layout, interaction, motion, responsiveness — seven years, and a written accessibility standard to go with it. Reusable components rather than page-by-page solutions — a system in two places. Three.js, React Three Fiber, shaders, WebGL, creative coding — above. Strong opinions about the web — you may have gathered.</p>
       </div>
     </div>
   </div>
@@ -485,13 +423,13 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
 
 <footer>
   <div class="wrap">
-    <div class="big">I would like to build these on Firefly Services instead of from scratch.</div>
+    <div class="big">I would like to stop doing these two jobs in two different buildings.</div>
     <div class="links">
       <a href="mailto:mkscrivana@gmail.com">mkscrivana@gmail.com</a> &nbsp;·&nbsp;
       <a href="https://design.michaelscrivana.com">design &amp; motion</a> &nbsp;·&nbsp;
       <a href="https://www.linkedin.com/in/michaelscrivana89/">linkedin</a>
     </div>
-    <div class="fine">Michael Scrivana · Case studies · August 2026 · Prepared for Adobe · Lead Forward Deployed Creative Technologist (R165641)<br>Internal tools built on Bayer-internal infrastructure; imagery shown is concept, pilot or shipped brand output. No confidential business data is reproduced here.</div>
+    <div class="fine">Michael Scrivana · Case studies · August 2026 · Prepared for Baseten · Design Engineer (Brand Team)<br>Built for this application. Palette borrowed from baseten.co and contrast-corrected to WCAG AA. Internal tools built on Bayer-internal infrastructure; imagery shown is concept, pilot or shipped brand output. No confidential business data is reproduced here.</div>
   </div>
 </footer>
 
