@@ -129,7 +129,7 @@ as a *shape* and never as a count, a date, a named leader, a forum or a channel.
 ```
 
 ## `hero.h1`
-I write the argument &mdash; *and I build the thing that carries it.*
+I write executive communications &mdash; *and make the material that carries them.*
 
 ## `hero.lede`
 More than eight years inside regulated healthcare, seven of them developing the **narratives, the visuals and the scalable materials** a global consumer-health organization runs on &mdash; for three different rooms: **employees, customers, and the stakeholders above them**. Five cases: the narrative and the thing that carries it; change communications at two altitudes, including the town hall I presented to close to a thousand colleagues; high-impact business events; the toolkits that make consistency scale; and **a published corporate sustainability campaign you can watch on Bayer&rsquo;s own channel**. The brand work behind those cases carries its own numbers &mdash; the two launches I designed and took to market have done **more than $79MM in retail sales**, and MiraFIBER&rsquo;s launch communications ran **more than 50% over sales projection**.
