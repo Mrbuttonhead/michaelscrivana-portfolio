@@ -1,0 +1,2133 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Nabu Pearl Lab</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  /* Single-theme by intent: this is an instrument for judging a luminous orb, and
+     the ground is the shader's own night background — main.frag's vec3(.042,.055,.078)
+     is literally #0b0e14. A light chrome would lie about what the TV shows.
+     Accent is the listening-state mint from the STATES table. */
+  :root { --bg:#0b0e13; --panel:#12161d; --line:#232a34; --ink:#c8d2dc; --dim:#7a8a96; --acc:#4fd1c5;
+          --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+          --sans:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif; }
+  * { box-sizing: border-box; }
+  html,body { margin:0; min-height:100%; background:var(--bg); color:var(--ink);
+              font:13px/1.45 var(--sans); overflow:hidden; }
+  :focus-visible { outline:2px solid var(--acc); outline-offset:2px; }
+  #stage { position:fixed; inset:0 320px 0 0; }
+  #c { width:100%; height:100%; display:block; }
+  #stage.light { background:#e6eaef; }
+  #panel { position:fixed; top:0; right:0; bottom:0; width:320px; background:var(--panel);
+           border-left:1px solid var(--line); overflow-y:auto; overflow-x:hidden; padding:12px 14px 40px; }
+  h1 { font:600 12px/1.3 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--ink); margin:0; }
+  .sub { color:var(--dim); font-size:11px; margin:4px 0 12px; max-width:34ch; }
+  h2 { font:11px/1.3 var(--mono); letter-spacing:.10em; text-transform:uppercase; color:var(--dim);
+       margin:18px 0 7px; padding-top:10px; border-top:1px solid var(--line); }
+  .row { display:flex; align-items:center; gap:8px; margin:5px 0; }
+  .row label { flex:0 0 82px; color:var(--dim); font:11px var(--mono); }
+  .row input[type=range] { flex:1; min-width:0; accent-color:var(--acc); }
+  .row .val { flex:0 0 46px; text-align:right; font:11px var(--mono); color:var(--ink);
+              font-variant-numeric:tabular-nums; }
+  .btns { display:flex; flex-wrap:wrap; gap:6px; }
+  button { background:#1a2029; color:var(--ink); border:1px solid var(--line); border-radius:6px;
+           padding:5px 10px; font-size:12px; cursor:pointer; }
+  button:hover { border-color:var(--acc); }
+  button.on { background:var(--acc); color:#06120f; border-color:var(--acc); font-weight:600; }
+  input[type=number] { width:100%; background:#0d1117; color:var(--ink); border:1px solid var(--line);
+                       border-radius:4px; padding:2px 3px; font:11px var(--mono);
+                       font-variant-numeric:tabular-nums; -moz-appearance:textfield; }
+  input[type=number]::-webkit-inner-spin-button { -webkit-appearance:none; }
+  table { width:100%; table-layout:fixed; border-collapse:collapse; font-size:11px; }
+  th { color:var(--dim); font-weight:400; text-align:center; padding-bottom:3px; }
+  th:first-child { width:56px; }
+  td { padding:2px 1px; }
+  td.name { color:var(--dim); text-align:right; padding-right:5px; white-space:nowrap; font-size:10px; }
+  #editor { position:fixed; left:0; right:320px; bottom:0; height:52%; background:#0d1117;
+            border-top:1px solid var(--line); display:none; flex-direction:column; }
+  #editor.open { display:flex; }
+  #src { white-space:pre; }
+  #tabs { display:flex; gap:2px; padding:6px 8px 0; align-items:center; }
+  #tabs button { border-radius:6px 6px 0 0; border-bottom:none; padding:4px 12px; font-size:11px; }
+  #src { flex:1; width:100%; background:#0d1117; color:#b9c6d2; border:none; outline:none; resize:none;
+         font:12px/1.5 ui-monospace,Menlo,monospace; padding:8px 12px; tab-size:2; }
+  #err { color:#ff8080; font:11px/1.4 monospace; padding:0 12px 6px; white-space:pre-wrap; max-height:80px;
+         overflow:auto; }
+  #hud { position:absolute; left:10px; top:10px; font:11px var(--mono); color:var(--dim);
+         pointer-events:none; max-width:calc(100% - 20px); }
+  .hint { color:var(--dim); font-size:11px; margin:6px 0 0; max-width:36ch; }
+
+  /* Narrow screens: stack instrument over canvas rather than squeezing the orb
+     into a slot too small to judge it in. */
+  @media (max-width: 760px) {
+    #stage  { inset:0 0 55% 0; }
+    #panel  { top:45%; left:0; width:auto; border-left:none; border-top:1px solid var(--line); }
+    #editor { right:0; bottom:55%; height:45%; }
+  }
+
+/* --- hero build: controls removed, renderer kept, looks cycling --- */
+#panel, #editor, #tabs, #hud { display: none !important; }
+#c { width: 100vw !important; height: 100vh !important; }
+#lookcap {
+  position: fixed; left: 0; right: 0; bottom: 22px; text-align: center;
+  font: 500 12.5px/1.5 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.5);
+  pointer-events: none; transition: opacity .5s ease; z-index: 9;
+  text-shadow: 0 1px 12px rgba(0,0,0,.55); }
+#lookcap b { color: #fff; font-weight: 700; }
+#lookcap i { font-style: normal; color: rgba(255,255,255,.42); text-transform: none;
+  letter-spacing: .02em; font-size: 12px; }
+</style>
+
+<div id="stage"><canvas id="c"></canvas><div id="hud"></div></div>
+
+<div id="editor">
+  <div id="tabs">
+    <button data-tab="main.frag" class="on">main.frag</button>
+    <button data-tab="particle.vert">particle.vert</button>
+    <button data-tab="particle.frag">particle.frag</button>
+    <span style="flex:1"></span>
+    <span class="hint" style="margin:0 8px">⌘/Ctrl+Enter to recompile</span>
+  </div>
+  <textarea id="src" spellcheck="false" wrap="off"></textarea>
+  <div id="err"></div>
+</div>
+
+<div id="panel">
+  <h1>Nabu pearl · lab</h1>
+  <p class="sub">The avatar's real WebGL renderer, with its shaders open for editing. Every
+    control here changes what the orb is, not a preview of it.</p>
+
+  <div class="btns" id="states"></div>
+  <div class="btns" style="margin-top:6px" id="shapes"></div>
+  <div class="btns" style="margin-top:6px">
+    <button id="bNight">night</button>
+    <button id="bLite">lite</button>
+    <button id="bBgless">transparent</button>
+    <button id="bEdit">shaders</button>
+  </div>
+
+  <h2>Presets</h2>
+  <div class="row"><label>look</label>
+    <select id="presetSel" style="flex:1;min-width:0;background:#0d1117;color:var(--ink);border:1px solid var(--line);border-radius:5px;padding:4px;font:11px var(--mono)"></select>
+  </div>
+  <div class="btns" style="margin-top:5px">
+    <button id="bSaveP">save as…</button>
+    <button id="bDelP">delete</button>
+    <button id="bCycle">cycle</button>
+  </div>
+  <div class="row"><label>every</label><input type="range" id="sCycle" min="5" max="120" step="5" value="30"><span class="val" id="vCycle">30s</span></div>
+  <p class="hint">Saving captures the shader you are editing plus every slider,
+    so a preset is a whole look, not a colour scheme. Yours are kept in this
+    browser; <em>copy shaders + states</em> still exports for the repo.</p>
+
+  <h2>Motion</h2>
+  <div class="row"><label>time ×</label><input type="range" id="sTime" min="0" max="3" step="0.05" value="1"><span class="val" id="vTime">1.00</span></div>
+  <div class="row"><label>amp</label><input type="range" id="sAmp" min="-0.01" max="1" step="0.01" value="-0.01"><span class="val" id="vAmp">auto</span></div>
+  <p class="hint">amp at far-left = driven by the state's voice envelope.</p>
+
+  <h2>State table</h2>
+  <table>
+    <tr><th></th><th>R</th><th>G</th><th>B</th><th>churn</th><th>blob</th></tr>
+    <tbody id="stateRows"></tbody>
+  </table>
+  <p class="hint">blob 1 = amoeba silhouette · 0 = perfect circle.</p>
+
+  <h2>Room lights</h2>
+  <div class="row"><label>wears room</label><input type="range" id="sLamp" min="0" max="1" step="0.01" value="0"><span class="val" id="vLamp">0.00</span></div>
+  <div class="btns" id="lamps" style="margin-top:4px"></div>
+  <p class="hint">The rim stops being a synthetic spectrum and becomes these four
+    colours instead, each owning a quadrant. On the TV they come live from the
+    Hue bars, the gradient tube and the Go lamp.</p>
+
+  <h2>Audio</h2>
+  <div class="row"><label>source</label>
+    <select id="audioSrc" style="flex:1;min-width:0;background:#0d1117;color:var(--ink);border:1px solid var(--line);border-radius:5px;padding:4px;font:11px var(--mono)">
+      <option value="">default input (mic)</option>
+    </select>
+  </div>
+  <div class="btns"><button id="bAudio">listen</button><button id="bFind">find devices</button><button id="bTab">capture tab audio</button></div>
+  <div class="row"><label>gain</label><input type="range" id="sGain" min="0.2" max="6" step="0.1" value="2"><span class="val" id="vGain">2.0</span></div>
+  <div class="row"><label>bass→swell</label><input type="range" id="sBass" min="0" max="2" step="0.05" value="1"><span class="val" id="vBass">1.00</span></div>
+  <div class="row"><label>highs→churn</label><input type="range" id="sTre" min="0" max="2" step="0.05" value="1"><span class="val" id="vTre">1.00</span></div>
+  <div class="row"><label>smoothing</label><input type="range" id="sSmooth" min="0" max="1" step="0.01" value="0.62"><span class="val" id="vSmooth">0.62</span></div>
+  <div id="meter" style="height:5px;background:#0d1117;border:1px solid var(--line);border-radius:3px;overflow:hidden;margin-top:6px">
+    <div id="meterFill" style="height:100%;width:0;background:var(--acc);transition:width .05s linear"></div>
+  </div>
+  <div class="row" style="margin-top:4px"><label>levels</label><span class="val" id="vLevels" style="flex:1;text-align:left">—</span></div>
+  <p class="hint">Pick <strong>Monitor of…</strong> to hear what this machine is
+    playing rather than the room — PipeWire's loopback, no mic involved. Device
+    names only appear after you allow audio once. <em>capture tab audio</em> grabs
+    a browser tab instead (tick "Share tab audio" in the picker).</p>
+
+  <h2>Colour</h2>
+  <div class="row"><label>saturation</label><input type="range" id="sSat" min="0" max="2.5" step="0.05" value="1"><span class="val" id="vSat">1.00</span></div>
+  <p class="hint">Applied to the finished frame, so it lifts every look. 0 is
+    greyscale, 1 is untouched. Above ~2 the brightest strands clip to primaries.</p>
+
+  <h2>Particles</h2>
+  <div class="row"><label>count</label><input type="range" id="sPn" min="0" max="40000" step="500" value="16000"><span class="val" id="vPn">16000</span></div>
+  <div class="row"><label>point size</label><input type="range" id="sPx" min="0.2" max="4" step="0.05" value="1"><span class="val" id="vPx">1.00</span></div>
+
+  <h2>Resolution</h2>
+  <div class="row"><label>scale</label><input type="range" id="sScale" min="0.2" max="1.5" step="0.05" value="0.55"><span class="val" id="vScale">0.55</span></div>
+  <div class="row"><label>row cap</label><input type="range" id="sCap" min="180" max="1600" step="20" value="1200"><span class="val" id="vCap">1200</span></div>
+  <p class="hint">The TV kiosk runs cap=1200; the tablet runs lite + 5000 pts + cap=360.</p>
+
+  <h2>Sphere</h2>
+  <div class="row"><label>transparency</label><input type="range" id="sTrans" min="0" max="1" step="0.01" value="0.85"><span class="val" id="vTrans">0.85</span></div>
+  <div class="row"><label>refraction</label><input type="range" id="sRefr" min="0" max="1" step="0.01" value="0.55"><span class="val" id="vRefr">0.55</span></div>
+  <p class="hint">Both at 0 give a solid, undistorted sphere. Transparency lets
+    the ribbons through; refraction bends them on the way. Gloss only — the
+    other looks have no sphere.</p>
+
+  <h2>Spare uniforms</h2>
+  <div class="row"><label>u_k1</label><input type="range" id="sK1" min="0" max="1" step="0.01" value="0"><span class="val" id="vK1">0.00</span></div>
+  <div class="row"><label>u_k2</label><input type="range" id="sK2" min="0" max="1" step="0.01" value="0"><span class="val" id="vK2">0.00</span></div>
+  <div class="row"><label>u_k3</label><input type="range" id="sK3" min="0" max="1" step="0.01" value="0"><span class="val" id="vK3">0.00</span></div>
+  <div class="row"><label>u_k4</label><input type="range" id="sK4" min="0" max="1" step="0.01" value="0"><span class="val" id="vK4">0.00</span></div>
+  <p class="hint">Declared in every shader. Wire one into an experiment and drive it live.</p>
+
+  <h2>Export</h2>
+  <div class="btns">
+    <button id="bCopy">copy settings + shaders</button>
+    <button id="bReset">reset all</button>
+  </div>
+  <p class="hint" id="copyMsg"></p>
+</div>
+
+<script>
+// ─────────────────────────────────────────────────────────────────────────────
+// Shader sources — verbatim from src/pearl/shaders/, plus a shared `u_k1..u_k4`
+// preamble so the spare sliders exist without editing three files.
+// ─────────────────────────────────────────────────────────────────────────────
+// Spliced onto the END of line 1 rather than prepended as its own line, so GLSL
+// error line numbers still match the editor exactly. It carries its own precision
+// qualifier because it lands ahead of any `precision` statement the shader has.
+const SPARE = ' uniform mediump float u_k1, u_k2, u_k3, u_k4, u_trans, u_refr;';
+function withSpare(text) {
+  const nl = text.indexOf('\n');
+  return nl < 0 ? text + SPARE : text.slice(0, nl) + SPARE + text.slice(nl);
+}
+
+const MAIN_VERT = `attribute vec2 p; void main(){ gl_Position = vec4(p,0.,1.); }`;
+
+const COMPOSITE_FRAG = `precision mediump float;
+uniform sampler2D u_tex; uniform vec2 u_cres; uniform float u_sat;
+void main(){
+  vec4 c = texture2D(u_tex, gl_FragCoord.xy/u_cres);
+  // Rec.709 luma, so saturating does not shift perceived brightness
+  float l = dot(c.rgb, vec3(0.2126, 0.7152, 0.0722));
+  gl_FragColor = vec4(mix(vec3(l), c.rgb, u_sat), c.a);
+}`;
+
+const DEFAULTS = {
+'main.frag': `precision highp float;
+uniform vec2  u_res;
+uniform float u_time;
+uniform float u_amp;    // 0..1 voice envelope
+uniform vec3  u_tint;   // state tint
+uniform float u_churn;  // extra inner turbulence (thinking)
+uniform float u_night;  // 0 = day pearl, 1 = evening pearl
+uniform float u_blob;   // 1 = amoeba idle silhouette, 0 = perfect circle (listening)
+uniform float u_lite;   // 1 = weak-GPU mode: no diffusion feedback, fewer blushes
+uniform float u_bgless; // 1 = transparent canvas: no scene bg, alpha = orb coverage
+uniform vec3  u_pulse;  // per-lobe flare pulses, time-only so computed JS-side
+uniform vec3  u_lamp[4];   // the room's live light colours, warmest-first
+uniform float u_lampMix;   // 0 = synthetic spectrum, 1 = wear the room's light
+uniform sampler2D u_prev;  // previous frame, for the outward diffusion feedback
+
+float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453123); }
+float noise(vec2 p){
+  vec2 i = floor(p), f = fract(p);
+  vec2 u = f*f*(3.0-2.0*f);
+  return mix(mix(hash(i), hash(i+vec2(1.,0.)), u.x),
+             mix(hash(i+vec2(0.,1.)), hash(i+vec2(1.,1.)), u.x), u.y);
+}
+float fbm(vec2 p){
+  float v = 0.0, a = 0.5;
+  for(int i=0;i<4;i++){ v += a*noise(p); p = p*2.03 + vec2(17.3, 9.1); a *= 0.5; }
+  return v;
+}
+void main(){
+  vec2 uv = (gl_FragCoord.xy - 0.5*u_res)/min(u_res.x, u_res.y);
+  float t = u_time*(0.08 + 0.20*u_churn);
+  float r = length(uv);
+  float ang = atan(uv.y, uv.x);
+
+  // smooth bubble edge: barely wobbles, swells with the voice
+  float amoeba = 0.042*sin(2.0*ang + u_time*0.40)
+               + 0.028*sin(3.0*ang - u_time*0.29)
+               + 0.014*sin(5.0*ang + u_time*0.55);
+  float radius = 0.335 + 0.050*u_amp + 0.006*sin(u_time*0.7)
+               + 0.006*(fbm(vec2(ang*1.2, t*0.5)) - 0.5)
+               + u_blob*amoeba;
+  float body = smoothstep(radius + 0.004, radius - 0.020, r);
+
+  vec3 bg  = mix(vec3(0.902, 0.918, 0.933), vec3(0.042, 0.055, 0.078), u_night);
+  vec3 col = mix(vec3(0.966, 0.973, 0.983), vec3(0.150, 0.150, 0.265), u_night);   // milky pearl / violet dark glass
+
+  // interior blushes — saturated color filling the body, not just the edges
+  float blushK = mix(1.0, 0.90, u_night);
+  float n1 = fbm(uv*1.7 + t*0.35);
+  float n2 = fbm(uv*1.4 - t*0.28 + 7.7);
+  float bottomBias = 0.35 + 0.65*smoothstep(0.15, -0.30, uv.y);
+  col = mix(col, vec3(0.22, 0.84, 0.76)*blushK, smoothstep(0.38, 0.78, n1)*bottomBias*(0.75 + 0.35*u_amp));
+  col = mix(col, vec3(0.62, 0.52, 0.96)*blushK, smoothstep(0.46, 0.84, n2)*0.55);
+  if (u_lite < 0.5) {
+    col = mix(col, vec3(0.99, 0.55, 0.68)*blushK, smoothstep(0.50, 0.86, fbm(uv*1.6 + 3.3 - t*0.2))*0.48);
+    col = mix(col, vec3(1.00, 0.78, 0.45)*blushK, smoothstep(0.56, 0.90, fbm(uv*1.9 - 2.4 + t*0.3))*0.38);
+  }
+
+  // iridescent rainbow drifting around the rim, uneven like a real bubble
+  float hue = ang/6.2832 + 0.12*sin(t*0.6) + u_time*0.015;
+  vec3 rainbow = 0.56 + 0.44*cos(6.2832*(hue + vec3(0.0, 0.33, 0.67)));
+
+  // Room mode: the four lamps take ownership of a quadrant of the rim each, so
+  // the iridescence becomes the light actually in the room rather than a
+  // synthetic spectrum. The same drifting angle still drives it, so the colours keep
+  // sliding around the bubble instead of sitting in fixed patches.
+  if (u_lampMix > 0.001) {
+    vec3 lampCol = vec3(0.0);
+    float wsum = 0.0;
+    for (int i = 0; i < 4; i++) {
+      float d = abs(fract(hue - float(i)*0.25 + 0.5) - 0.5);   // distance around the ring
+      float w = pow(max(0.0, 1.0 - d*2.6), 2.0);
+      lampCol += u_lamp[i]*w;
+      wsum += w;
+    }
+    rainbow = mix(rainbow, lampCol/max(wsum, 0.0001), u_lampMix);
+  }
+  float rimVar = 0.30 + 0.70*fbm(vec2(ang*1.5 + t, 2.0));
+
+  // fresnel: iridescence reaches deep into the body, not just the edge
+  float fres = smoothstep(radius*0.12, radius*0.88, r);
+  col = mix(col, rainbow, fres*rimVar*mix(0.50, 0.40, u_night));
+
+  // glossy glass highlights (soft blob + upper arc)
+  float hl  = exp(-pow(length(uv - vec2(-0.07, 0.21))*5.2, 2.0));
+  float arc = exp(-pow((r - radius*0.80)*26.0, 2.0))
+            * pow(max(0.0, dot(normalize(uv + vec2(1e-4)), normalize(vec2(-0.35, 1.0)))), 3.0);
+  col = mix(col, vec3(1.0), clamp(hl*0.7 + arc*0.55, 0.0, 1.0)*mix(1.0, 0.40, u_night));
+
+  // gentle pastel state wash
+  col *= mix(vec3(1.0), u_tint, 0.35);
+  rainbow *= mix(vec3(1.0), u_tint, 0.5);
+
+  // thin bright ring + outer bloom
+  float ring  = exp(-pow((r - radius + 0.006)*46.0, 2.0));
+  float bloom = exp(-max(0.0, r - radius)*7.5);
+  // bgless: bg drops out (rgb becomes premultiplied col*body) and the glow
+  // coefficients double as the alpha the glow contributes
+  vec3 bgT = bg * (1.0 - u_bgless);
+  float ringK  = ring  * rimVar * (0.55 + 0.90*u_amp) * mix(1.0, 1.45, u_night);
+  float bloomK = bloom * (1.0 - body) * rimVar * (0.16 + 0.30*u_amp) * mix(1.0, 1.8, u_night);
+  vec3 final = mix(bgT, col, body);
+  final += rainbow * ringK;
+  final += rainbow * bloomK;
+
+  // solar flares: slow-roaming prominences licking outward from the rim
+  float flare = 0.0;
+  for (int i = 0; i < 3; i++) {
+    float fi = float(i);
+    float dirSign = mod(fi, 2.0) < 1.0 ? 1.0 : -1.0;
+    float aF = fi*2.30 + dirSign*u_time*(0.06 + 0.025*fi);
+    float lobe = pow(max(0.0, cos(ang - aF)), 36.0 + 18.0*fi);
+    float pulse = u_pulse[i];
+    float reach = exp(-max(0.0, r - radius)*(3.0 - 1.1*pulse));
+    flare += lobe * pulse * reach * smoothstep(radius - 0.05, radius + 0.01, r);
+  }
+  float flareK = flare * (0.45 + 0.65*u_amp) * (0.30 + 0.70*u_blob) * mix(1.0, 1.5, u_night);
+  final += rainbow * flareK;
+  float alpha = mix(1.0, clamp(body + ringK + bloomK + flareK, 0.0, 1.0), u_bgless);
+
+  // outward diffusion feedback: each frame, pixels outside the bubble inherit color
+  // from slightly closer to the center, so rim light streams toward the screen edges
+  // (skipped entirely in lite mode — this texture read is the heaviest thing here)
+  if (u_lite < 0.5) {
+    vec2 pxy = gl_FragCoord.xy;
+    vec2 dirOut = pxy - 0.5*u_res;
+    float dl = max(length(dirOut), 1.0);
+    vec2 perp = vec2(-dirOut.y, dirOut.x)/dl;
+    vec2 sUv = (pxy - dirOut/dl*4.2 + perp*1.6*sin(u_time*0.25 + dl*0.012))/u_res;
+    vec4 prev = texture2D(u_prev, sUv);
+    float dith = (fract(sin(dot(pxy, vec2(12.9898, 78.233)) + u_time)*43758.5453) - 0.5)/255.0;
+    float decay = mix(0.972, 0.993, u_night);
+    // with bgT = 0 these same formulas decay the premultiplied trail to zero
+    vec3 prevAdj = mix(bgT, prev.rgb, decay) + dith*(1.0 - u_bgless);
+    prevAdj = mix(max(prevAdj, bgT - 0.03), prevAdj, u_night);   // day trails may tint but never gray the page
+    float outside = smoothstep(radius - 0.005, radius + 0.045, r);
+    float k = outside*mix(0.80, 0.95, u_night);
+    final = mix(final, prevAdj, k);
+    alpha = mix(alpha, prev.a*decay, k*u_bgless);
+  }
+
+  // bgless: the bloom still has a few percent of alpha where the canvas ends —
+  // fade it out before the bounds so the clip edge can never print
+  float fade = mix(1.0, 1.0 - smoothstep(0.46, 0.50, r), u_bgless);
+  gl_FragColor = vec4(final*fade, alpha*fade);
+}`,
+
+'particle.vert': `precision highp float;
+attribute vec4 a_seed;
+uniform vec2 u_res;
+uniform float u_time, u_amp, u_churn, u_snap, u_px, u_think, u_shape;
+uniform vec3 u_tint;
+varying vec3 v_col; varying vec3 v_colDay; varying float v_a;
+void main(){
+  float lon0 = a_seed.x, lat0 = a_seed.y, r1 = a_seed.z, r2 = a_seed.w;
+  float rotSpeed = 0.10 + 0.18*sin(lat0*3.0 + r1*2.3);
+  float lon = lon0 + u_time*rotSpeed*(1.0 + 1.6*u_churn);
+  float wave = sin(2.0*lon + 4.0*lat0 + u_time*0.45)
+             + 0.6*sin(3.0*lon - 2.5*lat0 - u_time*0.32)
+             + 0.4*sin(5.0*lon + 1.5*lat0 + u_time*0.6);
+  float free = 1.0 - u_snap;
+  float lat = lat0 + 0.09*wave*free;
+  float rad = 1.0 + 0.20*u_amp + (r2 - 0.5)*0.07 + 0.05*wave*free;
+  if (r2 > 0.96) rad += (0.12 + 0.30*fract(r1*7.31))*(0.6 + 0.4*sin(u_time*0.5 + r1*40.0))*free + 0.25*u_amp;
+  vec3 p = vec3(cos(lat)*cos(lon), sin(lat), cos(lat)*sin(lon))*rad;
+  float ct = cos(0.35), st = sin(0.35);
+  vec3 pS = vec3(p.x, ct*p.y - st*p.z, st*p.y + ct*p.z);
+
+  // thinking: morph into an upright light bulb (globe, neck, threaded screw base)
+  float tb = (sin(lat0) + 1.0)*0.5;
+  float ys[9]; float rs[9];
+  ys[0]=-1.00; rs[0]=0.06;
+  ys[1]=-0.93; rs[1]=0.20;
+  ys[2]=-0.55; rs[2]=0.22;
+  ys[3]=-0.35; rs[3]=0.30;
+  ys[4]=-0.05; rs[4]=0.54;
+  ys[5]= 0.25; rs[5]=0.68;
+  ys[6]= 0.60; rs[6]=0.56;
+  ys[7]= 0.85; rs[7]=0.30;
+  ys[8]= 0.98; rs[8]=0.02;
+  float fseg = tb*7.999;
+  float yB = ys[0]; float rB = rs[0];
+  for (int i = 0; i < 8; i++) {
+    float w = smoothstep(0.0, 1.0, clamp(fseg - float(i), 0.0, 1.0));
+    yB = mix(yB, ys[i+1], w);
+    rB = mix(rB, rs[i+1], w);
+  }
+  if (yB < -0.50 && yB > -0.95) rB += 0.018*sin(yB*55.0);   // screw threads
+  rB += (r2 - 0.5)*0.03 + 0.012*sin(u_time*2.0 + r1*30.0);  // shimmer
+  float lonB = lon0 + u_time*0.30;
+  vec3 pB = vec3(rB*cos(lonB), yB + 0.05, rB*sin(lonB))*1.28;
+
+  // alternate thinking target: anatomical brain profile — temporal lobe, Sylvian
+  // fissure, cerebellum, stem — as a closed outline, filled slab
+  float xs2[16]; float ys2[16];
+  xs2[0]= 0.08; ys2[0]=-0.82;   // stem tip
+  xs2[1]=-0.26; ys2[1]=-0.62;   // under cerebellum
+  xs2[2]=-0.74; ys2[2]=-0.52;   // cerebellum bulge
+  xs2[3]=-0.98; ys2[3]=-0.12;   // occipital low
+  xs2[4]=-0.90; ys2[4]= 0.36;   // occipital high
+  xs2[5]=-0.45; ys2[5]= 0.78;   // parietal
+  xs2[6]= 0.10; ys2[6]= 0.92;   // crown
+  xs2[7]= 0.62; ys2[7]= 0.74;   // top front
+  xs2[8]= 0.98; ys2[8]= 0.28;   // forehead
+  xs2[9]= 0.92; ys2[9]=-0.10;   // frontal low
+  xs2[10]= 0.44; ys2[10]=-0.14; // Sylvian fissure (notch in)
+  xs2[11]= 0.58; ys2[11]=-0.42; // temporal lobe tip (the thumb)
+  xs2[12]= 0.12; ys2[12]=-0.58; // temporal underside
+  xs2[13]=-0.02; ys2[13]=-0.48; // temporal joins stem
+  xs2[14]= 0.06; ys2[14]=-0.64; // stem top
+  xs2[15]= 0.08; ys2[15]=-0.82; // close the loop
+  float tb2 = fract(tb + (fract(r2*9.73) - 0.5)*0.03);
+  float fs2 = tb2*14.999;
+  float bx = 0.0; float by = 0.0;
+  for (int k = -1; k <= 1; k++) {
+    float fsk = clamp(fs2 + float(k)*0.40, 0.0, 14.999);
+    float px2 = xs2[0]; float py2 = ys2[0];
+    for (int i = 0; i < 15; i++) {
+      float w2 = clamp(fsk - float(i), 0.0, 1.0);
+      px2 = mix(px2, xs2[i+1], w2);
+      py2 = mix(py2, ys2[i+1], w2);
+    }
+    bx += px2/3.0; by += py2/3.0;
+  }
+  // fill inward from the outline, denser at the rim; gyri wobble on the outline
+  vec2 ctr = vec2(0.02, 0.08);
+  float fillR = 0.42 + 0.58*sqrt(fract(r1*5.7));
+  float gyri = 1.0 + 0.05*sin(34.0*tb + 2.0*sin(13.0*tb))*smoothstep(0.8, 1.0, fillR);
+  vec2 bp = ctr + (vec2(bx, by) - ctr)*fillR*gyri;
+  float bz = (fract(r1*3.19) - 0.5)*0.40*(1.0 - 0.6*fillR*fillR);
+  float yaw = 0.16*sin(u_time*0.20);
+  vec3 pBr = vec3(cos(yaw)*bp.x + sin(yaw)*bz, bp.y, -sin(yaw)*bp.x + cos(yaw)*bz)*1.06;
+  pBr.y += 0.03;
+
+  // neural-network target: beaded strands sweeping through space
+  float sid = floor(fract(r1*7.777)*9.0);
+  float sh1 = fract(sin(sid*127.1)*43758.5453);
+  float sh2 = fract(sin(sid*311.7)*43758.5453);
+  float sh3 = fract(sin(sid*74.7)*43758.5453);
+  vec3 rndS = vec3(sh1*2.0 - 1.0, sh2*2.0 - 1.0, sh3*2.0 - 1.0);
+  vec3 dirS = normalize(mix(vec3(1.0, 0.0, 0.0), rndS, 0.38) + 0.001);
+  vec3 upS = abs(dirS.y) < 0.9 ? vec3(0.0, 1.0, 0.0) : vec3(1.0, 0.0, 0.0);
+  vec3 e1 = normalize(cross(dirS, upS));
+  vec3 e2 = cross(dirS, e1);
+  float oh1 = fract(sin(sid*217.3)*43758.5453);
+  float oh2 = fract(sin(sid*431.1)*43758.5453);
+  float oh3 = fract(sin(sid*611.9)*43758.5453);
+  float ssN = tb*2.0 - 1.0;
+  vec3 pN = vec3((oh1 - 0.5)*1.0, (oh2*2.0 - 1.0)*1.05, (oh3*2.0 - 1.0)*0.85)
+          + dirS*ssN*1.9
+          + e1*0.34*sin(ssN*2.2 + sh1*6.28 + u_time*0.22)
+          + e2*0.26*sin(ssN*3.3 + sh2*6.28 - u_time*0.16);
+  pN += (vec3(fract(r2*13.1), fract(r2*57.3), fract(r2*91.7)) - 0.5)*0.012;
+  pN.z *= 0.55;
+  float pl = length(pN);
+  pN *= mix(1.0, 1.9/max(pl, 0.001), smoothstep(1.9, 2.6, pl));
+
+  float bulbK  = 1.0 - clamp(u_shape, 0.0, 1.0);
+  float brainK = clamp(u_shape, 0.0, 1.0) - clamp(u_shape - 1.0, 0.0, 1.0);
+  float neurK  = clamp(u_shape - 1.0, 0.0, 1.0);
+  vec3 pT = pB*bulbK + pBr*brainK + pN*neurK;
+  vec3 pp = mix(pS, pT, u_think);
+  float persp = 1.7/(2.6 - pp.z);
+  vec2 xy = pp.xy*persp*0.40*(1.0 + neurK*u_think*2.0);   // strands fill the whole bubble
+  xy.x *= u_res.y/u_res.x;
+  gl_Position = vec4(xy, 0.0, 1.0);
+  float ribbon = smoothstep(0.5, 1.6, abs(wave));
+  float facing = 0.45 + 0.55*smoothstep(-1.2, 1.0, pp.z);
+  float limb = 1.0 + smoothstep(0.55, 0.95, length(pp.xy)/rad);
+  // filament glow while a bulb: a hot heart low in the globe
+  limb += u_think*(bulbK + brainK*0.4)*1.4*exp(-dot(pp.xy - vec2(0.0, 0.02), pp.xy - vec2(0.0, 0.02))*22.0);
+  float tw = 0.75 + 0.25*sin(u_time*(1.5 + r1*3.0) + r2*40.0);
+  v_a = (0.30 + 0.85*ribbon)*facing*tw*limb;
+  v_a = mix(v_a, (0.55 + 0.35*ribbon)*facing*tw*limb, u_think);   // evenly lit surface while thinking
+  // synapse nodes: a subset of particles flash like firing neurons
+  float node = step(0.88, r2);
+  v_a += u_think*(brainK + neurK)*node*1.8*pow(0.5 + 0.5*sin(u_time*2.4 + r1*47.0), 3.0);
+  // glowing outline: the brain's rim is the brightest element, like the reference
+  v_a += u_think*brainK*smoothstep(0.90, 1.0, fillR)*1.1;
+  // cortical folds: winding gyri ridges painted across the interior
+  float fold = sin(bp.x*8.5 + 2.4*sin(bp.y*4.6 + bp.x*2.6) + bp.y*3.2);
+  float foldB = 0.62 + 0.55*pow(0.5 + 0.5*fold, 1.6);
+  v_a *= mix(1.0, foldB, brainK*u_think*(1.0 - smoothstep(0.92, 1.0, fillR)));
+  // neural: only a third of the swarm condenses into threads; the rest fades away
+  float member = step(fract(r1*3.917), 0.35);
+  v_a *= mix(1.0, member, neurK*u_think);
+  // dim threads with bright beads, fake depth-of-field, traveling signals
+  v_a *= mix(1.0, 0.40, neurK*u_think);
+  v_a *= 1.0/(1.0 + neurK*u_think*1.5*pp.z*pp.z);
+  v_a += neurK*u_think*member*1.5*pow(0.5 + 0.5*sin(ssN*9.0 - u_time*2.2 + sh1*6.2832), 6.0);
+  vec3 col = mix(vec3(0.10, 0.22, 0.85), vec3(0.30, 0.75, 1.00), ribbon);
+  col = mix(col, vec3(0.85, 0.95, 1.00), ribbon*smoothstep(0.85, 1.0, tw)*0.6);
+  if (fract(r1*13.7) > 0.93) col = mix(col, vec3(1.0, 0.45, 0.85), 0.55);
+  // thinking color: incandescent warmth as a bulb, electric cyan as a brain
+  vec3 thinkCol = mix(vec3(1.0, 0.78, 0.38), vec3(0.40, 0.92, 1.00), clamp(u_shape, 0.0, 1.0));
+  col = mix(col, thinkCol, u_think*0.80);
+  // brain stays electric even while the pearl shell goes amber
+  vec3 tnt = mix(u_tint, vec3(1.0), u_think*clamp(u_shape, 0.0, 1.0)*0.85);
+  v_col = col*tnt;
+  vec3 dcol = mix(vec3(0.16, 0.14, 0.55), vec3(0.05, 0.35, 0.60), ribbon);
+  if (fract(r1*13.7) > 0.93) dcol = vec3(0.55, 0.10, 0.45);
+  dcol = mix(dcol, vec3(0.02, 0.42, 0.62), u_think*clamp(u_shape, 0.0, 1.0)*0.6);
+  v_colDay = dcol*tnt;
+  gl_PointSize = u_px*(0.7 + 1.1*r1)*persp*(1.0 + 0.8*ribbon)
+               *(1.0 + u_think*(brainK + neurK)*node*0.9)
+               *(1.0 + neurK*u_think*2.6*abs(pp.z));
+}`,
+
+'particle.frag': `precision mediump float;
+uniform float u_night;
+varying vec3 v_col; varying vec3 v_colDay; varying float v_a;
+void main(){
+  vec2 d = gl_PointCoord - 0.5;
+  float a = exp(-dot(d, d)*10.0);
+  vec4 day  = vec4(v_colDay, a*v_a*0.50);
+  vec4 nite = vec4(v_col*a*v_a, 1.0);
+  gl_FragColor = mix(day, nite, u_night);
+}`
+};
+
+
+// ── Looks ───────────────────────────────────────────────────────────────────
+// Each look is a complete main.frag honouring the same uniform contract as the
+// pearl, so switching is just a recompile. None of them declare u_k1..u_k4 —
+// withSpare() splices those onto line 1 and a second declaration is an error.
+const LOOKS = {
+'Aurora': `precision highp float;
+uniform vec2  u_res;
+uniform float u_time, u_amp, u_churn, u_night, u_blob, u_lite, u_bgless, u_lampMix;
+uniform vec3  u_tint, u_pulse;
+uniform vec3  u_lamp[4];
+uniform sampler2D u_prev;
+
+float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453123); }
+float noise(vec2 p){
+  vec2 i = floor(p), f = fract(p);
+  vec2 u = f*f*(3.0-2.0*f);
+  return mix(mix(hash(i), hash(i+vec2(1.,0.)), u.x),
+             mix(hash(i+vec2(0.,1.)), hash(i+vec2(1.,1.)), u.x), u.y);
+}
+float fbm(vec2 p){ float v=0.0,a=0.5; for(int i=0;i<4;i++){ v+=a*noise(p); p=p*2.03+vec2(17.3,9.1); a*=0.5;} return v; }
+
+// The room's four lamps spread across a 0..1 axis. Two variants, because the
+// axis is sometimes a line (a curtain across the screen) and sometimes a ring
+// (an angle). Using the linear one on an angle seams hard where atan wraps.
+vec3 lampAt(float x){
+  vec3 c = vec3(0.0); float w = 0.0;
+  for (int i = 0; i < 4; i++) {
+    float d = abs(x - (float(i) + 0.5)*0.25);
+    float k = pow(max(0.0, 1.0 - d*3.0), 2.0);
+    c += u_lamp[i]*k; w += k;
+  }
+  return c/max(w, 0.0001);
+}
+vec3 lampRing(float a){
+  vec3 c = vec3(0.0); float w = 0.0;
+  for (int i = 0; i < 4; i++) {
+    float d = abs(fract(a - float(i)*0.25 + 0.5) - 0.5);   // wraps at the seam
+    float k = pow(max(0.0, 1.0 - d*2.6), 2.0);
+    c += u_lamp[i]*k; w += k;
+  }
+  return c/max(w, 0.0001);
+}
+
+// AURORA — a curtain of light standing at the bottom of the frame, rising with
+// the bass. No orb, no silhouette: the whole screen is the instrument. Built
+// dark on purpose; this sits on a TV at night.
+void main(){
+  vec2 uv = (gl_FragCoord.xy - 0.5*u_res)/min(u_res.x, u_res.y);
+  float t = u_time*0.11;
+
+  // curtain top: a slow ridge across x, lifted by the music
+  float ridge = fbm(vec2(uv.x*1.7 + t, t*0.5));
+  float top   = -0.34 + 0.70*ridge + 0.34*u_amp;
+  float body  = smoothstep(top, top - 0.85, uv.y);
+
+  // vertical striations — the thing that reads as "aurora" rather than "gradient"
+  float stri = 0.62 + 0.38*sin(uv.x*46.0 + fbm(vec2(uv.x*4.0, t*1.4))*7.0 + u_time*0.25);
+  float glow = body*stri*(0.5 + 0.95*u_amp);
+
+  // cold green-to-violet when the room is dark; the room's own light when not
+  vec3 cold = mix(vec3(0.20, 0.95, 0.62), vec3(0.45, 0.55, 1.00), smoothstep(-0.35, 0.55, uv.y));
+  vec3 col  = mix(cold, lampAt(uv.x*0.5 + 0.5), u_lampMix);
+  col *= mix(vec3(1.0), u_tint, 0.40);
+
+  vec3 bg = mix(vec3(0.88, 0.90, 0.93), vec3(0.02, 0.03, 0.05), u_night)*(1.0 - u_bgless);
+  vec3 final = bg + col*glow;
+
+  // three shafts that flare on the pulses
+  for (int i = 0; i < 3; i++) {
+    float xc = -0.55 + float(i)*0.55 + 0.18*sin(u_time*0.07 + float(i)*2.1);
+    float shaft = exp(-pow((uv.x - xc)*7.0, 2.0));
+    final += col*shaft*body*u_pulse[i]*(0.30 + 0.65*u_amp);
+  }
+
+  float alpha = mix(1.0, clamp(glow, 0.0, 1.0), u_bgless);
+
+  // smear upward, but only above the curtain so the body stays crisp
+  if (u_lite < 0.5) {
+    vec4 prev = texture2D(u_prev, (gl_FragCoord.xy - vec2(0.0, 3.0))/u_res);
+    float decay = mix(0.950, 0.980, u_night);
+    float k = (1.0 - body)*0.80;
+    final = mix(final, mix(bg, prev.rgb, decay), k);
+    alpha = mix(alpha, prev.a*decay, k*u_bgless);
+  }
+  gl_FragColor = vec4(final, alpha);
+}
+`,
+'Sonar': `precision highp float;
+uniform vec2  u_res;
+uniform float u_time, u_amp, u_churn, u_night, u_blob, u_lite, u_bgless, u_lampMix;
+uniform vec3  u_tint, u_pulse;
+uniform vec3  u_lamp[4];
+uniform sampler2D u_prev;
+
+float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453123); }
+float noise(vec2 p){
+  vec2 i = floor(p), f = fract(p);
+  vec2 u = f*f*(3.0-2.0*f);
+  return mix(mix(hash(i), hash(i+vec2(1.,0.)), u.x),
+             mix(hash(i+vec2(0.,1.)), hash(i+vec2(1.,1.)), u.x), u.y);
+}
+float fbm(vec2 p){ float v=0.0,a=0.5; for(int i=0;i<4;i++){ v+=a*noise(p); p=p*2.03+vec2(17.3,9.1); a*=0.5;} return v; }
+
+// The room's four lamps spread across a 0..1 axis. Two variants, because the
+// axis is sometimes a line (a curtain across the screen) and sometimes a ring
+// (an angle). Using the linear one on an angle seams hard where atan wraps.
+vec3 lampAt(float x){
+  vec3 c = vec3(0.0); float w = 0.0;
+  for (int i = 0; i < 4; i++) {
+    float d = abs(x - (float(i) + 0.5)*0.25);
+    float k = pow(max(0.0, 1.0 - d*3.0), 2.0);
+    c += u_lamp[i]*k; w += k;
+  }
+  return c/max(w, 0.0001);
+}
+vec3 lampRing(float a){
+  vec3 c = vec3(0.0); float w = 0.0;
+  for (int i = 0; i < 4; i++) {
+    float d = abs(fract(a - float(i)*0.25 + 0.5) - 0.5);   // wraps at the seam
+    float k = pow(max(0.0, 1.0 - d*2.6), 2.0);
+    c += u_lamp[i]*k; w += k;
+  }
+  return c/max(w, 0.0001);
+}
+
+// SONAR — rings leaving the centre, one per flare pulse. Nearly black most of
+// the time, which is the point: it reads as a room that breathes rather than a
+// screen that demands attention.
+void main(){
+  vec2 uv = (gl_FragCoord.xy - 0.5*u_res)/min(u_res.x, u_res.y);
+  float r = length(uv);
+  float ang = atan(uv.y, uv.x);
+
+  // rings are slightly out of round, and wobble as they travel
+  float warp = 0.028*fbm(vec2(ang*1.6, u_time*0.15)) - 0.014;
+  float rr = r + warp;
+
+  float ring = 0.0;
+  for (int i = 0; i < 4; i++) {
+    float ph  = fract(u_time*0.10 + float(i)*0.25);
+    float rad = ph*1.55;
+    float w   = 0.005 + 0.030*ph;                 // widen and soften as they go
+    float e   = exp(-pow((rr - rad)/w, 2.0));
+    ring += e*(1.0 - ph)*(1.0 - ph);
+  }
+  ring *= 0.45 + 1.35*u_amp;
+
+  // a held core that swells with the bass
+  float core = exp(-pow(rr*(5.5 - 2.2*u_amp), 2.0))*(0.25 + 0.85*u_amp);
+
+  vec3 base = mix(vec3(0.35, 0.85, 1.00), lampRing(ang/6.2832 + u_time*0.02), u_lampMix);
+  base *= mix(vec3(1.0), u_tint, 0.5);
+
+  vec3 bg = mix(vec3(0.90, 0.92, 0.95), vec3(0.015, 0.02, 0.035), u_night)*(1.0 - u_bgless);
+  vec3 final = bg + base*(ring + core);
+  float alpha = mix(1.0, clamp(ring + core, 0.0, 1.0), u_bgless);
+
+  // outward bleed so each ring drags a faint wake behind it
+  if (u_lite < 0.5) {
+    vec2 d = gl_FragCoord.xy - 0.5*u_res;
+    vec2 sUv = (gl_FragCoord.xy - normalize(d + vec2(1e-4))*2.6)/u_res;
+    vec4 prev = texture2D(u_prev, sUv);
+    float decay = mix(0.960, 0.985, u_night);
+    final = mix(final, mix(bg, prev.rgb, decay), 0.70);
+    alpha = mix(alpha, prev.a*decay, 0.70*u_bgless);
+  }
+  gl_FragColor = vec4(final, alpha);
+}
+`,
+'Raio': `precision highp float;
+uniform vec2  u_res;
+uniform float u_time, u_amp, u_churn, u_night, u_blob, u_lite, u_bgless, u_lampMix;
+uniform vec3  u_tint, u_pulse;
+uniform vec3  u_lamp[4];
+uniform sampler2D u_prev;
+
+float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453123); }
+float noise(vec2 p){
+  vec2 i = floor(p), f = fract(p);
+  vec2 u = f*f*(3.0-2.0*f);
+  return mix(mix(hash(i), hash(i+vec2(1.,0.)), u.x),
+             mix(hash(i+vec2(0.,1.)), hash(i+vec2(1.,1.)), u.x), u.y);
+}
+float fbm(vec2 p){ float v=0.0,a=0.5; for(int i=0;i<4;i++){ v+=a*noise(p); p=p*2.03+vec2(17.3,9.1); a*=0.5;} return v; }
+
+// Five curated stops. Two things matter here: each colour HOLDS across most of
+// its slot rather than lerping the whole way, and transitions pass through
+// cream. Lerping orange straight into blue crosses brown, which is what made
+// the first attempt look muddy; the reference cover goes light between bands.
+vec3 pick(float i){
+  vec3 c0 = vec3(1.00, 0.34, 0.05);   // orange
+  vec3 c1 = vec3(1.00, 0.76, 0.18);   // amber
+  vec3 c2 = vec3(0.99, 0.30, 0.72);   // magenta
+  vec3 c3 = vec3(0.24, 0.45, 1.00);   // blue
+  vec3 c4 = vec3(0.42, 0.88, 0.70);   // sea green
+  vec3 c = c0;
+  c = mix(c, c1, step(0.5, i));
+  c = mix(c, c2, step(1.5, i));
+  c = mix(c, c3, step(2.5, i));
+  c = mix(c, c4, step(3.5, i));
+  return c;
+}
+vec3 ramp(float x){
+  float f = fract(x)*5.0;
+  float i = floor(f);
+  float t = f - i;
+  vec3 a = pick(i);
+  vec3 b = pick(mod(i + 1.0, 5.0));
+  float k = smoothstep(0.34, 0.72, t);          // hold, then move quickly
+  vec3 c = mix(a, b, k);
+  return mix(c, vec3(1.00, 0.96, 0.91), sin(3.14159*k)*0.38);   // through cream
+}
+
+// RAIO — wide gradient ribbons sweeping the frame, after the album cover. The
+// whole image is one warped coordinate pushed through a palette; there is no
+// geometry here at all, which is why it has no edges to go wrong.
+void main(){
+  vec2 uv = (gl_FragCoord.xy - 0.5*u_res)/min(u_res.x, u_res.y);
+  float t = u_time*0.045;
+
+  // domain warp: bend the band coordinate with low-frequency noise so the
+  // ribbons curve and swell instead of running straight
+  float w1 = fbm(uv*0.55 + vec2(t*0.8, -t*0.5));
+  float w2 = fbm(uv*1.10 + vec2(-t*0.4, t*0.7) + 9.2);
+  float bend = 0.95 + 0.55*u_amp;
+
+  float band = uv.x*1.15
+             + bend*sin(uv.y*1.25 + w1*3.1 + t*1.6)
+             + w2*1.35
+             + t*1.1;
+
+  vec3 col = ramp(band*0.5);
+
+  // let the room bias the palette without flattening it
+  vec3 room = vec3(0.0); float rw = 0.0;
+  for (int i = 0; i < 4; i++) {
+    float d = abs(fract(band*0.5 - float(i)*0.25 + 0.5) - 0.5);
+    float k = pow(max(0.0, 1.0 - d*2.6), 2.0);
+    room += u_lamp[i]*k; rw += k;
+  }
+  col = mix(col, room/max(rw, 0.0001), u_lampMix*0.55);
+  col *= mix(vec3(1.0), u_tint, 0.25);
+
+  // soft internal shading: the ribbons have volume, lighter along their spines
+  col *= 0.94 + 0.16*sin(band*1.6 + w1*2.0);   // gentle volume, no darkening
+
+  // the cover is unmistakably grainy, and grain also kills gradient banding
+  float g = hash(gl_FragCoord.xy + fract(u_time)*97.0) - 0.5;
+  col += g*0.045;
+
+  // night pulls it down without draining the colour
+  col *= mix(1.0, 0.46, u_night);
+  col = clamp(col, 0.0, 1.0);
+
+  gl_FragColor = vec4(col, mix(1.0, 0.92, u_bgless));
+}
+`,
+'Groove': `precision highp float;
+uniform vec2  u_res;
+uniform float u_time, u_amp, u_churn, u_night, u_blob, u_lite, u_bgless, u_lampMix;
+uniform vec3  u_tint, u_pulse;
+uniform vec3  u_lamp[4];
+uniform sampler2D u_prev;
+
+float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453123); }
+float noise(vec2 p){
+  vec2 i = floor(p), f = fract(p);
+  vec2 u = f*f*(3.0-2.0*f);
+  return mix(mix(hash(i), hash(i+vec2(1.,0.)), u.x),
+             mix(hash(i+vec2(0.,1.)), hash(i+vec2(1.,1.)), u.x), u.y);
+}
+float fbm(vec2 p){ float v=0.0,a=0.5; for(int i=0;i<4;i++){ v+=a*noise(p); p=p*2.03+vec2(17.3,9.1); a*=0.5;} return v; }
+
+vec3 pick(float i){
+  vec3 c0 = vec3(0.96, 0.24, 0.45);   // crimson
+  vec3 c1 = vec3(1.00, 0.55, 0.25);   // coral
+  vec3 c2 = vec3(1.00, 0.83, 0.22);   // yellow
+  vec3 c3 = vec3(0.36, 0.80, 0.48);   // green
+  vec3 c4 = vec3(0.16, 0.66, 0.80);   // teal
+  vec3 c5 = vec3(0.42, 0.32, 0.78);   // violet
+  vec3 c = c0;
+  c = mix(c, c1, step(0.5, i));
+  c = mix(c, c2, step(1.5, i));
+  c = mix(c, c3, step(2.5, i));
+  c = mix(c, c4, step(3.5, i));
+  c = mix(c, c5, step(4.5, i));
+  return c;
+}
+vec3 ramp(float x){
+  float f = fract(x)*6.0;
+  float i = floor(f);
+  float t = smoothstep(0.0, 1.0, f - i);
+  return mix(pick(i), pick(mod(i + 1.0, 6.0)), t);
+}
+
+// GROOVE — a flow field pushed through a rainbow, with fine contour lines
+// riding the same field. The lines are what make it read as drawn rather than
+// rendered: they follow the flow exactly, because they ARE the flow, sampled at
+// a higher frequency.
+void main(){
+  vec2 uv = (gl_FragCoord.xy - 0.5*u_res)/min(u_res.x, u_res.y);
+  float t = u_time*0.035;
+
+  // iterated domain warp — one pass gives waves, two gives the curl and the
+  // teardrop shapes the reference has
+  vec2 p = uv*1.05;
+  for (int i = 0; i < 2; i++) {
+    p += 0.62*vec2(fbm(p + vec2(0.0, t*1.4) + 1.7),
+                   fbm(p + vec2(4.3, -t*1.1) + 8.1));
+  }
+
+  float field = fbm(p*0.85)*2.6 + p.x*0.42 + p.y*0.22 + t*0.9;
+  field += 0.30*u_amp;                                  // the music slides the palette
+
+  vec3 col = ramp(field*0.42);
+  col = mix(col, ramp(field*0.42 + 0.06), u_lampMix*0.0);  // placeholder, room handled below
+
+  // room bias, on the same axis as the palette so it never fights the flow
+  vec3 room = vec3(0.0); float rw = 0.0;
+  for (int i = 0; i < 4; i++) {
+    float d = abs(fract(field*0.42 - float(i)*0.25 + 0.5) - 0.5);
+    float k = pow(max(0.0, 1.0 - d*2.6), 2.0);
+    room += u_lamp[i]*k; rw += k;
+  }
+  col = mix(col, room/max(rw, 0.0001), u_lampMix*0.45);
+
+  // contour striations: the same field at high frequency, raised to a power so
+  // the ridges stay thin. A sine keeps it band-limited — WebGL1 has no fwidth
+  // without an extension, and a hard fract() line would alias badly.
+  float freq = 58.0 + 22.0*u_amp;
+  float ridge = pow(0.5 + 0.5*sin(field*freq), 14.0);
+  col = mix(col, col*1.25 + vec3(0.16, 0.15, 0.13), ridge*0.85);
+
+  // a second, much wider set for depth
+  float ridge2 = pow(0.5 + 0.5*sin(field*freq*0.34 + 1.2), 8.0);
+  col = mix(col, col*0.86, ridge2*0.30);
+
+  col *= mix(vec3(1.0), u_tint, 0.20);
+  col *= mix(1.0, 0.44, u_night);
+  col += (hash(gl_FragCoord.xy + fract(u_time)*61.0) - 0.5)*0.030;
+  gl_FragColor = vec4(clamp(col, 0.0, 1.0), mix(1.0, 0.92, u_bgless));
+}
+`,
+'Waveform': `precision highp float;
+uniform vec2  u_res;
+uniform float u_time, u_amp, u_churn, u_night, u_blob, u_lite, u_bgless, u_lampMix;
+uniform vec3  u_tint, u_pulse;
+uniform vec3  u_lamp[4];
+uniform sampler2D u_prev;
+
+float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453123); }
+float noise(vec2 p){
+  vec2 i = floor(p), f = fract(p);
+  vec2 u = f*f*(3.0-2.0*f);
+  return mix(mix(hash(i), hash(i+vec2(1.,0.)), u.x),
+             mix(hash(i+vec2(0.,1.)), hash(i+vec2(1.,1.)), u.x), u.y);
+}
+float fbm(vec2 p){ float v=0.0,a=0.5; for(int i=0;i<3;i++){ v+=a*noise(p); p=p*2.03+vec2(17.3,9.1); a*=0.5;} return v; }
+
+vec3 pick(float i){
+  vec3 c0 = vec3(1.00, 0.16, 0.44);   // hot pink
+  vec3 c1 = vec3(1.00, 0.42, 0.18);   // orange
+  vec3 c2 = vec3(1.00, 0.82, 0.26);   // gold
+  vec3 c3 = vec3(0.38, 0.92, 0.55);   // green
+  vec3 c4 = vec3(0.22, 0.86, 1.00);   // cyan
+  vec3 c5 = vec3(0.40, 0.40, 1.00);   // indigo
+  vec3 c6 = vec3(0.86, 0.40, 1.00);   // violet
+  vec3 c = c0;
+  c = mix(c, c1, step(0.5, i));
+  c = mix(c, c2, step(1.5, i));
+  c = mix(c, c3, step(2.5, i));
+  c = mix(c, c4, step(3.5, i));
+  c = mix(c, c5, step(4.5, i));
+  c = mix(c, c6, step(5.5, i));
+  return c;
+}
+vec3 ramp(float x){
+  float f = fract(x)*7.0;
+  float i = floor(f);
+  return mix(pick(i), pick(mod(i + 1.0, 7.0)), smoothstep(0.0, 1.0, f - i));
+}
+
+// WAVEFORM — a surface drawn as stacked curves receding toward a horizon, each
+// one a slice through the same moving field. Every line is evaluated at this
+// pixel's x, so the curves are exact rather than approximated by geometry.
+// Costly by design: ~40 field evaluations per pixel. Lite mode halves the rows.
+void main(){
+  vec2 uv = (gl_FragCoord.xy - 0.5*u_res)/min(u_res.x, u_res.y);
+  float t = u_time*0.42;
+
+  vec3 col = vec3(0.0);
+  float rows = 40.0;
+  for (int i = 0; i < 40; i++) {
+    if (u_lite > 0.5 && i > 19) break;          // weak GPUs draw half the mesh
+    float fi = float(i)/(rows - 1.0);
+
+    // rows bunch up toward the horizon; near rows are wide and tall
+    float persp = mix(1.0, 0.14, fi*fi);
+    float y0 = -0.50 + 0.96*fi*fi + 0.020*sin(t*0.35 + fi*1.1);   // slow camera bob
+
+    float xw = uv.x/max(persp, 0.05);
+    xw += 0.28*sin(t*0.55 + fi*1.6);                       // the whole sheet sways
+
+    // CURL. A row evaluated as y = h(x) is single-valued and can never fold, so
+    // instead we advect x by the wave's own height before sampling it: the
+    // crest is carried forward faster than the trough, leans, and past a
+    // threshold overtakes its base and folds — which is how a wave breaks.
+    // Two cheap sines approximate the height for the shear; the full field is
+    // only evaluated once, at the displaced coordinate.
+    float h0 = 0.52*sin(xw*2.2 + t*1.6 + fi*2.6)
+             + 0.42*sin(xw*1.35 - t*1.15 + fi*4.1);
+    float curl = 0.45 + 1.60*u_k1 + 0.55*u_amp;            // u_k1 dials it live
+    float xs = xw + h0*curl;
+
+    float h = 0.52*sin(xs*2.2 + t*1.6 + fi*2.6)
+            + 0.42*sin(xs*1.35 - t*1.15 + fi*4.1)
+            + 0.30*sin(xs*3.30 + t*2.20 - fi*1.7)          // a faster ripple on top
+            + 0.85*(fbm(vec2(xs*0.7, fi*2.2 + t*0.95)) - 0.5);
+
+    // the lip thins as it throws over, the way a breaking crest does
+    float lip = 1.0 - 0.45*clamp(h0*curl*0.8, 0.0, 1.0);
+    float yl = y0 + h*0.19*persp*(0.55 + 1.25*u_amp);
+
+    float d = abs(uv.y - yl);
+    float w = (0.0012 + 0.0042*persp)*lip;
+    float line = smoothstep(w, 0.0, d);
+    float glow = exp(-d*(120.0 - 70.0*persp))*0.55;   // halo around each strand
+
+    vec3 c = ramp(xs*0.16 + fi*0.60 + t*0.11 + h*0.16);
+    c = mix(c, u_lamp[int(mod(float(i), 4.0))], u_lampMix*0.35);
+    col += c*(line + glow)*(0.22 + 0.85*persp);
+  }
+
+  // SKY. The light strip behind the TV reads the screen's top edge, so black up
+  // there means a dark wall. Wash the upper frame with the palette sampled at
+  // the SAME x the strands use, so the wall mirrors what is on screen rather
+  // than glowing some unrelated colour. u_k2 dials how strong it is.
+  float skyMask = smoothstep(-0.02, 0.48, uv.y);
+  vec3 skyCol = ramp(uv.x*0.52 + t*0.11 + 0.30);
+  float skyAmt = 0.34 + 0.90*u_k2;
+  col += skyCol*skyMask*skyAmt*(0.55 + 0.75*u_amp);
+
+  col *= mix(vec3(1.0), u_tint, 0.20);
+  // the reference sits on true black; a lifted background would kill it
+  vec3 bg = mix(vec3(0.06, 0.05, 0.09), vec3(0.0), u_night)*(1.0 - u_bgless);
+  col += bg;
+  col *= mix(1.0, 0.85, u_night);
+
+  // Reinhard rather than clamp: where forty strands overlap, clamping crushes
+  // them to a white blob, while this rolls the highlight off and keeps the hue.
+  col = col/(1.0 + col);
+  col = pow(col, vec3(0.85));                 // lift the mids back after the roll-off
+  float lum = dot(col, vec3(0.2126, 0.7152, 0.0722));
+  col = mix(vec3(lum), col, 1.45);            // Reinhard desaturates; put it back
+  float alpha = mix(1.0, clamp(max(col.r, max(col.g, col.b)), 0.0, 1.0), u_bgless);
+  gl_FragColor = vec4(clamp(col, 0.0, 1.0), alpha);
+}
+`,
+'Gloss': `precision highp float;
+uniform vec2  u_res;
+uniform float u_time, u_amp, u_churn, u_night, u_blob, u_lite, u_bgless, u_lampMix;
+uniform vec3  u_tint, u_pulse;
+uniform vec3  u_lamp[4];
+uniform sampler2D u_prev;
+
+float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453123); }
+float noise(vec2 p){
+  vec2 i = floor(p), f = fract(p);
+  vec2 u = f*f*(3.0-2.0*f);
+  return mix(mix(hash(i), hash(i+vec2(1.,0.)), u.x),
+             mix(hash(i+vec2(0.,1.)), hash(i+vec2(1.,1.)), u.x), u.y);
+}
+float fbm(vec2 p){ float v=0.0,a=0.5; for(int i=0;i<3;i++){ v+=a*noise(p); p=p*2.03+vec2(17.3,9.1); a*=0.5;} return v; }
+
+// Saturated, high-value stops — this reference is poured enamel, not pastel.
+vec3 pick(float i){
+  vec3 c0 = vec3(0.98, 0.26, 0.36);   // red
+  vec3 c1 = vec3(1.00, 0.55, 0.20);   // orange
+  vec3 c2 = vec3(1.00, 0.84, 0.26);   // yellow
+  vec3 c3 = vec3(0.99, 0.97, 0.93);   // cream
+  vec3 c4 = vec3(0.22, 0.76, 0.62);   // teal
+  vec3 c5 = vec3(0.18, 0.52, 0.88);   // blue
+  vec3 c6 = vec3(0.62, 0.34, 0.82);   // violet
+  vec3 c7 = vec3(0.95, 0.45, 0.72);   // pink
+  vec3 c = c0;
+  c = mix(c, c1, step(0.5, i));
+  c = mix(c, c2, step(1.5, i));
+  c = mix(c, c3, step(2.5, i));
+  c = mix(c, c4, step(3.5, i));
+  c = mix(c, c5, step(4.5, i));
+  c = mix(c, c6, step(5.5, i));
+  c = mix(c, c7, step(6.5, i));
+  return c;
+}
+vec3 ramp(float x){
+  float f = fract(x)*8.0;
+  float i = floor(f);
+  return mix(pick(i), pick(mod(i + 1.0, 8.0)), smoothstep(0.25, 0.75, f - i));
+}
+
+// The flow coordinate. Everything is a function of this one number: which
+// ribbon you are on, where across it you are, and what colour it is.
+float flow(vec2 p, float t){
+  float w1 = fbm(p*0.62 + vec2(t*0.9, -t*0.3));
+  float w2 = fbm(p*1.25 + vec2(-t*0.5, t*0.7) + 4.4);
+  return p.x*1.45
+       + 1.15*sin(p.y*1.45 + w1*3.2 + t*1.7)
+       + 0.52*sin(p.y*2.95 - t*3.10 + w2*2.1)     // a second, faster travelling wave
+       + w2*1.25
+       + t*0.45;
+}
+
+const float BANDS = 7.0;
+
+// A sphere held at the centre. The ribbons TWIRL around it rather than being
+// shoved aside: the sampling coordinate is rotated about the centre by an angle
+// that decays outward, so the flow winds around the void and relaxes back to
+// normal at the edges of the frame. A small outward push remains so the ribbons
+// clear the sphere instead of running underneath it.
+// u_k3 = swirl strength, u_k4 = size.
+float sphereR(){
+  // pulses with the music: fast attack comes free from the audio envelope
+  return (0.07 + 0.13*u_k4)*(1.0 + 0.55*u_amp);
+}
+
+vec2 sphereWarp(vec2 p, float t, out float dome, out float core){
+  float R = sphereR();
+  float r = max(length(p), 1e-5);
+  float x = r/R;
+  float fall = exp(-x*x);
+
+  dome = fall;
+  core = smoothstep(1.00, 0.955, x);         // 1 inside the sphere, crisp rim
+
+  // oscillating rather than ever-increasing: a constantly growing angle winds
+  // the centre into infinitely fine detail that just aliases
+  float ang = (2.40*u_k3 + 0.75*sin(t*0.45) + 0.90*u_amp)*fall;
+  float ca = cos(ang), sa = sin(ang);
+  vec2 q = vec2(ca*p.x - sa*p.y, sa*p.x + ca*p.y);
+
+  q += (q/r)*(0.20*u_k3)*1.65*x*fall*R;      // vanishes at the centre, peaks at the rim
+  return q;
+}
+
+float surf(vec2 p, float t){
+  float dome, core;
+  p = sphereWarp(p, t, dome, core);
+  float g = flow(p, t)*BANDS;
+  float loc = fract(g);
+  // shove the crest across the ribbon as a function of length and time
+  loc = clamp(loc + 0.16*sin(p.y*6.2 - t*5.4 + floor(g)*1.7), 0.0, 1.0);
+  float prof = sin(loc*3.14159265);
+  return pow(max(prof, 0.0), 0.55) - dome*0.85*u_k3;   // a basin, so it sits BELOW
+}
+
+// GLOSS — poured enamel ribbons. u_k1 dials how wet they look.
+void main(){
+  vec2 uv = (gl_FragCoord.xy - 0.5*u_res)/min(u_res.x, u_res.y);
+  float t = u_time*0.135*(1.0 + 0.6*u_amp);
+
+  float h = surf(uv, t);
+
+  float e = 0.0022;
+  float hx = surf(uv + vec2(e, 0.0), t) - surf(uv - vec2(e, 0.0), t);
+  float hy = surf(uv + vec2(0.0, e), t) - surf(uv - vec2(0.0, e), t);
+  vec3 n = normalize(vec3(-hx*2.6, -hy*2.6, 1.0));
+
+  vec3 L = normalize(vec3(-0.40, 0.66, 0.64));
+  vec3 H = normalize(L + vec3(0.0, 0.0, 1.0));
+
+  float wet   = 0.55 + 1.45*u_k1;
+  float dif   = 0.66 + 0.34*max(0.0, dot(n, L));
+  float sheen = pow(max(0.0, dot(n, H)),   7.0)*wet*0.34;
+  float spec  = pow(max(0.0, dot(n, H)),  48.0)*wet*0.75;
+  float pip   = pow(max(0.0, dot(n, H)), 340.0)*wet*1.7;
+  float fres  = pow(1.0 - max(0.0, n.z), 3.0)*0.30;
+
+  // colour per ribbon, so neighbours are different rather than a gradient
+  float dome, core;
+  float g = flow(sphereWarp(uv, t, dome, core), t)*BANDS;
+  vec3 col = ramp(floor(g)/BANDS*0.92 + t*0.05);
+  col = mix(col*0.82, col, h);                   // ribbon edges sit in shadow
+  col *= dif;
+  col += vec3(1.0)*(sheen + spec);
+  col += vec3(1.0, 0.99, 0.97)*pip;
+  col += col*fres;
+
+  vec3 lampAvg = (u_lamp[0] + u_lamp[1] + u_lamp[2] + u_lamp[3])*0.25;
+  col = mix(col, col*(0.4 + 1.2*lampAvg), u_lampMix*0.45);
+
+  // glitter, dense in the reference, sitting on the lit faces
+  vec2 gp = uv*150.0;
+  vec2 cell = floor(gp);
+  float gh = hash(cell);
+  vec2 jit = (vec2(hash(cell + 7.1), hash(cell + 3.3)) - 0.5)*0.72;
+  float gd = length(fract(gp) - 0.5 - jit);
+  float twinkle = pow(0.5 + 0.5*sin(u_time*2.6 + gh*99.0), 6.0);
+  float grain = smoothstep(0.22, 0.0, gd)*step(0.955, gh);
+  col += vec3(1.0, 0.98, 0.94)*grain*twinkle*(0.25 + 0.9*max(0.0, dot(n, L)))*1.9;
+
+  col *= mix(vec3(1.0), u_tint, 0.16);
+  col *= mix(1.0, 0.44, u_night);
+  col = col/(1.0 + col*0.16);
+
+  // empty space where the sphere is
+  float rr = length(uv)/sphereR();
+  // Cast shadow: much larger and softer than a contact shadow, and offset away
+  // from the key light so it falls BEHIND the sphere instead of ringing it
+  // evenly. Gaussian rather than smoothstep — no edge to it at all.
+  vec2  shOff = -normalize(L.xy + 1e-5)*sphereR()*0.85;
+  float shd   = exp(-pow(length(uv - shOff)/(sphereR()*2.15), 2.0));
+  col *= 1.0 - 0.46*shd*(1.0 - core);
+  // a tight term as well, so it still looks seated where it meets the ribbons
+  col *= 1.0 - 0.26*smoothstep(1.28, 1.00, rr)*(1.0 - core);
+  vec3 voidCol = vec3(1.0);
+
+  if (core > 0.001) {
+    // Colour bleed. A white object ringed by saturated ribbons picks up their
+    // light, strongest where the surfaces are closest. Six samples around the
+    // rim, each weighted by whether this point faces it, so the tint varies
+    // across the sphere rather than washing it evenly.
+    vec2 dir = length(uv) > 1e-4 ? normalize(uv) : vec2(1.0, 0.0);
+    vec3 bounce = vec3(0.0);
+    float wsum = 0.0;
+    for (int i = 0; i < 6; i++) {
+      float a = float(i)*1.0471976;
+      vec2 sdir = vec2(cos(a), sin(a));
+      float d2, c2;
+      float gg = flow(sphereWarp(sdir*sphereR()*1.12, t, d2, c2), t)*BANDS;
+      vec3 cc = ramp(floor(gg)/BANDS*0.92 + t*0.05);
+      float w = 0.30 + 0.70*max(0.0, dot(dir, sdir));
+      bounce += cc*w;
+      wsum += w;
+    }
+    bounce /= max(wsum, 1e-4);
+
+    // Give the disc a real sphere normal — without it there is no geometry for
+    // a highlight to sit on, which is why it read as a flat cut-out.
+    float rn = clamp(rr, 0.0, 1.0);
+    float nz = sqrt(max(0.0, 1.0 - rn*rn));
+    vec3 sn = normalize(vec3(uv/max(sphereR(), 1e-5), nz));
+    vec3 Ls = normalize(vec3(-0.42, 0.66, 0.62));      // same key as the ribbons
+    float ndl = dot(sn, Ls);
+
+    // Subsurface: wrapped diffuse pushes the terminator past 90 degrees, so the
+    // shadow edge goes soft and creeps around the back. That soft terminator is
+    // the readable signature of light scattering inside a solid.
+    float wrap = 0.62;
+    float diff = clamp((ndl + wrap)/(1.0 + wrap), 0.0, 1.0);
+
+    // ...and transmission through the thin edge, tinted by its surroundings,
+    // brightest where the light is coming from behind the silhouette.
+    float thin = pow(1.0 - nz, 2.3);
+    vec3 sssTint = mix(vec3(1.00, 0.55, 0.52), bounce, 0.55);
+    vec3 sss = sssTint*thin*(0.45 + 0.95*smoothstep(-0.25, 0.85, -ndl));
+
+    float amt = (0.10 + 0.52*rn*rn)*(0.45 + 0.95*u_k2);
+    vec3 ambient = bounce*mix(0.85, 1.25, amt);   // never neutral: its whole world is coloured
+
+    // No specular on the sphere. It was also the last thing tying the sphere to
+    // u_k1, so wetness is now purely a ribbon property.
+    float frs = pow(1.0 - nz, 4.5)*0.28;
+
+    // Translucent, not opaque: what is behind shows through and bends on the
+    // way, which is where most of the colour comes from. One extra flow lookup
+    // at a position pushed along the surface normal.
+    vec2 refr = uv + sn.xy*(0.40*u_refr)*rn*sphereR()*2.4;
+    float d3, c3;
+    float g3 = flow(sphereWarp(refr, t, d3, c3), t)*BANDS;
+    vec3 behind = ramp(floor(g3)/BANDS*0.92 + t*0.05)*(0.78 + 0.42*diff);
+
+    // Body deliberately held below white. At full brightness the diffuse alone
+    // clips and the specular has nowhere left to go — the glint only reads if
+    // there is headroom above the surface it sits on.
+    vec3 bodyCol = vec3(0.97)*(ambient*0.42 + diff*0.52) + sss*0.85;
+
+    // thin at the rim, thick through the middle — but we want the middle to
+    // carry colour, so the transmission is strongest there
+    float opacity = clamp(mix(1.0, 0.38 + 0.46*rn, u_trans), 0.0, 1.0);
+
+    voidCol = mix(behind, bodyCol, opacity) + bounce*frs;
+  }
+
+  col = mix(col, clamp(voidCol, 0.0, 1.0), core);
+
+  gl_FragColor = vec4(clamp(col, 0.0, 1.0), mix(1.0, 0.96, u_bgless));
+}
+`,
+'Nebula': `precision highp float;
+uniform vec2  u_res;
+uniform float u_time, u_amp, u_churn, u_night, u_blob, u_lite, u_bgless, u_lampMix;
+uniform vec3  u_tint, u_pulse;
+uniform vec3  u_lamp[4];
+uniform sampler2D u_prev;
+
+float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453123); }
+float noise(vec2 p){
+  vec2 i = floor(p), f = fract(p);
+  vec2 u = f*f*(3.0-2.0*f);
+  return mix(mix(hash(i), hash(i+vec2(1.,0.)), u.x),
+             mix(hash(i+vec2(0.,1.)), hash(i+vec2(1.,1.)), u.x), u.y);
+}
+float fbm(vec2 p){ float v=0.0,a=0.5; for(int i=0;i<4;i++){ v+=a*noise(p); p=p*2.03+vec2(17.3,9.1); a*=0.5;} return v; }
+
+// The room's four lamps spread across a 0..1 axis. Two variants, because the
+// axis is sometimes a line (a curtain across the screen) and sometimes a ring
+// (an angle). Using the linear one on an angle seams hard where atan wraps.
+vec3 lampAt(float x){
+  vec3 c = vec3(0.0); float w = 0.0;
+  for (int i = 0; i < 4; i++) {
+    float d = abs(x - (float(i) + 0.5)*0.25);
+    float k = pow(max(0.0, 1.0 - d*3.0), 2.0);
+    c += u_lamp[i]*k; w += k;
+  }
+  return c/max(w, 0.0001);
+}
+vec3 lampRing(float a){
+  vec3 c = vec3(0.0); float w = 0.0;
+  for (int i = 0; i < 4; i++) {
+    float d = abs(fract(a - float(i)*0.25 + 0.5) - 0.5);   // wraps at the seam
+    float k = pow(max(0.0, 1.0 - d*2.6), 2.0);
+    c += u_lamp[i]*k; w += k;
+  }
+  return c/max(w, 0.0001);
+}
+
+// NEBULA — no edges anywhere. Two fbm fields drifting against each other, lit
+// from within. The particle swarm still runs, reading as embers inside the
+// cloud rather than a surface.
+void main(){
+  vec2 uv = (gl_FragCoord.xy - 0.5*u_res)/min(u_res.x, u_res.y);
+  float t = u_time*(0.05 + 0.10*u_churn);
+
+  vec2 q = uv*1.25;
+  float n1 = fbm(q + vec2(t*0.9, -t*0.6));
+  float n2 = fbm(q*1.85 - vec2(t*0.5, t*0.8) + 5.3);
+  float n3 = fbm(q*0.7 + vec2(-t*0.3, t*0.2) + 11.1);
+
+  // density: where the two fields agree, the cloud is thick
+  float dens = smoothstep(0.34, 0.78, n1*0.58 + n2*0.30 + n3*0.12);
+  dens *= 0.55 + 0.85*u_amp;
+  // vignette so it sits in the middle of the frame rather than filling it
+  dens *= 1.0 - smoothstep(0.30, 1.05, length(uv));
+
+  vec3 deep = mix(vec3(0.16, 0.10, 0.44), vec3(0.72, 0.18, 0.55), n3);
+  vec3 hot  = mix(vec3(1.00, 0.62, 0.30), vec3(0.45, 0.90, 1.00), smoothstep(0.35, 0.75, n2));
+  vec3 col  = mix(deep, hot, smoothstep(0.12, 0.62, dens));
+  col = mix(col, lampRing(n3 + u_time*0.01), u_lampMix*0.85);
+  col *= mix(vec3(1.0), u_tint, 0.35);
+
+  vec3 bg = mix(vec3(0.90, 0.91, 0.94), vec3(0.02, 0.02, 0.04), u_night)*(1.0 - u_bgless);
+  vec3 final = mix(bg, col, clamp(dens*1.9, 0.0, 1.0));
+
+  // pulses light the cloud from three points, like heat lightning inside it
+  for (int i = 0; i < 3; i++) {
+    vec2 c = vec2(sin(u_time*0.05 + float(i)*2.4), cos(u_time*0.04 + float(i)*1.7))*0.34;
+    float lamp = exp(-dot(uv - c, uv - c)*7.0);
+    final += col*lamp*u_pulse[i]*dens*1.5;
+  }
+
+  float alpha = mix(1.0, clamp(dens*1.3, 0.0, 1.0), u_bgless);
+
+  if (u_lite < 0.5) {
+    vec2 sUv = (gl_FragCoord.xy + vec2(sin(u_time*0.2)*1.5, 1.2))/u_res;
+    vec4 prev = texture2D(u_prev, sUv);
+    float decay = mix(0.955, 0.988, u_night);
+    float k = (1.0 - dens)*0.78;
+    final = mix(final, mix(bg, prev.rgb, decay), k);
+    alpha = mix(alpha, prev.a*decay, k*u_bgless);
+  }
+  gl_FragColor = vec4(final, alpha);
+}
+`
+};
+
+// A preset = one look + the params it wants. Params left out keep their current
+// value, so a preset can be a palette tweak rather than a whole new world.
+const PRESETS = [
+  { name:'Pearl',          look:null,     params:{ pn:16000, pxMul:1.0,  timeScale:1.0,  lampMix:0.0,  state:'idle',      night:1 } },
+  { name:'Pearl · room',   look:null,     params:{ pn:16000, pxMul:1.0,  timeScale:1.0,  lampMix:0.85, state:'idle',      night:1 } },
+  { name:'Pearl · listen', look:null,     params:{ pn:16000, pxMul:1.15, timeScale:1.2,  lampMix:0.35, state:'listening', night:1 } },
+  { name:'Aurora',         look:'Aurora', params:{ pn:0,     pxMul:1.0,  timeScale:1.0,  lampMix:0.7,  state:'idle',      night:1 } },
+  { name:'Sonar',          look:'Sonar',  params:{ pn:0,     pxMul:1.0,  timeScale:1.0,  lampMix:0.5,  state:'idle',      night:1 } },
+  { name:'Raio',           look:'Raio',   params:{ pn:0,     pxMul:1.0,  timeScale:1.0,  lampMix:0.25, state:'idle',      night:1 } },
+  { name:'Groove',         look:'Groove', params:{ pn:0,     pxMul:1.0,  timeScale:1.0,  lampMix:0.2,  state:'idle',      night:0 } },
+  { name:'Waveform',       look:'Waveform', params:{ pn:0,   pxMul:1.0,  timeScale:1.0,  lampMix:0.3,  state:'idle',      night:1, k1:0.32 } },
+  { name:'Waveform · mike',look:'Waveform', params:{ pn:0, pxMul:1.15, timeScale:2.10, amp:0.38, lampMix:0.30,
+                                                     state:'idle', night:1, k1:0.50, k2:0.18,
+                                                     scale:1.5, cap:1600, sat:1.55,
+                                                     gain:3.4, bass:1.15, treble:0 } },
+  { name:'Gloss',          look:'Gloss',  params:{ pn:0, pxMul:1.0, timeScale:1.0, amp:-0.01, lampMix:0.15,
+                                                    state:'idle', night:0, k1:0.45, sat:1.15 } },
+  { name:'Gloss · mike',   look:'Gloss',  params:{ pn:0, pxMul:0.20, timeScale:1.10, amp:0.90, lampMix:0.15,
+                                                    state:'speaking', night:0, lite:0,
+                                                    k1:0.60, k2:1.00, k3:0.74, k4:0.08,
+                                                    scale:1.5, cap:1600, sat:2.50,
+                                                    trans:0.83, refr:0.65,
+                                                    gain:3.7, bass:0.80, treble:1.25 } },
+  { name:'Nebula',         look:'Nebula', params:{ pn:9000,  pxMul:0.7,  timeScale:0.8,  lampMix:0.6,  state:'thinking',  night:1 } },
+];
+
+// state table — mirrors STATES in src/pearl/index.ts
+const STATES = {
+  idle:      { tint:[1.00,1.00,1.00], churn:0.0, blob:1.00 },
+  listening: { tint:[0.55,1.25,0.85], churn:0.2, blob:0.00 },
+  thinking:  { tint:[1.35,1.00,0.50], churn:1.0, blob:0.12 },
+  speaking:  { tint:[1.05,1.10,1.20], churn:0.3, blob:0.03 },
+};
+const SHAPES = { bulb:0, brain:1, neural:2 };
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GL plumbing — the same two-pass pipeline as src/pearl/index.ts
+// ─────────────────────────────────────────────────────────────────────────────
+const canvas = document.getElementById('c');
+const gl = canvas.getContext('webgl', { antialias:false, alpha:true });
+if (!gl) document.body.innerHTML = '<p style="padding:2rem">WebGL unavailable.</p>';
+
+const dbg = gl.getExtension('WEBGL_debug_renderer_info');
+const RENDERER = String(dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER));
+
+const src = { ...DEFAULTS };
+const opt = { night:1, lite:0, bgless:0, timeScale:1, ampOverride:-0.01, pn:16000,
+              pxMul:1, scale:0.55, cap:1200, k:[0,0,0,0], lampMix:0, sat:1, trans:0.85, refr:0.55 };
+// Seeded from what these fixtures actually reported: the Play bars and gradient
+// tube sitting warm, the Go lamp cool. Ring order = room order.
+const LAMPS = ['#ff8628', '#ff8628', '#ff9e4f', '#bbf3ff'];
+const lampBuf = new Float32Array(12);
+function pushLamps() {
+  for (let i = 0; i < 4; i++) {
+    const h = LAMPS[i];
+    lampBuf[i*3]   = parseInt(h.slice(1,3),16)/255;
+    lampBuf[i*3+1] = parseInt(h.slice(3,5),16)/255;
+    lampBuf[i*3+2] = parseInt(h.slice(5,7),16)/255;
+  }
+}
+pushLamps();
+let state = 'idle', shape = 'bulb';
+
+function compile(type, source) {
+  const s = gl.createShader(type);
+  gl.shaderSource(s, source);
+  gl.compileShader(s);
+  if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+    const log = gl.getShaderInfoLog(s);
+    gl.deleteShader(s);
+    throw new Error(log);
+  }
+  return s;
+}
+function link(vs, fs) {
+  const p = gl.createProgram();
+  gl.attachShader(p, compile(gl.VERTEX_SHADER, vs));
+  gl.attachShader(p, compile(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(p);
+  if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p));
+  return p;
+}
+function uniforms(prog, names) {
+  const u = {};
+  for (const n of names) u[n] = gl.getUniformLocation(prog, n);
+  return u;
+}
+
+let prog, cprog, pprog, U, CU, PU, aP, aCP, aSeed;
+function buildPrograms() {                       // throws on a bad edit; caller keeps the old ones
+  const np = link(withSpare(MAIN_VERT), withSpare(src['main.frag']));
+  const nc = link(withSpare(MAIN_VERT), withSpare(COMPOSITE_FRAG));
+  const npp = link(withSpare(src['particle.vert']), withSpare(src['particle.frag']));
+  [prog, cprog, pprog] = [np, nc, npp];
+  U  = uniforms(prog, ['u_res','u_time','u_amp','u_tint','u_churn','u_night','u_blob','u_lite','u_bgless','u_pulse','u_prev','u_lamp','u_lampMix','u_trans','u_refr','u_k1','u_k2','u_k3','u_k4']);
+  CU = uniforms(cprog, ['u_tex','u_cres','u_sat']);
+  PU = uniforms(pprog, ['u_res','u_time','u_amp','u_churn','u_snap','u_px','u_tint','u_night','u_think','u_shape','u_k1','u_k2','u_k3','u_k4']);
+  aP = gl.getAttribLocation(prog, 'p');
+  aCP = gl.getAttribLocation(cprog, 'p');
+  aSeed = gl.getAttribLocation(pprog, 'a_seed');
+}
+buildPrograms();
+
+const triBuf = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, triBuf);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+
+let seedBuf = gl.createBuffer();
+function buildSeeds(n) {                          // fibonacci sphere, as in index.ts
+  const seeds = new Float32Array(Math.max(1, n) * 4);
+  const GA = Math.PI * (3 - Math.sqrt(5));
+  for (let i = 0; i < n; i++) {
+    const y = 1 - (i + 0.5) * 2 / n;
+    seeds[i*4]   = (i * GA) % (Math.PI * 2);
+    seeds[i*4+1] = Math.asin(y);
+    seeds[i*4+2] = Math.random();
+    seeds[i*4+3] = Math.random();
+  }
+  gl.bindBuffer(gl.ARRAY_BUFFER, seedBuf);
+  gl.bufferData(gl.ARRAY_BUFFER, seeds, gl.STATIC_DRAW);
+}
+buildSeeds(opt.pn);
+
+function makeTarget(w, h) {
+  const tex = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, tex);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, w, h, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  const fb = gl.createFramebuffer();
+  gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+  gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+  return { tex, fb };
+}
+function freeTarget(t) { if (t) { gl.deleteTexture(t.tex); gl.deleteFramebuffer(t.fb); } }
+
+// Wipe the feedback history. Without this a look switch keeps smearing the
+// previous look's image for several seconds.
+function clearFeedback() {
+  for (const t of [tgtA, tgtB]) {
+    if (!t) continue;
+    gl.bindFramebuffer(gl.FRAMEBUFFER, t.fb);
+    gl.clearColor(0, 0, 0, 0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+  }
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+}
+
+let tgtA = null, tgtB = null;
+function size() {
+  let s = opt.scale * (window.devicePixelRatio || 1);
+  if (canvas.clientHeight * s > opt.cap) s = opt.cap / canvas.clientHeight;
+  const w = Math.max(1, Math.round(canvas.clientWidth * s));
+  const h = Math.max(1, Math.round(canvas.clientHeight * s));
+  const k = Math.max(300 / w, 200 / h, 1);        // one factor, or the orb renders squashed
+  canvas.width = Math.round(w * k);
+  canvas.height = Math.round(h * k);
+  gl.viewport(0, 0, canvas.width, canvas.height);
+  freeTarget(tgtA); freeTarget(tgtB);
+  tgtA = makeTarget(canvas.width, canvas.height);
+  tgtB = makeTarget(canvas.width, canvas.height);
+}
+window.addEventListener('resize', size);
+size();
+
+// JS mirror of the shader fbm — the flare pulses are time-only
+function jsHash(x, y) { const s = Math.sin(x*127.1 + y*311.7)*43758.5453123; return s - Math.floor(s); }
+function jsNoise(x, y) {
+  const ix = Math.floor(x), iy = Math.floor(y), fx = x - ix, fy = y - iy;
+  const ux = fx*fx*(3 - 2*fx), uy = fy*fy*(3 - 2*fy);
+  return (jsHash(ix,iy)*(1-ux) + jsHash(ix+1,iy)*ux)*(1-uy)
+       + (jsHash(ix,iy+1)*(1-ux) + jsHash(ix+1,iy+1)*ux)*uy;
+}
+function jsFbm(x, y) {
+  let v = 0, a = 0.5;
+  for (let i = 0; i < 4; i++) { v += a*jsNoise(x, y); const nx = x*2.03 + 17.3; y = y*2.03 + 9.1; x = nx; a *= 0.5; }
+  return v;
+}
+const sstep = (e0, e1, x) => { const t = Math.min(1, Math.max(0, (x-e0)/(e1-e0))); return t*t*(3-2*t); };
+
+// animated values
+let amp = 0, tint = [1,1,1], churn = 0, blob = 1, think = 0, shapeF = 0, nightF = opt.night;
+let fkV = 0, fkT = 0, fkNext = 0;
+function env() {
+  const now = performance.now();
+  if (now > fkNext) { fkT = Math.random() < 0.2 ? 0 : 0.2 + Math.random()*0.8; fkNext = now + 60 + Math.random()*120; }
+  fkV += (fkT - fkV)*0.4;
+  return fkV;
+}
+
+let simT = 0, lastTs = 0, frames = 0, fpsT = 0, fps = 0;
+const hud = document.getElementById('hud');
+
+function frame(ts) {
+  const dt = lastTs ? Math.min(0.1, (ts - lastTs)/1000) : 0;
+  lastTs = ts;
+  simT += dt * opt.timeScale;
+
+  frames++;
+  if (!fpsT) fpsT = ts;                 // or the first window is measured against t=0
+  if (ts - fpsT > 1000) { fps = frames*1000/(ts - fpsT); frames = 0; fpsT = ts;
+    hud.textContent = Math.round(fps) + ' fps · ' + canvas.width + '×' + canvas.height
+      + ' · ' + opt.pn + 'p' + (opt.lite ? ' · lite' : '') + ' · ' + RENDERER; }
+
+  const s = STATES[state];
+  let target;
+  if (audio.on && audio.analyser) target = audioFrame();
+  else target = opt.ampOverride >= 0 ? opt.ampOverride
+              : (state === 'speaking' ? env() : (state === 'listening' ? 0.12 : 0.04));
+  amp += (target - amp)*0.3;
+  for (let i = 0; i < 3; i++) tint[i] += (s.tint[i] - tint[i])*0.06;
+  const churnT = s.churn + (audio.on ? audio.tre * audio.treble : 0);
+  churn += (churnT - churn)*0.05;
+  nightF += (opt.night - nightF)*0.04;
+  const bt = s.blob;
+  blob += (bt - blob) * (bt < blob ? 0.22 : 0.015);      // snap round fast, melt back slowly
+  think += ((state === 'thinking' ? 1 : 0) - think)*0.07;
+  shapeF += (SHAPES[shape] - shapeF)*0.06;
+
+  const lite = opt.lite;
+  const useComposite = !lite || Math.abs(opt.sat - 1) > 0.001;
+
+  gl.useProgram(prog);
+  gl.bindBuffer(gl.ARRAY_BUFFER, triBuf);
+  gl.enableVertexAttribArray(aP);
+  gl.vertexAttribPointer(aP, 2, gl.FLOAT, false, 0, 0);
+  gl.uniform2f(U.u_res, canvas.width, canvas.height);
+  gl.uniform1f(U.u_time, simT);
+  gl.uniform1f(U.u_amp, amp);
+  gl.uniform3f(U.u_tint, tint[0], tint[1], tint[2]);
+  gl.uniform1f(U.u_churn, churn);
+  gl.uniform1f(U.u_night, nightF);
+  gl.uniform1f(U.u_blob, blob);
+  gl.uniform3f(U.u_pulse,
+    sstep(0.42, 0.85, jsFbm(simT*0.22, 5.2)),
+    sstep(0.42, 0.85, jsFbm(simT*0.22 + 13.7, 5.2)),
+    sstep(0.42, 0.85, jsFbm(simT*0.22 + 27.4, 5.2)));
+  gl.uniform3fv(U.u_lamp, lampBuf);
+  gl.uniform1f(U.u_lampMix, opt.lampMix);
+  gl.uniform1f(U.u_lite, lite);
+  gl.uniform1f(U.u_bgless, opt.bgless);
+  gl.uniform1f(U.u_trans, opt.trans);
+  gl.uniform1f(U.u_refr, opt.refr);
+  gl.uniform1f(U.u_k1, opt.k[0]); gl.uniform1f(U.u_k2, opt.k[1]);
+  gl.uniform1f(U.u_k3, opt.k[2]); gl.uniform1f(U.u_k4, opt.k[3]);
+
+  gl.bindFramebuffer(gl.FRAMEBUFFER, useComposite ? tgtA.fb : null);
+  if (opt.bgless) { gl.clearColor(0,0,0,0); gl.clear(gl.COLOR_BUFFER_BIT); }
+  gl.activeTexture(gl.TEXTURE0);
+  gl.bindTexture(gl.TEXTURE_2D, tgtB.tex);
+  gl.uniform1i(U.u_prev, 0);
+  gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+  gl.useProgram(pprog);
+  gl.bindBuffer(gl.ARRAY_BUFFER, seedBuf);
+  gl.enableVertexAttribArray(aSeed);
+  gl.vertexAttribPointer(aSeed, 4, gl.FLOAT, false, 0, 0);
+  gl.uniform2f(PU.u_res, canvas.width, canvas.height);
+  gl.uniform1f(PU.u_time, simT);
+  gl.uniform1f(PU.u_amp, amp);
+  gl.uniform1f(PU.u_churn, churn);
+  gl.uniform1f(PU.u_snap, 1 - blob);
+  gl.uniform1f(PU.u_think, think);
+  gl.uniform1f(PU.u_shape, shapeF);
+  gl.uniform1f(PU.u_px, opt.pxMul * canvas.height/340);
+  gl.uniform1f(PU.u_night, nightF);
+  gl.uniform3f(PU.u_tint, tint[0], tint[1], tint[2]);
+  gl.uniform1f(PU.u_k1, opt.k[0]); gl.uniform1f(PU.u_k2, opt.k[1]);
+  gl.uniform1f(PU.u_k3, opt.k[2]); gl.uniform1f(PU.u_k4, opt.k[3]);
+  gl.enable(gl.BLEND);
+  // separate alpha blend: particles decorate the inside, they don't set the silhouette
+  if (nightF > 0.5) gl.blendFuncSeparate(gl.ONE, gl.ONE, gl.ZERO, gl.ONE);
+  else gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ZERO, gl.ONE);
+  gl.drawArrays(gl.POINTS, 0, opt.pn);
+  gl.disable(gl.BLEND);
+
+  if (useComposite) {
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    gl.useProgram(cprog);
+    gl.bindBuffer(gl.ARRAY_BUFFER, triBuf);
+    gl.enableVertexAttribArray(aCP);
+    gl.vertexAttribPointer(aCP, 2, gl.FLOAT, false, 0, 0);
+    gl.bindTexture(gl.TEXTURE_2D, tgtA.tex);
+    gl.uniform1i(CU.u_tex, 0);
+    gl.uniform2f(CU.u_cres, canvas.width, canvas.height);
+    gl.uniform1f(CU.u_sat, opt.sat);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    const tmp = tgtA; tgtA = tgtB; tgtB = tmp;
+  }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Panel wiring
+// ─────────────────────────────────────────────────────────────────────────────
+const $ = (id) => document.getElementById(id);
+
+function buttonGroup(host, names, get, set) {
+  host.innerHTML = '';
+  const bs = names.map((n) => {
+    const b = document.createElement('button');
+    b.textContent = n;
+    b.onclick = () => { set(n); bs.forEach((x, i) => x.classList.toggle('on', names[i] === get())); };
+    return b;
+  });
+  bs.forEach((b) => host.appendChild(b));
+  bs.forEach((b, i) => b.classList.toggle('on', names[i] === get()));
+}
+buttonGroup($('states'), Object.keys(STATES), () => state, (n) => { state = n; });
+buttonGroup($('shapes'), Object.keys(SHAPES), () => shape, (n) => { shape = n; });
+
+function toggle(btn, key, after) {
+  const b = $(btn);
+  const sync = () => b.classList.toggle('on', !!opt[key]);
+  b.onclick = () => { opt[key] = opt[key] ? 0 : 1; sync(); after && after(); };
+  sync();
+}
+toggle('bNight', 'night');
+toggle('bLite', 'lite');
+toggle('bBgless', 'bgless', () => $('stage').classList.toggle('light', !!opt.bgless && !opt.night));
+
+function slider(id, valId, key, fmt, after) {
+  const s = $(id), v = $(valId);
+  const sync = () => { v.textContent = fmt(+s.value); };
+  s.oninput = () => { const n = +s.value;
+    if (Array.isArray(key)) opt.k[key[1]] = n; else if (key) opt[key] = n;
+    sync(); after && after(n); };
+  sync();
+}
+const f2 = (n) => n.toFixed(2);
+slider('sTime', 'vTime', 'timeScale', f2);
+slider('sAmp', 'vAmp', 'ampOverride', (n) => n < 0 ? 'auto' : f2(n));
+slider('sLamp', 'vLamp', 'lampMix', f2);
+const lampHost = $('lamps');
+LAMPS.forEach((hex, i) => {
+  const inp = document.createElement('input');
+  inp.type = 'color'; inp.value = hex;
+  inp.title = ['Play bar (left)','gradient tube','Play bar (right)','Go lamp'][i];
+  inp.style.cssText = 'width:56px;height:26px;padding:1px;background:#0d1117;border:1px solid var(--line);border-radius:5px;cursor:pointer';
+  inp.oninput = () => { LAMPS[i] = inp.value; pushLamps(); };
+  lampHost.appendChild(inp);
+});
+
+slider('sSat', 'vSat', 'sat', f2);
+slider('sTrans', 'vTrans', 'trans', f2);
+slider('sRefr', 'vRefr', 'refr', f2);
+slider('sPn', 'vPn', 'pn', (n) => String(n), (n) => buildSeeds(n));
+slider('sPx', 'vPx', 'pxMul', f2);
+slider('sScale', 'vScale', 'scale', f2, size);
+slider('sCap', 'vCap', 'cap', (n) => String(n), size);
+slider('sK1', 'vK1', ['k', 0], f2);
+slider('sK2', 'vK2', ['k', 1], f2);
+slider('sK3', 'vK3', ['k', 2], f2);
+slider('sK4', 'vK4', ['k', 3], f2);
+
+// This page IS an animation, so reduced-motion can't just soften a transition:
+// start frozen on one frame and let the reader choose to run it.
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  opt.timeScale = 0;
+  $('sTime').value = 0;
+  $('vTime').textContent = '0.00';
+  $('sTime').closest('.row').insertAdjacentHTML('afterend',
+    '<p class="hint">Motion is paused because your system asks for reduced motion — raise time × to run it.</p>');
+}
+
+// editable state table
+const rows = $('stateRows');
+for (const [name, cfg] of Object.entries(STATES)) {
+  const tr = document.createElement('tr');
+  tr.innerHTML = '<td class="name">' + name + '</td>';
+  const mk = (get, set, step, max) => {
+    const td = document.createElement('td');
+    const i = document.createElement('input');
+    i.type = 'number'; i.step = step; i.min = 0; i.max = max; i.value = get();
+    i.oninput = () => set(+i.value);
+    td.appendChild(i); tr.appendChild(td);
+  };
+  [0,1,2].forEach((c) => mk(() => cfg.tint[c], (v) => cfg.tint[c] = v, 0.05, 3));
+  mk(() => cfg.churn, (v) => cfg.churn = v, 0.05, 3);
+  mk(() => cfg.blob, (v) => cfg.blob = v, 0.02, 1);
+  rows.appendChild(tr);
+}
+
+// shader editor
+let tab = 'main.frag';
+const srcEl = $('src'), errEl = $('err');
+srcEl.value = src[tab];
+$('bEdit').onclick = () => {
+  const open = $('editor').classList.toggle('open');
+  $('bEdit').classList.toggle('on', open);
+};
+document.querySelectorAll('#tabs button').forEach((b) => {
+  b.onclick = () => {
+    src[tab] = srcEl.value;
+    tab = b.dataset.tab;
+    document.querySelectorAll('#tabs button').forEach((x) => x.classList.toggle('on', x === b));
+    srcEl.value = src[tab];
+  };
+});
+srcEl.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); recompile(); }
+  if (e.key === 'Tab') { e.preventDefault();
+    const p = srcEl.selectionStart;
+    srcEl.value = srcEl.value.slice(0, p) + '  ' + srcEl.value.slice(srcEl.selectionEnd);
+    srcEl.selectionStart = srcEl.selectionEnd = p + 2; }
+});
+function recompile() {
+  src[tab] = srcEl.value;
+  const keep = [prog, cprog, pprog, U, CU, PU, aP, aCP, aSeed];
+  try {
+    buildPrograms();
+    errEl.textContent = '';
+  } catch (e) {
+    [prog, cprog, pprog, U, CU, PU, aP, aCP, aSeed] = keep;   // last good pipeline keeps drawing
+    errEl.textContent = String(e.message || e).replace(/\0/g, '').trim();
+  }
+}
+
+// ── Audio reactivity ─────────────────────────────────────────────────────────
+// Bass drives the swell, highs drive the churn: the two things the orb already
+// knows how to do. Deliberately NOT a spectrum bar chart bolted on — the orb
+// stays an orb and merely breathes with the room.
+const audio = { on:false, gain:2, bass:1, treble:1, smooth:0.62, analyser:null, buf:null, env:0, tre:0 };
+slider('sGain', 'vGain', null, (n)=>n.toFixed(1), (n)=>audio.gain=n);
+slider('sBass', 'vBass', null, f2, (n)=>audio.bass=n);
+slider('sTre',  'vTre',  null, f2, (n)=>audio.treble=n);
+slider('sSmooth','vSmooth', null, f2, (n)=>{
+  audio.smooth = n;
+  if (audio.analyser) audio.analyser.smoothingTimeConstant = 0.55 + 0.42*n;
+});
+
+function stopAudio() {
+  audio.stream?.getTracks().forEach((t) => t.stop());
+  audio.on = false; audio.analyser = null; audio.stream = null;
+  $('bAudio').classList.remove('on');
+  $('bTab').classList.remove('on');
+  $('bAudio').textContent = 'listen';
+  $('meterFill').style.width = '0';
+}
+
+function startAnalyser(stream, label) {
+  const ctx = new AudioContext();
+  const an = ctx.createAnalyser();
+  an.fftSize = 4096;                             // ~11 Hz bins: the bass band is no longer 6 bins wide
+  an.smoothingTimeConstant = 0.55 + 0.42*audio.smooth;
+  ctx.createMediaStreamSource(stream).connect(an);
+  audio.stream = stream;
+  audio.analyser = an;
+  audio.buf = new Uint8Array(an.frequencyBinCount);
+  audio.hz = ctx.sampleRate / an.fftSize;        // Hz per bin
+  audio.on = true;
+  $('bAudio').textContent = 'stop · ' + label;
+  $('bAudio').classList.add('on');
+}
+
+// Device labels stay blank until audio permission has been granted once, so
+// the list is refreshed after every successful capture.
+async function refreshInputs() {
+  try {
+    const ds = await navigator.mediaDevices.enumerateDevices();
+    const sel = $('audioSrc');
+    const keep = sel.value;
+    sel.innerHTML = '<option value="">default input (mic)</option>';
+    let n = 0;
+    for (const d of ds.filter((x) => x.kind === 'audioinput')) {
+      if (!d.deviceId) continue;
+      const o = document.createElement('option');
+      o.value = d.deviceId;
+      o.textContent = d.label || ('unnamed input ' + (++n));
+      sel.appendChild(o);
+    }
+    sel.value = keep;
+  } catch {}
+}
+refreshInputs();
+navigator.mediaDevices.addEventListener?.('devicechange', refreshInputs);
+
+// Chrome reports a single unnamed input until audio permission is granted, so
+// the monitor sources are invisible until then. Ask once, release immediately,
+// and re-enumerate — this starts no capture.
+$('bFind').onclick = async () => {
+  try {
+    const st = await navigator.mediaDevices.getUserMedia({ audio: true });
+    st.getTracks().forEach((t) => t.stop());
+    await refreshInputs();
+    const n = $('audioSrc').options.length - 1;
+    $('copyMsg').textContent = n > 0 ? n + ' input(s) found — pick "Monitor of…"'
+                                     : 'No extra inputs exposed by Chrome.';
+  } catch (e) {
+    const framed = (() => { try { return window.top !== window; } catch { return true; } })();
+    $('copyMsg').textContent = framed
+      ? 'Blocked in an iframe — open the local copy at http://127.0.0.1:8777/lab.html'
+      : 'Audio permission denied.';
+  }
+  setTimeout(() => $('copyMsg').textContent = '', 9000);
+};
+
+$('bAudio').onclick = async () => {
+  if (audio.on) { stopAudio(); return; }
+  const id = $('audioSrc').value;
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: { deviceId: id ? { exact: id } : undefined,
+               echoCancellation: false, noiseSuppression: false, autoGainControl: false } });
+    const name = $('audioSrc').selectedOptions[0]?.textContent || 'input';
+    startAnalyser(stream, /monitor/i.test(name) ? 'system' : 'mic');
+    refreshInputs();
+  } catch (e) {
+    $('bAudio').textContent = 'input blocked';
+    const framed = (() => { try { return window.top !== window; } catch { return true; } })();
+    $('copyMsg').textContent = framed
+      ? 'Blocked: this page is in an iframe without microphone permission. Run scripts/lab.sh and open http://127.0.0.1:8777/lab.html'
+      : 'Audio permission denied.';
+    setTimeout(() => $('copyMsg').textContent = '', 9000);
+    console.warn('audio denied', e);
+  }
+};
+
+// Tab capture: works when the music is playing in a browser tab, and needs no
+// monitor device at all. The video track is discarded immediately.
+$('bTab').onclick = async () => {
+  if (audio.on) { stopAudio(); return; }
+  try {
+    const stream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true });
+    if (!stream.getAudioTracks().length) {
+      stream.getTracks().forEach((t) => t.stop());
+      $('copyMsg').textContent = 'No audio track — tick "Share tab audio" in the picker.';
+      setTimeout(() => $('copyMsg').textContent = '', 5000);
+      return;
+    }
+    stream.getVideoTracks().forEach((t) => t.stop());
+    startAnalyser(stream, 'tab');
+    $('bTab').classList.add('on');
+  } catch (e) { console.warn('display capture cancelled', e); }
+};
+
+// Mean energy over a frequency band, 0..1.
+function band(lo, hi) {
+  const b = audio.buf, n = b.length;
+  let a = Math.max(0, Math.round(lo/audio.hz)), z = Math.min(n-1, Math.round(hi/audio.hz));
+  let sum = 0;
+  for (let i = a; i <= z; i++) sum += b[i];
+  return sum / ((z - a + 1) * 255);
+}
+
+// Called once per frame while listening; returns the amp the orb should wear.
+function audioFrame() {
+  audio.analyser.getByteFrequencyData(audio.buf);
+  const lo = band(40, 180) * audio.gain;         // kick / bass fundamental, above the rumble
+  const hi = band(2000, 8000) * audio.gain;      // cymbals, consonants, air
+  // Attack scales hard with the smoothing control, release only mildly: the
+  // jumpiness is an attack artefact, and slowing the release by as much just
+  // makes the whole thing feel laggy instead of smooth.
+  // Release slows far harder than attack. Making both slow just turns the
+  // envelope into a slow oscillation with the same swing — measurably worse.
+  // Keeping some attack and holding the peak is what stops it collapsing
+  // between hits, and that collapse is what reads as jumpy.
+  const atk = 0.55 - 0.35*audio.smooth;
+  const rel = 0.10 - 0.088*audio.smooth;
+  audio.env += (lo - audio.env) * (lo > audio.env ? atk : rel);
+  audio.tre += (hi - audio.tre) * (hi > audio.tre ? atk*0.8 : rel);
+  $('meterFill').style.width = Math.min(100, audio.env*100) + '%';
+  if ((audio.tick = (audio.tick || 0) + 1) % 6 === 0) {
+    $('vLevels').textContent = 'bass ' + audio.env.toFixed(2) + ' · highs ' + audio.tre.toFixed(2)
+                             + (audio.env > 0.98 ? '  ⚠ clipping' : '');
+  }
+  return Math.min(1, audio.env * audio.bass);
+}
+
+
+// ── Presets ─────────────────────────────────────────────────────────────────
+// A preset captures the look (shader source) and the rig around it. Applying
+// one recompiles, so the switch is a real change of engine, not a skin.
+const LS_KEY = 'nabu-lab-presets';
+let userPresets = [];
+try { userPresets = JSON.parse(localStorage.getItem(LS_KEY) || '[]'); } catch { userPresets = []; }
+
+function allPresets() { return PRESETS.concat(userPresets); }
+
+function currentParams() {
+  return { pn: opt.pn, pxMul: opt.pxMul, timeScale: opt.timeScale, lampMix: opt.lampMix,
+           amp: opt.ampOverride,
+           scale: opt.scale, cap: opt.cap, night: opt.night, lite: opt.lite,
+           state, shape, gain: audio.gain, bass: audio.bass, treble: audio.treble, smooth: audio.smooth,
+           sat: opt.sat, trans: opt.trans, refr: opt.refr, k1: opt.k[0], k2: opt.k[1], k3: opt.k[2], k4: opt.k[3] };
+}
+
+// Push a param set through the same controls the user would touch, so the
+// sliders never disagree with what is on screen.
+function applyParams(pr) {
+  const set = (id, val, key, fmt) => {
+    if (val === undefined) return;
+    const el = $(id);
+    if (el) { el.value = val; const v = $(id.replace(/^s/, 'v')); if (v && fmt) v.textContent = fmt(val); }
+    if (key) opt[key] = val;
+  };
+  set('sPn', pr.pn, 'pn', String);
+  set('sPx', pr.pxMul, 'pxMul', f2);
+  set('sTime', pr.timeScale, 'timeScale', f2);
+  set('sAmp', pr.amp, 'ampOverride', (n) => n < 0 ? 'auto' : f2(n));
+  set('sLamp', pr.lampMix, 'lampMix', f2);
+  set('sScale', pr.scale, 'scale', f2);
+  set('sCap', pr.cap, 'cap', String);
+  set('sSat', pr.sat, 'sat', f2);
+  set('sTrans', pr.trans, 'trans', f2);
+  set('sRefr', pr.refr, 'refr', f2);
+  set('sGain', pr.gain, null, (n)=>n.toFixed(1)); if (pr.gain !== undefined) audio.gain = pr.gain;
+  set('sBass', pr.bass, null, f2); if (pr.bass !== undefined) audio.bass = pr.bass;
+  set('sTre', pr.treble, null, f2); if (pr.treble !== undefined) audio.treble = pr.treble;
+  set('sSmooth', pr.smooth, null, f2);
+  if (pr.smooth !== undefined) {
+    audio.smooth = pr.smooth;
+    if (audio.analyser) audio.analyser.smoothingTimeConstant = 0.55 + 0.42*pr.smooth;
+  }
+  ['k1','k2','k3','k4'].forEach((key, i) => {
+    if (pr[key] === undefined) return;
+    opt.k[i] = pr[key];
+    const el = $('sK' + (i + 1)); if (el) el.value = pr[key];
+    const v = $('vK' + (i + 1)); if (v) v.textContent = f2(pr[key]);
+  });
+  if (pr.pn !== undefined) buildSeeds(pr.pn);
+  if (pr.scale !== undefined || pr.cap !== undefined) size();
+  if (pr.night !== undefined) { opt.night = pr.night; $('bNight').classList.toggle('on', !!pr.night); }
+  if (pr.lite !== undefined) { opt.lite = pr.lite; $('bLite').classList.toggle('on', !!pr.lite); }
+  if (pr.state) { state = pr.state; syncGroup('states', state); }
+  if (pr.shape) { shape = pr.shape; syncGroup('shapes', shape); }
+}
+
+function syncGroup(hostId, val) {
+  [...$(hostId).querySelectorAll('button')].forEach((b) => b.classList.toggle('on', b.textContent === val));
+}
+
+let applying = false;
+function applyPreset(name) {
+  const pr = allPresets().find((x) => x.name === name);
+  if (!pr) return;
+  applying = true;
+  // fade through black — a hard cut between two unrelated looks reads as a glitch
+  canvas.style.transition = 'opacity .35s ease';
+  canvas.style.opacity = '0';
+  setTimeout(() => {
+    src['main.frag'] = pr.look ? (LOOKS[pr.look] || pr.frag || DEFAULTS['main.frag'])
+                               : (pr.frag || DEFAULTS['main.frag']);
+    if (pr.particleVert) src['particle.vert'] = pr.particleVert;
+    if (tab === 'main.frag') srcEl.value = src['main.frag'];
+    try { buildPrograms(); clearFeedback(); errEl.textContent = ''; }
+    catch (e) { errEl.textContent = String(e.message || e).replace(/\0/g, '').trim(); }
+    applyParams(pr.params || {});
+    canvas.style.opacity = '1';
+    applying = false;
+  }, 360);
+}
+
+function refreshPresetList(select) {
+  const sel = $('presetSel');
+  sel.innerHTML = '';
+  for (const pr of allPresets()) {
+    const o = document.createElement('option');
+    o.value = o.textContent = pr.name;
+    if (userPresets.indexOf(pr) !== -1) o.textContent = pr.name + ' *';
+    sel.appendChild(o);
+  }
+  if (select) sel.value = select;
+}
+refreshPresetList('Gloss \u00b7 mike');
+$('presetSel').onchange = () => applyPreset($('presetSel').value.replace(/ \*$/, ''));
+
+$('bSaveP').onclick = () => {
+  const name = prompt('Name this look:', 'My look ' + (userPresets.length + 1));
+  if (!name) return;
+  src[tab] = srcEl.value;
+  const pr = { name, look: null, frag: src['main.frag'], particleVert: src['particle.vert'],
+               params: currentParams() };
+  const i = userPresets.findIndex((x) => x.name === name);
+  if (i >= 0) userPresets[i] = pr; else userPresets.push(pr);
+  localStorage.setItem(LS_KEY, JSON.stringify(userPresets));
+  refreshPresetList(name);
+};
+
+$('bDelP').onclick = () => {
+  const name = $('presetSel').value.replace(/ \*$/, '');
+  const i = userPresets.findIndex((x) => x.name === name);
+  if (i < 0) { $('copyMsg').textContent = 'Built-in looks cannot be deleted.'; return; }
+  userPresets.splice(i, 1);
+  localStorage.setItem(LS_KEY, JSON.stringify(userPresets));
+  refreshPresetList('Pearl');
+  applyPreset('Pearl');
+};
+
+// Remember the rig across reloads. Tuning is slow and a refresh used to throw
+// all of it away — which is exactly how a session gets lost.
+const LS_LAST = 'nabu-lab-last';
+let restoring = false;
+function rememberSettings() {
+  if (restoring || applying) return;
+  try {
+    localStorage.setItem(LS_LAST, JSON.stringify({
+      preset: $('presetSel').value.replace(/ \*$/, ''),
+      params: currentParams(), lamps: LAMPS,
+    }));
+  } catch {}
+}
+setInterval(rememberSettings, 2000);
+
+(function restoreSettings() {
+  let saved = null;
+  try { saved = JSON.parse(localStorage.getItem(LS_LAST) || 'null'); } catch {}
+  if (!saved) return;
+  restoring = true;
+  const pr = allPresets().find((x) => x.name === saved.preset);
+  if (pr) {
+    src['main.frag'] = pr.look ? (LOOKS[pr.look] || DEFAULTS['main.frag'])
+                               : (pr.frag || DEFAULTS['main.frag']);
+    if (tab === 'main.frag') srcEl.value = src['main.frag'];
+    try { buildPrograms(); } catch {}
+    refreshPresetList(saved.preset);
+  }
+  if (saved.lamps) { saved.lamps.forEach((h, i) => { LAMPS[i] = h; }); pushLamps();
+    [...$('lamps').querySelectorAll('input')].forEach((inp, i) => { inp.value = LAMPS[i]; }); }
+  applyParams(saved.params || {});
+  restoring = false;
+})();
+
+// Auto-cycle: this is the screensaver mode.
+let cycleTimer = null;
+slider('sCycle', 'vCycle', null, (n) => n + 's', () => { if (cycleTimer) startCycle(); });
+function startCycle() {
+  clearInterval(cycleTimer);
+  const every = +$('sCycle').value * 1000;
+  cycleTimer = setInterval(() => {
+    if (applying) return;
+    const names = allPresets().map((x) => x.name);
+    const cur = $('presetSel').value.replace(/ \*$/, '');
+    const next = names[(names.indexOf(cur) + 1) % names.length];
+    refreshPresetList(next);
+    applyPreset(next);
+  }, every);
+}
+$('bCycle').onclick = () => {
+  if (cycleTimer) { clearInterval(cycleTimer); cycleTimer = null; $('bCycle').classList.remove('on'); }
+  else { startCycle(); $('bCycle').classList.add('on'); }
+};
+
+// export
+$('bCopy').onclick = async () => {
+  src[tab] = srcEl.value;
+  const settings = JSON.stringify({ preset: $('presetSel').value.replace(/ \*$/, ''),
+                                    params: currentParams(), lamps: LAMPS }, null, 1);
+  const table = Object.entries(STATES).map(([k, v]) =>
+    `  ${(k + ':').padEnd(11)}{ tint: [${v.tint.map((n) => n.toFixed(2)).join(', ')}], churn: ${v.churn}, blob: ${v.blob} },`).join('\n');
+  const out =
+`// ── current settings (paste this back to reproduce the look exactly) ─────────
+${settings}
+
+// ── src/pearl/index.ts › STATES ───────────────────────────────────────────────
+${table}
+
+// ── src/pearl/shaders/main.frag ──────────────────────────────────────────────
+${src['main.frag']}
+
+// ── src/pearl/shaders/particle.vert ──────────────────────────────────────────
+${src['particle.vert']}
+
+// ── src/pearl/shaders/particle.frag ──────────────────────────────────────────
+${src['particle.frag']}
+`;
+  try { await navigator.clipboard.writeText(out); $('copyMsg').textContent = 'Copied — paste back over the repo files.'; }
+  catch { console.log(out); $('copyMsg').textContent = 'Clipboard blocked; dumped to the console.'; }
+  setTimeout(() => $('copyMsg').textContent = '', 4000);
+};
+$('bReset').onclick = () => location.reload();
+</script>
+
+<div id="lookcap"></div>
+<script>
+(function(){
+  // Seven shaders, cycling. The avatar presets are deliberately excluded —
+  // they have their own tile on the page.
+  var LOOKS = [
+    ['Gloss \u00b7 mike', 'glossy tubes, refracting sphere, audio-driven'],
+    ['Aurora',             'a curtain of light'],
+    ['Waveform \u00b7 mike','the signal itself'],
+    ['Groove',             'rhythm, as contours'],
+    ['Raio',               'ray and beam'],
+    ['Nebula',             'cloud'],
+    ['Sonar',              'ping and sweep'],
+    ['Gloss',              'the same tubes, without the mic']
+  ];
+  var i = 0, cap, timer;
+  function show(n){
+    var L = LOOKS[n];
+    try {
+      if (typeof refreshPresetList === 'function') refreshPresetList(L[0]);
+      if (typeof applyPreset === 'function') applyPreset(L[0]);
+    } catch(e){}
+    cap.style.opacity = '0';
+    setTimeout(function(){
+      cap.innerHTML = '<b>' + L[0] + '</b> &nbsp;<i>' + L[1] + '</i>';
+      cap.style.opacity = '1';
+    }, 300);
+  }
+  function boot(){
+    cap = document.getElementById('lookcap');
+    if (!cap) return;
+    show(0);
+    timer = setInterval(function(){ i = (i + 1) % LOOKS.length; show(i); }, 11000);
+  }
+  if (document.readyState === 'complete') boot();
+  else window.addEventListener('load', boot);
+})();
+</script>
