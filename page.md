@@ -80,6 +80,14 @@ as a *shape* and never as a count, a date, a named leader, a forum or a channel.
 | `method.block.*` | taught 1,000+ beginners drawing | §10.1 · §5 | ✅ understate deliberately; ⛔ never name the venue on the page |
 | `method.cta.*` | ~$79MM in retail sales | §5 rollup | ✅ canonical, primary |
 | `ninety.step.5` | no issues management, crisis, recall or reputation defense | §8.28 confirmed negative | ✅ **stated on purpose** |
+| `sustainability.*` | all the 3D, lighting, rendering, animation, type animation — his own hand | §2 SunBird (2026-08-28) | ✅ first-hand craft; verb is **made**, not *directed* |
+| `sustainability.*` | sustainability team → communications → he built it | §2 · §4 · §8.29 | ✅ canonical, the full external-comms loop |
+| `sustainability.*` | ran across social and in print | §2 SunBird | ⚠️ ⛔ name no channel beyond social/print (open Q#16) |
+| `sustainability.*` | the LCA claims went through the MLR process | §2 · §8.29 | ⚠️ **claims cleared MLR** — ⛔ never "I took it through" / "owned the submission" (open Q#16) |
+| `sustainability.*` | "first PET blister in the consumer health sector" | §8.26 · §8.29 | ⚠️ **Bayer's claim, attributed + linked to the 2024-10-30 newsroom release.** ⛔ never asserted as his |
+| `sustainability.*` | −38% carbon · −78% water · −53% land · −18% weight | Bayer press release 2024-10-30 | ✅ sourced — ⚠️ **the comparator is stated on the page**, never strip it |
+| `sustainability.*` | live on Bayer Global, Nov 2024, Liveo Research, Netherlands first | verified 2026-08-28 | ✅ canonical |
+| — | *the film's view count (612)* | §8.29 | ⛔ **never on any artifact** — true, and the wrong number |
 
 ⚠️ **Not claimable on this page, in either direction:**
 
@@ -93,6 +101,10 @@ as a *shape* and never as a count, a date, a named leader, a forum or a channel.
 - ⚠️ **M&A** — Iberogast as acquired-brand work is real (§8.23) but is **not** on this page,
   and "led an M&A brand integration" is prohibited. **Separation / carve-out is OPEN, not
   denied** — claim neither the experience nor the gap.
+- ⛔ **The SunBird view count (612).** Verified and prohibited (§8.29). Sourcing a number tells you
+  whether it is true, not whether it belongs.
+- ⚠️ **Embedding is disabled on Bayer's YouTube channel** — the case uses linked stills and an
+  outbound CTA on purpose. ⛔ Do not "fix" it by restoring an iframe; it renders a dead box.
 - ⚠️ **Every §8.28 communications claim is unquantified on purpose.** If open question #15
   gets answered, this page can get materially stronger — until then, do not add a number.
 
@@ -110,7 +122,7 @@ as a *shape* and never as a count, a date, a named leader, a forum or a channel.
 The message landing is not the finish line &mdash; *you find out why it stopped short, then change the situation.*
 
 ## `hero.lede`
-Twelve years in regulated healthcare, seven of them writing and building the communications a global consumer-health organization runs on. Five cases: the executive layer &mdash; the words leaders deliver and the material that carries them; change communications for a 115-person organization inside a roadmap covering more than a thousand people; high-impact business events; the toolkits that make consistency scale; and the one that matters most for this role &mdash; what I do when a message does not land.
+Twelve years in regulated healthcare, seven of them writing and building the communications a global consumer-health organization runs on. Six cases: the executive layer &mdash; the words leaders deliver and the material that carries them; change communications for a 115-person organization inside a roadmap covering more than a thousand people; high-impact business events; the toolkits that make consistency scale; **a published corporate sustainability campaign you can watch on Bayer&rsquo;s own channel**; and the one that matters most for this role &mdash; what I do when a message does not land.
 
 ## `hero.who`
 ```html
@@ -349,6 +361,79 @@ Template systems and reusable modules, global and local on the same base.
 <span>communication toolkits</span><span>best practices &amp; resources</span><span>brand standards</span><span>accessibility &amp; inclusion</span><span>editorial consistency</span>
 ```
 
+## `sustainability.title`
+SunBird &mdash; a corporate sustainability claim, made watchable
+
+## `sustainability.sub`
+Sustainability team owned the science &middot; communications owned the message &middot; I made every frame of it &middot; live on Bayer&rsquo;s global channel
+
+## `sustainability.fig.1`
+**The opening frame of the published film.** Thirty-two seconds, live on *Bayer Global* &mdash; the corporate channel, not a brand channel. I did all of it: the 3D, the lighting, the rendering, the animation and the type animation.
+
+## `sustainability.fig.2`
+**And where it lands.** A material-science change resolved back into one line a shopper can hold: same product, same relief, better packaging. The sustainability story has to end somewhere a person recognizes.
+
+## `sustainability.fig.1`
+**Before.** The old blister &mdash; PVC with a foil backing. Opaque, multi-material, and effectively unsortable at the recycling stage.
+
+## `sustainability.fig.2`
+**After.** Mono-material PET. The whole argument is that you can now see through it &mdash; which is why the film is lit to make transparency the subject rather than a detail.
+
+## `sustainability.fig.3`
+**The shot I am proudest of.** Two blisters edge-on, so an eighteen percent weight reduction stops being a number and becomes a thickness you can see. Nobody reads a percentage. They do look at a silhouette.
+
+## `sustainability.fig.4`
+**Four claims, four footnotes.** Carbon &minus;38%, water &minus;78%, land &minus;53%, weight &minus;18% &mdash; every one carrying its comparator in the corner, because a sustainability number without its baseline is not a claim, it is a liability.
+
+## `sustainability.block.the-problem.label`
+The problem
+
+## `thesis.p`
+Bayer had replaced the PVC in a blister pack with mono-material PET &mdash; the kind of change that is genuinely significant and almost impossible to feel. The whole story lives in a material nobody looks at, on a product people open without thinking, and it is carried by four life-cycle-assessment percentages that mean nothing on their own.
+
+## `sustainability.block.how-it-was-actually-made.label`
+How it was actually made
+
+## `sustainability.block.how-it-was-actually-made.p`
+I worked with the **sustainability team**, who owned the science, and then with **communications**, to craft the message &mdash; and then I built the entire thing: 3D creative, lighting, rendering, animation, type animation. It ran across **social and in print**, alongside the press release.
+
+## `sustainability.block.why-this-is-the-case-that-matt.label`
+Why this is the case that matters most for a communications team
+
+## `sustainability.block.why-this-is-the-case-that-matt.p`
+Because it is the whole loop, and I was in every room of it. **A subject-matter function owns a technical truth. Communications owns what the public should understand. Somebody has to turn one into the other** &mdash; and usually that person briefs it out and waits. Here I sat in the sustainability conversation, sat in the comms conversation, and then made the artifact myself, which meant the message and the craft never had to survive a handoff.
+
+## `sustainability.block.why-this-is-the-case-that-matt.p2`
+And it was a regulated claim, not a slogan: **the life-cycle-assessment claims went through the MLR process** before any of this was public. I have spent years working alongside legal, medical and regulatory colleagues, and this is what that is for &mdash; a public environmental claim that holds up because the numbers were cleared before the film was cut, not after.
+
+## `sustainability.block.why-this-is-the-case-that-matt.p3`
+```html
+Bayer positioned the launch as the first PET blister in the consumer health sector, with packaging partner Liveo Research, launching first in the Netherlands. <em>That framing is Bayer&rsquo;s, and it is on the record</em> &mdash; the <a href="https://www.bayer.com/media/en-us/bayer-and-liveo-research-launch-first-of-its-kind-blister-packaging-with-improved-environmental-footprint/">30 October 2024 press release</a>, plus independent coverage in Packaging Europe, Healthcare Packaging, Packaging Digest and Recycling Today.
+```
+
+## `sustainability.outcome.1.lead`
+Published, not described
+
+## `sustainability.outcome.1.sub`
+Live on Bayer&rsquo;s global corporate channel since November 2024.
+
+## `sustainability.outcome.2.lead`
+Cleared before it shipped
+
+## `sustainability.outcome.2.sub`
+The LCA claims went through MLR ahead of publication.
+
+## `sustainability.outcome.3.lead`
+Science &rarr; message &rarr; artifact
+
+## `sustainability.outcome.3.sub`
+One person across all three, so nothing was lost in a handoff.
+
+## `sustainability.jd-tags`
+```html
+<span>external communications</span><span>corporate narrative</span><span>video content</span><span>visual storytelling</span><span>regulated claims</span><span>cross-functional collaboration</span>
+```
+
 ## `method.title`
 What I do when a message does not land
 
@@ -404,6 +489,9 @@ And what I would actually do in the first ninety days
 
 ## `ninety.sub`
 Everything above is Bayer &middot; this is the part that is about Stryker
+
+## `thesis.p`
+Six cases of evidence are worth less than one honest plan &mdash; including the part where I say what I would not be arriving with.
 
 ## `ninety.metric.1.n`
 01
