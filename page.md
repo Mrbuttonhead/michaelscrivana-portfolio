@@ -87,6 +87,7 @@ as a *shape* and never as a count, a date, a named leader, a forum or a channel.
 | `sustainability.*` | "first PET blister in the consumer health sector" | §8.26 · §8.29 | ⚠️ **Bayer's claim, attributed + linked to the 2024-10-30 newsroom release.** ⛔ never asserted as his |
 | `sustainability.*` | −38% carbon · −78% water · −53% land · −18% weight | Bayer press release 2024-10-30 | ✅ sourced — ⚠️ **the comparator is stated on the page**, never strip it |
 | `sustainability.*` | live on Bayer Global, Nov 2024, Liveo Research, Netherlands first | verified 2026-08-28 | ✅ canonical |
+| `sustainability.*` | the print execution, with its comparator footnote set under the claims | §2 SunBird · source art from Michael | ✅ canonical — "social and in print" is his own wording |
 | — | *the film's view count (612)* | §8.29 | ⛔ **never on any artifact** — true, and the wrong number |
 
 ⚠️ **Not claimable on this page, in either direction:**
@@ -103,8 +104,16 @@ as a *shape* and never as a count, a date, a named leader, a forum or a channel.
   denied** — claim neither the experience nor the gap.
 - ⛔ **The SunBird view count (612).** Verified and prohibited (§8.29). Sourcing a number tells you
   whether it is true, not whether it belongs.
-- ⚠️ **Embedding is disabled on Bayer's YouTube channel** — the case uses linked stills and an
-  outbound CTA on purpose. ⛔ Do not "fix" it by restoring an iframe; it renders a dead box.
+- ⚠️ **Embedding is disabled on Bayer's YouTube channel** — an iframe pointed at YouTube renders a
+  dead "Video unavailable" box. Verified 2026-08-28. ⛔ Never point the player at YouTube.
+  ✅ **The film plays from Vimeo instead** (`1222026785`, unlisted hash `49b5ad571e`, uploaded by
+  Michael), matching the Vimeo pattern already used on `design.michaelscrivana.com`. The YouTube
+  link stays in the caption as *provenance* — it is the proof Bayer published it.
+- ⚠️ **The Vimeo upload is the ORIGINAL 1920×1080 letterboxed master**, so the player frame is
+  **16:9**, not 4:5. A cropped 4:5 web cut exists at `~/Drop/SunBird-4x5-web.mp4` (5.8 MB). If that
+  ever replaces the Vimeo source, change `.vimeo-45` back to `padding-top: 125%`.
+- ⛔ **Frame 8 of the carousel ("Now recycle ready") carries a visible Shutterstock watermark** and
+  is deliberately excluded. Do not add it.
 - ⚠️ **Every §8.28 communications claim is unquantified on purpose.** If open question #15
   gets answered, this page can get materially stronger — until then, do not add a number.
 
@@ -368,27 +377,24 @@ SunBird &mdash; a corporate sustainability claim, made watchable
 Sustainability team owned the science &middot; communications owned the message &middot; I made every frame of it &middot; live on Bayer&rsquo;s global channel
 
 ## `sustainability.fig.1`
-**The opening frame of the published film.** Thirty-two seconds, live on *Bayer Global* &mdash; the corporate channel, not a brand channel. I did all of it: the 3D, the lighting, the rendering, the animation and the type animation.
+**The problem, named in three words.** PVC with a foil backing &mdash; opaque, multi-material, effectively unsortable at the recycling stage. Naming what is being removed is more legible than naming what replaces it.
 
 ## `sustainability.fig.2`
-**And where it lands.** A material-science change resolved back into one line a shopper can hold: same product, same relief, better packaging. The sustainability story has to end somewhere a person recognizes.
-
-## `sustainability.fig.1`
-**Before.** The old blister &mdash; PVC with a foil backing. Opaque, multi-material, and effectively unsortable at the recycling stage.
-
-## `sustainability.fig.2`
-**After.** Mono-material PET. The whole argument is that you can now see through it &mdash; which is why the film is lit to make transparency the subject rather than a detail.
+**The whole argument in one frame.** A hard split down the middle &mdash; opaque on the left, transparent on the right. No copy required. This is the frame the campaign is built around.
 
 ## `sustainability.fig.3`
 **The shot I am proudest of.** Two blisters edge-on, so an eighteen percent weight reduction stops being a number and becomes a thickness you can see. Nobody reads a percentage. They do look at a silhouette.
 
 ## `sustainability.fig.4`
-**Four claims, four footnotes.** Carbon &minus;38%, water &minus;78%, land &minus;53%, weight &minus;18% &mdash; every one carrying its comparator in the corner, because a sustainability number without its baseline is not a claim, it is a liability.
+**Four claims, four comparators.** Carbon &minus;38%, water &minus;78%, land &minus;53%, weight &minus;18% &mdash; every one footnoted against the packaging it replaces, because a sustainability number without its baseline is not a claim, it is a liability.
+
+## `sustainability.fig.5`
+**And the same story in print, where nothing moves.** The film can reveal the claims in sequence; a printed page has to deliver all four at once without becoming a table. The three benefit pills carry the icons from the film, and the comparator footnote sits under them rather than hiding in the gutter &mdash; same argument, same system, different physics.
 
 ## `sustainability.block.the-problem.label`
 The problem
 
-## `thesis.p`
+## `thesis.p-2`
 Bayer had replaced the PVC in a blister pack with mono-material PET &mdash; the kind of change that is genuinely significant and almost impossible to feel. The whole story lives in a material nobody looks at, on a product people open without thinking, and it is carried by four life-cycle-assessment percentages that mean nothing on their own.
 
 ## `sustainability.block.how-it-was-actually-made.label`
@@ -490,14 +496,20 @@ And what I would actually do in the first ninety days
 ## `ninety.sub`
 Everything above is Bayer &middot; this is the part that is about Stryker
 
-## `thesis.p`
+## `thesis.p-3`
 Six cases of evidence are worth less than one honest plan &mdash; including the part where I say what I would not be arriving with.
 
 ## `ninety.metric.1.n`
 01
 
+## `ninety.step.1.p`
+**Learn the leaders before I write a word for them.** Voice is not a style guide, it is a set of things a particular person will and will not say. I would spend the first weeks listening to how each leader I support actually talks &mdash; in a meeting, not on a stage &mdash; before drafting anything they have to own.
+
 ## `ninety.metric.2.n`
 02
+
+## `ninety.step.1.p-2`
+**Map the calendar and find the three moments that carry the year.** Customer engagements, sales meetings, industry events, integration milestones. Most communications calendars have three or four moments that actually move something and a long tail that consumes the team. I would want to know which is which before adding anything to it.
 
 ## `ninety.metric.3.n`
 03
