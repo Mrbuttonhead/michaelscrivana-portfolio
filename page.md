@@ -129,10 +129,10 @@ as a *shape* and never as a count, a date, a named leader, a forum or a channel.
 ```
 
 ## `hero.h1`
-The message landing is not the finish line &mdash; *you find out why it stopped short, then change the situation.*
+I write the argument &mdash; *and I build the thing that carries it.*
 
 ## `hero.lede`
-Twelve years in regulated healthcare, seven of them writing and building the communications a global consumer-health organization runs on. Five cases: the executive layer &mdash; the words leaders deliver and the material that carries them; change communications for a 115-person organization inside a roadmap covering more than a thousand people; high-impact business events; the toolkits that make consistency scale; and **a published corporate sustainability campaign you can watch on Bayer&rsquo;s own channel**. The brand work behind those cases carries its own numbers &mdash; the two launches I designed and took to market have done **more than $79MM in retail sales**, and MiraFIBER&rsquo;s launch communications ran **more than 50% over sales projection**.
+Twelve years in regulated healthcare, seven of them developing the **narratives, the visuals and the scalable materials** a global consumer-health organization runs on &mdash; for three different rooms: **employees, customers, and the stakeholders above them**. Five cases: the narrative and the thing that carries it; change communications at two altitudes, including the town hall I presented to close to a thousand colleagues; high-impact business events; the toolkits that make consistency scale; and **a published corporate sustainability campaign you can watch on Bayer&rsquo;s own channel**. The brand work behind those cases carries its own numbers &mdash; the two launches I designed and took to market have done **more than $79MM in retail sales**, and MiraFIBER&rsquo;s launch communications ran **more than 50% over sales projection**.
 
 ## `hero.who`
 ```html
@@ -458,7 +458,7 @@ One person across all three, so nothing was lost in a handoff.
 ```
 
 ## `footer.big`
-I write the argument and I build the thing that carries it &mdash; the useful part is that nothing gets lost in between.
+The message landing is not the finish line &mdash; you find out why it stopped short, then change the situation.
 
 ## `footer.fine`
 Michael Scrivana &middot; Case studies &middot; August 2026 &middot; Prepared for Stryker &middot; Senior Manager, Communications &middot; R570593  
