@@ -203,10 +203,10 @@ A 1,000+-person AI roadmap, taught across several days, not presented once.
 ```
 
 ## `change.title`
-Change communications for 115 people, inside a roadmap covering a thousand
+Change communications at two altitudes &mdash; and the room that had to be convinced
 
 ## `change.sub`
-Strategy, cadence, channels and audience &mdash; not just the artifacts &middot; a champion network across six disciplines &middot; zero to active use in twelve months
+Two altitudes, one message &middot; a champion network across six disciplines &middot; and the town hall where a thousand people needed to hear it
 
 ## `change.fig.1`
 **One destination, so the message has somewhere to live.** Internal communications fail quietly when they are only ever events. This is the standing surface underneath the campaign &mdash; searchable, current, and the place every briefing, recap and announcement points back to.
@@ -224,10 +224,19 @@ The problem
 A 115-person global organization across six craft disciplines had to change how it worked, inside an enterprise roadmap covering more than a thousand people. Nobody could be ordered to. The change had no budget line for compliance and no manager who could enforce it &mdash; which is the normal condition of change communications and the reason most of it fails.
 
 ## `change.block.what-i-ran.label`
-What I ran
+What I ran, and where
 
 ## `change.block.what-i-ran.p`
-The whole program: strategy, cadence, channels and audience. **Daily briefings**, **executive leadership decks**, **weekly recaps**, **town halls and leadership forums**, **internal campaigns and intranet channels**, and a **change-champion network** with a named person inside each of the six disciplines. Plus recurring immersion sessions for leadership &mdash; demonstration and discussion, not slideware at them.
+**Inside the organization** I own the whole program: strategy, cadence, channels and audience. **Daily briefings**, **executive leadership decks**, **weekly recaps**, **town halls**, **internal campaigns and intranet channels**, and a **change-champion network** with a named person inside each of the six disciplines. **Above it**, I represent that organization on the division&rsquo;s science-wide AI program, where the audience is leadership and the message has to ladder to enterprise strategy. *Keeping those two the same message is most of the job.*
+
+## `change.block.the-town-hall-and-the-thing-no.label`
+The town hall — and the thing nobody wants to say out loud
+
+## `thesis.p-2`
+The most recent one shared our AI roadmap with **close to a thousand colleagues**. The honest problem with that room is that a good number of the people in it suspect this technology is coming for their craft, and no amount of roadmap defuses that. So the message was stated plainly and up front rather than left to be inferred: **the goal is to amplify our people, not replace them.** I helped craft the presentation and the strategy for delivering it.
+
+## `change.block.the-town-hall-and-the-thing-no.p2`
+Then I built participation into it instead of talking at people for an hour — a live segment called **&ldquo;Is it AI?&rdquo;**, where the audience guesses which work was machine-made. It is fun, which matters more than it sounds. It also does in ninety seconds what no slide can: it lets a *skeptical creative audience test the technology on itself* and reach its own conclusion, rather than being argued at by someone with an initiative to defend. **That is the same move as everything else on this page.** When a message is not landing, change the situation rather than repeat it louder.
 
 ## `change.block.what-made-it-stick-and-how-i-k.label`
 What made it stick, and how I know
@@ -255,29 +264,29 @@ Change carried by people inside the team, not broadcast at them.
 
 ## `change.jd-tags`
 ```html
-<span>internal &amp; change communications</span><span>town halls</span><span>internal campaigns</span><span>intranet</span><span>enterprise strategy</span><span>influence without authority</span>
+<span>internal &amp; change communications</span><span>town halls</span><span>employee engagement</span><span>internal campaigns</span><span>intranet</span><span>enterprise strategy</span><span>influence without authority</span>
 ```
 
 ## `events.title`
-High-impact business events &mdash; the stage, and the room where customers sit
+High-impact business events &mdash; the industry show, and the room where the customer sits
 
 ## `events.sub`
-A 200+-attendee event, three consecutive years, three different formats &middot; a customer-engagement suite at the industry trade show, consecutive years, six-figure budget
+The NACDS trade-show program, four consecutive years, two formats &middot; expo-floor island booths and a roughly 20&times;30-ft executive meeting suite &middot; six-figure budget &middot; plus a 200-plus-attendee internal event across three formats
 
 ## `events.fig.1`
-**I draw the frames and then animate them.** A shot-by-shot storyboard for the stage opener &mdash; blocks assembling into the hero mark &mdash; used to sell the direction internally before a frame of it was built. The film that ran in the room came from these panels, by the same hand.
+**Judged in the same frame as the competition.** Every major consumer-health company is within a few hundred feet on this floor, and retail buyers compare presences the way shoppers compare a shelf. The environment is the first thing the company says before anyone speaks.
 
 ## `events.fig.2`
-**The teaser, three weeks earlier.** An event is not one moment; it is a sequence of communications with a room at the end of it. This one starts as a teaser with no information in it at all.
+**Corporate messaging, at architectural scale.** The lines on those walls are the enterprise narrative &mdash; the same words leadership uses, sized so a customer reads them from the aisle.
 
 ## `events.fig.3`
-**Corporate messaging, at architectural scale.** The built customer suite on the show floor. The lines on those walls are the enterprise narrative &mdash; the same words leadership uses, sized so a customer reads them from the aisle.
+**Where the meetings actually happen.** At the Annual Meeting the open floor is replaced by a 360&deg; branded suite built inside a resort conference room &mdash; an environment designed around senior retail-buyer conversations, not foot traffic.
 
 ## `events.fig.4`
-**Where the meetings actually happen.** Art-directed across consecutive years on a six-figure budget &mdash; vendor management, production timelines and spatial design, delivered to a fixed date that does not move.
+**The room is planned before it is decorated.** The suite at The Breakers &mdash; 17&prime;8 &times; 32&prime;1, ceiling height noted &mdash; with the table centred for the conversation, the screen wall at the focal end and product around the perimeter. Nothing on this drawing is a decision the vendor made.
 
 ## `events.fig.5`
-**One system, three years, three formats.** The event ran virtual, then hybrid, then in person, with a different identity treatment each year held together by a single design system &mdash; identity, 3D, motion, live stage and the merchandise people took home. Surviving three formats is a harder test of a system than surviving three dates.
+**The brief, before any vendor work began.** My own direction page for one side of the booth &mdash; *two key messages, &ldquo;Health for all, Hunger for none&rdquo; and &ldquo;Helping billions of people,&rdquo; on the front of the booth,* with the moves allowed against them. Messaging hierarchy is decided here, in words, and everything the vendor produces is measured against it.
 
 ## `events.block.the-problem.label`
 The problem
@@ -289,7 +298,7 @@ Business events are the one communication channel with no second draft. The date
 What I owned
 
 ## `events.block.what-i-owned.p`
-The full identity and live production for a **200-plus-attendee event across three consecutive years**, and the art direction of a **customer-engagement suite at the industry trade show** across consecutive years &mdash; a 20&times;30-foot footprint on a six-figure budget, including vendor selection, production timelines and spatial design.
+Bayer&rsquo;s **NACDS presence for four consecutive years**, across two formats: island booths on the Total Store Expo floor (30&times;40 ft, then 30&times;30 ft) and the **executive meeting suite** at the Annual Meeting &mdash; roughly 20&times;30 ft, in a different resort conference room each year &mdash; on a **six-figure budget**. I wrote the creative brief before any vendor work began &mdash; brand-zone assignments, messaging hierarchy, vignette concepts, lighting direction &mdash; then directed the production vendor through **six-plus proof rounds** to production-ready graphics, with vendor selection, production timelines and spatial design against a show date that does not move. One graphic system flexed from 40-foot walls down to meeting-room panels without losing the message.
 
 ## `events.block.why-the-craft-half-matters-to.label`
 Why the craft half matters to a communications team
@@ -297,27 +306,39 @@ Why the craft half matters to a communications team
 ## `events.block.why-the-craft-half-matters-to.p`
 Because it removes a translation step at the point where events usually fail. When the narrative changes four days out &mdash; and it always does &mdash; I can redraw the frame, rewrite the card and re-cut the film myself rather than briefing it out and waiting. That is not a claim about taste; it is a claim about **latency under a fixed date**, and it is the single most useful thing I bring to an event calendar that includes customer engagements, sales meetings, industry events and integration milestones.
 
+## `events.block.bold.label`
+And the same muscle, pointed inward &mdash; the BOLD Ambition Tour
+
+## `events.block.bold.p`
+A **200-plus-attendee internal event, three consecutive years, three different formats** &mdash; virtual, then hybrid, then in person &mdash; held together by one design system spanning identity, 3D, motion, live stage and merchandise. I drew the storyboards by hand and animated the stage films from them, so the direction sold internally on paper before a frame of it was built. Surviving three formats is a harder test of a system than surviving three dates.
+
+## `events.fig.6`
+**I draw the frames and then animate them.** The shot-by-shot storyboard for the stage opener &mdash; and the film that ran in the room came from these panels, by the same hand.
+
+## `events.fig.7`
+**One system, all the way to what people take home.** The identity carried a different treatment each year and still read as one event across all three.
+
 ## `events.outcome.1.lead`
-Three years, three formats
+Four years, two formats
 
 ## `events.outcome.1.sub`
-Virtual, hybrid, in person &mdash; one system, held.
+Expo floor and executive suite, six-figure build, one graphic system.
 
 ## `events.outcome.2.lead`
-Storyboard to finished film
+Brief first, vendor second
 
 ## `events.outcome.2.sub`
-Drawn and animated by hand, the whole chain visible.
+Zoning and messaging hierarchy set before production; six-plus proof rounds.
 
 ## `events.outcome.3.lead`
-Six-figure build, consecutive years
+Three years, three formats
 
 ## `events.outcome.3.sub`
-Vendors, production timelines, spatial design, fixed date.
+The internal event ran virtual, hybrid, in person &mdash; one system, held.
 
 ## `events.jd-tags`
 ```html
-<span>event branding</span><span>customer engagements</span><span>industry events</span><span>video content</span><span>agency &amp; vendor direction</span>
+<span>industry events</span><span>customer engagements</span><span>sales meetings</span><span>event branding</span><span>video content</span><span>agency &amp; vendor direction</span>
 ```
 
 ## `toolkits.title`
@@ -394,7 +415,7 @@ Sustainability team owned the science &middot; communications owned the message 
 ## `sustainability.block.the-problem.label`
 The problem
 
-## `thesis.p-2`
+## `thesis.p-2.2`
 Bayer had replaced the PVC in a blister pack with mono-material PET &mdash; the kind of change that is genuinely significant and almost impossible to feel. The whole story lives in a material nobody looks at, on a product people open without thinking, and it is carried by four life-cycle-assessment percentages that mean nothing on their own.
 
 ## `sustainability.block.how-it-was-actually-made.label`
@@ -439,86 +460,6 @@ One person across all three, so nothing was lost in a handoff.
 ```html
 <span>external communications</span><span>corporate narrative</span><span>video content</span><span>visual storytelling</span><span>regulated claims</span><span>cross-functional collaboration</span>
 ```
-
-## `method.title`
-What I do when a message does not land
-
-## `method.sub`
-Required training for 100+ marketers &middot; it worked &middot; and then I went and found out why it had not worked enough
-
-## `method.block.what-happened.label`
-What happened
-
-## `method.block.what-happened.p`
-I co-authored a five-module capability curriculum and it launched as **required** training inside the marketing organization &mdash; not optional, not a lunch-and-learn. I delivered **three sessions to more than a hundred marketers** personally, and it was then published to the internal learning platform as mandatory training, where it still runs without me. It was later extended beyond marketing into the science organization.
-
-## `method.block.what-i-measured.label`
-What I measured
-
-## `method.block.what-i-measured.p`
-The briefs got measurably better. By the usual standard that is a successful communication and the story ends there. But people kept asking the same questions afterward, which meant something in the pipeline was still broken &mdash; and questions after training are data, not noise.
-
-## `method.block.what-i-found-and-what-i-did-ab.label`
-What I found, and what I did about it
-
-## `method.block.what-i-found-and-what-i-did-ab.p`
-So I went and looked at how briefs were actually written. The obstacle was never missing knowledge &mdash; the training had delivered that. It was **missing information, and the cost of going to find it**. Teaching the module harder would not have touched that, and running the same message again louder would have been the obvious move and the wrong one. So I built a tool that closed the information gap instead, and the briefs improved again.
-
-## `method.block.what-i-found-and-what-i-did-ab.p2`
-That is the whole method, and it is fifteen years old: I taught drawing to more than a thousand beginners before I did any of this, and the thing that worked was never explaining better &mdash; it was giving people *a check that runs at the moment of the decision*. Same instinct in the accessibility standard. Same instinct here. **Understanding is not enough.** Measure what happened, find where it stopped short, then change the situation rather than the volume.
-
-## `method.outcome.1.lead`
-Required, not optional
-
-## `method.outcome.1.sub`
-Three sessions, 100+ marketers, then mandatory on the learning platform.
-
-## `method.outcome.2.lead`
-It worked, and that was not the end
-
-## `method.outcome.2.sub`
-Briefs improved; the residual questions were treated as the finding.
-
-## `method.outcome.3.lead`
-Changed the situation
-
-## `method.outcome.3.sub`
-Built the thing that closed the information gap, rather than re-teaching.
-
-## `method.jd-tags`
-```html
-<span>measure effectiveness</span><span>continuous improvement</span><span>enablement</span><span>cross-functional collaboration</span>
-```
-
-## `ninety.title`
-And what I would actually do in the first ninety days
-
-## `ninety.sub`
-Everything above is Bayer &middot; this is the part that is about Stryker
-
-## `thesis.p-3`
-Six cases of evidence are worth less than one honest plan &mdash; including the part where I say what I would not be arriving with.
-
-## `ninety.metric.1.n`
-01
-
-## `ninety.step.1.p`
-**Learn the leaders before I write a word for them.** Voice is not a style guide, it is a set of things a particular person will and will not say. I would spend the first weeks listening to how each leader I support actually talks &mdash; in a meeting, not on a stage &mdash; before drafting anything they have to own.
-
-## `ninety.metric.2.n`
-02
-
-## `ninety.step.1.p-2`
-**Map the calendar and find the three moments that carry the year.** Customer engagements, sales meetings, industry events, integration milestones. Most communications calendars have three or four moments that actually move something and a long tail that consumes the team. I would want to know which is which before adding anything to it.
-
-## `ninety.metric.3.n`
-03
-
-## `ninety.metric.4.n`
-04
-
-## `ninety.metric.5.n`
-05
 
 ## `footer.big`
 I write the argument and I build the thing that carries it &mdash; the useful part is that nothing gets lost in between.
