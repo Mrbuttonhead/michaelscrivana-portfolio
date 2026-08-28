@@ -276,7 +276,7 @@ The NACDS trade-show program, four consecutive years, two formats &middot; expo-
 **Where the meetings actually happen.** At the Annual Meeting the open floor becomes a 360&deg; suite built around senior buyer conversations, not foot traffic.
 
 ## `events.fig.4`
-**The room is planned before it is decorated.** 17&prime;8 &times; 32&prime;1 at The Breakers &mdash; table centred for the conversation, screen wall at the focal end. Nothing here was the vendor&rsquo;s decision.
+**The room is planned before it is decorated.** 17&prime;8 &times; 32&prime;1 at The Breakers &mdash; table centered for the conversation, screen wall at the focal end. Nothing here was the vendor&rsquo;s decision.
 
 ## `events.fig.5`
 **The brief, before any vendor work began.** My direction page for one booth side: two key messages and the moves allowed against them. **Messaging hierarchy is decided here, in words.**
@@ -307,9 +307,6 @@ And the same muscle, pointed inward &mdash; the BOLD Ambition Tour
 
 ## `events.fig.6`
 **I draw the frames, then animate them.** The stage-opener storyboard &mdash; and the film that ran in the room came from these panels, by the same hand.
-
-## `events.fig.7`
-**One system, all the way to what people take home.** A different treatment each year that still read as one event.
 
 ## `events.outcome.1.lead`
 Four years, two formats
