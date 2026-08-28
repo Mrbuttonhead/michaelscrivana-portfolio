@@ -139,13 +139,8 @@ Twelve years in regulated healthcare, seven of them writing and building the com
 <strong>Michael Scrivana</strong> &mdash; Senior Designer &amp; AI Lead, Product Experience, Bayer Consumer Health. Career started on the assembly floor at Siemens Healthcare building clinical diagnostic analyzers; every year since has been inside regulated healthcare. &nbsp;<a href="https://www.linkedin.com/in/michaelscrivana89/">linkedin</a>
 ```
 
-## `thesis.p`
-```html
-I have never believed that <span class="hl">understanding is enough</span>. Every time I have communicated something at scale, the interesting work started after it landed &mdash; measure what actually happened, find out where it stopped short, and change the situation rather than repeating yourself louder.
-```
-
 ## `executive.title`
-Executive communications &mdash; the words, and the thing that carries them
+The narrative, and the thing that carries it
 
 ## `executive.sub`
 Talking points, leader messages and briefing narratives &middot; the decks, agendas and stage content they live inside &middot; at divisional and senior-leadership level
