@@ -206,7 +206,7 @@ A 1,000+-person AI roadmap, taught across several days, not presented once.
 Change communications at two altitudes &mdash; and the room that had to be convinced
 
 ## `change.sub`
-Two altitudes, one message &middot; a champion network across six disciplines &middot; and the town hall where a thousand people needed to hear it
+Two altitudes, one message &middot; a champion network across six disciplines &middot; and the town hall I presented to a thousand people who needed to hear it
 
 ## `change.fig.1`
 **One destination, so the message has somewhere to live.** Internal communications fail quietly when they are only ever events. This is the standing surface underneath the campaign &mdash; searchable, current, and the place every briefing, recap and announcement points back to.
@@ -233,7 +233,7 @@ What I ran, and where
 The town hall — and the thing nobody wants to say out loud
 
 ## `thesis.p-2`
-The most recent one shared our AI roadmap with **close to a thousand colleagues**. The honest problem with that room is that a good number of the people in it suspect this technology is coming for their craft, and no amount of roadmap defuses that. So the message was stated plainly and up front rather than left to be inferred: **the goal is to amplify our people, not replace them.** I helped craft the presentation and the strategy for delivering it.
+The most recent one I presented myself: our AI roadmap, to **close to a thousand colleagues**. The honest problem with that room is that a good number of the people in it suspect this technology is coming for their craft, and no amount of roadmap defuses that. So the message was stated plainly and up front rather than left to be inferred: **the goal is to amplify our people, not replace them.** I collaborated on producing it and helped craft the strategy for delivering it.
 
 ## `change.block.the-town-hall-and-the-thing-no.p2`
 Then I built participation into it instead of talking at people for an hour — a live segment called **&ldquo;Is it AI?&rdquo;**, where the audience guesses which work was machine-made. It is fun, which matters more than it sounds. It also does in ninety seconds what no slide can: it lets a *skeptical creative audience test the technology on itself* and reach its own conclusion, rather than being argued at by someone with an initiative to defend. **That is the same move as everything else on this page.** When a message is not landing, change the situation rather than repeat it louder.
