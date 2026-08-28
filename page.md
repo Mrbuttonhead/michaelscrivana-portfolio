@@ -5,8 +5,8 @@ role: Design Engineer (Brand Team) — Baseten
 posting: https://jobs.ashbyhq.com/baseten/81d573b6-741c-4140-a36b-6892456eca73
 branch: baseten
 worktree: ~/Documents/ms-baseten
-packet: ~/Documents/Vaults/Life/Job Search/Applications/Baseten_DesignEngineerBrandTeam
-corpus: ~/Documents/Vaults/Life/Job Search/Master/Master_Corpus.md
+packet: ~/Documents/Vaults/Job Search/Applications/Baseten_DesignEngineerBrandTeam
+corpus: ~/Documents/Vaults/Job Search/Master/Master_Corpus.md
 accent: "#00693d"      # Baseten green darkened to clear WCAG AA on their #f5f8f4 paper
 subpages: [vat/, pearl/, gloss/, lab/]
 status: application filled, NOT submitted (2026-08-27)
