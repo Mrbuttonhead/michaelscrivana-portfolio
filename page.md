@@ -452,7 +452,7 @@ One person across all three, so nothing was lost in a handoff.
 ```
 
 ## `footer.big`
-The message landing is not the finish line &mdash; you find out why it stopped short, then change the situation.
+Thank you for your consideration. I would welcome the chance to talk about the work.
 
 ## `footer.fine`
 Michael Scrivana &middot; Case studies &middot; August 2026 &middot; Prepared for Stryker &middot; Senior Manager, Communications &middot; R570593  
