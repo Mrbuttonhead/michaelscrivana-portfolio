@@ -1,5 +1,5 @@
 # Working files live in the branch for versioning but must never be served.
 # page.md carries the claims table and the "not claimable" list — internal only.
-/page.md      /404.html   404
-/page.md/*    /404.html   404
-/*.md         /404.html   404
+# The trailing ! forces the rule; without it Netlify serves the real file.
+/page.md      /404.html   404!
+/*.md         /404.html   404!
