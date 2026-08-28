@@ -83,7 +83,7 @@ as a *shape* and never as a count, a date, a named leader, a forum or a channel.
 | `sustainability.*` | all the 3D, lighting, rendering, animation, type animation — his own hand | §2 SunBird (2026-08-28) | ✅ first-hand craft; verb is **made**, not *directed* |
 | `sustainability.*` | sustainability team → communications → he built it | §2 · §4 · §8.29 | ✅ canonical, the full external-comms loop |
 | `sustainability.*` | ran across social and in print | §2 SunBird | ⚠️ ⛔ name no channel beyond social/print (open Q#16) |
-| `sustainability.*` | the LCA claims went through the MLR process | §2 · §8.29 | ⚠️ **claims cleared MLR** — ⛔ never "I took it through" / "owned the submission" (open Q#16) |
+| `sustainability.*` | worked with comms + sustainability to take the claims through legal, medical and regulatory review | §2 (upgraded 2026-08-28) | ✅ **active and collaborative** — ⛔ still never "owned the submission" or "responsible party" |
 | `sustainability.*` | "first PET blister in the consumer health sector" | §8.26 · §8.29 | ⚠️ **Bayer's claim, attributed + linked to the 2024-10-30 newsroom release.** ⛔ never asserted as his |
 | `sustainability.*` | −38% carbon · −78% water · −53% land · −18% weight | Bayer press release 2024-10-30 | ✅ sourced — ⚠️ **the comparator is stated on the page**, never strip it |
 | `sustainability.*` | live on Bayer Global, Nov 2024, Liveo Research, Netherlands first | verified 2026-08-28 | ✅ canonical |
@@ -431,7 +431,7 @@ Why this is the case that matters most for a communications team
 Because it is the whole loop, and I was in every room of it. **A subject-matter function owns a technical truth. Communications owns what the public should understand. Somebody has to turn one into the other** &mdash; and usually that person briefs it out and waits. Here I sat in the sustainability conversation, sat in the comms conversation, and then made the artifact myself, which meant the message and the craft never had to survive a handoff.
 
 ## `sustainability.block.why-this-is-the-case-that-matt.p2`
-And it was a regulated claim, not a slogan: **the life-cycle-assessment claims went through the MLR process** before any of this was public. I have spent years working alongside legal, medical and regulatory colleagues, and this is what that is for &mdash; a public environmental claim that holds up because the numbers were cleared before the film was cut, not after.
+And it was a regulated claim, not a slogan: **I worked with the communications and sustainability teams to take the life-cycle-assessment claims through legal, medical and regulatory review** before any of this was public. I have spent years working alongside legal, medical and regulatory colleagues, and this is what that is for &mdash; a public environmental claim that holds up because the numbers were cleared before the film was cut, not after.
 
 ## `sustainability.block.why-this-is-the-case-that-matt.p3`
 ```html
@@ -445,10 +445,10 @@ Published, not described
 Live on Bayer&rsquo;s global corporate channel since November 2024.
 
 ## `sustainability.outcome.2.lead`
-Cleared before it shipped
+Cleared before it shipped, with me in the room
 
 ## `sustainability.outcome.2.sub`
-The LCA claims went through MLR ahead of publication.
+Taken through legal, medical and regulatory review with comms and sustainability.
 
 ## `sustainability.outcome.3.lead`
 Science &rarr; message &rarr; artifact
