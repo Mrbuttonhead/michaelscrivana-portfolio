@@ -146,16 +146,13 @@ The narrative, and the thing that carries it
 Talking points, leader messages and briefing narratives &middot; the decks, agendas and stage content they live inside &middot; at divisional and senior-leadership level
 
 ## `executive.fig.1`
-**A day of leadership content, planned as one argument.** Four sessions, each with its own thesis &mdash; holistic brand building, breaking through the clutter, connecting with emotion, being a storyteller &mdash; sequenced so the day builds rather than accumulates. The agenda is the first piece of communication anybody reads, and it is where the narrative either has a shape or does not.
+**Leadership content is an argument before it is a slide.** One idea, stated once, in the language leadership had already agreed to use &mdash; the opening beat of a day built as a single argument rather than a series of appearances. I write the words at this altitude and then design the thing that carries them, which means the strategy and the craft never have to survive a handoff between two people who disagree.
 
 ## `executive.fig.2`
-**Session cards as narrative beats.** Each title card is one idea, stated once, in the language leadership had agreed to use. The visual system does the remembering so the speaker does not have to.
+**The same grammar, a different beat.** One visual system across a full day of speakers, internal and external, so the room reads it as one message rather than a sequence of unrelated talks. The system does the remembering so the speaker does not have to.
 
 ## `executive.fig.3`
-**The same system, a different beat.** One grammar across an entire day of speakers, internal and external, so the room reads it as a single message rather than a series of appearances.
-
-## `executive.fig.4`
-**Executive visibility, including other people&rsquo;s.** External keynote speakers arrive with their own material and their own brand. Making them land inside ours &mdash; without flattening either &mdash; is the same job as preparing an internal leader for a stage.
+**And the beat before any of it.** A teaser with no information in it at all, three weeks out. An event is not one moment &mdash; it is a sequence of communications with a room at the end, and the first one only has to make people curious.
 
 ## `executive.block.what-i-actually-do.label`
 What I actually do
