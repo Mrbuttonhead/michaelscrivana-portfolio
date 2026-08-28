@@ -146,13 +146,13 @@ The narrative, and the thing that carries it
 Talking points, leader messages and briefing narratives &middot; the decks, agendas and stage content they live inside &middot; at divisional and senior-leadership level
 
 ## `executive.fig.1`
-**Leadership content is an argument before it is a slide.** One idea, stated once, in the language leadership had already agreed to use &mdash; the opening beat of a day built as a single argument rather than a series of appearances. I write the words at this altitude and then design the thing that carries them, which means the strategy and the craft never have to survive a handoff between two people who disagree.
+**Leadership content is an argument before it is a slide.** One idea, stated once, in the language leadership had already agreed to use. I write the words at this altitude and design the thing that carries them.
 
 ## `executive.fig.2`
-**The same grammar, a different beat.** One visual system across a full day of speakers, internal and external, so the room reads it as one message rather than a sequence of unrelated talks. The system does the remembering so the speaker does not have to.
+**The same grammar, a different beat.** One visual system across a full day of speakers, internal and external, so the room reads it as one message rather than a sequence of talks.
 
 ## `executive.fig.3`
-**And the beat before any of it.** A teaser with no information in it at all, three weeks out. An event is not one moment &mdash; it is a sequence of communications with a room at the end, and the first one only has to make people curious.
+**And the beat before any of it.** A teaser with no information in it at all, three weeks out. The first communication only has to make people curious.
 
 ## `executive.block.what-i-actually-do.label`
 What I actually do
@@ -170,7 +170,7 @@ Most people who can write an executive narrative hand it to a designer. Most peo
 The evidence I cannot show you
 
 ## `executive.block.the-evidence-i-cannot-show-you.p`
-The strongest examples are internal and stay that way: **retailer selling presentations I have owned end to end** &mdash; the narrative, the data slides, the key visuals &mdash; plus **the master template system the category decks are constructed from**; and **material carried to divisional leadership and board level**. The most consequential was a divisional AI roadmap for a science organization of more than a thousand people, which I co-authored and then carried to the division&rsquo;s Science President across a multi-day workshop in Cambridge, England. That workshop produced a new role, a promotion, and the roadmap itself. I am happy to walk through any of it in a conversation; none of it belongs on a public page.
+**The strongest examples are internal and stay that way.** Retailer selling presentations I own end to end &mdash; narrative, data slides, key visuals &mdash; plus the master template system behind the category decks, and material carried to divisional leadership and board level. **The most consequential was a divisional AI roadmap I co-authored and carried to our Science President across a multi-day workshop.** It produced a new role, a promotion, and the roadmap itself.
 
 ## `executive.outcome.1.lead`
 Written, not just designed
@@ -202,25 +202,25 @@ Change communications at two altitudes &mdash; and the room that had to be convi
 Two altitudes, one message &middot; a champion network across six disciplines &middot; and the town hall I presented to a thousand people who needed to hear it
 
 ## `change.fig.1`
-**One destination, so the message has somewhere to live.** Internal communications fail quietly when they are only ever events. This is the standing surface underneath the campaign &mdash; searchable, current, and the place every briefing, recap and announcement points back to.
+**One destination, so the message has somewhere to live.** Internal communications fail quietly when they are only ever events. This is the standing surface every briefing and recap points back to.
 
 ## `change.fig.2`
-**Commitments in public, with their status attached.** Four outcomes per ninety-day cycle, each visibly in progress or not. Publishing the status is the communication &mdash; it is what stops a transformation program from becoming an announcement people stopped believing.
+**Commitments in public, with their status attached.** Publishing the status is the communication &mdash; it is what stops a transformation program becoming an announcement people stopped believing.
 
 ## `change.fig.3`
-**Internal programs need identities too.** A town hall series, a curiosity program, a think tank, an internal awards program, the tour. Employees do not experience &ldquo;internal communications&rdquo; &mdash; they experience a set of named things that either feel like one organization or do not.
+**Internal programs need identities too.** A town hall series, a curiosity program, a think tank, an awards program, the tour. Employees experience named things, not &ldquo;internal communications&rdquo;.
 
 ## `change.block.the-problem.label`
 The problem
 
 ## `change.block.the-problem.p`
-A 115-person global organization across six craft disciplines had to change how it worked, inside an enterprise roadmap covering more than a thousand people. Nobody could be ordered to. The change had no budget line for compliance and no manager who could enforce it &mdash; which is the normal condition of change communications and the reason most of it fails.
+**A 115-person organization across six disciplines had to change how it worked**, inside a roadmap covering more than a thousand people. Nobody could be ordered to. No budget line for compliance, no manager who could enforce it &mdash; **the normal condition of change communications, and the reason most of it fails.**
 
 ## `change.block.what-i-ran.label`
 What I ran, and where
 
 ## `change.block.what-i-ran.p`
-**Inside the organization** I own the whole program: strategy, cadence, channels and audience. **Daily briefings**, **executive leadership decks**, **weekly recaps**, **town halls**, **internal campaigns and intranet channels**, and a **change-champion network** with a named person inside each of the six disciplines. **Above it**, I represent that organization on the division&rsquo;s science-wide AI program, where the audience is leadership and the message has to ladder to enterprise strategy. *Keeping those two the same message is most of the job.*
+**Inside the organization I own the whole program** &mdash; strategy, cadence, channels and audience: daily briefings, executive leadership decks, weekly recaps, town halls, internal campaigns and intranet, and a **change-champion network with a named person in each of the six disciplines**. **Above it, I represent that organization on the division&rsquo;s science-wide AI program**, where the audience is leadership. Keeping those two the same message is most of the job.
 
 ## `change.block.the-town-hall-and-the-thing-no.label`
 The town hall — and the thing nobody wants to say out loud
@@ -229,13 +229,13 @@ The town hall — and the thing nobody wants to say out loud
 The most recent one I presented myself: our AI roadmap, to **close to a thousand colleagues**. The honest problem with that room is that a good number of the people in it suspect this technology is coming for their craft, and no amount of roadmap defuses that. So the message was stated plainly and up front rather than left to be inferred: **the goal is to amplify our people, not replace them.** I collaborated on producing it and helped craft the strategy for delivering it.
 
 ## `change.block.the-town-hall-and-the-thing-no.p2`
-Then I built participation into it instead of talking at people for an hour — a live segment called **&ldquo;Is it AI?&rdquo;**, where the audience guesses which work was machine-made. It is fun, which matters more than it sounds. It also does in ninety seconds what no slide can: it lets a *skeptical creative audience test the technology on itself* and reach its own conclusion, rather than being argued at by someone with an initiative to defend. **That is the same move as everything else on this page.** When a message is not landing, change the situation rather than repeat it louder.
+**Then I built participation in rather than talking at people for an hour** &mdash; a live segment called &ldquo;Is it AI?&rdquo;, where the audience guesses which work was machine-made. It does in ninety seconds what no slide can: **it lets a skeptical creative audience test the technology on itself** instead of being argued at by someone with an initiative to defend.
 
 ## `change.block.what-made-it-stick-and-how-i-k.label`
 What made it stick, and how I know
 
 ## `change.block.what-made-it-stick-and-how-i-k.p`
-I stopped asking people to adopt something and started removing the trip. The tools were shipped *into the places people already worked* rather than to a new destination, and every pilot went first to the team with the nearest real deadline &mdash; not the team that asked politely, and not my own function. A partner team under pressure will tell you the truth about whether something helps. The number I watch is not attendance or opens; it is **usage that repeats**. In twelve months the organization went from no AI literacy at all to active use across **all six craft disciplines**, and one leadership workshop converted into **five concrete ninety-day commitments** from leaders with no reporting line to me.
+**I stopped asking people to adopt things and started removing the trip.** Tools shipped into the places people already worked, and every pilot went first to the team with the nearest real deadline &mdash; not the team that asked politely, and not my own function. **The number I watch is not attendance or opens. It is usage that repeats.**
 
 ## `change.outcome.1.lead`
 Zero to six disciplines, twelve months
@@ -267,49 +267,49 @@ High-impact business events &mdash; the industry show, and the room where the cu
 The NACDS trade-show program, four consecutive years, two formats &middot; expo-floor island booths and a roughly 20&times;30-ft executive meeting suite &middot; six-figure budget &middot; plus a 200-plus-attendee internal event across three formats
 
 ## `events.fig.1`
-**Judged in the same frame as the competition.** Every major consumer-health company is within a few hundred feet on this floor, and retail buyers compare presences the way shoppers compare a shelf. The environment is the first thing the company says before anyone speaks.
+**Judged in the same frame as the competition.** Every major consumer-health company is within a few hundred feet, and buyers compare presences the way shoppers compare a shelf.
 
 ## `events.fig.2`
-**Corporate messaging, at architectural scale.** The lines on those walls are the enterprise narrative &mdash; the same words leadership uses, sized so a customer reads them from the aisle.
+**Corporate messaging at architectural scale.** The lines on those walls are the enterprise narrative, sized so a customer reads them from the aisle.
 
 ## `events.fig.3`
-**Where the meetings actually happen.** At the Annual Meeting the open floor is replaced by a 360&deg; branded suite built inside a resort conference room &mdash; an environment designed around senior retail-buyer conversations, not foot traffic.
+**Where the meetings actually happen.** At the Annual Meeting the open floor becomes a 360&deg; suite built around senior buyer conversations, not foot traffic.
 
 ## `events.fig.4`
-**The room is planned before it is decorated.** The suite at The Breakers &mdash; 17&prime;8 &times; 32&prime;1, ceiling height noted &mdash; with the table centred for the conversation, the screen wall at the focal end and product around the perimeter. Nothing on this drawing is a decision the vendor made.
+**The room is planned before it is decorated.** 17&prime;8 &times; 32&prime;1 at The Breakers &mdash; table centred for the conversation, screen wall at the focal end. Nothing here was the vendor&rsquo;s decision.
 
 ## `events.fig.5`
-**The brief, before any vendor work began.** My own direction page for one side of the booth &mdash; *two key messages, &ldquo;Health for all, Hunger for none&rdquo; and &ldquo;Helping billions of people,&rdquo; on the front of the booth,* with the moves allowed against them. Messaging hierarchy is decided here, in words, and everything the vendor produces is measured against it.
+**The brief, before any vendor work began.** My direction page for one booth side: two key messages and the moves allowed against them. **Messaging hierarchy is decided here, in words.**
 
 ## `events.block.the-problem.label`
 The problem
 
 ## `events.block.the-problem.p`
-Business events are the one communication channel with no second draft. The date does not move, the room is either full or it is not, and everything &mdash; narrative, agenda, stage content, environment, follow-up &mdash; has to arrive finished on the same morning.
+**Business events are the one channel with no second draft.** The date does not move, the room is either full or it is not, and narrative, agenda, stage content and environment all have to arrive finished on the same morning.
 
 ## `events.block.what-i-owned.label`
 What I owned
 
 ## `events.block.what-i-owned.p`
-Bayer&rsquo;s **NACDS presence for four consecutive years**, across two formats: island booths on the Total Store Expo floor (30&times;40 ft, then 30&times;30 ft) and the **executive meeting suite** at the Annual Meeting &mdash; roughly 20&times;30 ft, in a different resort conference room each year &mdash; on a **six-figure budget**. I wrote the creative brief before any vendor work began &mdash; brand-zone assignments, messaging hierarchy, vignette concepts, lighting direction &mdash; then directed the production vendor through **six-plus proof rounds** to production-ready graphics, with vendor selection, production timelines and spatial design against a show date that does not move. One graphic system flexed from 40-foot walls down to meeting-room panels without losing the message.
+**Bayer&rsquo;s NACDS presence, four consecutive years, two formats** &mdash; Total Store Expo island booths (30&times;40 ft, then 30&times;30 ft) and the **executive meeting suite**, roughly 20&times;30 ft, rebuilt in a different resort room each year, on a **six-figure budget**. **I wrote the creative brief before any vendor touched it** &mdash; brand zones, messaging hierarchy, lighting direction &mdash; then took the production vendor through **six-plus proof rounds**.
 
 ## `events.block.why-the-craft-half-matters-to.label`
 Why the craft half matters to a communications team
 
 ## `events.block.why-the-craft-half-matters-to.p`
-Because it removes a translation step at the point where events usually fail. When the narrative changes four days out &mdash; and it always does &mdash; I can redraw the frame, rewrite the card and re-cut the film myself rather than briefing it out and waiting. That is not a claim about taste; it is a claim about **latency under a fixed date**, and it is the single most useful thing I bring to an event calendar that includes customer engagements, sales meetings, industry events and integration milestones.
+**When the narrative changes four days out &mdash; and it always does &mdash; I redraw the frame, rewrite the card and re-cut the film myself.** That is not a claim about taste. It is a claim about **latency under a fixed date**, on a calendar of customer engagements, sales meetings and industry events.
 
 ## `events.block.bold.label`
 And the same muscle, pointed inward &mdash; the BOLD Ambition Tour
 
 ## `events.block.bold.p`
-A **200-plus-attendee internal event, three consecutive years, three different formats** &mdash; virtual, then hybrid, then in person &mdash; held together by one design system spanning identity, 3D, motion, live stage and merchandise. I drew the storyboards by hand and animated the stage films from them, so the direction sold internally on paper before a frame of it was built. Surviving three formats is a harder test of a system than surviving three dates.
+**A 200-plus-attendee internal event, three consecutive years, three formats** &mdash; virtual, hybrid, in person &mdash; on one design system spanning identity, 3D, motion, live stage and merchandise. I drew the storyboards by hand and animated the stage films from them. **Surviving three formats is a harder test than surviving three dates.**
 
 ## `events.fig.6`
-**I draw the frames and then animate them.** The shot-by-shot storyboard for the stage opener &mdash; and the film that ran in the room came from these panels, by the same hand.
+**I draw the frames, then animate them.** The stage-opener storyboard &mdash; and the film that ran in the room came from these panels, by the same hand.
 
 ## `events.fig.7`
-**One system, all the way to what people take home.** The identity carried a different treatment each year and still read as one event across all three.
+**One system, all the way to what people take home.** A different treatment each year that still read as one event.
 
 ## `events.outcome.1.lead`
 Four years, two formats
@@ -341,7 +341,7 @@ Toolkits, best practices and standards &mdash; consistency that does not depend 
 A brand book made the single standard every partner worked from &middot; a shared vocabulary used across decks, pre-reads and internal tools &middot; an accessibility standard with a check written into the gate
 
 ## `toolkits.fig.1`
-**A shared vocabulary, stated once.** One set of tokens, one brand mark, one type pairing &mdash; used across *decks, pre-reads, internal tools* and AI-generated material, so everything the organization ships reads as one family. Consistency is a supply problem before it is a discipline problem: make the on-standard thing the easiest thing to reach for.
+**A shared vocabulary, stated once.** One set of tokens, one brand mark, one type pairing, used across decks, pre-reads and internal tools. **Consistency is a supply problem before it is a discipline problem.**
 
 ## `toolkits.block.the-problem.label`
 The problem
@@ -359,7 +359,7 @@ I **digitized a brand book into the single standard every agency accessed and wo
 And the one I am proudest of
 
 ## `toolkits.block.and-the-one-i-am-proudest-of.p`
-I co-authored our **inclusive-design and accessibility standard** &mdash; WCAG AA contrast adopted across print, web, mobile, packaging and point-of-sale, with named validation tooling, accessible typography criteria at letterform level, and representation checklists applied at photoshoot brief, selection and post-launch. The part that made it real was not the document. It was putting the **contrast check into the QC gate**, so the standard is enforced at the moment of the decision instead of remembered afterward. When a posting asks for alignment with brand, accessibility, inclusion and editorial standards &mdash; I am one of the people who wrote one.
+**I co-authored our inclusive-design and accessibility standard** &mdash; WCAG AA across print, web, mobile, packaging and point-of-sale, with named validation tooling and representation checklists. **The part that made it real was not the document. It was putting the contrast check into the QC gate**, so the standard is enforced at the moment of the decision rather than remembered afterward.
 
 ## `toolkits.outcome.1.lead`
 One standard, every partner
@@ -403,7 +403,7 @@ Sustainability team owned the science &middot; communications owned the message 
 **Four claims, four comparators.** Carbon &minus;38%, water &minus;78%, land &minus;53%, weight &minus;18% &mdash; every one footnoted against the packaging it replaces, because a sustainability number without its baseline is not a claim, it is a liability.
 
 ## `sustainability.fig.5`
-**And the same story in print, where nothing moves.** The film can reveal the claims in sequence; a printed page has to deliver all four at once without becoming a table. The three benefit pills carry the icons from the film, and the comparator footnote sits under them rather than hiding in the gutter &mdash; same argument, same system, different physics.
+**And the same story in print, where nothing moves.** The film reveals the claims in sequence; a page has to land all four at once without becoming a table. Same icons, same system, different physics.
 
 ## `sustainability.block.the-problem.label`
 The problem
@@ -421,10 +421,10 @@ I worked with the **sustainability team**, who owned the science, and then with 
 Why this is the case that matters most for a communications team
 
 ## `sustainability.block.why-this-is-the-case-that-matt.p`
-Because it is the whole loop, and I was in every room of it. **A subject-matter function owns a technical truth. Communications owns what the public should understand. Somebody has to turn one into the other** &mdash; and usually that person briefs it out and waits. Here I sat in the sustainability conversation, sat in the comms conversation, and then made the artifact myself, which meant the message and the craft never had to survive a handoff.
+**Because it is the whole loop, and I was in every room of it.** A subject-matter function owns a technical truth. Communications owns what the public should understand. Usually the person between them briefs it out and waits. **Here I sat in both conversations and then made the artifact myself.**
 
 ## `sustainability.block.why-this-is-the-case-that-matt.p2`
-And it was a regulated claim, not a slogan: **I worked with the communications and sustainability teams to take the life-cycle-assessment claims through legal, medical and regulatory review** before any of this was public. I have spent years working alongside legal, medical and regulatory colleagues, and this is what that is for &mdash; a public environmental claim that holds up because the numbers were cleared before the film was cut, not after.
+**And it was a regulated claim, not a slogan.** I worked with the communications and sustainability teams to take the life-cycle-assessment claims through **legal, medical and regulatory review** before any of it was public &mdash; so the claim holds up because the numbers were cleared before the film was cut, not after.
 
 ## `sustainability.block.why-this-is-the-case-that-matt.p3`
 ```html
