@@ -56,7 +56,8 @@ as a *shape* and never as a count, a date, a named leader, a forum or a channel.
 | `hero.who` | started at Siemens building clinical diagnostic analyzers | §1 | ✅ canonical |
 | `metrics.*` | 115-person organization | §8.6 settled | ✅ canonical |
 | `metrics.*` | roadmap covering 1,000+ people | §4, §5 rollup | ✅ canonical |
-| `metrics.*` | 100+ marketers, three sessions, delivered personally | §2, §5 rollup | ✅ canonical |
+| `metrics.*` | ~$79MM+ combined MULO+ retail sales, two launches | §2 (MiraFAST ~$38MM + MiraFIBER $41MM+), §5 rollup | ✅ canonical — phrased as traction of SKUs Michael designed, **never** personal P&L (§2 guardrail) |
+| `hero.lede` | MiraFIBER launch communications >50% over projection | §2 MiraFIBER | ✅ canonical — launch-era figure |
 | `metrics.*` | zero to six craft disciplines in 12 months | §5 rollup | ✅ canonical |
 | `executive.block.*` | writes talking points, leader messages, speeches, scripts, briefing narratives | §4 / §8.28 (2026-08-28) | ⚠️ **shape only** — no count, no leader, no date (open Q#15) |
 | `executive.block.*` | at divisional and senior-leadership level (VP+) | §4 / §8.28 | ✅ altitude confirmed |
@@ -131,7 +132,7 @@ as a *shape* and never as a count, a date, a named leader, a forum or a channel.
 The message landing is not the finish line &mdash; *you find out why it stopped short, then change the situation.*
 
 ## `hero.lede`
-Twelve years in regulated healthcare, seven of them writing and building the communications a global consumer-health organization runs on. Six cases: the executive layer &mdash; the words leaders deliver and the material that carries them; change communications for a 115-person organization inside a roadmap covering more than a thousand people; high-impact business events; the toolkits that make consistency scale; **a published corporate sustainability campaign you can watch on Bayer&rsquo;s own channel**; and the one that matters most for this role &mdash; what I do when a message does not land.
+Twelve years in regulated healthcare, seven of them writing and building the communications a global consumer-health organization runs on. Five cases: the executive layer &mdash; the words leaders deliver and the material that carries them; change communications for a 115-person organization inside a roadmap covering more than a thousand people; high-impact business events; the toolkits that make consistency scale; and **a published corporate sustainability campaign you can watch on Bayer&rsquo;s own channel**. The brand work behind those cases carries its own numbers &mdash; the two launches I designed and took to market have done **more than $79MM in retail sales**, and MiraFIBER&rsquo;s launch communications ran **more than 50% over sales projection**.
 
 ## `hero.who`
 ```html
@@ -147,7 +148,7 @@ I have never believed that <span class="hl">understanding is enough</span>. Ever
 Executive communications &mdash; the words, and the thing that carries them
 
 ## `executive.sub`
-Talking points, speeches, scripts and briefing narratives &middot; the decks, agendas and stage content they live inside &middot; at divisional and senior-leadership level
+Talking points, leader messages and briefing narratives &middot; the decks, agendas and stage content they live inside &middot; at divisional and senior-leadership level
 
 ## `executive.fig.1`
 **A day of leadership content, planned as one argument.** Four sessions, each with its own thesis &mdash; holistic brand building, breaking through the clutter, connecting with emotion, being a storyteller &mdash; sequenced so the day builds rather than accumulates. The agenda is the first piece of communication anybody reads, and it is where the narrative either has a shape or does not.
@@ -165,7 +166,7 @@ Talking points, speeches, scripts and briefing narratives &middot; the decks, ag
 What I actually do
 
 ## `executive.block.what-i-actually-do.p`
-I write the executive layer: **talking points and leader messages**, **speeches and scripts** that other people deliver, and the **briefing materials and strategic narrative** underneath them &mdash; at divisional and senior-leadership level. Then I build what carries them.
+I write the executive layer: **talking points and leader messages**, and the **briefing materials and strategic narrative** underneath them &mdash; at divisional and senior-leadership level. Then I build what carries them.
 
 ## `executive.block.why-that-combination-is-rare.label`
 Why that combination is rare
@@ -183,7 +184,7 @@ The strongest examples are internal and stay that way: **retailer selling presen
 Written, not just designed
 
 ## `executive.outcome.1.sub`
-Talking points, leader messages, speeches, scripts, briefing narratives.
+Talking points, leader messages, briefing materials, strategic narrative.
 
 ## `executive.outcome.2.lead`
 Owned end to end
@@ -199,7 +200,7 @@ A 1,000+-person AI roadmap, taught across several days, not presented once.
 
 ## `executive.jd-tags`
 ```html
-<span>executive presentations</span><span>speeches &amp; talking points</span><span>briefing materials</span><span>business narrative</span><span>supporting senior executives</span>
+<span>executive presentations</span><span>leader messages &amp; talking points</span><span>briefing materials</span><span>business narrative</span><span>supporting senior executives</span>
 ```
 
 ## `change.title`
