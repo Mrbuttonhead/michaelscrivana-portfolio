@@ -51,7 +51,7 @@ as a *shape* and never as a count, a date, a named leader, a forum or a channel.
 
 | Handle | Claim | Corpus anchor | Status |
 |---|---|---|---|
-| `hero.lede` | twelve years in regulated healthcare | §1 (Siemens 2014 → present) | ✅ canonical |
+| `hero.lede` | more than eight years in regulated healthcare | §8.2 settled (Bayer 7+ and Siemens 1.5) | ✅ canonical — ⛔ **never twelve**; the WPU years and the study gap are not healthcare |
 | `hero.who` | Senior Designer – AI Lead | §8.7 official title | ✅ canonical |
 | `hero.who` | started at Siemens building clinical diagnostic analyzers | §1 | ✅ canonical |
 | `metrics.*` | 115-person organization | §8.6 settled | ✅ canonical |
@@ -132,11 +132,11 @@ as a *shape* and never as a count, a date, a named leader, a forum or a channel.
 I write the argument &mdash; *and I build the thing that carries it.*
 
 ## `hero.lede`
-Twelve years in regulated healthcare, seven of them developing the **narratives, the visuals and the scalable materials** a global consumer-health organization runs on &mdash; for three different rooms: **employees, customers, and the stakeholders above them**. Five cases: the narrative and the thing that carries it; change communications at two altitudes, including the town hall I presented to close to a thousand colleagues; high-impact business events; the toolkits that make consistency scale; and **a published corporate sustainability campaign you can watch on Bayer&rsquo;s own channel**. The brand work behind those cases carries its own numbers &mdash; the two launches I designed and took to market have done **more than $79MM in retail sales**, and MiraFIBER&rsquo;s launch communications ran **more than 50% over sales projection**.
+More than eight years inside regulated healthcare, seven of them developing the **narratives, the visuals and the scalable materials** a global consumer-health organization runs on &mdash; for three different rooms: **employees, customers, and the stakeholders above them**. Five cases: the narrative and the thing that carries it; change communications at two altitudes, including the town hall I presented to close to a thousand colleagues; high-impact business events; the toolkits that make consistency scale; and **a published corporate sustainability campaign you can watch on Bayer&rsquo;s own channel**. The brand work behind those cases carries its own numbers &mdash; the two launches I designed and took to market have done **more than $79MM in retail sales**, and MiraFIBER&rsquo;s launch communications ran **more than 50% over sales projection**.
 
 ## `hero.who`
 ```html
-<strong>Michael Scrivana</strong> &mdash; Senior Designer &amp; AI Lead, Product Experience, Bayer Consumer Health. Career started on the assembly floor at Siemens Healthcare building clinical diagnostic analyzers; every year since has been inside regulated healthcare. &nbsp;<a href="https://www.linkedin.com/in/michaelscrivana89/">linkedin</a>
+<strong>Michael Scrivana</strong> &mdash; Senior Designer &amp; AI Lead, Product Experience, Bayer Consumer Health. Career started on the assembly floor at Siemens Healthcare building clinical diagnostic analyzers &mdash; the first of more than eight years inside regulated healthcare. &nbsp;<a href="https://www.linkedin.com/in/michaelscrivana89/">linkedin</a>
 ```
 
 ## `executive.title`
