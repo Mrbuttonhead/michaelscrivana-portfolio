@@ -1,122 +1,75 @@
 ---
-slug: stryker
-url: https://stryker.michaelscrivana.com
-role: Senior Manager, Communications (remote) — Stryker
-posting: https://careers.stryker.com/senior-manager-communications-remote/job/8C6691205BD5C28406B55712E8541AE8
-req: R570593
-branch: stryker
-base: origin/sanofi
-worktree: ~/Documents/ms-stryker
-packet: ~/Documents/Vaults/Job Search/Applications/Stryker_SrManagerCommunications
-corpus: ~/Documents/Vaults/Job Search/Master/Master_Corpus.md
-accent: "#8a5a00"      # deep amber — nods to Stryker's gold, 5.4:1 on the page's #f4f5f7 paper
+page: novartis.michaelscrivana.com
+branch: novartis (off `stryker`)
+worktree: ~/Documents/ms-novartis
+for: Novartis · Associate Director, Product Adoption Lead · REQ-10086144
+packet: Job Search/Applications/Novartis_ADProductAdoptionLead/
+built: 2026-09-01
+accent: #0d5661 (deep teal — matches the CV and cover-letter renders)
 robots: noindex, nofollow
-status: packet ready, NOT submitted (2026-08-28)
 ---
 
-# How this page is edited
+# Claims table
 
-Two writers work on `index.html`: Michael in Cursor, Claude Code from the terminal.
-The rules exist so neither silently reverts the other.
+Every assertion on the page, mapped to the Corpus line it rests on. ⛔ **Never write `✅ canonical` without re-reading the Corpus line first** — §8.2 is the cautionary tale, where a claims table certified arithmetic written in the same pass.
 
-1. **Every text region carries a `data-k` handle.** Claude addresses regions by
-   handle, **never** by matching their prose. Reword anything you like in Cursor —
-   the handles do not depend on the words.
-2. **`git status` and `git diff` before editing.** Git is the arbiter of who
-   changed what. Commit after each coherent change so Cursor's gutter shows it.
-3. **No wholesale rewrites of `index.html`.** Targeted region edits only.
-4. **Reconcile with the tool**, from either direction:
+| Claim on the page | Corpus anchor | Status |
+|---|---|---|
+| 115-person global product organization | §4, §5 rollup, §8.6 settled | ✅ canonical (115, never "100+") |
+| Roadmap covering 1,000+ people | §4, §5 rollup | ✅ canonical |
+| Zero AI literacy → active use across six craft disciplines in 12 months | §3 (PX Hub), §5 rollup | ✅ canonical |
+| Five internal AI products in twelve months | §3 | ✅ canonical |
+| Artwork review 15–20 min → under 1 min | §3, §5 rollup | ✅ canonical |
+| One product × five channels × three regulated adjustments in 60 seconds | §3 (CreativeLab, Prime Day), §5 | ✅ canonical |
+| Internal apps ship in days vs a 4–6-week external cycle | §4, §5 rollup | ✅ canonical |
+| More than eight years in regulated healthcare | §1, **§8.2 settled** | ✅ canonical — ⛔ **NOT "twelve years"**; twelve silently counts the study gap and the university lab |
+| Six-person team, one domain expert per discipline, 90-day cycles, three deliverables | §4 | ✅ canonical |
+| Four cycle outcomes, published with status, last is scale adoption | §4 | ✅ canonical; also visible in the screenshot |
+| Two altitudes — sender inside PX, representative on the divisional program | §4 | ✅ canonical |
+| Agents callable from Microsoft Teams; Azure AI Foundry-native | §4 | ✅ canonical |
+| One knowledge deployment across three AI surfaces incl. Microsoft 365 Copilot | §3 (Knowledge MCP) | ✅ canonical |
+| "AI soup" — Claude, Microsoft Copilot and internal LLMs at once; knowledge layer any tool can call | §4 | ✅ canonical (his own term, safe out loud) |
+| Trust-calibration UI — confidence scores, citation backlinks, visual diff overlays | §3 | ✅ canonical |
+| Self-taught the enterprise infrastructure because the IT queue ran to weeks | §3 | ✅ canonical — ⚠️ **must be delivered without disparaging the IT function**; the page says the controls are legitimate |
+| Tracks usage, confidence and sentiment, adoption barriers, business outcomes | §4, **§8.32**, confirmed 2026-09-01 | ⚠️ **SHAPES ONLY — zero particulars.** ⛔ No instrument, tool name, metric, cadence, sample or result may be added to this page (open question #18) |
+| Brief Translator diagnosis — briefs improved, questions persisted, obstacle was missing information not missing knowledge | §2, §3 | ✅ canonical, and the one measurement story that is fully citable |
+| Curriculum: co-authored five modules, required training, 3 sessions to 100+ marketers, still runs without him | §2, **§8.11 settled** | ✅ canonical — verb stays **co-authored**, never "authored" |
+| Change-champion network per sub-home | §4 | ✅ canonical |
+| Monthly two-day hackathon; first produced seven tools ready to scale; two events produced software still in development | §10.6 | ✅ canonical — ⛔ **aggregate outcome only**; no colleague names, no internal project names, no hackathon business data |
+| Enablement playbook run for its first colleague outside the team | §4 | ✅ canonical |
+| AI learning track for the 115-person domain, in rollout | §4 | ✅ canonical — ⛔ never "complete", never "graduates" |
+| Town hall presented to close to a thousand colleagues; "amplify our people, not replace them" | §4, open question #17 (closed) | ✅ **"presented" is confirmed and writable**; "helped craft the presentation and the strategy for delivering it" is the exact verb — ⛔ never "hosted", "keynoted", or "produced" unqualified |
+| The "Is it AI?" participation segment | §4 | ✅ canonical (his own invention, safe to describe) — ⛔ not quantified, and what it asked people to judge is not recorded |
+| Years of close collaboration with legal, medical and regulatory review | §2 | ✅ canonical — ⛔ **not** "owned MLR submissions", "carried work through a formal MLR board", or any agency-side / med-ed framing |
+| SunBird: a public environmental claim taken through review with comms and sustainability, on creative he made himself, live on the global corporate channel | §2, §8.29 | ✅ canonical — ⛔ **do not cite the view count**; ⛔ any "first PET blister" framing must be attributed to Bayer (§8.26) |
+| Field-sales application: reps looking up parts in a spreadsheet → MVP now being developed for field use | §2, §10.6 | ✅ canonical — ⚠️ contribution, from a hackathon team; the page says "helped build" |
+| Career started building clinical diagnostic analyzers against regulatory standards | §1 (Siemens) | ✅ canonical |
+| HCP-facing work alongside the consumer portfolio | §2 | ✅ canonical — ⛔ no brand, therapeutic area, year range, or agency-side seat |
+| The OTC-vs-Rx distance, stated on the page as an honest miss | FitScan gap #2 | ✅ deliberate. Most recent precedent is the Stryker page, which states its negative on the page |
 
-   ```sh
-   node ~/Documents/ms-tools/sync.mjs check .    # drift report, exit 1 if any
-   node ~/Documents/ms-tools/sync.mjs pull .     # index.html -> page.md
-   node ~/Documents/ms-tools/sync.mjs push .     # page.md -> index.html
-   node ~/Documents/ms-tools/sync.mjs annotate . # add handles to new elements
-   ```
+# ⛔ NOT claimable on this page
 
-# Claims — what each assertion rests on
+- **"Product owner", "backlog", "scrum", "agile"** — asked 2026-09-01 and **not answered**; §8.32. Neither a claim nor a gap.
+- **"Brand owner"** — §2: the Mira figures are commercial traction of SKUs he designed, **not personal P&L ownership**.
+- **Any named product-analytics tool** — he confirmed using one and did not name it (§6, open question #18).
+- **Power Platform / Power Automate** — offered by name, unticked. **OPEN, not a denial** (§8.22).
+- **Copilot Studio beyond the bare name** — no build, scale, user count or date is recorded.
+- **"Customer success"** — nothing in the Corpus. A clean miss.
+- **"Clinical data" / "trial data"** — §8.24. Market and scientific data is the ceiling.
+- **"Fortune 100" / "Fortune 500" unqualified** — §8.26. Only "Fortune Global 500".
+- **The AI Champion Development Program** and every metric attached to it — struck (§8.15).
+- **DesignAgentPX in the present tense** — deprecated, superseded by CreativeLab (§3).
+- **Named colleagues, the consultancy engagement and its findings, unreleased codenames, the internal team-site URL** (§8.30).
+- **Formal direct reports** — coaching and capability leadership only (§2).
+- **Issues management, crisis or reputation work** — confirmed negative (§8.28). Nothing on this JD asks for it, and nothing on the page implies it.
 
-⛔ **Rule (Corpus §8.26): a third-party ranking is a citation, not a description.**
-Anything of the form *"[ranking] [company]"* needs a source before it goes on the page.
-"Fortune 100" was false and reached seven packets before anyone checked it.
-⚠️ **This page deliberately makes no Fortune claim at all** — the CV and cover letter say
-*Fortune **Global** 500* and that is the only permitted form.
+# ⚠️ Image note — `images/hub/hub-02-four-outcomes.jpg` was edited before publishing
 
-⭐ **Read this before editing any communications claim.** Every executive-writing and
-change-communications assertion on this page rests on **Corpus §4 / §8.28, recorded
-2026-08-28** — the day the broad ask happened. Before that date the Corpus had *one line*
-about communications. Eight of nine shapes came back positive and **zero particulars were
-attached to any of them** (open question #15). That is why every claim below is written
-as a *shape* and never as a count, a date, a named leader, a forum or a channel.
+The source screenshot carried an **internal project codename twice** — once in the section subhead and once inside the first outcome card. §8.30 prohibits publishing unreleased programme, product and project codenames, so before this page shipped the file was edited: the subhead band was cropped out, and the trailing clause of card 01 was cleared, leaving the complete sentence *"Shared view of current PX — workflows, pain points, data, and AI readiness."* **No claim, status badge or outcome title was altered** — only the codename was removed.
 
-| Handle | Claim | Corpus anchor | Status |
-|---|---|---|---|
-| `hero.lede` | more than eight years in regulated healthcare | §8.2 settled (Bayer 7+ and Siemens 1.5) | ✅ canonical — ⛔ **never twelve**; the WPU years and the study gap are not healthcare |
-| `hero.who` | Senior Designer – AI Lead | §8.7 official title | ✅ canonical |
-| `hero.who` | started at Siemens building clinical diagnostic analyzers | §1 | ✅ canonical |
-| `metrics.*` | 115-person organization | §8.6 settled | ✅ canonical |
-| `metrics.*` | roadmap covering 1,000+ people | §4, §5 rollup | ✅ canonical |
-| `metrics.*` | ~$79MM+ combined MULO+ retail sales, two launches | §2 (MiraFAST ~$38MM + MiraFIBER $41MM+), §5 rollup | ✅ canonical — phrased as traction of SKUs Michael designed, **never** personal P&L (§2 guardrail) |
-| `hero.lede` | MiraFIBER launch communications >50% over projection | §2 MiraFIBER | ✅ canonical — launch-era figure |
-| `metrics.*` | zero to six craft disciplines in 12 months | §5 rollup | ✅ canonical |
-| `executive.block.*` | writes talking points, leader messages, speeches, scripts, briefing narratives | §4 / §8.28 (2026-08-28) | ⚠️ **shape only** — no count, no leader, no date (open Q#15) |
-| `executive.block.*` | at divisional and senior-leadership level (VP+) | §4 / §8.28 | ✅ altitude confirmed |
-| `executive.block.*` | selling presentations owned end to end + the template system | §2 (2026-08-26) | ⚠️ no retailer, no count, no year (open Q#13) |
-| `executive.block.*` | divisional leadership and board material | §2 (2026-08-26) | ⚠️ ⛔ never "investor" or "external financial" |
-| `executive.block.*` | AI roadmap carried to a Science President, Cambridge, multi-day | §4 | ✅ canonical |
-| `change.block.*` | owned a change-comms program end to end (strategy, cadence, channels, audience) | §4 / §8.28 | ⚠️ shape only |
-| `change.block.*` | town halls, leadership forums, internal campaigns, intranet | §4 / §8.28 | ⚠️ **no channel may be named** (open Q#15) |
-| `change.block.*` | change-champion network per sub-home | §4 | ✅ canonical |
-| `change.block.*` | five 90-day commitments from one leadership workshop | §4 | ✅ canonical |
-| `change.block.*` | shipped into where people already work, not a new destination | §4 (Teams-native agents) | ✅ canonical |
-| `events.*` | 200+ attendees, three consecutive years, three formats, one system | §2 · §8.17 | ✅ canonical — ⛔ **cite no date** (7.20.22 / 7.21.22 unresolved) |
-| `events.*` | storyboards drawn and animated by his own hand | §2 · §8.18 | ✅ canonical, first-hand craft |
-| `events.*` | trade-show suite, 20×30 ft, six-figure budget, consecutive years | §2 (NACDS) | ✅ canonical |
-| `toolkits.block.*` | brand book digitized into the single agency-facing standard | §2 · §8.12 | ⚠️ "digitized", ⛔ never "authored the brandbook" |
-| `toolkits.block.*` | 15-page visual brief, ecommerce content standards | §2 | ✅ canonical |
-| `toolkits.block.*` | master-and-adaptation templates, reusable regulated-copy modules | §2 (2026-08-19) | ⚠️ no brand, no DAM, no count (open Q#10) |
-| `toolkits.block.*` | co-authored the inclusive-design standard; WCAG AA; check in the QC gate | §2 · §6 | ✅ canonical — verb stays **co-authored** |
-| `method.block.*` | curriculum co-authored, required, 3 sessions, 100+ marketers | §2 · §8.11 | ✅ canonical — verb stays **co-authored** |
-| `method.block.*` | briefs improved → diagnosis → Brief Translator | §2 · §3 | ✅ canonical, causality confirmed |
-| `method.block.*` | taught 1,000+ beginners drawing | §10.1 · §5 | ✅ understate deliberately; ⛔ never name the venue on the page |
-| `method.cta.*` | ~$79MM in retail sales | §5 rollup | ✅ canonical, primary |
-| `ninety.step.5` | no issues management, crisis, recall or reputation defense | §8.28 confirmed negative | ✅ **stated on purpose** |
-| `sustainability.*` | all the 3D, lighting, rendering, animation, type animation — his own hand | §2 SunBird (2026-08-28) | ✅ first-hand craft; verb is **made**, not *directed* |
-| `sustainability.*` | sustainability team → communications → he built it | §2 · §4 · §8.29 | ✅ canonical, the full external-comms loop |
-| `sustainability.*` | ran across social and in print | §2 SunBird | ⚠️ ⛔ name no channel beyond social/print (open Q#16) |
-| `sustainability.*` | worked with comms + sustainability to take the claims through legal, medical and regulatory review | §2 (upgraded 2026-08-28) | ✅ **active and collaborative** — ⛔ still never "owned the submission" or "responsible party" |
-| `sustainability.*` | "first PET blister in the consumer health sector" | §8.26 · §8.29 | ⚠️ **Bayer's claim, attributed + linked to the 2024-10-30 newsroom release.** ⛔ never asserted as his |
-| `sustainability.*` | −38% carbon · −78% water · −53% land · −18% weight | Bayer press release 2024-10-30 | ✅ sourced — ⚠️ **the comparator is stated on the page**, never strip it |
-| `sustainability.*` | live on Bayer Global, Nov 2024, Liveo Research, Netherlands first | verified 2026-08-28 | ✅ canonical |
-| `sustainability.*` | the print execution, with its comparator footnote set under the claims | §2 SunBird · source art from Michael | ✅ canonical — "social and in print" is his own wording |
-| — | *the film's view count (612)* | §8.29 | ⛔ **never on any artifact** — true, and the wrong number |
+⛔⛔ **THE UNEDITED FILE IS STILL LIVE ON `stryker.michaelscrivana.com`**, where the codename is readable to anyone who opens the image directly. **That page was published 2026-08-28 and this was not caught then.** It needs the same edit, or the image pulled. **Flag to Michael — it is his call whether that word is publishable at all.**
 
-⚠️ **Not claimable on this page, in either direction:**
 
-- ⛔ **Issues management / reputation** — confirmed negative and a **prohibition** (§8.28).
-  The page states the miss outright in `ninety.step.5`. Never soften it into
-  "navigated sensitive communications" and never quietly delete it either.
-- ⛔ **"Clinical data" or "trial data"** — market and scientific data is the ceiling (§8.24).
-- ⛔ **Agency-side employment.** He is buy-side: writes the RFPs, scores the responses (§8.14).
-  The page never implies otherwise; the cover letter says it explicitly.
-- ⛔ **Named agencies** (standing preference 2026-08-24) — none appear here.
-- ⚠️ **M&A** — Iberogast as acquired-brand work is real (§8.23) but is **not** on this page,
-  and "led an M&A brand integration" is prohibited. **Separation / carve-out is OPEN, not
-  denied** — claim neither the experience nor the gap.
-- ⛔ **The SunBird view count (612).** Verified and prohibited (§8.29). Sourcing a number tells you
-  whether it is true, not whether it belongs.
-- ⚠️ **Embedding is disabled on Bayer's YouTube channel** — an iframe pointed at YouTube renders a
-  dead "Video unavailable" box. Verified 2026-08-28. ⛔ Never point the player at YouTube.
-  ✅ **The film plays from Vimeo instead** (`1222026785`, unlisted hash `49b5ad571e`, uploaded by
-  Michael), matching the Vimeo pattern already used on `design.michaelscrivana.com`. The YouTube
-  link stays in the caption as *provenance* — it is the proof Bayer published it.
-- ⚠️ **The Vimeo upload is the ORIGINAL 1920×1080 letterboxed master**, so the player frame is
-  **16:9**, not 4:5. A cropped 4:5 web cut exists at `~/Drop/SunBird-4x5-web.mp4` (5.8 MB). If that
-  ever replaces the Vimeo source, change `.vimeo-45` back to `padding-top: 125%`.
-- ⛔ **Frame 8 of the carousel ("Now recycle ready") carries a visible Shutterstock watermark** and
-  is deliberately excluded. Do not add it.
-- ⚠️ **Every §8.28 communications claim is unquantified on purpose.** If open question #15
-  gets answered, this page can get materially stronger — until then, do not add a number.
 
 # Copy
 
@@ -125,335 +78,335 @@ as a *shape* and never as a count, a date, a named leader, a forum or a channel.
 
 ## `hero.kicker`
 ```html
-<span class="dot"></span>Michael Scrivana &nbsp;&middot;&nbsp; for Stryker &middot; Senior Manager, Communications
+<span class="dot"></span>Michael Scrivana &nbsp;&middot;&nbsp; for Novartis &middot; Associate Director, Product Adoption Lead
 ```
 
 ## `hero.h1`
-I am a designer who writes the story &mdash; *and designs how it lands.*
+Adoption does not fail in general. *It fails at a moment &mdash; and the moment is usually changeable.*
 
 ## `hero.lede`
-More than eight years inside regulated healthcare, seven of them developing the **narratives, the visuals and the scalable materials** a global consumer-health organization runs on &mdash; for three different rooms: **employees, customers, and the stakeholders above them**. Five cases: the narrative and the thing that carries it; change communications at two altitudes, including the town hall I presented to close to a thousand colleagues; high-impact business events; the toolkits that make consistency scale; and **a published corporate sustainability campaign you can watch on Bayer&rsquo;s own channel**. The brand work behind those cases carries its own numbers &mdash; the two launches I designed and took to market have done **more than $79MM in retail sales**, and MiraFIBER&rsquo;s launch communications ran **more than 50% over sales projection**.
+I lead AI adoption for a **115-person global product organization** inside a divisional roadmap covering **more than a thousand colleagues**. In twelve months that organization went from **zero AI literacy to active use across all six of its craft disciplines**. It did not happen because of a campaign. It happened because I stopped asking people to come to the AI and started putting it where they already were &mdash; and because when it stalled, I went and found out exactly where.
 
 ## `hero.who`
 ```html
-<strong>Michael Scrivana</strong> &mdash; Senior Designer &amp; AI Lead, Product Experience, Bayer Consumer Health. Career started on the assembly floor at Siemens Healthcare building clinical diagnostic analyzers &mdash; the first of more than eight years inside regulated healthcare. &nbsp;<a href="https://www.linkedin.com/in/michaelscrivana89/">linkedin</a>
+<strong>Michael Scrivana</strong> &mdash; Senior Designer &amp; AI Lead, Product Experience, Bayer Consumer Health. More than eight years inside regulated healthcare, starting on the assembly floor at Siemens building clinical diagnostic analyzers. Twenty minutes from East Hanover. &nbsp;<a href="https://www.linkedin.com/in/michaelscrivana89/">linkedin</a>
 ```
 
-## `executive.title`
-The narrative, and the thing that carries it
-
-## `executive.sub`
-Talking points, leader messages and briefing narratives &middot; the decks, agendas and stage content they live inside &middot; at divisional and senior-leadership level
-
-## `executive.fig.1`
-**Leadership content is an argument before it is a slide.** One idea, stated once, in the language leadership had already agreed to use. I write the words at this altitude and design the thing that carries them.
-
-## `executive.fig.2`
-**The same grammar, a different beat.** One visual system across a full day of speakers, internal and external, so the room reads it as one message rather than a sequence of talks.
-
-## `executive.fig.3`
-**And the beat before any of it.** A teaser with no information in it at all, three weeks out. The first communication only has to make people curious.
-
-## `executive.block.what-i-actually-do.label`
-What I actually do
-
-## `executive.block.what-i-actually-do.p`
-I write the executive layer: **talking points and leader messages**, and the **briefing materials and strategic narrative** underneath them &mdash; at divisional and senior-leadership level. Then I build what carries them.
-
-## `executive.block.why-that-combination-is-rare.label`
-Why that combination is rare
-
-## `executive.block.why-that-combination-is-rare.p`
-Most people who can write an executive narrative hand it to a designer. Most people who can build the deck did not write the argument. The seam between those two is where meaning usually leaks &mdash; a strong point rendered weakly, or a beautiful slide making a claim nobody agreed to.
-
-## `executive.block.the-evidence-i-cannot-show-you.label`
-The evidence I cannot show you
-
-## `executive.block.the-evidence-i-cannot-show-you.p`
-**The strongest examples are internal and stay that way.** Retailer selling presentations I own end to end &mdash; narrative, data slides, key visuals &mdash; plus the master template system behind the category decks, and material carried to divisional leadership and board level. **The most consequential was a divisional AI roadmap I co-authored and carried to our Science President across a multi-day workshop.** It produced a new role, a promotion, and the roadmap itself.
-
-## `executive.outcome.1.lead`
-Written, not just designed
-
-## `executive.outcome.1.sub`
-Talking points, leader messages, briefing materials, strategic narrative.
-
-## `executive.outcome.2.lead`
-Owned end to end
-
-## `executive.outcome.2.sub`
-Selling presentations and the template system the category decks are built from.
-
-## `executive.outcome.3.lead`
-Carried to a division president
-
-## `executive.outcome.3.sub`
-A 1,000+-person AI roadmap, taught across several days, not presented once.
-
-## `executive.jd-tags`
+## `thesis.p`
 ```html
-<span>executive presentations</span><span>leader messages &amp; talking points</span><span>briefing materials</span><span>business narrative</span><span>supporting senior executives</span>
+Most adoption programs try to change the person. <span class="hl">I change the situation</span> &mdash; and then I go and check whether it worked.
 ```
 
-## `change.title`
-Change communications at two altitudes &mdash; and the room that had to be convinced
+## `plan.title`
+The adoption plan, and the fact that its status is published
 
-## `change.sub`
-Two altitudes, one message &middot; a champion network across six disciplines &middot; and the town hall I presented to a thousand people who needed to hear it
+## `plan.sub`
+Ninety-day cycles &middot; six domain experts, one per discipline &middot; four outcomes, each carrying its own state &middot; the last of them is scale adoption
 
-## `change.fig.1`
-**One destination, so the message has somewhere to live.** Internal communications fail quietly when they are only ever events. This is the standing surface every briefing and recap points back to.
+## `plan.fig.1`
+**This is the adoption plan, and it is a screen anyone in the organization can open.** Four outcomes, each with a live status &mdash; what this cycle has committed to and what it has not. Publishing the state is the part most transformation programs skip, and it is the part that decides whether the next announcement is believed.
 
-## `change.fig.2`
-**Commitments in public, with their status attached.** Publishing the status is the communication &mdash; it is what stops a transformation program becoming an announcement people stopped believing.
+## `plan.block.how-it-actually-runs.label`
+How it actually runs
 
-## `change.fig.3`
-**Internal programs need identities too.** A town hall series, a curiosity program, a think tank, an awards program, the tour. Employees experience named things, not &ldquo;internal communications&rdquo;.
+## `plan.block.how-it-actually-runs.p`
+Ninety-day cycles, with a **six-person team I assembled and lead as player-coach** &mdash; one domain expert per craft discipline, so the people who have to adopt the thing are in the room where it is designed. Every cycle owes three deliverables: **strategy, knowledge infrastructure, and up to three production experiments.** Nothing is a standing committee.
 
-## `change.block.the-problem.label`
-The problem
+## `plan.block.two-altitudes-one-message.label`
+Two altitudes, one message
 
-## `change.block.the-problem.p`
-**A 115-person organization across six disciplines had to change how it worked**, inside a roadmap covering more than a thousand people. Nobody could be ordered to. No budget line for compliance, no manager who could enforce it &mdash; **the normal condition of change communications, and the reason most of it fails.**
+## `plan.block.two-altitudes-one-message.p`
+Inside the 115-person organization I am the sender. Above it, I am that organization&rsquo;s representative on the division&rsquo;s **science-wide AI program**, a roadmap covering more than a thousand people, which I co-author. **The same message has to survive both rooms** &mdash; and I am the person responsible for it not quietly becoming two messages.
 
-## `change.block.what-i-ran.label`
-What I ran, and where
+## `plan.block.why-the-status-badges-matter-m.label`
+Why the status badges matter more than the plan
 
-## `change.block.what-i-ran.p`
-**Inside the organization I own the whole program** &mdash; strategy, cadence, channels and audience: daily briefings, executive leadership decks, weekly recaps, town halls, internal campaigns and intranet, and a **change-champion network with a named person in each of the six disciplines**. **Above it, I represent that organization on the division&rsquo;s science-wide AI program**, where the audience is leadership. Keeping those two the same message is most of the job.
+## `plan.block.why-the-status-badges-matter-m.p`
+A roadmap with no visible state is indistinguishable from a roadmap that stopped. **Publishing what is in progress, what is upcoming, and what a cycle deliberately did not take on** is what stops a transformation program from becoming an announcement people politely stopped believing in. It also makes the next set of commitments credible, because the last set was auditable.
 
-## `change.block.the-town-hall-and-the-thing-no.label`
-The town hall — and the thing nobody wants to say out loud
+## `plan.outcome.1.lead`
+Zero to six disciplines
 
-## `thesis.p-2`
-The most recent one I presented myself: our AI roadmap, to **close to a thousand colleagues**. The honest problem with that room is that a good number of the people in it suspect this technology is coming for their craft, and no amount of roadmap defuses that. So the message was stated plainly and up front rather than left to be inferred: **the goal is to amplify our people, not replace them.** I collaborated on producing it and helped craft the strategy for delivering it.
+## `plan.outcome.1.sub`
+Active use across every craft discipline in the organization, in twelve months.
 
-## `change.block.the-town-hall-and-the-thing-no.p2`
-**Then I built participation in rather than talking at people for an hour** &mdash; a live segment called &ldquo;Is it AI?&rdquo;, where the audience guesses which work was machine-made. It does in ninety seconds what no slide can: **it lets a skeptical creative audience test the technology on itself** instead of being argued at by someone with an initiative to defend.
+## `plan.outcome.2.lead`
+Cadence, not campaign
 
-## `change.block.what-made-it-stick-and-how-i-k.label`
-What made it stick, and how I know
+## `plan.outcome.2.sub`
+Ninety-day cycles with three fixed deliverables, not a launch moment.
 
-## `change.block.what-made-it-stick-and-how-i-k.p`
-**I stopped asking people to adopt things and started removing the trip.** Tools shipped into the places people already worked, and every pilot went first to the team with the nearest real deadline &mdash; not the team that asked politely, and not my own function. **The number I watch is not attendance or opens. It is usage that repeats.**
+## `plan.outcome.3.lead`
+Users in the design room
 
-## `change.outcome.1.lead`
-Zero to six disciplines, twelve months
+## `plan.outcome.3.sub`
+One domain expert per discipline on the team that builds the thing.
 
-## `change.outcome.1.sub`
-Measured as repeat usage, not attendance.
-
-## `change.outcome.2.lead`
-Five 90-day commitments
-
-## `change.outcome.2.sub`
-From one leadership workshop, by leaders who do not report to me.
-
-## `change.outcome.3.lead`
-A champion in every discipline
-
-## `change.outcome.3.sub`
-Change carried by people inside the team, not broadcast at them.
-
-## `change.jd-tags`
+## `plan.jd-tags`
 ```html
-<span>internal &amp; change communications</span><span>town halls</span><span>employee engagement</span><span>internal campaigns</span><span>intranet</span><span>enterprise strategy</span><span>influence without authority</span>
+<span>adoption plans</span><span>enterprise-wide change</span><span>stakeholder engagement</span><span>project management</span><span>digital transformation</span>
 ```
 
-## `events.title`
-High-impact business events &mdash; the industry show, and the room where the customer sits
+## `activation.title`
+The activation moment is a trip you did not have to take
 
-## `events.sub`
-The NACDS trade-show program, four consecutive years, two formats &middot; expo-floor island booths and a roughly 20&times;30-ft executive meeting suite &middot; six-figure budget &middot; plus a 200-plus-attendee internal event across three formats
+## `activation.sub`
+Agents callable from Microsoft Teams &middot; one knowledge deployment across three AI surfaces including Microsoft 365 Copilot &middot; and the answer to &ldquo;which tool do I use?&rdquo;
 
-## `events.fig.1`
-**Judged in the same frame as the competition.** Every major consumer-health company is within a few hundred feet, and buyers compare presences the way shoppers compare a shelf.
+## `activation.fig.1`
+**The front door, and the promise printed on it.** *Amplified by AI* is not decoration &mdash; it is the same sentence I say on stage, put where people arrive. An adoption message that only exists in a town hall is a message with a half-life.
 
-## `events.fig.2`
-**Corporate messaging at architectural scale.** The lines on those walls are the enterprise narrative, sized so a customer reads them from the aisle.
+## `activation.block.the-mechanism.label`
+The mechanism
 
-## `events.fig.3`
-**Where the meetings actually happen.** At the Annual Meeting the open floor becomes a 360&deg; suite built around senior buyer conversations, not foot traffic.
+## `activation.block.the-mechanism.p`
+Our agents ship **callable from Microsoft Teams**, so a colleague invokes one inside the software they already have open rather than learning a new destination. Microsoft is the native stack, so the agent work is **Azure AI Foundry-native** rather than a bespoke runtime &mdash; a platform decision, not a preference.
 
-## `events.fig.4`
-**The room is planned before it is decorated.** 17&prime;8 &times; 32&prime;1 at The Breakers &mdash; table centered for the conversation, screen wall at the focal end. Nothing here was the vendor&rsquo;s decision.
+## `activation.block.the-honest-answer-to-how-did-y.label`
+The honest answer to &ldquo;how did you drive adoption?&rdquo;
 
-## `events.fig.5`
-**The brief, before any vendor work began.** My direction page for one booth side: two key messages and the moves allowed against them. **Messaging hierarchy is decided here, in words.**
+## `activation.block.the-honest-answer-to-how-did-y.p`
+It is not *I evangelized.* It is **I removed the trip.** Every additional destination between a person and the thing they need is a place adoption leaks, and the leak is invisible in an attendance number.
 
-## `events.block.the-problem.label`
-The problem
+## `activation.block.ai-soup-and-why-i-refused-to-p.label`
+AI soup &mdash; and why I refused to pick a tool
 
-## `events.block.the-problem.p`
-**Business events are the one channel with no second draft.** The date does not move, the room is either full or it is not, and narrative, agenda, stage content and environment all have to arrive finished on the same morning.
+## `activation.block.ai-soup-and-why-i-refused-to-p.p`
+Large organizations do not run one AI. Ours runs **Claude, Microsoft Copilot and internal models at once**, and the question colleagues ask more than any other is *which tool do I use?* My answer was not to pick one. I **moved the knowledge into a layer any tool can call** &mdash; a shared knowledge server running as **one deployment across three AI surfaces, one of them Microsoft 365 Copilot** &mdash; so the choice of tool stops mattering, and a colleague can be wrong about which assistant to open and still get the right answer.
 
-## `events.block.what-i-owned.label`
-What I owned
+## `activation.block.ai-soup-and-why-i-refused-to-p.p2`
+That is the same move as everything else on this page: **rather than train the behavior, remove the decision.**
 
-## `events.block.what-i-owned.p`
-**Bayer&rsquo;s NACDS presence, four consecutive years, two formats** &mdash; Total Store Expo island booths (30&times;40 ft, then 30&times;30 ft) and the **executive meeting suite**, roughly 20&times;30 ft, rebuilt in a different resort room each year, on a **six-figure budget**. **I wrote the creative brief before any vendor touched it** &mdash; brand zones, messaging hierarchy, lighting direction &mdash; then took the production vendor through **six-plus proof rounds**.
+## `activation.outcome.1.lead`
+Inside Teams, not beside it
 
-## `events.block.why-the-craft-half-matters-to.label`
-Why the craft half matters to a communications team
+## `activation.outcome.1.sub`
+Users invoke agents where they already work.
 
-## `events.block.why-the-craft-half-matters-to.p`
-**When the narrative changes four days out &mdash; and it always does &mdash; I redraw the frame, rewrite the card and re-cut the film myself.** That is not a claim about taste. It is a claim about **latency under a fixed date**, on a calendar of customer engagements, sales meetings and industry events.
+## `activation.outcome.2.lead`
+One deployment, three surfaces
 
-## `events.block.bold.label`
-And the same muscle, pointed inward &mdash; the BOLD Ambition Tour
+## `activation.outcome.2.sub`
+Including Microsoft 365 Copilot, on the stack the company already runs.
 
-## `events.block.bold.p`
-**A 200-plus-attendee internal event, three consecutive years, three formats** &mdash; virtual, hybrid, in person &mdash; on one design system spanning identity, 3D, motion, live stage and merchandise. I drew the storyboards by hand and animated the stage films from them. **Surviving three formats is a harder test than surviving three dates.**
+## `activation.outcome.3.lead`
+Tool-agnostic by design
 
-## `events.fig.6`
-**I draw the frames, then animate them.** The stage-opener storyboard &mdash; and the film that ran in the room came from these panels, by the same hand.
+## `activation.outcome.3.sub`
+The knowledge sits outside the assistant, so picking wrong is survivable.
 
-## `events.outcome.1.lead`
-Four years, two formats
-
-## `events.outcome.1.sub`
-Expo floor and executive suite, six-figure build, one graphic system.
-
-## `events.outcome.2.lead`
-Brief first, vendor second
-
-## `events.outcome.2.sub`
-Zoning and messaging hierarchy set before production; six-plus proof rounds.
-
-## `events.outcome.3.lead`
-Three years, three formats
-
-## `events.outcome.3.sub`
-The internal event ran virtual, hybrid, in person &mdash; one system, held.
-
-## `events.jd-tags`
+## `activation.jd-tags`
 ```html
-<span>industry events</span><span>customer engagements</span><span>sales meetings</span><span>event branding</span><span>video content</span><span>agency &amp; vendor direction</span>
+<span>activation moments</span><span>use cases</span><span>Microsoft 365 Copilot</span><span>copilots</span><span>AI-enabled products</span>
 ```
 
-## `toolkits.title`
-Toolkits, best practices and standards &mdash; consistency that does not depend on me
+## `products.title`
+What people actually adopted &mdash; five products in twelve months
 
-## `toolkits.sub`
-A brand book made the single standard every partner worked from &middot; a shared vocabulary used across decks, pre-reads and internal tools &middot; an accessibility standard with a check written into the gate
+## `products.sub`
+Self-service workflows &middot; a compliance review cut from fifteen or twenty minutes to under one &middot; one product through five channels in about a minute
 
-## `toolkits.fig.1`
-**A shared vocabulary, stated once.** One set of tokens, one brand mark, one type pairing, used across decks, pre-reads and internal tools. **Consistency is a supply problem before it is a discipline problem.**
+## `products.fig.1`
+**A self-service workflow other teams run without me.** Prompt and reference wire into generation, generation into iteration, iteration into output and video &mdash; each step consulting the brand rules rather than trusting the operator to remember them. The reason this gets adopted is that it is faster than the thing it replaced, not that anyone was asked to try it.
 
-## `toolkits.block.the-problem.label`
-The problem
+## `products.block.the-roster.label`
+The roster
 
-## `toolkits.block.the-problem.p`
-Guidance that lives in a document nobody opens is not a standard. Across a global portfolio, multiple agencies and local markets, consistency was being maintained by review &mdash; catching drift after it happened, one asset at a time, forever.
+## `products.block.the-roster.p`
+An **AI front door** hosting five self-service tools behind enterprise single sign-on. A **pre-review artwork agent** that checks packaging against regulatory and brand-system rules before it reaches legal, medical and regulatory review. A **shared knowledge server** across three AI surfaces. A **node-based creative pipeline**. A **3D packaging visualizer** that turned weeks of outsourced work into self-serve hours.
 
-## `toolkits.block.what-i-built.label`
-What I built
+## `products.block.trust-is-a-design-problem.label`
+Trust is a design problem
 
-## `toolkits.block.what-i-built.p`
-I **digitized a brand book into the single standard every agency accessed and worked from**; authored a **fifteen-page visual brief** defining content specifications across three major retailers; and maintain **master-and-adaptation template systems** and reusable regulated-copy modules that global and local teams build from rather than around.
+## `products.block.trust-is-a-design-problem.p`
+The artwork agent surfaces **confidence scores, citation backlinks and visual diff overlays**, because a reviewer needs to know when *not* to believe it. An AI product that cannot be doubted precisely does not get adopted &mdash; it gets used once and quietly abandoned.
 
-## `toolkits.block.and-the-one-i-am-proudest-of.label`
-And the one I am proudest of
+## `products.metric.1.n`
+15&ndash;20 min &rarr; &lt;1
 
-## `toolkits.block.and-the-one-i-am-proudest-of.p`
-**I co-authored our inclusive-design and accessibility standard** &mdash; WCAG AA across print, web, mobile, packaging and point-of-sale, with named validation tooling and representation checklists. **The part that made it real was not the document. It was putting the contrast check into the QC gate**, so the standard is enforced at the moment of the decision rather than remembered afterward.
+## `products.metric.1.l`
+Artwork compliance review, per piece.
 
-## `toolkits.outcome.1.lead`
-One standard, every partner
+## `products.metric.2.n`
+60 seconds
 
-## `toolkits.outcome.1.sub`
-A brand book digitized into the source agencies actually work from.
+## `products.metric.2.l`
+One product through five channels with three regulated adjustments.
 
-## `toolkits.outcome.2.lead`
-WCAG AA, written and gated
+## `products.metric.3.n`
+days
 
-## `toolkits.outcome.2.sub`
-Co-authored, with the check placed inside QC rather than beside it.
+## `products.metric.3.l`
+Internal applications ship in days, against a typical four-to-six-week external cycle.
 
-## `toolkits.outcome.3.lead`
-Masters teams adapt from
+## `products.block.why-i-build-them-rather-than-o.label`
+Why I build them rather than only plan for them
 
-## `toolkits.outcome.3.sub`
-Template systems and reusable modules, global and local on the same base.
+## `products.block.why-i-build-them-rather-than-o.p`
+Because owning the surface is what makes measurement honest. **I track usage, confidence and sentiment, adoption barriers and business outcomes** on tools I am responsible for, which means the reading is not a quarterly slide someone assembles &mdash; it is how I find out whether the last cycle was worth anything. I also self-taught the enterprise infrastructure to get any of it deployed at all: the internal path ran through a queue measured in weeks, so I read the platform documentation until I understood what I was permitted to deploy and under which controls. That is why there are five products and not one.
 
-## `toolkits.jd-tags`
+## `products.outcome.1.lead`
+Shipped, not piloted forever
+
+## `products.outcome.1.sub`
+Five products in twelve months, every one behind real auth and access control.
+
+## `products.outcome.2.lead`
+Measured on surfaces I own
+
+## `products.outcome.2.sub`
+Usage, sentiment, barriers and outcomes, read first-hand.
+
+## `products.outcome.3.lead`
+Built inside the constraints
+
+## `products.outcome.3.sub`
+Learned the platform rules rather than waiting in the queue &mdash; the controls are legitimate.
+
+## `products.jd-tags`
 ```html
-<span>communication toolkits</span><span>best practices &amp; resources</span><span>brand standards</span><span>accessibility &amp; inclusion</span><span>editorial consistency</span>
+<span>self-service workflows</span><span>scaling enterprise tools</span><span>AI solutions</span><span>workflow transformation</span><span>business outcomes</span>
 ```
 
-## `sustainability.title`
-SunBird &mdash; a corporate sustainability claim, made watchable
+## `guidance.title`
+The guidance layer &mdash; and the diagnosis that produced it
 
-## `sustainability.sub`
-Sustainability team owned the science &middot; communications owned the message &middot; I made every frame of it &middot; live on Bayer&rsquo;s global channel
+## `guidance.sub`
+User guidance built as a product &middot; a required curriculum that still runs without me &middot; monthly hackathons &middot; and the moment I stopped teaching and built the tool instead
 
-## `sustainability.fig.1`
-**The problem, named in three words.** PVC with a foil backing &mdash; opaque, multi-material, effectively unsortable at the recycling stage. Naming what is being removed is more legible than naming what replaces it.
+## `guidance.fig.1`
+**User guidance, written as a product rather than a memo.** An ordered path, a version for each machine someone might be sitting at, and a checklist that remembers where they stopped. It has already been run for its first colleague outside the original team &mdash; which is the whole point: onboarding that is a document other people can run, not a conversation only I can have.
 
-## `sustainability.fig.2`
-**The whole argument in one frame.** A hard split down the middle &mdash; opaque on the left, transparent on the right. No copy required. This is the frame the campaign is built around.
+## `guidance.block.the-diagnosis.label`
+The diagnosis
 
-## `sustainability.fig.3`
-**The shot I am proudest of.** Two blisters edge-on, so an eighteen percent weight reduction stops being a number and becomes a thickness you can see. Nobody reads a percentage. They do look at a silhouette.
+## `guidance.block.the-diagnosis.p`
+I once taught a briefing module to more than a hundred marketers. It worked &mdash; the briefs measurably improved. And the questions kept coming, more of them rather than fewer. The obvious response was to teach it harder. **Instead I looked at what actually happens at the moment someone sits down to write a brief, and found the obstacle was not missing knowledge. It was missing information, and the cost of going to find it.** So I stopped teaching and built the tool that closed the gap.
 
-## `sustainability.fig.4`
-**Four claims, four comparators.** Carbon &minus;38%, water &minus;78%, land &minus;53%, weight &minus;18% &mdash; every one footnoted against the packaging it replaces, because a sustainability number without its baseline is not a claim, it is a liability.
+## `guidance.block.adoption-barriers-are-found-no.label`
+Adoption barriers are found, not inferred
 
-## `sustainability.fig.5`
-**And the same story in print, where nothing moves.** The film reveals the claims in sequence; a page has to land all four at once without becoming a table. Same icons, same system, different physics.
+## `guidance.block.adoption-barriers-are-found-no.p`
+That is what a barrier looks like when you go and look for one: not *they need more training*, but *this specific step costs more than it is worth, and here is the number of minutes.* Training was the intuitive fix and it was the wrong one, which is exactly why the diagnosis has to happen before the intervention.
 
-## `sustainability.block.the-problem.label`
-The problem
+## `guidance.block.the-rest-of-the-layer.label`
+The rest of the layer
 
-## `thesis.p-2.2`
-Bayer had replaced the PVC in a blister pack with mono-material PET &mdash; the kind of change that is genuinely significant and almost impossible to feel. The whole story lives in a material nobody looks at, on a product people open without thinking, and it is carried by four life-cycle-assessment percentages that mean nothing on their own.
+## `guidance.block.the-rest-of-the-layer.p`
+A **five-module capability curriculum I co-authored**, launched as *required* training inside the marketing organization &mdash; three sessions I delivered personally to more than a hundred marketers, then published to the internal learning platform as mandatory training, **where it still runs without me**. A **change-champion network** with a named person in each discipline. A **monthly two-day hackathon** open to every department across the science organization, pairing domain experts with technical champions: the first produced **seven tools ready to scale**, and two of these events have produced software still being developed for production use. And the **AI learning track for the 115-person domain**, organized by task and by tool, which I am building now.
 
-## `sustainability.block.how-it-was-actually-made.label`
-How it was actually made
+## `guidance.block.the-pattern-underneath-all-of.label`
+The pattern underneath all of it
 
-## `sustainability.block.how-it-was-actually-made.p`
-I worked with the **sustainability team**, who owned the science, and then with **communications**, to craft the message &mdash; and then I built the entire thing: 3D creative, lighting, rendering, animation, type animation. It ran across **social and in print**, alongside the press release.
+## `guidance.block.the-pattern-underneath-all-of.p`
+Teach it. Find out why it did not take. **Then change the situation rather than the person.** I have run that loop on drawing, on design briefs, on accessibility standards, on brand standards, on bread, and now on AI across an enterprise &mdash; and the hackathon is its purest form, because the lesson *is* the format: nobody leaves a room like that without having built something.
 
-## `sustainability.block.why-this-is-the-case-that-matt.label`
-Why this is the case that matters most for a communications team
+## `guidance.outcome.1.lead`
+Guidance that outlives me
 
-## `sustainability.block.why-this-is-the-case-that-matt.p`
-**Because it is the whole loop, and I was in every room of it.** A subject-matter function owns a technical truth. Communications owns what the public should understand. Usually the person between them briefs it out and waits. **Here I sat in both conversations and then made the artifact myself.**
+## `guidance.outcome.1.sub`
+Mandatory training still running on the platform without my involvement.
 
-## `sustainability.block.why-this-is-the-case-that-matt.p2`
-**And it was a regulated claim, not a slogan.** I worked with the communications and sustainability teams to take the life-cycle-assessment claims through **legal, medical and regulatory review** before any of it was public &mdash; so the claim holds up because the numbers were cleared before the film was cut, not after.
+## `guidance.outcome.2.lead`
+Onboarding as a document
 
-## `sustainability.block.why-this-is-the-case-that-matt.p3`
+## `guidance.outcome.2.sub`
+A playbook already run for its first colleague outside the team.
+
+## `guidance.outcome.3.lead`
+A community with a cadence
+
+## `guidance.outcome.3.sub`
+Monthly hackathons; seven tools ready to scale out of the first one.
+
+## `guidance.jd-tags`
 ```html
-Bayer positioned the launch as the first PET blister in the consumer health sector, with packaging partner Liveo Research, launching first in the Netherlands. <em>That framing is Bayer&rsquo;s, and it is on the record</em> &mdash; the <a href="https://www.bayer.com/media/en-us/bayer-and-liveo-research-launch-first-of-its-kind-blister-packaging-with-improved-environmental-footprint/">30 October 2024 press release</a>, plus independent coverage in Packaging Europe, Healthcare Packaging, Packaging Digest and Recycling Today.
+<span>user guidance</span><span>learning &amp; communications</span><span>community resources</span><span>adoption barriers</span><span>AI enablement</span><span>change management</span>
 ```
 
-## `sustainability.outcome.1.lead`
-Published, not described
+## `resistance.title`
+The room that had to be convinced
 
-## `sustainability.outcome.1.sub`
-Live on Bayer&rsquo;s global corporate channel since November 2024.
+## `resistance.sub`
+A town hall for close to a thousand colleagues &middot; a craft the technology appears to threaten &middot; and ninety seconds of a game doing what a deck cannot
 
-## `sustainability.outcome.2.lead`
-Cleared before it shipped, with me in the room
+## `resistance.block.the-hardest-part-of-this-job-i.label`
+The hardest part of this job is not the plan
 
-## `sustainability.outcome.2.sub`
-Taken through legal, medical and regulatory review with comms and sustainability.
+## `resistance.block.the-hardest-part-of-this-job-i.p`
+Earlier this year I presented our AI roadmap at a science-organization town hall to an audience of **close to a thousand people**, a great many of whom practice a craft this technology appears to threaten. That is not a friendly room, and no adoption plan survives contact with it if the plan pretends the fear is not there.
 
-## `sustainability.outcome.3.lead`
-Science &rarr; message &rarr; artifact
+## `resistance.block.the-hardest-part-of-this-job-i.p2`
+The message was **&ldquo;our goal is to amplify our people, not replace them.&rdquo;** I helped craft the presentation and the strategy for delivering it, and I presented it.
 
-## `sustainability.outcome.3.sub`
-One person across all three, so nothing was lost in a handoff.
+## `resistance.block.is-it-ai.label`
+&ldquo;Is it AI?&rdquo;
 
-## `sustainability.jd-tags`
+## `resistance.block.is-it-ai.p`
+Rather than argue the point, I built a participation segment into the session: the room guesses which work was machine-made. It is a game, and it is deliberately fun. **It also lets an audience test the technology on itself instead of being argued at** &mdash; which converts a defensive room into a participating one in about ninety seconds.
+
+## `resistance.block.why-a-guessing-game-is-the-ser.label`
+Why a guessing game is the serious option
+
+## `resistance.block.why-a-guessing-game-is-the-ser.p`
+If a room of practitioners cannot reliably tell, that is a real conversation about where the craft actually lives. If they can, the threat deflates on its own. **Either result is better than a slide asserting one of them**, and both of them belong to the audience rather than to me.
+
+## `resistance.block.and-then-you-measure-the-part.label`
+And then you measure the part nobody measures
+
+## `resistance.block.and-then-you-measure-the-part.p`
+Usage tells you whether people opened the thing. It does not tell you whether they trust it. **I track confidence and sentiment alongside usage, adoption barriers and business outcomes** &mdash; because on an AI rollout the number that predicts next quarter is how people feel about the tool, and it is the one most programs never collect.
+
+## `resistance.outcome.1.lead`
+Presented, not just prepared
+
+## `resistance.outcome.1.sub`
+Close to a thousand colleagues, on the message that AI amplifies rather than replaces.
+
+## `resistance.outcome.2.lead`
+Participation designed in
+
+## `resistance.outcome.2.sub`
+A segment of my own invention that lets the room test the claim itself.
+
+## `resistance.outcome.3.lead`
+Sentiment is tracked
+
+## `resistance.outcome.3.sub`
+Not only whether people clicked, but whether they believed it.
+
+## `resistance.jd-tags`
 ```html
-<span>external communications</span><span>corporate narrative</span><span>video content</span><span>visual storytelling</span><span>regulated claims</span><span>cross-functional collaboration</span>
+<span>sentiment &amp; confidence</span><span>change communications</span><span>town halls</span><span>usage tracking</span><span>data interpretation</span>
 ```
+
+## `straight.title`
+One straight answer, before you have to go looking for it
+
+## `straight.sub`
+Where my regulated-healthcare experience travels to US Commercial, and where it does not
+
+## `straight.block.the-distance-stated-plainly.label`
+The distance, stated plainly
+
+## `straight.block.the-distance-stated-plainly.p`
+My eight-plus years in regulated healthcare are **consumer health** &mdash; retail, ecommerce, and the commercial conversations behind shelf space. **They are not pharmaceutical commercial operations.** Your commercial engine is not one I have run, and I would rather learn it from your teams than describe the two as the same thing.
+
+## `straight.block.what-does-travel.label`
+What does travel
+
+## `straight.block.what-does-travel.p`
+The regulated part. **Years of close collaboration with legal, medical and regulatory review**, including a public environmental claim I took through that review with our communications and sustainability teams, on creative I made myself &mdash; now live on the company&rsquo;s global corporate channel. Healthcare-professional-facing work alongside the consumer portfolio. And a career that started building clinical diagnostic analyzers against regulatory standards.
+
+## `straight.block.and-the-field-facing-part-in-a.label`
+And the field-facing part, in a smaller way
+
+## `straight.block.and-the-field-facing-part-in-a.p`
+One of our hackathons produced a **sales application for field representatives** who had been looking up equipment parts for hospital customers in a spreadsheet. I helped build the prototype into a working version, and it is now being developed for field use. It is the closest thing I have to commercial-field enablement, and it came out of a teaching format rather than a project plan.
 
 ## `footer.big`
 Thank you for your consideration. I would welcome the chance to talk about the work.
 
 ## `footer.fine`
-Michael Scrivana &middot; Case studies &middot; August 2026 &middot; Prepared for Stryker &middot; Senior Manager, Communications &middot; R570593  
-Imagery shown is concept, pilot or shipped brand output from work at Bayer Consumer Health. No confidential business data is reproduced here.
+Michael Scrivana &middot; Case studies &middot; September 2026 &middot; Prepared for Novartis &middot; Associate Director, Product Adoption Lead &middot; REQ-10086144  
+Imagery shown is concept, pilot or shipped internal output from work at Bayer Consumer Health. No confidential business data is reproduced here.
