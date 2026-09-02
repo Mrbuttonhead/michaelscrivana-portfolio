@@ -57,6 +57,16 @@ body {
 
 .mono { font-family: var(--mono); text-transform: uppercase; letter-spacing: var(--track); font-size: 11px; font-weight: 500; }
 .eyebrow { color: var(--accent); }
+.embed16 { position: relative; width: 100%; padding-top: 56.25%; margin: .9rem 0 .5rem;
+  border-radius: 4px; overflow: hidden; background: #000; border: 1px solid var(--accent-line); }
+.embed16 iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.proof-link { display: inline-flex; align-items: center; gap: .4em; margin-top: .35rem;
+  font-weight: 600; font-size: .92em; color: var(--accent); text-decoration: none;
+  border-bottom: 1px solid var(--accent-line); padding-bottom: 1px; transition: border-color .15s, color .15s; }
+.proof-link:hover { color: var(--accent-deep); border-bottom-color: var(--accent-deep); }
+.film-credit { font-size: .84em; color: var(--muted, #5b6472); margin-top: .45rem; }
+.film-credit a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+figcaption .proof-link { display: inline-flex; margin-top: .35rem; font-size: .95em; }
 
 /* ── TOP NAV ── */
 .topnav {
@@ -102,13 +112,13 @@ header.hero { padding: 84px 0 52px; border-bottom: 1px solid var(--border); }
 
 /* ── CASE STUDIES ── */
 .case { padding: 58px 0; border-bottom: 1px solid var(--border); scroll-margin-top: 70px; }
-.case-head { display: grid; grid-template-columns: 64px 1fr; gap: 20px; align-items: start; margin-bottom: 28px; }
-.case-num { font-family: var(--mono); font-size: 13px; color: var(--accent); padding-top: 6px; }
+.case-head { display: grid; grid-template-columns: 1fr; gap: 6px; align-items: start; margin-bottom: 28px; }
+.case-num { font-family: var(--mono); font-size: 13px; color: var(--accent); }
 .case-title { font-size: clamp(24px, 4vw, 34px); font-weight: 700; letter-spacing: var(--tight); line-height: 1.08; }
 .case-sub { color: var(--ink-3); font-size: 14px; margin-top: 8px; font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.12em; }
 
 .case-body { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 40px; }
-@media (max-width: 680px) { .case-body { grid-template-columns: 1fr; } .case-head { grid-template-columns: 1fr; gap: 6px; } }
+@media (max-width: 680px) { .case-body { grid-template-columns: 1fr; } }
 .block .label { color: var(--ink-3); margin-bottom: 8px; }
 .block p { font-size: 15px; color: var(--ink-2); line-height: 1.62; }
 .block p strong { color: var(--ink); font-weight: 600; }
@@ -159,6 +169,22 @@ figcaption { font-size: 12.5px; color: var(--ink-3); margin-top: 10px; line-heig
 figcaption strong { color: var(--ink-2); font-weight: 600; }
 .shots .wide { margin-top: 18px; }
 
+/* ── OAD SCALE: KV masters row + pack wall + scroll reveal ── */
+.kv-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 12px; }
+.kv-row figure img { border-radius: 12px; }
+@media (max-width: 680px) { .kv-row { grid-template-columns: repeat(2, 1fr); } }
+
+.pack-wall { display: grid; grid-template-columns: repeat(auto-fill, minmax(108px, 1fr)); gap: 10px; }
+.pack-wall .pack img { border-radius: 12px; aspect-ratio: 1 / 1; object-fit: cover; box-shadow: var(--shadow-sm); }
+
+.reveal { opacity: 0; transform: translateY(16px);
+  transition: opacity .7s cubic-bezier(.2,0,0,1), transform .7s cubic-bezier(.2,0,0,1);
+  transition-delay: calc(var(--i, 0) * 55ms); }
+.reveal.visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+
 /* ── FOOTER ── */
 footer { padding: 56px 0 80px; }
 footer .big { font-size: clamp(22px, 3.5vw, 30px); font-weight: 700; letter-spacing: var(--tight); margin-bottom: 18px; max-width: 24ch; }
@@ -179,6 +205,7 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
       <a class="case-link" href="#tooling">Self-Service</a>
       <a class="case-link" href="#education">Enablement</a>
       <a class="case-link" href="#change">Under Change</a>
+      <a class="case-link" href="#announcement">The Announcement</a>
     </div>
   </div>
 </nav>
@@ -187,14 +214,14 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
   <div class="wrap">
     <p class="kicker"><span class="dot"></span>Sr. Manager, Brand Operations and Marketing &nbsp;·&nbsp; DePuy Synthes &nbsp;·&nbsp; R-094539</p>
     <h1>A standard nobody can follow at the moment of work <em>is a document, not a standard.</em></h1>
-    <p class="lede">Seven years governing brand systems for a global consumer-health portfolio — and building the operational machinery that keeps them consistent when a hundred people, a dozen agencies and fifty SKUs are all touching them at once. Five cases, in the order this job would meet them.</p>
+    <p class="lede">Seven years governing brand systems for a global consumer-health portfolio, and building the machinery that holds them together when a hundred people, a dozen agencies and fifty SKUs are all touching them at once. Six cases, in the order this job would meet them.</p>
     <p class="who"><strong>Michael Scrivana</strong> — Senior Designer, AI Lead at Bayer Consumer Health. Eight years in regulated healthcare. &nbsp;<a href="mailto:mkscrivana@gmail.com">mkscrivana@gmail.com</a></p>
   </div>
 </header>
 
 <section class="thesis">
   <div class="wrap">
-    <p>Brand governance fails operationally, <span class="hl">not creatively.</span> The rules are usually fine. Finding them, at speed, under a deadline, is the problem.</p>
+    <p>Brand governance fails operationally, <span class="hl">not creatively.</span> The rules are usually fine. Finding them at speed, under a deadline, is the problem.</p>
   </div>
 </section>
 
@@ -217,7 +244,7 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
 
       <div class="block">
         <div class="label">What I did</div>
-        <p>I <strong>digitized the brand book into the single standard every agency and internal team accessed and worked from</strong> — one live resource instead of a circulating file — then coordinated pack renders across every SKU and held consistency through Amazon (including A+ pages), Walmart, Target, retail, digital and social. I wrote the design briefs and reviewed partner deliverables against the standard rather than against taste.</p>
+        <p>I <strong>digitized the brand book into the single standard every agency and internal team worked from</strong>, so there was one live resource to check against. Then I coordinated pack renders across every SKU and held consistency through Amazon (including A+ pages), Walmart, Target, retail, digital and social. I wrote the design briefs and reviewed partner deliverables against the standard.</p>
       </div>
 
       <div class="shots">
@@ -228,7 +255,7 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
           </figure>
           <figure>
             <img src="images/oad-kv-lineup-orange.webp" alt="One A Day Kids, Prenatal, Women's Multi and Men's 50+ in the relaunched identity, shown as a family under The ONE for you">
-            <figcaption><strong>After, at volume.</strong> Consistency across a portfolio is a governance outcome before it is a design one.</figcaption>
+            <figcaption><strong>After, at volume.</strong> Fifty-plus SKUs, a thousand-plus assets, one relaunch window.</figcaption>
           </figure>
         </div>
       </div>
@@ -260,23 +287,56 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
 
       <div class="block">
         <div class="label">Publishing at volume</div>
-        <p>I oversaw <strong>700+ product renders</strong> through <strong>GS1 syndication into EDAM/PIM</strong> — the naming, tagging, versioning and publishing discipline that decides whether the right image appears on the right retailer's page. Set the aesthetic standards with the render vendors; owned the pipeline that carried them out.</p>
+        <p>I oversaw <strong>700+ product renders</strong> through <strong>GS1 syndication into EDAM/PIM</strong>. Naming, tagging, versioning and publishing is what decides whether the right image reaches the right retailer's page. I set the standards with the render vendors and owned the pipeline that carried them out.</p>
       </div>
 
       <div class="block">
         <div class="label">The schema underneath</div>
-        <p>I designed the <strong>PX Taxonomy Framework</strong> — five facets across six craft sub-homes, on a canonical-object schema with cross-references — so a person or a machine can find the one authoritative version of a thing rather than the nearest copy of it.</p>
+        <p>I designed the <strong>PX Taxonomy Framework</strong>: six facets across six craft sub-homes, on a canonical-object schema with cross-references. A person or a machine can find the authoritative version of a thing, not the nearest copy.</p>
       </div>
 
       <div class="block full">
-        <div class="label">Components, not files</div>
-        <p>I built <strong>master-and-adaptation template systems</strong>, modular assets held in a DAM, and reusable regulated-copy modules, so brands, markets and partners assemble from parts rather than commissioning finished files. I design the global masters local markets adapt, and I build and maintain the <strong>Figma library and token base</strong> for the PX design system.</p>
+        <div class="label">Built from parts</div>
+        <p>I built <strong>master-and-adaptation template systems</strong>, modular assets in a DAM, and reusable regulated-copy modules, so brands, markets and partners assemble what they need instead of commissioning it. I design the global masters that local markets adapt, and I maintain the <strong>Figma library and token base</strong> for the PX design system.</p>
+      </div>
+
+      <div class="shots reveal">
+        <figure class="wide" style="--i:0">
+          <img loading="lazy" src="images/oad-scale/kv/main.webp" alt="One A Day master key visual: the portfolio lineup on the orange brand field under the tagline The ONE for you">
+        </figure>
+        <div class="kv-row">
+          <figure style="--i:1"><img loading="lazy" src="images/oad-scale/kv/kids.webp" alt="One A Day Kids key visual on the cyan brand field"></figure>
+          <figure style="--i:2"><img loading="lazy" src="images/oad-scale/kv/mens.webp" alt="One A Day Men's life-stages key visual on the deep-blue brand field"></figure>
+          <figure style="--i:3"><img loading="lazy" src="images/oad-scale/kv/womens.webp" alt="One A Day Women's life-stages key visual on the orange brand field"></figure>
+          <figure style="--i:4"><img loading="lazy" src="images/oad-scale/kv/fiftyplus.webp" alt="One A Day 50+ tablet key visual"></figure>
+        </div>
+        <figcaption><strong>The masters.</strong> One key-visual architecture — logo lockup, lighting and pack geometry held fixed — flexed by segment. Orange for the portfolio, cyan for Kids, blue for Men's; the master is what local markets adapt from.</figcaption>
+      </div>
+
+      <div class="shots">
+        <div class="pack-wall">
+          <figure class="pack reveal" style="--i:0"><img loading="lazy" src="images/oad-scale/packs/kids-multi-gummy.webp" alt="One A Day Kids Multi Gummy pack render"></figure>
+          <figure class="pack reveal" style="--i:1"><img loading="lazy" src="images/oad-scale/packs/kids-multi-iron.webp" alt="One A Day Kids Multi with Iron pack render"></figure>
+          <figure class="pack reveal" style="--i:2"><img loading="lazy" src="images/oad-scale/packs/kids-probiotic.webp" alt="One A Day Kids Multi with Probiotic pack render"></figure>
+          <figure class="pack reveal" style="--i:3"><img loading="lazy" src="images/oad-scale/packs/teen-boy.webp" alt="One A Day Teen Multi Gummy for him pack render"></figure>
+          <figure class="pack reveal" style="--i:4"><img loading="lazy" src="images/oad-scale/packs/teen-girl.webp" alt="One A Day Teen Multi Gummy for her pack render"></figure>
+          <figure class="pack reveal" style="--i:5"><img loading="lazy" src="images/oad-scale/packs/womens-multi.webp" alt="One A Day Women's Multi pack render"></figure>
+          <figure class="pack reveal" style="--i:6"><img loading="lazy" src="images/oad-scale/packs/womens-tablet.webp" alt="One A Day Women's Multi tablet pack render"></figure>
+          <figure class="pack reveal" style="--i:7"><img loading="lazy" src="images/oad-scale/packs/womens-50plus.webp" alt="One A Day Women's 50+ Multi pack render"></figure>
+          <figure class="pack reveal" style="--i:8"><img loading="lazy" src="images/oad-scale/packs/prenatal-advanced.webp" alt="One A Day Prenatal Advanced Multi Gummy pack render"></figure>
+          <figure class="pack reveal" style="--i:9"><img loading="lazy" src="images/oad-scale/packs/prenatal-carton.webp" alt="One A Day Prenatal carton pack render"></figure>
+          <figure class="pack reveal" style="--i:10"><img loading="lazy" src="images/oad-scale/packs/mens-tablet.webp" alt="One A Day Men's Multi tablet pack render"></figure>
+          <figure class="pack reveal" style="--i:11"><img loading="lazy" src="images/oad-scale/packs/mens-gummy.webp" alt="One A Day Men's Multi Gummy pack render"></figure>
+          <figure class="pack reveal" style="--i:12"><img loading="lazy" src="images/oad-scale/packs/mens-50plus.webp" alt="One A Day Men's 50+ Multi pack render"></figure>
+          <figure class="pack reveal" style="--i:13"><img loading="lazy" src="images/oad-scale/packs/womens-multi-gummy.webp" alt="One A Day Women's Multi Gummy pack render, angled hero shot"></figure>
+        </div>
+        <figcaption><strong>At volume.</strong> A slice of the SKU-level render library — <strong>700+ product renders</strong> on one lighting and camera language, syndicated across the digital shelf.</figcaption>
       </div>
 
       <div class="outcomes">
-        <div class="outcome"><div class="o-lead">One authoritative version</div><div class="o-sub">A canonical-object schema with cross-references, not a folder convention.</div></div>
-        <div class="outcome"><div class="o-lead">700+ renders syndicated</div><div class="o-sub">GS1 into EDAM/PIM — the digital shelf, end to end.</div></div>
-        <div class="outcome"><div class="o-lead">Assembled, not commissioned</div><div class="o-sub">Master-and-adaptation templates plus modular regulated copy.</div></div>
+        <div class="outcome"><div class="o-lead">6 facets, 6 sub-homes</div><div class="o-sub">A canonical-object schema with cross-references.</div></div>
+        <div class="outcome"><div class="o-lead">700+ renders syndicated</div><div class="o-sub">GS1 into EDAM/PIM, across the digital shelf.</div></div>
+        <div class="outcome"><div class="o-lead">Templates, not tickets</div><div class="o-sub">Master-and-adaptation systems plus modular regulated copy.</div></div>
       </div>
 
       <div class="jd-tag">
@@ -301,7 +361,7 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
 
       <div class="block full">
         <div class="label">The premise</div>
-        <p>We default to briefing outward because it is the path of least resistance, not because the work needs an agency. Change the path and the default changes with it. <strong>Five internal tools in twelve months</strong>, all built to be used by people who are not designers.</p>
+        <p>Teams brief outward because it is the easiest route, not because the work needs an agency. Change the route and the default changes with it. <strong>Five internal tools in twelve months</strong>, all built for people who are not designers.</p>
       </div>
 
       <div class="metrics">
@@ -313,12 +373,44 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
 
       <div class="block">
         <div class="label">How the rules got inside the tools</div>
-        <p>The compliance layer runs on what I call a <strong>brand brain</strong> — brand guidelines encoded as machine-readable rules, plus reference assets and scoring, consulted at every step of the pipeline. Output is on-guideline by construction rather than by review. The same architectural move as the digitized brand book, one level down.</p>
+        <p>The compliance layer runs on what I call a <strong>brand brain</strong>: guidelines encoded as machine-readable rules, plus reference assets and scoring, consulted at every step of the pipeline. Work comes out on-guideline by construction, so review catches less. Same move as the digitized brand book, one level down.</p>
       </div>
 
       <div class="block">
         <div class="label">Where it ships</div>
-        <p>The hub sits behind corporate single sign-on so it is a work tool, not a curiosity. I ship agents callable from the tools people already live in, because <strong>adoption is mostly the removal of a trip</strong> — not evangelism.</p>
+        <p>The hub sits behind corporate single sign-on, which is what makes it a work tool. I ship agents callable from the software people already have open, because <strong>adoption is mostly the removal of a trip</strong>.</p>
+      </div>
+
+      <div class="block full">
+        <div class="label">One of the five, in detail — CreativeLab</div>
+        <p>The clearest of the five is <strong>CreativeLab</strong>, a <strong>node-based creative production pipeline</strong> I built solo, full-stack. It is a React Flow graph editor over image-generation backends: each step — <span class="code">concept → variant → mask-edit → compliance-check</span> — is a node, and the graph itself becomes the artifact, so the next campaign starts from a pipeline rather than a blank brief. The brand brain is wired in as a first-class input, so output is <strong>on-guideline by construction</strong> rather than corrected back onto brand after the fact.</p>
+      </div>
+
+      <div class="shots">
+        <div class="judge-pair">
+          <figure>
+            <img src="images/creativelab-canvas-oad-kids.jpg" alt="The CreativeLab node canvas: a graph of generation, mask-edit and compliance-check nodes wired together over a product concept">
+            <figcaption><strong>The canvas.</strong> A node graph running <em>concept → variant → mask-edit → compliance-check</em>. Each step is a node; the pipeline is what gets reused, not the finished file.</figcaption>
+          </figure>
+          <figure>
+            <img src="images/creativelab-oad-kids-hero.jpg" alt="A generated One A Day Kids hero image produced through the CreativeLab pipeline">
+            <figcaption><strong>Output, on-guideline by construction.</strong> The brand brain — machine-readable rules, reference assets and compliance scoring — is consulted at every hop, so work arrives on-brand rather than being fixed back onto it.</figcaption>
+          </figure>
+        </div>
+        <figure class="wide">
+          <img src="images/creativelab-graph/creativelab-canvas-womens50-video-graph.jpg" alt="CreativeLab canvas close-up: Prompt and Reference nodes feed a Generate node, into an Output, into an Iterate node that changes one thing at a time, into a final Output wired to a video node">
+          <figcaption><strong>The real graph, brief to motion.</strong> One A Day Women&rsquo;s 50+: the pack reference feeds Generate, an Iterate node changes <em>one thing at a time</em> — <em>&ldquo;overhead view, more dramatic lighting&rdquo;</em>, everything else held — and the keeper frame wires into a video node. Every node is a decision you can see, re-run and hand to somebody else.</figcaption>
+        </figure>
+      </div>
+
+      <div class="block full">
+        <div class="label">The node output, animated</div>
+        <div class="embed16">
+          <iframe src="https://player.vimeo.com/video/1204031227?title=0&amp;byline=0&amp;portrait=0&amp;dnt=1"
+                  title="One A Day Women&rsquo;s 50+ Multi Gummy — Veo animation generated inside CreativeLab"
+                  loading="lazy" allow="fullscreen; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <p class="film-credit">The end of that graph, run out: Women&rsquo;s 50+ Multi Gummy — pack reference in, the hero still iterated, then the keeper frame animated by the video node. Nothing photographed; the whole chain runs inside the tool in minutes.</p>
       </div>
 
       <div class="jd-tag">
@@ -348,12 +440,35 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
 
       <div class="block">
         <div class="label">The failure that taught me the most</div>
-        <p>Briefs got better. They also kept stalling. When I went looking for why, the cause was not missing knowledge — people knew what a good brief contained. It was <strong>missing information, and the cost of going to find it</strong>. So I stopped teaching the module harder and built the <strong>Brief Translator</strong> to close the gap instead.</p>
+        <p>Briefs got better. They also kept stalling. When I went looking for why, it turned out people knew perfectly well what a good brief contained. What they lacked was <strong>the information itself, and the time to go find it</strong>. So I stopped teaching the module harder and built the <strong>Brief Translator</strong>.</p>
+      </div>
+
+      <div class="shots">
+        <div class="judge-pair">
+          <figure class="reveal" style="--i:0">
+            <img loading="lazy" src="images/curriculum/cogsci-cover.jpg" alt="Design Capability Curriculum module cover slide: 'How our brains are wired, applied to branding'">
+            <figcaption><strong>The anchor module.</strong> Cognitive science applied to branding — 103 of the 189 slides. The subject is the audience&rsquo;s own cognition; everything after it is a consequence.</figcaption>
+          </figure>
+          <figure class="reveal" style="--i:1">
+            <img loading="lazy" src="images/curriculum/curriculum-map.jpg" alt="Curriculum table-of-contents slide mapping four chapters: core idea, cut-through, consistent, connection">
+            <figcaption><strong>Architecture on slide two.</strong> Four chapters — core idea, cut-through, consistent, connection — each a question, with page numbers, so learners always know where they are.</figcaption>
+          </figure>
+        </div>
+        <div class="judge-pair" style="margin-top:16px">
+          <figure class="reveal" style="--i:2">
+            <img loading="lazy" src="images/curriculum/brief-good-bad-ugly.jpg" alt="Training exercise slide: grade example brief 'why' sections as good, bad, or ugly">
+            <figcaption><strong>Graded, not lectured.</strong> Learners grade real briefs against criteria they built ten slides earlier — good, bad, or ugly.</figcaption>
+          </figure>
+          <figure class="reveal" style="--i:3">
+            <img loading="lazy" src="images/curriculum/brief-checklist.jpg" alt="Design brief checklist slide — the portable artifact each module ends on">
+            <figcaption><strong>A portable artifact.</strong> Every module ends in something that survives Monday — here, the design-brief checklist that becomes the check at the moment of the decision.</figcaption>
+          </figure>
+        </div>
       </div>
 
       <div class="block full">
-        <div class="label">The pattern, stated plainly</div>
-        <p>Every time I have taught something, I have followed the teaching with a change to <em>the situation</em> rather than to the person. Drawing students were told to measure rather than trust their eye. The accessibility standard is not just 189 slides — it is <strong>a contrast check sitting in the QC gate</strong>. Brand standards became machine-readable rules the pipeline consults. <strong>A written standard is necessary and never sufficient; what makes it survive a deadline is a check that runs at the moment of the decision.</strong></p>
+        <div class="label">The pattern</div>
+        <p>Every time I have taught something, I have followed it by changing <em>the situation</em> instead of the person. Drawing students were told to measure. The 189-slide accessibility standard also put <strong>a contrast check in the QC gate</strong>. Brand standards became machine-readable rules. <strong>A written standard rarely survives a deadline. A check that runs at the moment of the decision does.</strong></p>
       </div>
 
       <div class="jd-tag">
@@ -384,7 +499,7 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
       <div class="shots">
         <figure class="wide">
           <img src="images/Mira-BeforeAfter_1.avif" alt="The MiraLAX brand mark before and after redesign, shown side by side">
-          <figcaption><strong>Before and after.</strong> A rebrand is judged at four feet in a drugstore aisle, not at 100% on a monitor.</figcaption>
+          <figcaption><strong>Before and after.</strong> A rebrand is judged at four feet in a drugstore aisle.</figcaption>
         </figure>
       </div>
 
@@ -395,24 +510,84 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
 
       <div class="block">
         <div class="label">A brand that arrived by acquisition</div>
-        <p><strong>Iberogast came into Bayer through the Steigerwald acquisition.</strong> I launched it end to end for its new parent — responsive brand site, mobile, retail merchandising — establishing it in a new market under new ownership.</p>
+        <p><strong>Iberogast came into Bayer through the Steigerwald acquisition.</strong> I launched it end to end for its new parent across responsive brand site, mobile and retail merchandising, establishing it in a new market under new ownership.</p>
       </div>
 
       <div class="shots">
         <div class="judge-pair">
           <figure>
-            <img src="images/nacds/Annual-2025_render-wide-angle.png" alt="Wide-angle render of the Bayer NACDS trade-show booth, a 20 by 30 foot exhibit environment">
-            <figcaption><strong>Environmental branding.</strong> The NACDS booth, art-directed across consecutive years — 20×30-ft footprint, six-figure budget, vendor management and production timelines.</figcaption>
+            <img src="images/nacds/TSE-onsite_wide-exterior.avif" width="1600" height="1200" loading="lazy" decoding="async" alt="The Bayer NACDS booth on the show floor, seen from outside: gradient brand wall, product panels and the suspended Bayer ring above">
+            <figcaption><strong>Environmental branding.</strong> The NACDS booth, art-directed across consecutive years, with a six-figure budget, vendor management and production timelines. <a class="proof-link" href="https://design.michaelscrivana.com/nacds.html" target="_blank" rel="noopener">See the case study &rarr;</a></figcaption>
           </figure>
           <figure>
-            <img src="images/BOLD-HERO2.png" alt="Key visual from the BOLD Ambition Tour, the identity system built for a 200-plus attendee Bayer event">
-            <figcaption><strong>Event branding.</strong> The BOLD Ambition Tour — one design system carried across three consecutive years and three different formats, virtual to hybrid to in-person.</figcaption>
+            <img src="images/BOLD-HERO2.avif" width="1600" height="1422" loading="lazy" decoding="async" alt="Key visual from the BOLD Ambition Tour, the identity system built for a 200-plus attendee Bayer event">
+            <figcaption><strong>Event branding.</strong> The BOLD Ambition Tour: one design system carried across three consecutive years and three formats, virtual to hybrid to in-person. <a class="proof-link" href="https://design.michaelscrivana.com/bold.html" target="_blank" rel="noopener">See the case study &rarr;</a></figcaption>
           </figure>
         </div>
       </div>
 
       <div class="jd-tag">
         <span>Rebrand</span><span>Acquisition</span><span>Brand architecture</span><span>Packaging guidance</span><span>Environmental branding</span><span>Event branding</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ─────────────── 06 ─────────────── -->
+<section class="case" id="announcement">
+  <div class="wrap">
+    <div class="case-head">
+      <div class="case-num">06</div>
+      <div>
+        <div class="case-title">An Announcement That Had to Hold Across Every Channel at Once</div>
+        <div class="case-sub">External communications · corporate channels · regulated claims</div>
+      </div>
+    </div>
+    <div class="case-body">
+
+      <div class="block full">
+        <div class="label">The situation</div>
+        <p>Bayer replaced the PVC in the Aleve Feminax blister with PET, making it recycle-ready, and <strong>positioned it in its own newsroom as a first-of-its-kind in the consumer health sector</strong>. A corporate announcement lands everywhere on the same day: press, employees, social, print, the corporate channel. Every surface has to carry the same claim in the same words.</p>
+      </div>
+
+      <div class="shots">
+        <figure class="wide">
+          <img src="images/sunbird-pr.avif" width="1600" height="1064" loading="lazy" decoding="async" alt="SunBird announcement key visual: the clear PET Aleve Feminax blister beside its carton, with the sustainability statistics set alongside">
+          <figcaption><strong>The announcement key visual.</strong> One system, re-cut for press, social, intranet, print and video.</figcaption>
+        </figure>
+      </div>
+
+      <div class="block full">
+        <div class="label">What I made</div>
+        <p>I built the film end to end: <strong>all of the 3D creative, lighting, rendering, animation and typography</strong>. The clear PET blister lit against blue, a silver-to-clear wipe for the material change, and an edge-on shot where you can see the weight come out of the pack.</p>
+        <div class="embed16">
+          <iframe src="https://player.vimeo.com/video/1222026785?h=49b5ad571e&amp;title=0&amp;byline=0&amp;portrait=0&amp;dnt=1"
+                  title="SunBird — Bayer&rsquo;s first PET blister, 32-second announcement film"
+                  loading="lazy" allow="fullscreen; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <p class="film-credit">Thirty-two seconds. Published 1 November 2024 on Bayer&rsquo;s global corporate channel.</p>
+      </div>
+
+      <div class="block">
+        <div class="label">Where it ran</div>
+        <p>The film went out on <strong>Bayer’s global corporate channel</strong>, not a brand channel. The campaign carried across <strong>press and media assets, LinkedIn, the BayerNet employee intranet and print</strong>, timed to the newsroom release, and the packaging and healthcare trade press picked it up.</p>
+        <p class="film-credit">Independently verifiable: the film sits on Bayer&rsquo;s own corporate channel, and the launch is on the <a href="https://www.bayer.com/media/en-us/bayer-and-liveo-research-launch-first-of-its-kind-blister-packaging-with-improved-environmental-footprint/" target="_blank" rel="noopener">bayer.com newsroom</a>, dated 30 October 2024.</p>
+      </div>
+
+      <div class="block">
+        <div class="label">The part that makes it governance</div>
+        <p>Every statistic here is a regulated environmental claim. <strong>Carbon footprint down 38%, 78% less water, 53% less land, packaging weight down 18%</strong>, each carrying its comparator: <em>per unit, against the current Aleve blister packaging</em>. Drop the footnote and the claim is no longer substantiated, so it has to survive every crop, every aspect ratio and every channel the asset gets rebuilt for. I worked through that with the communications and sustainability teams, on creative I had built myself.</p>
+      </div>
+
+      <div class="block full">
+        <div class="label">Same move, different register</div>
+        <p>The brand book, the machine-readable rules and this asterisk are the same problem at three scales. <strong>A claim is only as good as its weakest reproduction.</strong></p>
+      </div>
+
+      <div class="jd-tag">
+        <span>External communication</span><span>Corporate communications</span><span>Content creation</span><span>Regulated claims</span><span>Multi-channel</span><span>Stakeholder engagement</span>
       </div>
 
     </div>
@@ -435,6 +610,25 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
     </div>
   </div>
 </footer>
+
+<script>
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+</script>
 
 </body>
 </html>
