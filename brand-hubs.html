@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand hubs — governance at the moment of work · Michael Scrivana</title>
+<meta name="description" content="Nobody breaks the brand guidelines on purpose. Two digital brand hubs — One A Day and Claritin — built so the right asset is findable at the moment of work. The argument: findability is the governance problem, and a global system means governing the variance, not eliminating it.">
+<meta name="robots" content="noindex, nofollow">
+<meta content="Brand hubs — governance at the moment of work" property="og:title">
+<meta content="Nobody breaks the brand guidelines on purpose. Findability is the governance problem — and a global system means governing the variance, not eliminating it." property="og:description">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jnj.michaelscrivana.com/brand-hubs.html">
+<meta property="og:image" content="https://jnj.michaelscrivana.com/images/brand-hubs/claritin-hub-home.webp">
+<meta content="summary_large_image" name="twitter:card">
+<meta name="twitter:title" content="Brand hubs — governance at the moment of work">
+<meta name="twitter:description" content="Nobody breaks the brand guidelines on purpose. Findability is the governance problem — and a global system means governing the variance, not eliminating it.">
+<meta name="twitter:image" content="https://jnj.michaelscrivana.com/images/brand-hubs/claritin-hub-home.webp">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/webclip.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   PX Design System v0.2 — LIGHT / PAPER tokens, scoped & inlined.
+   Case-study variant: essay + process artifacts + lightbox.
+   Self-contained: no external CSS dependency.
+   ══════════════════════════════════════════════════════════════ */
+:root {
+  --px-bg:          #f4f5f7;
+  --px-surface:     #ffffff;
+  --px-surface-2:   #ebedf0;
+  --px-surface-3:   #dde0e6;
+  --px-surface-4:   #c9cdd5;
+
+  --px-accent:       #2850D8;
+  --px-accent-deep:  #1B3AB0;
+  --px-accent-hover: #4368E8;
+  --px-accent-2:     #00867A;
+  --px-accent-dim:   rgba(40, 80, 216, 0.10);
+  --px-accent-glow:  rgba(40, 80, 216, 0.22);
+
+  --px-text:    #0a0d12;
+  --px-text-2:  #4a5058;
+  --px-text-3:  #8b9099;
+  --px-text-4:  #b8bcc4;
+
+  --px-border:    rgba(10, 13, 18, 0.08);
+  --px-border-2:  rgba(10, 13, 18, 0.14);
+  --px-border-3:  rgba(10, 13, 18, 0.24);
+
+  --px-font:  'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --px-mono:  'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+
+  --px-track-tight:    -0.025em;
+  --px-track-body:     -0.005em;
+  --px-track-mono:     0.14em;
+  --px-track-mono-lg:  0.18em;
+
+  --px-radius:     14px;
+  --px-radius-sm:  10px;
+  --px-radius-xs:  6px;
+
+  --px-shadow-sm:    0 1px 2px -1px rgba(10, 13, 18, 0.08);
+  --px-shadow:       0 4px 16px -8px rgba(10, 13, 18, 0.12);
+  --px-shadow-lg:    0 8px 32px -12px rgba(10, 13, 18, 0.18);
+  --px-shadow-accent:0 8px 30px -12px rgba(40, 80, 216, 0.25);
+
+  --px-ease:  cubic-bezier(0.2, 0, 0, 1);
+  --px-dur:   160ms;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background:
+    radial-gradient(ellipse 70% 40% at 50% -8%, var(--px-accent-dim), transparent 60%),
+    var(--px-bg);
+  color: var(--px-text);
+  font-family: var(--px-font);
+  font-size: 17px;
+  line-height: 1.65;
+  font-weight: 400;
+  letter-spacing: var(--px-track-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+::selection { background: var(--px-accent); color: #fff; }
+
+/* ============ NAV ============ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(244, 245, 247, 0.82);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border-bottom: 1px solid var(--px-border);
+}
+nav .name {
+  font-family: var(--px-font);
+  font-size: 14px; font-weight: 500;
+  letter-spacing: var(--px-track-body);
+  color: var(--px-text); text-decoration: none;
+}
+nav .name .dot {
+  display: inline-block; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--px-accent);
+  margin-right: 10px; vertical-align: middle;
+}
+nav .back {
+  font-family: var(--px-mono);
+  font-size: 11px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: var(--px-track-mono);
+  color: var(--px-text-3); text-decoration: none;
+  transition: color var(--px-dur) var(--px-ease);
+}
+nav .back:hover { color: var(--px-text); }
+
+/* ============ EYEBROW + MONO UTILITIES ============ */
+.px-eyebrow {
+  font-family: var(--px-mono);
+  text-transform: uppercase; letter-spacing: var(--px-track-mono-lg);
+  font-size: 11px; font-weight: 500; color: var(--px-accent);
+}
+
+/* ============ HERO ============ */
+.hero {
+  padding: 150px 40px 40px;
+  max-width: 880px; margin: 0 auto;
+}
+.hero-eyebrow { margin-bottom: 28px; opacity: 0; animation: fadeUp 0.8s var(--px-ease) 0.15s forwards; }
+.hero h1 {
+  font-family: var(--px-font);
+  font-size: clamp(40px, 5.6vw, 66px);
+  font-weight: 700; line-height: 1.06;
+  letter-spacing: var(--px-track-tight);
+  color: var(--px-text); margin-bottom: 30px;
+  opacity: 0; animation: fadeUp 0.9s var(--px-ease) 0.3s forwards;
+}
+.hero h1 em { font-style: italic; font-weight: 400; color: var(--px-accent); }
+.hero-subtitle {
+  font-family: var(--px-font);
+  font-size: 19px; line-height: 1.6; font-weight: 400;
+  color: var(--px-text-2); max-width: 660px;
+  opacity: 0; animation: fadeUp 0.9s var(--px-ease) 0.45s forwards;
+}
+.hero-divider { height: 1px; background: var(--px-border); margin: 48px 0 28px; opacity: 0; animation: fadeIn 0.9s var(--px-ease) 0.6s forwards; }
+.hero-meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; opacity: 0; animation: fadeUp 0.9s var(--px-ease) 0.7s forwards; }
+.hero-meta dt { font-family: var(--px-mono); text-transform: uppercase; letter-spacing: var(--px-track-mono); font-size: 10.5px; font-weight: 500; color: var(--px-text-3); margin-bottom: 6px; }
+.hero-meta dd { font-family: var(--px-font); font-size: 15px; font-weight: 400; color: var(--px-text); }
+
+/* hero feature image */
+.hero-feature { max-width: 1120px; margin: 44px auto 0; padding: 0 40px; opacity: 0; animation: fadeUp 0.9s var(--px-ease) 0.8s forwards; }
+.hero-feature figure { margin: 0; }
+.hero-feature img { width: 100%; height: auto; display: block; border-radius: var(--px-radius); border: 1px solid var(--px-border-2); box-shadow: var(--px-shadow-lg); background: var(--px-surface); }
+.hero-feature figcaption { font-family: var(--px-font); font-size: 13.5px; color: var(--px-text-3); margin-top: 14px; line-height: 1.55; text-align: center; }
+.hero-feature figcaption strong { color: var(--px-text-2); font-weight: 600; }
+
+/* ============ ESSAY SECTIONS ============ */
+section.essay { padding: 0 40px; max-width: 720px; margin: 0 auto; }
+.section-spacer { height: 88px; }
+.section-spacer-sm { height: 48px; }
+
+.essay-head { margin-bottom: 24px; }
+.essay-head .px-eyebrow { display: block; margin-bottom: 16px; }
+.essay-head h2 {
+  font-family: var(--px-font);
+  font-size: clamp(28px, 3.4vw, 38px);
+  font-weight: 600; line-height: 1.18;
+  letter-spacing: -0.02em; color: var(--px-text);
+}
+.essay-head h2 em { font-style: italic; font-weight: 400; }
+
+.essay-body p { font-size: 17px; line-height: 1.7; color: var(--px-text); margin-bottom: 20px; }
+.essay-body p:last-child { margin-bottom: 0; }
+.essay-body p.lead { font-size: 19px; line-height: 1.6; color: var(--px-text-2); margin-bottom: 32px; }
+.essay-body em { font-style: italic; }
+.essay-body strong { font-weight: 600; color: var(--px-text); }
+.essay-body code {
+  font-family: var(--px-mono); font-size: 0.9em; color: var(--px-text);
+  background: var(--px-surface-2); padding: 2px 6px;
+  border-radius: var(--px-radius-xs); border: 1px solid var(--px-border);
+}
+
+/* ============ PULL QUOTE ============ */
+.pullquote {
+  border-left: 3px solid var(--px-accent);
+  padding: 4px 0 4px 28px;
+  margin: 36px 0;
+  font-size: clamp(20px, 2.4vw, 24px);
+  line-height: 1.4; font-weight: 500;
+  letter-spacing: -0.015em; color: var(--px-text);
+}
+.pullquote em { font-style: italic; font-weight: 400; color: var(--px-accent); }
+
+/* ============ FIGURES / GALLERY (wide, break out of the 720 column) ============ */
+.figblock { max-width: 1000px; margin: 40px auto; padding: 0 40px; }
+.figblock--narrow { max-width: 820px; }
+.figlabel {
+  font-family: var(--px-mono); text-transform: uppercase;
+  letter-spacing: var(--px-track-mono); font-size: 10.5px; font-weight: 600;
+  color: var(--px-text-3); margin-bottom: 14px; display: block;
+}
+figure { margin: 0; }
+figure img { width: 100%; height: auto; display: block; border-radius: var(--px-radius); border: 1px solid var(--px-border-2); background: var(--px-surface); box-shadow: var(--px-shadow); cursor: zoom-in; }
+figcaption { font-family: var(--px-font); font-size: 13.5px; color: var(--px-text-3); margin-top: 13px; line-height: 1.55; }
+figcaption strong { color: var(--px-text-2); font-weight: 600; }
+.fig-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.fig-trio { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.fig-quad { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.fig-pair figcaption, .fig-trio figcaption, .fig-quad figcaption { margin-top: 10px; font-size: 12.5px; }
+.fig-pair.top { align-items: start; }
+@media (max-width: 720px) {
+  .fig-pair, .fig-trio, .fig-quad { grid-template-columns: 1fr; }
+}
+
+/* ============ REGION-SUBSET DIAGRAM (theme-aware, no library) ============ */
+.diagram { max-width: 1000px; margin: 40px auto; padding: 0 40px; }
+.diagram svg { width: 100%; height: auto; display: block; border-radius: var(--px-radius); border: 1px solid var(--px-border-2); background: var(--px-surface); box-shadow: var(--px-shadow); }
+.diagram figcaption { font-family: var(--px-font); font-size: 13.5px; color: var(--px-text-3); margin-top: 13px; line-height: 1.55; }
+.diagram figcaption strong { color: var(--px-text-2); font-weight: 600; }
+.d-core   { fill: var(--px-accent-dim); stroke: var(--px-accent); stroke-width: 1.5; }
+.d-tile   { fill: var(--px-surface); stroke: var(--px-border-3); stroke-width: 1; }
+.d-region { fill: var(--px-surface-2); stroke: var(--px-border-3); stroke-width: 1; }
+.d-must   { stroke: var(--px-accent); stroke-width: 2.5; fill: none; }
+.d-choose { stroke: var(--px-text-3); stroke-width: 1.5; stroke-dasharray: 4 5; fill: none; }
+.d-h      { font-family: var(--px-font); font-weight: 600; fill: var(--px-text); }
+.d-sub    { font-family: var(--px-font); fill: var(--px-text-2); }
+.d-lbl    { font-family: var(--px-mono); letter-spacing: 0.12em; fill: var(--px-text-3); }
+.d-accent { fill: var(--px-accent); }
+
+/* ============ PLACEHOLDER FIGURES (drop-in slots for exports still to come) ============ */
+.ph { border: 1px dashed var(--px-border-3); border-radius: var(--px-radius); background: var(--px-surface-2); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 56px 28px; min-height: 300px; }
+.ph .ph-tag { font-family: var(--px-mono); text-transform: uppercase; letter-spacing: var(--px-track-mono); font-size: 10.5px; font-weight: 600; color: var(--px-accent); margin-bottom: 12px; }
+.ph .ph-title { font-family: var(--px-font); font-size: 16px; font-weight: 600; color: var(--px-text-2); margin-bottom: 6px; }
+.ph .ph-note { font-family: var(--px-font); font-size: 13.5px; line-height: 1.55; color: var(--px-text-3); max-width: 48ch; }
+
+/* ============ INTERACTIVE AGENT (demo of the interaction pattern) ============ */
+.agent { border: 1px solid var(--px-border-2); border-radius: var(--px-radius); background: var(--px-surface); box-shadow: var(--px-shadow); overflow: hidden; }
+.agent-bar { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--px-border); background: var(--px-surface-2); }
+.agent-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--px-accent-2); box-shadow: 0 0 0 3px rgba(0,134,122,0.15); flex: 0 0 auto; }
+.agent-name { font-family: var(--px-font); font-size: 14px; font-weight: 600; color: var(--px-text); }
+.agent-tag { margin-left: auto; font-family: var(--px-mono); text-transform: uppercase; letter-spacing: var(--px-track-mono); font-size: 9.5px; font-weight: 600; color: var(--px-text-3); border: 1px solid var(--px-border-2); border-radius: 100px; padding: 3px 9px; }
+.agent-log { padding: 20px 18px; display: flex; flex-direction: column; gap: 14px; max-height: 440px; overflow-y: auto; }
+.msg { display: flex; }
+.msg.user { justify-content: flex-end; }
+.bubble { max-width: 84%; font-family: var(--px-font); font-size: 15px; line-height: 1.55; padding: 11px 15px; border-radius: 15px; }
+.msg.bot .bubble { background: var(--px-surface-2); color: var(--px-text); border-bottom-left-radius: 5px; }
+.msg.user .bubble { background: var(--px-accent); color: #fff; border-bottom-right-radius: 5px; }
+.bubble .path { display: inline-flex; align-items: center; gap: 6px; margin-top: 11px; font-family: var(--px-mono); font-size: 11px; letter-spacing: 0.03em; color: var(--px-accent-deep); background: var(--px-accent-dim); border: 1px solid rgba(40,80,216,0.22); border-radius: 100px; padding: 5px 12px; }
+.bubble .path::before { content: '\21B3'; opacity: 0.7; }
+.agent-typing { display: inline-flex; gap: 4px; align-items: center; }
+.agent-typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--px-text-4); animation: agentblink 1s infinite; }
+.agent-typing i:nth-child(2) { animation-delay: 0.18s; }
+.agent-typing i:nth-child(3) { animation-delay: 0.36s; }
+@keyframes agentblink { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+.agent-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 4px 18px 16px; }
+.chip { font-family: var(--px-font); font-size: 13px; color: var(--px-text-2); background: var(--px-surface); border: 1px solid var(--px-border-2); border-radius: 100px; padding: 8px 14px; cursor: pointer; transition: color var(--px-dur) var(--px-ease), border-color var(--px-dur) var(--px-ease); }
+.chip:hover { border-color: var(--px-accent); color: var(--px-accent); }
+.chip:focus-visible { outline: 2px solid var(--px-accent); outline-offset: 2px; }
+.agent-input { display: flex; gap: 10px; padding: 14px 18px; border-top: 1px solid var(--px-border); background: var(--px-surface-2); }
+.agent-input input { flex: 1 1 auto; min-width: 0; font-family: var(--px-font); font-size: 15px; color: var(--px-text); background: var(--px-surface); border: 1px solid var(--px-border-2); border-radius: 100px; padding: 11px 16px; outline: none; transition: border-color var(--px-dur) var(--px-ease); }
+.agent-input input:focus { border-color: var(--px-accent); }
+.agent-input button { flex: 0 0 auto; width: 42px; height: 42px; border-radius: 50%; border: none; background: var(--px-accent); color: #fff; font-size: 18px; line-height: 1; cursor: pointer; transition: background var(--px-dur) var(--px-ease); }
+.agent-input button:hover { background: var(--px-accent-hover); }
+.agent-input button:focus-visible { outline: 2px solid var(--px-accent); outline-offset: 2px; }
+.agent-note { font-family: var(--px-font); font-size: 13.5px; color: var(--px-text-3); line-height: 1.55; margin: 14px auto 0; text-align: center; max-width: 660px; }
+.agent-note strong { color: var(--px-text-2); font-weight: 600; }
+@media (prefers-reduced-motion: reduce) { .agent-typing i { animation: none; } }
+
+/* ============ SPECULATIVE / NEXT BLOCKS ============ */
+.speculative { margin-top: 28px; }
+.spec-block { padding: 30px 0; border-top: 1px solid var(--px-border); }
+.spec-block:last-child { border-bottom: 1px solid var(--px-border); }
+.spec-block h3 { font-family: var(--px-font); font-size: 20px; font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; color: var(--px-text); margin-bottom: 12px; display: flex; align-items: baseline; gap: 14px; }
+.spec-block h3 .num { font-family: var(--px-mono); font-size: 11px; font-weight: 500; letter-spacing: var(--px-track-mono); color: var(--px-accent); text-transform: uppercase; }
+.spec-block p { font-size: 16px; line-height: 1.7; color: var(--px-text-2); }
+
+/* ============ CLOSING ============ */
+.closing { padding: 0 40px; max-width: 640px; margin: 96px auto 0; text-align: center; }
+.closing-mark { width: 36px; height: 1px; background: var(--px-accent); margin: 0 auto 32px; }
+.closing p { font-family: var(--px-font); font-style: italic; font-weight: 400; font-size: clamp(20px, 2.4vw, 24px); line-height: 1.5; letter-spacing: -0.015em; color: var(--px-text); }
+.closing p::before { content: '\201C'; color: var(--px-accent); margin-right: 2px; }
+.closing p::after  { content: '\201D'; color: var(--px-accent); margin-left: 2px; }
+
+/* ============ FOOTER ============ */
+footer { margin-top: 110px; padding: 48px 40px 64px; max-width: 1120px; margin-left: auto; margin-right: auto; border-top: 1px solid var(--px-border); display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; align-items: start; }
+.foot-col { display: flex; flex-direction: column; gap: 10px; }
+.foot-col .label { font-family: var(--px-mono); text-transform: uppercase; letter-spacing: var(--px-track-mono); font-size: 10.5px; font-weight: 500; color: var(--px-text-3); margin-bottom: 4px; }
+.foot-col a { font-family: var(--px-font); font-size: 14px; color: var(--px-text); text-decoration: none; transition: color var(--px-dur) var(--px-ease); }
+.foot-col a:hover { color: var(--px-accent); }
+.foot-col .mono { font-family: var(--px-mono); font-size: 12.5px; letter-spacing: 0; text-transform: none; }
+.foot-col.right { text-align: right; }
+.foot-col.right .copy { font-family: var(--px-mono); text-transform: uppercase; letter-spacing: var(--px-track-mono); font-size: 10.5px; color: var(--px-text-3); }
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s var(--px-ease), transform 0.7s var(--px-ease); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ============ LIGHTBOX ============ */
+.lightbox { position: fixed; inset: 0; z-index: 200; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 4vh 4vw; background: rgba(10, 13, 18, 0.92); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); opacity: 0; visibility: hidden; transition: opacity .22s ease, visibility .22s ease; cursor: zoom-out; }
+.lightbox.open { opacity: 1; visibility: visible; }
+.lightbox img { max-width: 92vw; max-height: 84vh; width: auto; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 30px 80px -30px rgba(0,0,0,0.8); background: var(--px-surface); cursor: default; transform: scale(.98); transition: transform .22s ease; }
+.lightbox.open img { transform: scale(1); }
+.lightbox .lb-cap { max-width: 70ch; text-align: center; color: rgba(255,255,255,0.78); font-size: 13.5px; line-height: 1.55; cursor: default; }
+.lightbox .lb-cap strong { color: #fff; font-weight: 600; }
+.lightbox .lb-close { position: fixed; top: 18px; right: 22px; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.22); background: rgba(255,255,255,0.06); color: #fff; font-size: 20px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .15s; }
+.lightbox .lb-close:hover { background: rgba(255,255,255,0.16); }
+.lightbox .lb-nav { position: fixed; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.22); background: rgba(255,255,255,0.06); color: #fff; font-size: 24px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .15s; }
+.lightbox .lb-nav:hover { background: rgba(255,255,255,0.16); }
+.lightbox .lb-prev { left: 18px; }
+.lightbox .lb-next { right: 18px; }
+@media (max-width: 600px) { .lightbox .lb-prev { left: 8px; } .lightbox .lb-next { right: 8px; } .lightbox .lb-nav { width: 42px; height: 42px; } }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px) {
+  .hero-meta { grid-template-columns: 1fr; gap: 20px; }
+  footer { grid-template-columns: 1fr; }
+  .foot-col.right { text-align: left; }
+  .hero-feature, .figblock, .diagram { padding-left: 24px; padding-right: 24px; }
+}
+@media (max-width: 640px) {
+  nav { padding: 14px 20px; }
+  .hero { padding: 124px 20px 40px; }
+  section.essay { padding: 0 20px; }
+  .closing { padding: 0 20px; }
+  footer { padding: 40px 20px 48px; }
+  .hero h1 { font-size: clamp(32px, 8vw, 46px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .hero-eyebrow, .hero h1, .hero-subtitle, .hero-divider, .hero-meta, .hero-feature { opacity: 1 !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class='name' href='/'><span class="dot"></span>Michael Scrivana</a>
+  <a class='back' href='/#standard'>&larr; Back to the application</a>
+</nav>
+
+<!-- ================ HERO ================ -->
+<div class="hero">
+  <div class="hero-eyebrow px-eyebrow">Case study &middot; Brand governance</div>
+  <h1>Nobody breaks the brand <em>guidelines</em> on purpose.</h1>
+  <p class="hero-subtitle">A brand guideline is a document about how things should be. A brand hub is a bet about how people actually work &mdash; under a deadline, on a Friday, three time zones from whoever wrote the rule. I&rsquo;ve built two of them: web properties on our internal web platform where partners, agencies, and internal teams all work from the same place. This is the argument behind them &mdash; that governance fails at the moment of work, not the moment of writing.</p>
+
+  <div class="hero-divider"></div>
+
+  <dl class="hero-meta">
+    <div>
+      <dt>Role</dt>
+      <dd>Operationalized the system; ran it cross-functionally</dd>
+    </div>
+    <div>
+      <dt>Scope</dt>
+      <dd>Two brand hubs &mdash; One&nbsp;A&nbsp;Day &amp; Claritin</dd>
+    </div>
+    <div>
+      <dt>Operating model</dt>
+      <dd>Marketing, design &amp; legal &middot; agency support for implementation</dd>
+    </div>
+  </dl>
+</div>
+
+<!-- HERO FEATURE -->
+<div class="hero-feature">
+  <figure>
+    <img src="images/brand-hubs/claritin-hub-home.webp" width="2048" height="1032" alt="The Claritin brand hub home page: a full-width header reading 'Visual brand logic and downloadables in one place', with brand navigation for Brand strategy, Visual identity, Global activations, Download center, FAQ and Contact">
+    <figcaption><strong>One address for &ldquo;what&rsquo;s correct.&rdquo;</strong> The Claritin hub home &mdash; brand logic and every downloadable in one place, instead of a file living wherever the last person emailed it.</figcaption>
+  </figure>
+</div>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 01 — THE PROBLEM ================ -->
+<section class="essay reveal" id="problem" style="scroll-margin-top: 88px;">
+  <div class="essay-head">
+    <span class="px-eyebrow">01 &middot; The problem</span>
+    <h2>The guideline was never the hard part. Finding the right file in the time you have is the hard part.</h2>
+  </div>
+  <div class="essay-body">
+    <p class="lead">Every brand has a standard. The standard is almost never where the work is. It lives in a PDF, wherever the last person emailed it, and so &ldquo;is this correct?&rdquo; becomes a question you have to ask a person &mdash; if you can find the person, and if you have the time.</p>
+    <p>That gap is where brands actually break. Not in a meeting where someone argues against the guideline, but on a Friday afternoon when the deck is due, the right logo lockup is three folders deep in someone else&rsquo;s inbox, and guessing is faster than finding. The rule didn&rsquo;t fail. The <em>distance</em> between the rule and the moment of work failed.</p>
+    <div class="pullquote">Nobody breaks brand guidelines on purpose. They break them because finding the right asset costs more than guessing does. Governance fails at the moment of work, not the moment of writing.</div>
+    <p>So I stopped treating this as a documentation problem and started treating it as a <strong>findability</strong> problem. A hub isn&rsquo;t a nicer PDF. It&rsquo;s the bet that if the correct thing is the easiest thing to reach, correctness stops depending on who you know and how much time you have.</p>
+  </div>
+</section>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 02 — CLARITIN, THE HARDER ONE ================ -->
+<section class="essay reveal" id="claritin" style="scroll-margin-top: 88px;">
+  <div class="essay-head">
+    <span class="px-eyebrow">02 &middot; Hub one, the harder one</span>
+    <h2>Claritin: a global system doesn&rsquo;t mean everyone uses the <em>same</em> thing.</h2>
+  </div>
+  <div class="essay-body">
+    <p class="lead">The thing people underestimate about a global brand system is that regions don&rsquo;t all use the same assets.</p>
+    <p>A market draws a different subset depending on its regulatory position, its retail environment, and what it&rsquo;s actually launching. So the system has to hold a single standard while different regions legitimately pull different things from it. Governing that is a different job from governing one market &mdash; and pretending the variance shouldn&rsquo;t exist is how global systems get quietly ignored.</p>
+    <p>That reframes the goal. The job isn&rsquo;t to force uniformity; it&rsquo;s to <strong>govern the variance</strong> &mdash; to make the non-negotiable core impossible to miss while making each market&rsquo;s legitimate choices easy to reach. A screenshot can show what the hub looks like. It can&rsquo;t show how that works, so I drew it.</p>
+  </div>
+</section>
+
+<!-- THE DIAGRAM — anchor of the Claritin section -->
+<div class="diagram reveal">
+  <span class="figlabel" style="display:block;max-width:1000px;margin:0 auto 14px;">How it works — one shared core, four regional draws</span>
+  <figure>
+    <svg viewBox="0 0 920 610" role="img" aria-label="Diagram. At the centre is a shared core of mandatory brand assets — logo, colour and cleared claims — labelled 'what everyone must use'. Four regional markets surround it: United States, China, MENA and Brazil. A solid line connects every region to the shared core, meaning the core is mandatory for all. A separate dashed line connects each region to its own outer set of chosen assets — retailer and DTC for the US, marketplace product pages for China, an Arabic logo lockup for MENA, and pharmacy-shelf assets for Brazil — meaning each market chooses a different subset on top of the shared core.">
+      <!-- must-use spokes (region -> core) -->
+      <line class="d-must" x1="292" y1="182" x2="360" y2="240"/>
+      <line class="d-must" x1="628" y1="182" x2="560" y2="240"/>
+      <line class="d-must" x1="292" y1="428" x2="360" y2="370"/>
+      <line class="d-must" x1="628" y1="428" x2="560" y2="370"/>
+      <!-- market-chooses draws (region -> outer tile) -->
+      <line class="d-choose" x1="170" y1="123" x2="150" y2="82"/>
+      <line class="d-choose" x1="750" y1="123" x2="770" y2="82"/>
+      <line class="d-choose" x1="170" y1="487" x2="150" y2="528"/>
+      <line class="d-choose" x1="750" y1="487" x2="770" y2="528"/>
+
+      <!-- shared core -->
+      <rect class="d-core" x="360" y="240" width="200" height="130" rx="16"/>
+      <text class="d-lbl d-accent" x="460" y="270" text-anchor="middle" font-size="11">SHARED CORE</text>
+      <text class="d-sub" x="460" y="295" text-anchor="middle" font-size="13.5">what everyone must use</text>
+      <rect class="d-tile" x="382" y="318" width="44" height="30" rx="6"/>
+      <rect class="d-tile" x="438" y="318" width="44" height="30" rx="6"/>
+      <rect class="d-tile" x="494" y="318" width="44" height="30" rx="6"/>
+      <text class="d-lbl" x="404" y="337" text-anchor="middle" font-size="8">LOGO</text>
+      <text class="d-lbl" x="460" y="337" text-anchor="middle" font-size="8">COLOR</text>
+      <text class="d-lbl" x="516" y="337" text-anchor="middle" font-size="8">CLAIMS</text>
+
+      <!-- region nodes -->
+      <rect class="d-region" x="142" y="123" width="150" height="60" rx="12"/>
+      <text class="d-h" x="217" y="159" text-anchor="middle" font-size="16">United States</text>
+      <rect class="d-region" x="628" y="123" width="150" height="60" rx="12"/>
+      <text class="d-h" x="703" y="159" text-anchor="middle" font-size="16">China</text>
+      <rect class="d-region" x="142" y="427" width="150" height="60" rx="12"/>
+      <text class="d-h" x="217" y="463" text-anchor="middle" font-size="16">MENA</text>
+      <rect class="d-region" x="628" y="427" width="150" height="60" rx="12"/>
+      <text class="d-h" x="703" y="463" text-anchor="middle" font-size="16">Brazil</text>
+
+      <!-- outer choice tiles -->
+      <rect class="d-tile" x="60" y="38" width="180" height="44" rx="10"/>
+      <text class="d-sub" x="150" y="65" text-anchor="middle" font-size="12.5">Retailer + DTC set</text>
+      <rect class="d-tile" x="680" y="38" width="180" height="44" rx="10"/>
+      <text class="d-sub" x="770" y="65" text-anchor="middle" font-size="12.5">Marketplace PDPs</text>
+      <rect class="d-tile" x="60" y="528" width="180" height="44" rx="10"/>
+      <text class="d-sub" x="150" y="555" text-anchor="middle" font-size="12.5">Arabic logo lockup</text>
+      <rect class="d-tile" x="680" y="528" width="180" height="44" rx="10"/>
+      <text class="d-sub" x="770" y="555" text-anchor="middle" font-size="12.5">Pharmacy-shelf assets</text>
+
+      <!-- legend -->
+      <line class="d-must" x1="330" y1="596" x2="366" y2="596"/>
+      <text class="d-lbl" x="374" y="600" font-size="10">MUST USE</text>
+      <line class="d-choose" x1="486" y1="596" x2="522" y2="596"/>
+      <text class="d-lbl" x="530" y="600" font-size="10">MARKET CHOOSES</text>
+    </svg>
+    <figcaption><strong>Govern the variance, don&rsquo;t eliminate it.</strong> The solid lines are the non-negotiable core every market must use. The dashed lines are each market&rsquo;s own legitimate draw &mdash; a different subset for a different regulatory position, retail environment, and launch. The regions and example draws are illustrative of the structure, not a live map.</figcaption>
+  </figure>
+</div>
+
+<div class="figblock reveal">
+  <span class="figlabel">The variance, made visible — one system, many market draws</span>
+  <div class="fig-pair top">
+    <figure>
+      <img src="images/brand-hubs/claritin-markets.webp" width="1512" height="2000" loading="lazy" alt="A Claritin hub page titled 'Global activations' with the heading 'See best assets from different markets', listing the United States, China, Australia and Brazil — each market shown with its own distinct set of creative assets and a 'see best assets' link">
+      <figcaption><strong>Different markets, different draws.</strong> The hub&rsquo;s global-activations view: each market has its own set of best assets under one standard &mdash; the variance named and organized, not hidden.</figcaption>
+    </figure>
+    <figure>
+      <img src="images/brand-hubs/claritin-usa-examples.webp" width="2000" height="1977" loading="lazy" alt="A Claritin hub region page titled 'USA examples' showing the United States market's own asset sets — HCP assets and digital banners — with a 'Looking for source assets? Go to Downloads' call to action">
+      <figcaption><strong>One region&rsquo;s view.</strong> Drill into a single market and you get that market&rsquo;s subset &mdash; here the US: its HCP assets and digital banners, findable in one place. This is the detail the diagram abstracts.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<div class="figblock reveal">
+  <span class="figlabel">One standard, many scripts</span>
+  <figure>
+    <img src="images/brand-hubs/claritin-typography.webp" width="2000" height="1800" loading="lazy" alt="The Claritin hub typography page showing the type system across scripts — a Latin primary and system typeface, and an Arabic typeface — under a single set of rules">
+    <figcaption><strong>The standard has to travel.</strong> The type system holds one voice across Latin, Arabic and Cyrillic scripts. &ldquo;Global&rdquo; isn&rsquo;t one asset used everywhere &mdash; it&rsquo;s one standard that survives the trip into each market&rsquo;s reality.</figcaption>
+  </figure>
+</div>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 03 — ONE A DAY HUB ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">03 &middot; Hub two</span>
+    <h2>One A Day: give &ldquo;what&rsquo;s correct&rdquo; <em>one address</em>.</h2>
+  </div>
+  <div class="essay-body">
+    <p>The other hub is US, built around the One A Day portfolio relaunch. Its whole purpose is unglamorous and exactly the point: give the brand one address. Partners, agencies, and internal teams all work from the same place, so the current pack, the right palette, and the cleared claim are the defaults rather than something you reconstruct from memory.</p>
+    <p>To be precise about my role: I <strong>operationalized</strong> this &mdash; I built and ran the hub that makes the system usable. The relaunch creative itself was brand-team and agency-led. Building the place where a system lives is a different job from owning the brand, and it&rsquo;s the job this page is about.</p>
+  </div>
+</section>
+
+<div class="figblock reveal">
+  <span class="figlabel">One A Day hub — the establishing shot</span>
+  <figure>
+    <img src="images/brand-hubs/oad-hub-home.webp" width="1183" height="2000" loading="lazy" alt="The One A Day brand hub home page: a hero reading 'Our Brand World', entry points to Brand strategy, Visual Identity and Brand World Design, and a Key Elements row for logo, colors and photography">
+    <figcaption><strong>One address for the relaunch.</strong> The One&nbsp;A&nbsp;Day hub home &mdash; brand strategy, visual identity, and every key element in one place. The US hub, built around the portfolio relaunch; I operationalized it, while the relaunch creative was brand-team and agency-led.</figcaption>
+  </figure>
+</div>
+
+<div class="figblock reveal">
+  <span class="figlabel">What one address holds — from key visuals to the shelf</span>
+  <div class="fig-pair top">
+    <figure>
+      <img src="images/brand-hubs/oad-key-visuals.webp" width="2000" height="1582" loading="lazy" alt="The One A Day hub key-visual layouts page: labelled examples of Hero KV, Megabrand single-image, Megabrand mosaic and Product KV, each with rules for using the '1' outline and branding">
+      <figcaption><strong>The system, spelled out.</strong> Key-visual layouts with the rules attached &mdash; when to use the &ldquo;1&rdquo; outline, how branding carries &mdash; so the correct build is also the reachable one.</figcaption>
+    </figure>
+    <figure>
+      <img src="images/brand-hubs/oad-retail-layouts.webp" width="2000" height="1445" loading="lazy" alt="The One A Day hub digital and retail layouts page: e-commerce product tiles for Women's Multi Gummy and Men's 50+ Multi, and a retailer storefront banner">
+      <figcaption><strong>All the way to the shelf.</strong> The same system carried into e-commerce tiles and the retailer storefront &mdash; the digital shelf is where correctness has to survive the deadline.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 04 — HOW IT WAS BUILT ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">04 &middot; How it was built</span>
+    <h2>Legal was in the room, not at the end.</h2>
+  </div>
+  <div class="essay-body">
+    <p>These get built cross-functionally &mdash; marketing, design and legal in it together &mdash; with agency support for the implementation. Having legal in from the start rather than at the end is the difference between compliance being <em>designed in</em> and compliance being <em>inspected in</em>. When the reviewer helped decide how the system is structured, &ldquo;is this allowed?&rdquo; is answered by the hub&rsquo;s architecture instead of by a rejection two days before the deadline.</p>
+    <p>The honest note on agencies: this isn&rsquo;t an argument against them. Agency partners did the implementation and did it well. It&rsquo;s an argument about <strong>what you should be paying them for</strong> &mdash; execution against a system you own and operate, not the ownership of the system itself. Keep the governance in-house and cross-functional; buy the build.</p>
+  </div>
+</section>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 05 — THE AGENT ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">05 &middot; The agent</span>
+    <h2>A design system too big to browse is a design system nobody uses.</h2>
+  </div>
+  <div class="essay-body">
+    <p>A design system at this scale is too big to browse. And people don&rsquo;t fail to follow the guidelines because they disagree with them &mdash; they fail because they can&rsquo;t find the right asset in the time they have. That&rsquo;s the same failure from the top of this page, just larger.</p>
+    <p>So we built conversational agents into the hubs. You ask for what you need and the system takes you to it. That&rsquo;s the difference between a brand centre that exists and a brand centre people actually use. I want to be clear that this isn&rsquo;t an AI story &mdash; it&rsquo;s an <strong>adoption</strong> story. The agent is what taking &ldquo;findability is the governance problem&rdquo; seriously looks like once the system is too big for a human to hold in their head.</p>
+  </div>
+</section>
+
+<div class="figblock figblock--narrow reveal">
+  <span class="figlabel">The agent — try it</span>
+  <div class="agent" id="agent">
+    <div class="agent-bar">
+      <span class="agent-dot"></span>
+      <span class="agent-name">Brand hub assistant</span>
+      <span class="agent-tag">Interaction demo</span>
+    </div>
+    <div class="agent-log" id="agentLog" role="log" aria-live="polite" aria-label="Brand hub assistant conversation">
+      <div class="msg bot">
+        <div class="bubble">Tell me the asset or the rule you need and I&rsquo;ll take you to the right place in the hub. Try one of these:</div>
+      </div>
+    </div>
+    <div class="agent-chips" id="agentChips">
+      <button type="button" class="chip" data-q="Where's the Women's 50+ pack shot?">Where&rsquo;s the Women&rsquo;s 50+ pack shot?</button>
+      <button type="button" class="chip" data-q='Can I put the "1" outline over a lifestyle photo?'>Can I put the &ldquo;1&rdquo; outline over a photo?</button>
+      <button type="button" class="chip" data-q="I need the Claritin logo for MENA.">Claritin logo for MENA?</button>
+      <button type="button" class="chip" data-q="What color does Kids use?">What color does Kids use?</button>
+    </div>
+    <form class="agent-input" id="agentForm">
+      <input type="text" id="agentField" autocomplete="off" placeholder="Ask for an asset or a rule&hellip;" aria-label="Ask the brand hub assistant">
+      <button type="submit" aria-label="Send message">&rarr;</button>
+    </form>
+  </div>
+  <p class="agent-note">An illustration of the interaction, not a capture of the production hub. The point is the pattern: <strong>ask for what you need, arrive at the right asset</strong> &mdash; findability as the governance move.</p>
+</div>
+
+<div class="section-spacer"></div>
+
+<!-- ================ 06 — WHERE I'D TAKE IT ================ -->
+<section class="essay reveal">
+  <div class="essay-head">
+    <span class="px-eyebrow">06 &middot; Where I&rsquo;d take it</span>
+    <h2>Where I&rsquo;d take it.</h2>
+  </div>
+  <div class="essay-body">
+    <div class="speculative">
+      <div class="spec-block">
+        <h3><span class="num">A</span>Usage telemetry as the governance signal.</h3>
+        <p>What people search for and fail to find is a brief. A hub knows where correctness is expensive &mdash; the searches that dead-end, the assets requested for markets that don&rsquo;t have them yet. That signal should feed the roadmap, so the system fixes the gaps that are actually costing people time instead of the ones we assume.</p>
+      </div>
+      <div class="spec-block">
+        <h3><span class="num">B</span>The agent answering &ldquo;can I?&rdquo;, not just &ldquo;where is?&rdquo;</h3>
+        <p>Right now the agent solves findability &mdash; take me to the thing. The next step is the harder question: <em>can I do this?</em> An agent that reasons over the rules &mdash; this claim in this market, this lockup on this background &mdash; turns the hub from a library into a governor that answers at the moment of the decision.</p>
+      </div>
+      <div class="spec-block">
+        <h3><span class="num">C</span>The hub publishing back into the channels.</h3>
+        <p>The last mile is not making people visit the hub. It&rsquo;s the hub pushing the correct, current asset out to where the work already happens &mdash; the deck, the retailer portal, the DAM &mdash; so the right thing arrives without a trip. Governance you don&rsquo;t have to go looking for is governance that finally wins the Friday-afternoon decision.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================ CLOSING ================ -->
+<div class="closing reveal">
+  <div class="closing-mark"></div>
+  <p>A guideline tells people what&rsquo;s right. A hub makes what&rsquo;s right the easiest thing to reach &mdash; and that&rsquo;s the only version of governance that survives a deadline.</p>
+</div>
+
+<!-- ================ FOOTER ================ -->
+<footer>
+  <div class="foot-col">
+    <span class="label">Contact</span>
+    <a href="mailto:mkscrivana@gmail.com" class="mono">mkscrivana@gmail.com</a>
+    <a href="https://www.linkedin.com/in/michaelscrivana89" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://michaelscrivana.com" target="_blank" rel="noopener">michaelscrivana.com</a>
+  </div>
+  <div class="foot-col">
+    <span class="label">More work</span>
+    <a href="https://creative.michaelscrivana.com/creativelab.html">CreativeLab &mdash; a generative pipeline</a>
+    <a href="https://creative.michaelscrivana.com/oad-new-identity.html">One A Day &mdash; identity at scale</a>
+    <a href="/">The application</a>
+  </div>
+  <div class="foot-col right">
+    <span class="label">Colophon</span>
+    <span class="copy">PX Design System v0.2</span>
+    <span class="copy">DM Sans &middot; JetBrains Mono</span>
+    <span class="copy">&copy; 2026 Michael Scrivana</span>
+  </div>
+</footer>
+
+<!-- ================ LIGHTBOX ================ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true">
+  <button class="lb-close" id="lbClose" type="button" aria-label="Close">&times;</button>
+  <button class="lb-nav lb-prev" id="lbPrev" type="button" aria-label="Previous image">&#8249;</button>
+  <button class="lb-nav lb-next" id="lbNext" type="button" aria-label="Next image">&#8250;</button>
+  <img id="lbImg" alt="">
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<!-- ============ SCROLL REVEAL ============ -->
+<script>
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+</script>
+
+<!-- ============ LIGHTBOX ============ -->
+<script>
+(function () {
+  var lb = document.getElementById('lightbox'),
+      img = document.getElementById('lbImg'),
+      cap = document.getElementById('lbCap'),
+      closeBtn = document.getElementById('lbClose'),
+      prevBtn = document.getElementById('lbPrev'),
+      nextBtn = document.getElementById('lbNext'),
+      items = Array.prototype.slice.call(document.querySelectorAll('figure img')),
+      current = 0, lastFocus = null;
+
+  function render(i) {
+    current = (i + items.length) % items.length;
+    var el = items[current], fig = el.closest('figure'),
+        figcap = fig ? fig.querySelector('figcaption') : null;
+    img.src = el.currentSrc || el.src; img.alt = el.alt || '';
+    if (figcap) { cap.innerHTML = figcap.innerHTML; cap.style.display = ''; }
+    else { cap.textContent = ''; cap.style.display = 'none'; }
+  }
+  function open(i) {
+    render(i);
+    lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    lastFocus = document.activeElement; closeBtn.focus();
+  }
+  function close() {
+    lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = ''; img.src = '';
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  function step(d) { render(current + d); }
+
+  items.forEach(function (el, i) { el.addEventListener('click', function () { open(i); }); });
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function (e) { e.stopPropagation(); step(-1); });
+  nextBtn.addEventListener('click', function (e) { e.stopPropagation(); step(1); });
+  lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  });
+})();
+</script>
+
+<!-- ============ INTERACTIVE AGENT (scripted, no backend) ============ -->
+<script>
+(function () {
+  var log = document.getElementById('agentLog'),
+      form = document.getElementById('agentForm'),
+      field = document.getElementById('agentField'),
+      chips = document.getElementById('agentChips');
+  if (!log || !form || !field) return;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Findability-focused, on-brand answers. No invented numbers or internal system names.
+  var kb = [
+    { k: ['women', '50', 'pack', 'shot', 'download', 'render', 'file', 'asset', 'get'],
+      r: 'Download Center holds the current, cleared renders. The Women\u2019s 50+ pack shot is pinned to the top of its shelf \u2014 grab that one, not whatever\u2019s sitting in an old email thread.',
+      p: 'Download Center \u203A 50+ \u203A Women\u2019s' },
+    { k: ['outline', 'kv', 'key visual', 'photo', 'lifestyle', 'mosaic', 'hero'],
+      r: 'On a Hero KV the \u201C1\u201D outline is built to sit over a lifestyle photo. On a Megabrand mosaic it isn\u2019t allowed \u2014 there, branding comes from packaging or the logo instead. Here\u2019s the rule with do/don\u2019t examples.',
+      p: 'Visual Identity \u203A Key Visuals' },
+    { k: ['logo', 'lockup', 'mena', 'arabic', 'region', 'market', 'global', 'claritin'],
+      r: 'The global core logo is mandatory everywhere. MENA also has an approved Arabic lockup \u2014 use that for MENA placements. Both live together so you can\u2019t reach for the wrong one.',
+      p: 'Visual Identity \u203A Logo' },
+    { k: ['color', 'colour', 'palette', 'typography', 'type', 'font', 'kids', 'cyan'],
+      r: 'Color &amp; Typography has the exact palette values and the type rules \u2014 including the cyan field Kids uses \u2014 with the do/don\u2019t sitting right next to each one.',
+      p: 'Visual Identity \u203A Color &amp; Typography' },
+    { k: ['claim', 'legal', 'allergen', 'say', 'copy', 'approved', 'wording'],
+      r: 'Cleared claim copy travels with the assets it belongs to, so the approved wording ships with the pack. Legal signed the structure, not just the file \u2014 that\u2019s compliance designed in rather than inspected in.',
+      p: 'Brand strategy \u203A Claims' }
+  ];
+  var fallback = { r: 'This is a demo of the pattern rather than the live hub \u2014 but in the real thing I\u2019d take you straight there. Try one of the suggested questions to see how \u201Cask \u2192 arrive\u201D works.', p: null };
+
+  function answer(q) {
+    var s = ' ' + q.toLowerCase() + ' ', best = fallback, score = 0;
+    kb.forEach(function (item) {
+      var n = 0;
+      item.k.forEach(function (w) { if (s.indexOf(w) > -1) n++; });
+      if (n > score) { score = n; best = item; }
+    });
+    return best;
+  }
+  function scrollDown() { log.scrollTop = log.scrollHeight; }
+  function addUser(t) {
+    var d = document.createElement('div'); d.className = 'msg user';
+    var b = document.createElement('div'); b.className = 'bubble'; b.textContent = t;
+    d.appendChild(b); log.appendChild(d); scrollDown();
+  }
+  function addBot(item) {
+    var d = document.createElement('div'); d.className = 'msg bot';
+    var b = document.createElement('div'); b.className = 'bubble';
+    b.innerHTML = item.r + (item.p ? ('<span class="path">' + item.p + '</span>') : '');
+    d.appendChild(b); log.appendChild(d); scrollDown();
+  }
+  function showTyping() {
+    var d = document.createElement('div'); d.className = 'msg bot';
+    d.innerHTML = '<div class="bubble"><span class="agent-typing"><i></i><i></i><i></i></span></div>';
+    log.appendChild(d); scrollDown(); return d;
+  }
+  function ask(q) {
+    q = (q || '').trim(); if (!q) return;
+    addUser(q);
+    var item = answer(q);
+    if (reduce) { addBot(item); return; }
+    var t = showTyping();
+    setTimeout(function () { if (t.parentNode) t.parentNode.removeChild(t); addBot(item); }, 640);
+  }
+  form.addEventListener('submit', function (e) { e.preventDefault(); ask(field.value); field.value = ''; field.focus(); });
+  if (chips) chips.addEventListener('click', function (e) {
+    var btn = e.target.closest('.chip'); if (!btn) return;
+    ask(btn.getAttribute('data-q'));
+  });
+})();
+</script>
+
+</body>
+</html>

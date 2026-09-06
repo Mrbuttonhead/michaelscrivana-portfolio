@@ -64,6 +64,22 @@ body {
   font-weight: 600; font-size: .92em; color: var(--accent); text-decoration: none;
   border-bottom: 1px solid var(--accent-line); padding-bottom: 1px; transition: border-color .15s, color .15s; }
 .proof-link:hover { color: var(--accent-deep); border-bottom-color: var(--accent-deep); }
+.case-cta {
+  grid-column: 1 / -1; margin-top: 4px;
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  padding: 18px 22px; border: 1px solid var(--accent-line);
+  background: var(--accent-dim); border-radius: 14px;
+}
+.case-cta .cta-text { font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+.case-cta .cta-text strong { color: var(--ink); font-weight: 600; }
+.case-cta a.cta-link {
+  font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.1em;
+  font-size: 11px; font-weight: 600; color: #fff; background: var(--accent-deep);
+  text-decoration: none; padding: 10px 16px; border-radius: 100px; white-space: nowrap;
+  transition: background .15s; margin-left: auto;
+}
+.case-cta a.cta-link:hover { background: var(--ink); }
+@media (max-width: 520px) { .case-cta a.cta-link { margin-left: 0; } }
 .film-credit { font-size: .84em; color: var(--muted, #5b6472); margin-top: .45rem; }
 .film-credit a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
 figcaption .proof-link { display: inline-flex; margin-top: .35rem; font-size: .95em; }
@@ -123,6 +139,13 @@ header.hero { padding: 84px 0 52px; border-bottom: 1px solid var(--border); }
 .block p { font-size: 15px; color: var(--ink-2); line-height: 1.62; }
 .block p strong { color: var(--ink); font-weight: 600; }
 .block.full { grid-column: 1 / -1; }
+.block p + p { margin-top: 0.85em; }
+.pullquote {
+  grid-column: 1 / -1;
+  font-size: clamp(17px, 2.2vw, 21px); font-weight: 500;
+  letter-spacing: var(--tight); line-height: 1.4; color: var(--ink);
+  border-left: 2px solid var(--accent); padding-left: 18px;
+}
 .code { font-family: var(--mono); font-size: 0.92em; background: var(--surface-2); padding: 1px 6px; border-radius: 5px; color: var(--ink); }
 
 .metrics { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px; }
@@ -231,33 +254,38 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
     <div class="case-head">
       <div class="case-num">01</div>
       <div>
-        <div class="case-title">The Single Standard</div>
-        <div class="case-sub">Brand governance · guidelines · agency enablement</div>
+        <div class="case-title">The guideline was never the hard part.</div>
+        <div class="case-sub">Findability · two brand hubs · global variance</div>
       </div>
     </div>
     <div class="case-body">
 
       <div class="block">
-        <div class="label">The situation</div>
-        <p>One A Day relaunched its identity across <strong>50+ SKUs and more than a thousand creative assets</strong>. Multiple agencies, every retail and digital channel, one relaunch window. The brand book existed. It was a PDF, and it lived wherever the last person had emailed it.</p>
+        <div class="label">The problem</div>
+        <p>The standard is usually fine. It lives in a PDF, wherever the last person emailed it, so &ldquo;is this correct?&rdquo; is a question you ask a person. I treat that as a <strong>findability</strong> problem: two digital hubs where the correct thing is the easiest thing to reach.</p>
       </div>
 
       <div class="block">
-        <div class="label">What I did</div>
-        <p>I turned the PDF into a <strong>live brand website — the single standard every agency and internal team worked from</strong>. Not a document to download, but a hub: <strong>Brand Strategy, Visual Identity, Brand World Design, a Download Center, FAQ and Contact</strong>, with the logo system (Glow, Flat and Pack), the &ldquo;1&rdquo; outline, branding bar, color and typography, photography, icons and key-visual rules all in one place. The Download Center served master assets by collection and life stage, so partners pulled the authoritative file instead of the nearest copy. Then I coordinated pack renders across every SKU and held consistency through Amazon (including A+ pages), Walmart, Target, retail, digital and social. I wrote the design briefs and reviewed partner deliverables against the standard.</p>
+        <div class="label">The harder hub &mdash; Claritin</div>
+        <p>A global system has to hold one standard while regions legitimately draw different assets from it. The job is <strong>governing that variance</strong>, not pretending it shouldn&rsquo;t exist.</p>
       </div>
 
       <div class="shots">
         <div class="judge-pair">
           <figure>
-            <img src="images/OAD-OLD-M_1.avif" alt="One A Day Men's packaging in the previous identity, before the portfolio relaunch">
-            <figcaption><strong>Before.</strong> The identity the portfolio was relaunching out of.</figcaption>
+            <img src="images/brand-hubs/claritin-markets.webp" width="1512" height="2000" loading="lazy" alt="The Claritin hub Global activations page listing the United States, China, Australia and Brazil, each with its own set of creative assets">
+            <figcaption><strong>Different markets, different draws.</strong> Each market has its own best-asset set under one standard &mdash; the variance named and organized, not hidden.</figcaption>
           </figure>
           <figure>
-            <img src="images/oad-kv-lineup-orange.webp" alt="One A Day Kids, Prenatal, Women's Multi and Men's 50+ in the relaunched identity, shown as a family under The ONE for you">
-            <figcaption><strong>After, at volume.</strong> Fifty-plus SKUs, a thousand-plus assets, one relaunch window.</figcaption>
+            <img src="images/brand-hubs/claritin-usa-examples.webp" width="2000" height="1977" loading="lazy" alt="The Claritin hub USA examples page showing that market's HCP assets and digital banners">
+            <figcaption><strong>One region&rsquo;s view.</strong> Drill into a single market and you get that market&rsquo;s subset &mdash; here the US, findable in one place.</figcaption>
           </figure>
         </div>
+      </div>
+
+      <div class="case-cta">
+        <div class="cta-text"><strong>Governance at the moment of work &mdash; the full case.</strong> The findability argument, then Claritin: how a global hub governs the variance.</div>
+        <a class="cta-link" href="brand-hubs.html#problem">Read the case study &rarr;</a>
       </div>
 
       <div class="block full">
