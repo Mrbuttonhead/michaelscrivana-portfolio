@@ -191,6 +191,9 @@ figure img {
 figcaption { font-size: 12.5px; color: var(--ink-3); margin-top: 10px; line-height: 1.5; }
 figcaption strong { color: var(--ink-2); font-weight: 600; }
 .shots .wide { margin-top: 18px; }
+.trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+.trio figure img { border-radius: 12px; }
+@media (max-width: 680px) { .trio { grid-template-columns: 1fr; } }
 
 /* ── OAD SCALE: KV masters row + pack wall + scroll reveal ── */
 .kv-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 12px; }
@@ -225,9 +228,8 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
     <div class="links">
       <a class="case-link" href="#standard">The Standard</a>
       <a class="case-link" href="#taxonomy">Taxonomy</a>
-      <a class="case-link" href="#tooling">Self-Service</a>
+      <a class="case-link" href="#tooling">Scale</a>
       <a class="case-link" href="#education">Enablement</a>
-      <a class="case-link" href="#change">Under Change</a>
       <a class="case-link" href="#announcement">The Announcement</a>
     </div>
   </div>
@@ -381,15 +383,15 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
     <div class="case-head">
       <div class="case-num">03</div>
       <div>
-        <div class="case-title">Self-Service That Displaces the Agency Brief</div>
-        <div class="case-sub">Scalable tools · adoption · reducing external reliance</div>
+        <div class="case-title">Scale the work, not the waiting</div>
+        <div class="case-sub">Pipelines · adoption · speed to market</div>
       </div>
     </div>
     <div class="case-body">
 
       <div class="block full">
         <div class="label">The premise</div>
-        <p>Teams brief outward because it is the easiest route, not because the work needs an agency. Change the route and the default changes with it. <strong>Five internal tools in twelve months</strong>, all built for people who are not designers.</p>
+        <p>The brand already has a system. What it doesn&rsquo;t have is a way to run that system at volume. Change the default from &ldquo;brief it out&rdquo; to &ldquo;run the pipeline,&rdquo; and speed follows. <strong>Five internal tools in twelve months</strong>, built for people who are not designers.</p>
       </div>
 
       <div class="metrics">
@@ -515,7 +517,7 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
       <div class="case-num">05</div>
       <div>
         <div class="case-title">Holding a System Together While Everything Moves</div>
-        <div class="case-sub">Rebrand · acquisition · architecture · environmental &amp; event</div>
+        <div class="case-sub">Rebrand · architecture · environmental &amp; event</div>
       </div>
     </div>
     <div class="case-body">
@@ -538,16 +540,14 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
       </div>
 
       <div class="shots">
-        <div class="judge-pair">
-          <figure>
-            <img src="images/nacds/TSE-onsite_wide-exterior.avif" width="1600" height="1200" loading="lazy" decoding="async" alt="The Bayer NACDS booth on the show floor, seen from outside: gradient brand wall, product panels and the suspended Bayer ring above">
-            <figcaption><strong>Environmental branding.</strong> The NACDS booth, art-directed across consecutive years, with a six-figure budget, vendor management and production timelines. <a class="proof-link" href="https://design.michaelscrivana.com/nacds.html" target="_blank" rel="noopener">See the case study &rarr;</a></figcaption>
-          </figure>
-          <figure>
-            <img src="images/BOLD-HERO2.avif" width="1600" height="1422" loading="lazy" decoding="async" alt="Key visual from the BOLD Ambition Tour, the identity system built for a 200-plus attendee Bayer event">
-            <figcaption><strong>Event branding.</strong> The BOLD Ambition Tour: one design system carried across three consecutive years and three formats, virtual to hybrid to in-person. <a class="proof-link" href="https://design.michaelscrivana.com/bold.html" target="_blank" rel="noopener">See the case study &rarr;</a></figcaption>
-          </figure>
-        </div>
+        <figure class="wide">
+          <img src="images/nacds/nacds-booth-floor.jpg" width="1024" height="759" loading="lazy" decoding="async" alt="The Bayer NACDS booth on the show floor: Health for All reception desk, product wall spanning MiraLAX, One A Day and Alka-Seltzer, and a lounge with the Bayer mark on screen">
+          <figcaption><strong>Environmental branding.</strong> The NACDS booth, art-directed across consecutive years, with a six-figure budget, vendor management and production timelines. <a class="proof-link" href="https://design.michaelscrivana.com/nacds.html" target="_blank" rel="noopener">See the case study &rarr;</a></figcaption>
+        </figure>
+        <figure class="wide">
+          <img src="images/BoldKV1.webp" width="1440" height="516" loading="lazy" decoding="async" alt="BOLD Activation Tour key visual — the wordmark on a circuit-line field, the identity carried across virtual, hybrid and in-person years">
+          <figcaption><strong>Event branding.</strong> The BOLD Ambition Tour: one design system carried across three consecutive years and three formats, virtual to hybrid to in-person. <a class="proof-link" href="https://design.michaelscrivana.com/bold.html" target="_blank" rel="noopener">See the case study &rarr;</a></figcaption>
+        </figure>
       </div>
 
       <div class="jd-tag">
@@ -581,6 +581,22 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
           <img src="images/sunbird-pr.avif" width="1600" height="1064" loading="lazy" decoding="async" alt="SunBird announcement key visual: the clear PET Aleve Feminax blister beside its carton, with the sustainability statistics set alongside">
           <figcaption><strong>The announcement key visual.</strong> One system, re-cut for press, social, intranet, print and video.</figcaption>
         </figure>
+        <div class="trio">
+          <figure>
+            <img src="images/sunbird/sunbird-02-pvc.jpg" width="760" height="950" loading="lazy" decoding="async" alt="Campaign frame: Eliminating the use of PVC, with the old silver-backed blister beside the Aleve Feminax pack">
+          </figure>
+          <figure>
+            <img src="images/sunbird/sunbird-03-before-after.jpg" width="760" height="950" loading="lazy" decoding="async" alt="Campaign frame split down the middle: Before, the opaque silver blister; After, the clear mono-material PET blister">
+          </figure>
+          <figure>
+            <img src="images/sunbird/sunbird-06-weight.jpg" width="760" height="950" loading="lazy" decoding="async" alt="Campaign frame: two blisters shot edge-on showing the thickness difference, captioned reducing the packaging weight by 18%">
+          </figure>
+        </div>
+        <figcaption><strong>Left to right: the problem, the argument, and the shot I am proudest of.</strong> The middle frame is a hard split — opaque one side, transparent the other.</figcaption>
+        <figure class="wide">
+          <img src="images/sunbird/sunbird-07-print.jpg" width="1400" height="932" loading="lazy" decoding="async" alt="The landscape print execution: headline on a teal wedge at left, three footnoted benefit pills beneath it, the pack and clear blister at right">
+          <figcaption><strong>And the same story in print, where nothing moves.</strong> Same icons, same system, the comparator footnote under the claims rather than hiding in the gutter.</figcaption>
+        </figure>
       </div>
 
       <div class="block full">
@@ -603,11 +619,6 @@ footer .fine { margin-top: 32px; font-size: 12px; color: var(--ink-4); font-fami
       <div class="block">
         <div class="label">The part that makes it governance</div>
         <p>Every statistic here is a regulated environmental claim. <strong>Carbon footprint down 38%, 78% less water, 53% less land, packaging weight down 18%</strong>, each carrying its comparator: <em>per unit, against the current Aleve blister packaging</em>. Drop the footnote and the claim is no longer substantiated, so it has to survive every crop, every aspect ratio and every channel the asset gets rebuilt for. I worked through that with the communications and sustainability teams, on creative I had built myself.</p>
-      </div>
-
-      <div class="block full">
-        <div class="label">Same move, different register</div>
-        <p>The brand book, the machine-readable rules and this asterisk are the same problem at three scales. <strong>A claim is only as good as its weakest reproduction.</strong></p>
       </div>
 
       <div class="jd-tag">
