@@ -242,6 +242,39 @@ figcaption strong { color: var(--px-text-2); font-weight: 600; }
 .d-lbl    { font-family: var(--px-mono); letter-spacing: 0.12em; fill: var(--px-text-3); }
 .d-accent { fill: var(--px-accent); }
 
+.d-core-group { transform-origin: 460px 305px; transform-box: view-box; }
+.d-core { stroke-dasharray: 18 12; }
+.d-must.d-flow, .d-choose.d-flow {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.diagram.visible .d-core-group { animation: d-pulse 2.8s ease-in-out infinite; }
+.diagram.visible .d-core { animation: d-core-stroke 6s linear infinite; }
+.diagram.visible .d-must.d-flow {
+  animation:
+    d-draw 0.9s var(--px-ease) calc(var(--i, 0) * 90ms) forwards,
+    d-must-flow 1.8s linear calc(1s + var(--i, 0) * 90ms) infinite;
+}
+.diagram.visible .d-choose.d-flow {
+  animation:
+    d-draw 0.8s var(--px-ease) calc(0.55s + var(--i, 0) * 80ms) forwards,
+    d-march 1.6s linear calc(1.4s + var(--i, 0) * 80ms) infinite;
+}
+@keyframes d-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.035); }
+}
+@keyframes d-core-stroke { to { stroke-dashoffset: -60; } }
+@keyframes d-draw { to { stroke-dashoffset: 0; } }
+@keyframes d-must-flow {
+  from { stroke-dasharray: 0.62 0.2; stroke-dashoffset: 0; }
+  to   { stroke-dasharray: 0.62 0.2; stroke-dashoffset: -0.82; }
+}
+@keyframes d-march {
+  from { stroke-dasharray: 0.12 0.14; stroke-dashoffset: 0; }
+  to   { stroke-dasharray: 0.12 0.14; stroke-dashoffset: -0.26; }
+}
+
 /* ============ PLACEHOLDER FIGURES (drop-in slots for exports still to come) ============ */
 .ph { border: 1px dashed var(--px-border-3); border-radius: var(--px-radius); background: var(--px-surface-2); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 56px 28px; min-height: 300px; }
 .ph .ph-tag { font-family: var(--px-mono); text-transform: uppercase; letter-spacing: var(--px-track-mono); font-size: 10.5px; font-weight: 600; color: var(--px-accent); margin-bottom: 12px; }
@@ -356,6 +389,10 @@ footer { margin-top: 110px; padding: 48px var(--px-gutter) 64px; max-width: var(
   html { scroll-behavior: auto; }
   .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
   .hero-eyebrow, .hero h1, .hero-subtitle, .hero-divider, .hero-meta, .hero-feature { opacity: 1 !important; animation: none !important; }
+  .d-core-group, .d-core, .d-must.d-flow, .d-choose.d-flow { animation: none !important; }
+  .d-core { stroke-dasharray: none; }
+  .d-must.d-flow { stroke-dasharray: none; stroke-dashoffset: 0; }
+  .d-choose.d-flow { stroke-dasharray: 4 5; stroke-dashoffset: 0; }
 }
 </style>
 </head>
@@ -436,26 +473,28 @@ footer { margin-top: 110px; padding: 48px var(--px-gutter) 64px; max-width: var(
   <figure>
     <svg viewBox="0 0 920 610" role="img" aria-label="Diagram. At the centre is a shared core of mandatory brand assets — logo, colour and cleared claims — labelled 'what everyone must use'. Four regional markets surround it: United States, China, MENA and Brazil. A solid line connects every region to the shared core, meaning the core is mandatory for all. A separate dashed line connects each region to its own outer set of chosen assets — retailer and DTC for the US, marketplace product pages for China, an Arabic logo lockup for MENA, and pharmacy-shelf assets for Brazil — meaning each market chooses a different subset on top of the shared core.">
       <!-- must-use spokes (region -> core) -->
-      <line class="d-must" x1="292" y1="182" x2="360" y2="240"/>
-      <line class="d-must" x1="628" y1="182" x2="560" y2="240"/>
-      <line class="d-must" x1="292" y1="428" x2="360" y2="370"/>
-      <line class="d-must" x1="628" y1="428" x2="560" y2="370"/>
+      <line class="d-must d-flow" pathLength="1" style="--i:0" x1="292" y1="182" x2="360" y2="240"/>
+      <line class="d-must d-flow" pathLength="1" style="--i:1" x1="628" y1="182" x2="560" y2="240"/>
+      <line class="d-must d-flow" pathLength="1" style="--i:2" x1="292" y1="428" x2="360" y2="370"/>
+      <line class="d-must d-flow" pathLength="1" style="--i:3" x1="628" y1="428" x2="560" y2="370"/>
       <!-- market-chooses draws (region -> outer tile) -->
-      <line class="d-choose" x1="170" y1="123" x2="150" y2="82"/>
-      <line class="d-choose" x1="750" y1="123" x2="770" y2="82"/>
-      <line class="d-choose" x1="170" y1="487" x2="150" y2="528"/>
-      <line class="d-choose" x1="750" y1="487" x2="770" y2="528"/>
+      <line class="d-choose d-flow" pathLength="1" style="--i:0" x1="170" y1="123" x2="150" y2="82"/>
+      <line class="d-choose d-flow" pathLength="1" style="--i:1" x1="750" y1="123" x2="770" y2="82"/>
+      <line class="d-choose d-flow" pathLength="1" style="--i:2" x1="170" y1="487" x2="150" y2="528"/>
+      <line class="d-choose d-flow" pathLength="1" style="--i:3" x1="750" y1="487" x2="770" y2="528"/>
 
       <!-- shared core -->
-      <rect class="d-core" x="360" y="240" width="200" height="130" rx="16"/>
-      <text class="d-lbl d-accent" x="460" y="270" text-anchor="middle" font-size="11">SHARED CORE</text>
-      <text class="d-sub" x="460" y="295" text-anchor="middle" font-size="13.5">what everyone must use</text>
-      <rect class="d-tile" x="382" y="318" width="44" height="30" rx="6"/>
-      <rect class="d-tile" x="438" y="318" width="44" height="30" rx="6"/>
-      <rect class="d-tile" x="494" y="318" width="44" height="30" rx="6"/>
-      <text class="d-lbl" x="404" y="337" text-anchor="middle" font-size="8">LOGO</text>
-      <text class="d-lbl" x="460" y="337" text-anchor="middle" font-size="8">COLOR</text>
-      <text class="d-lbl" x="516" y="337" text-anchor="middle" font-size="8">CLAIMS</text>
+      <g class="d-core-group">
+        <rect class="d-core" x="360" y="240" width="200" height="130" rx="16"/>
+        <text class="d-lbl d-accent" x="460" y="270" text-anchor="middle" font-size="11">SHARED CORE</text>
+        <text class="d-sub" x="460" y="295" text-anchor="middle" font-size="13.5">what everyone must use</text>
+        <rect class="d-tile" x="382" y="318" width="44" height="30" rx="6"/>
+        <rect class="d-tile" x="438" y="318" width="44" height="30" rx="6"/>
+        <rect class="d-tile" x="494" y="318" width="44" height="30" rx="6"/>
+        <text class="d-lbl" x="404" y="337" text-anchor="middle" font-size="8">LOGO</text>
+        <text class="d-lbl" x="460" y="337" text-anchor="middle" font-size="8">COLOR</text>
+        <text class="d-lbl" x="516" y="337" text-anchor="middle" font-size="8">CLAIMS</text>
+      </g>
 
       <!-- region nodes -->
       <rect class="d-region" x="142" y="123" width="150" height="60" rx="12"/>
