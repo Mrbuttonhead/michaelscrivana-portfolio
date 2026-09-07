@@ -190,6 +190,8 @@ section.essay { padding: 0 var(--px-gutter); max-width: var(--px-page); margin: 
 .essay-body p.lead { font-size: 19px; line-height: 1.6; color: var(--px-text-2); margin-bottom: 32px; }
 .essay-body em { font-style: italic; }
 .essay-body strong { font-weight: 600; color: var(--px-text); }
+.essay-body a { color: var(--px-accent); text-decoration: underline; text-underline-offset: 3px; }
+.essay-body a:hover { color: var(--px-accent-hover); }
 .essay-body code {
   font-family: var(--px-mono); font-size: 0.9em; color: var(--px-text);
   background: var(--px-surface-2); padding: 2px 6px;
@@ -471,7 +473,7 @@ footer { margin-top: 110px; padding: 48px var(--px-gutter) 64px; max-width: var(
 <div class="diagram reveal">
   <span class="figlabel" style="display:block;max-width:1000px;margin:0 auto 14px;">How it works — one shared core, four regional draws</span>
   <figure>
-    <svg viewBox="0 0 920 610" role="img" aria-label="Diagram. At the centre is a shared core of mandatory brand assets — logo, colour and cleared claims — labelled 'what everyone must use'. Four regional markets surround it: United States, China, MENA and Brazil. A solid line connects every region to the shared core, meaning the core is mandatory for all. A separate dashed line connects each region to its own outer set of chosen assets — retailer and DTC for the US, marketplace product pages for China, an Arabic logo lockup for MENA, and pharmacy-shelf assets for Brazil — meaning each market chooses a different subset on top of the shared core.">
+    <svg viewBox="0 0 920 610" role="img" aria-label="Diagram. At the centre is the brand hub — a shared core of mandatory brand assets — logo, colour and cleared claims — labelled 'what everyone must use'. Four regional markets surround it: United States, China, MENA and Brazil. A solid line connects every region to the shared core, meaning the core is mandatory for all. A separate dashed line connects each region to its own outer set of chosen assets — retailer and DTC for the US, marketplace product pages for China, an Arabic logo lockup for MENA, and pharmacy-shelf assets for Brazil — meaning each market chooses a different subset on top of the shared core.">
       <!-- must-use spokes (region -> core) -->
       <line class="d-must d-flow" pathLength="1" style="--i:0" x1="292" y1="182" x2="360" y2="240"/>
       <line class="d-must d-flow" pathLength="1" style="--i:1" x1="628" y1="182" x2="560" y2="240"/>
@@ -486,7 +488,7 @@ footer { margin-top: 110px; padding: 48px var(--px-gutter) 64px; max-width: var(
       <!-- shared core -->
       <g class="d-core-group">
         <rect class="d-core" x="360" y="240" width="200" height="130" rx="16"/>
-        <text class="d-lbl d-accent" x="460" y="270" text-anchor="middle" font-size="11">SHARED CORE</text>
+        <text class="d-lbl d-accent" x="460" y="270" text-anchor="middle" font-size="11" font-weight="700">BRAND HUB</text>
         <text class="d-sub" x="460" y="295" text-anchor="middle" font-size="13.5">what everyone must use</text>
         <rect class="d-tile" x="382" y="318" width="44" height="30" rx="6"/>
         <rect class="d-tile" x="438" y="318" width="44" height="30" rx="6"/>
@@ -641,25 +643,27 @@ footer { margin-top: 110px; padding: 48px var(--px-gutter) 64px; max-width: var(
 
 <div class="section-spacer"></div>
 
-<!-- ================ 06 — WHERE I'D TAKE IT ================ -->
+<!-- ================ 06 — WHERE IT'S GOING ================ -->
 <section class="essay reveal">
   <div class="essay-head">
-    <span class="px-eyebrow">06 &middot; Where I&rsquo;d take it</span>
-    <h2>Where I&rsquo;d take it.</h2>
+    <span class="px-eyebrow">06 &middot; Where it&rsquo;s going</span>
+    <h2>The assets are governed. The next job is scaling them across regions.</h2>
   </div>
   <div class="essay-body">
+    <p class="lead">Both hubs did something quieter than they look: they turned the brand into governed, structured data &mdash; a shared core plus each market&rsquo;s legitimate subset. Once the brand is data instead of a document, it stops being only something people read and becomes something a tool can consume.</p>
+    <p>That&rsquo;s the thread I&rsquo;m starting to pull now, and it runs into the other tool I built. <a href="/#tooling">CreativeLab</a> is a node-based generator that already takes brand data &mdash; pack, palette, rules, channel specs &mdash; as structured input rather than a prompt. Feeding a region&rsquo;s governed subset from the hub into it lets a market generate on-brand, compliant creative at volume without re-briefing the brand every time. This is early &mdash; the first version wires a single region&rsquo;s draw into the graph &mdash; but the shape is clear.</p>
     <div class="speculative">
       <div class="spec-block">
-        <h3><span class="num">A</span>Usage telemetry as the governance signal.</h3>
-        <p>What people search for and fail to find is a brief. A hub knows where correctness is expensive &mdash; the searches that dead-end, the assets requested for markets that don&rsquo;t have them yet. That signal should feed the roadmap, so the system fixes the gaps that are actually costing people time instead of the ones we assume.</p>
+        <h3><span class="num">A</span>The hub becomes machine-readable brand context.</h3>
+        <p>The must-use core and each region&rsquo;s subset are exactly the structured inputs a generator needs. A market generates from its own draw without ever touching the core. That is the variance this page argued for, made consumable.</p>
       </div>
       <div class="spec-block">
-        <h3><span class="num">B</span>The agent answering &ldquo;can I?&rdquo;, not just &ldquo;where is?&rdquo;</h3>
-        <p>Right now the agent solves findability &mdash; take me to the thing. The next step is the harder question: <em>can I do this?</em> An agent that reasons over the rules &mdash; this claim in this market, this lockup on this background &mdash; turns the hub from a library into a governor that answers at the moment of the decision.</p>
+        <h3><span class="num">B</span>CreativeLab does the generating; the standard rides along.</h3>
+        <p>Because brand context loads as structured reference and the compliance check lives on an output node, adding volume doesn&rsquo;t loosen the bar. Governance is designed into the pipeline, not inspected after it.</p>
       </div>
       <div class="spec-block">
-        <h3><span class="num">C</span>The hub publishing back into the channels.</h3>
-        <p>The last mile is not making people visit the hub. It&rsquo;s the hub pushing the correct, current asset out to where the work already happens &mdash; the deck, the retailer portal, the DAM &mdash; so the right thing arrives without a trip. Governance you don&rsquo;t have to go looking for is governance that finally wins the Friday-afternoon decision.</p>
+        <h3><span class="num">C</span>The variance stops being a bottleneck.</h3>
+        <p>Governing a global system used to mean policing every market&rsquo;s draw by hand. When the hub feeds the tool, the variance this page argued for becomes a setting, not a stack of one-off requests &mdash; one standard, many regions, generated.</p>
       </div>
     </div>
   </div>
